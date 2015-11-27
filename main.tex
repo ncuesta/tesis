@@ -1,0 +1,118 @@
+\documentclass[a4paper,12pt,titlepage]{article}
+
+% Paquetes
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{alltt}
+\usepackage{verbatim}
+%   - minted: Highlighting de código con Pygments
+\usepackage{minted}
+%   - cleveref: Intelligent cross-referencing
+\usepackage{cleveref}
+\usepackage{titlesec}
+\usepackage[hyperfootnotes=false]{hyperref}
+%%   - Glosario
+%\usepackage[acronym]{glossaries}
+%   - Visual
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%   - Índices
+\usepackage[xindy]{imakeidx}
+
+% Configuración
+%   - Espacio entre el texto principal y las notas al pie
+\setlength{\skip\footins}{1cm}
+%   - Espacio entre notas al pie
+\setlength{\footnotesep}{0.5cm}
+%   - Formatos
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%   - Resaltado de sintaxis
+\newminted{ruby}{linenos=true,fontsize=\small}
+\newminted{console}{linenos=false,fontsize=\small}
+
+% Definición de ambientes
+%   - displaycode: para mostrar código
+\newenvironment{displaycode}{\begin{alltt}}{\end{alltt}}
+%   - code: para mostrar código
+\newenvironment{code}{\color{Sepia}\verbatim}{\endverbatim}
+
+%% Generación de glosario e índices
+%\input{src/glosario/glosario}
+%\makeglossaries
+\makeindex
+
+\begin{document}
+
+% Carátula
+\thispagestyle{empty} % Oculta numeración de las páginas
+%\caratula
+\newpage
+
+% Página en blanco
+\newpage
+
+% Meta previa al contenido principal
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+\setcounter{page}{1} 
+\pagenumbering{Roman}
+%   - Agradecimientos
+\input{src/meta/agradecimientos}
+\newpage
+%   - Tabla de contenidos
+\tableofcontents
+\newpage
+%   - Lista de figuras
+\listoffigures
+\newpage
+%   - Lista de tablas
+\listoftables
+\newpage
+
+% Contenido principal
+\pagenumbering{arabic}
+\setcounter{secnumdepth}{0}
+%   - Introducción
+\section{Introducción}
+\input{src/00-intro/introduccion}
+\newpage
+%   - Capítulo I
+\section{Capítulo I}
+\input{src/01-capitulo-1/todo}
+\newpage
+%   - Capítulo II
+\section{Capítulo II}
+\input{src/02-capitulo-2/todo}
+\newpage
+%   - Capítulo III
+\section{Capítulo III}
+\input{src/03-capitulo-3/todo}
+\newpage
+%   - Capítulo IV
+\section{Capítulo IV}
+\input{src/04-capitulo-4/todo}
+\newpage
+
+% Apéndice
+\appendix
+\newpage
+%   - Anexo I: Detalle de las aplicaciones cliente de la nube
+\section{Anexo I}
+\input{src/anexos/01-detalle-clientes-nube}
+\newpage
+%   - Bibliografía
+\bibliographystyle{plain}
+\bibliography{src/bibliografia/mcarbone,src/bibliografia/ncuesta}
+\newpage
+%%   - Glosario
+%\printglossary[title={Glosario}]
+
+\end{document}

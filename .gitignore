@@ -1,0 +1,9 @@
+*.aux
+*.lof
+*.log
+*.lot
+*.toc
+
+/pdf/*
+/tmp/*
+/_minted-main

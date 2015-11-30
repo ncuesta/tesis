@@ -20,6 +20,7 @@ $(MAIN).pdf: $(MAIN).tex
 	$(TEX) $<
 
 gls:
+	ln -s $(AUX_DIR)/$(MAIN).xdy
 	$(GLS) $(AUX_DIR)/$(MAIN)
 
 bib:
@@ -30,4 +31,4 @@ dist:
 	$(MAKE) clean
 
 clean:
-	rm -rfv $(AUX_DIR)/* _minted-main
+	rm -rfv $(AUX_DIR)/* _minted-main $(MAIN).xdy

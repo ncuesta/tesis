@@ -1,0 +1,122 @@
+\subsection{Historia: ¿Cómo llegamos a donde estamos?}\label{nube:historia}
+
+Como desarrolladores y analistas del \cespi, dependencia de la \unlp encargada de fomentar, implementar y administrar TICs, hemos participado del relevamiento, la implementación, la puesta en producción y el mantenimiento de varias aplicaciones web de uso diario por los agentes de las distintas Unidades Académicas y demás Dependencias administrativas de esta Alta Casa de estudios. Así, en el transcurso de más de 7 años de experiencia, hemos migrado entre distintos paradigmas arquitectónicos en el desarrollo de las aplicaciones y su intercomunicación.
+
+En este capítulo haremos una reseña de lo ocurrido en este tiempo, separando en etapas marcadas por los distintos enfoques que fuimos dando a la problemática de alimentar las distintas aplicaciones que desarrollamos para la UNLP, indicando las razones y decisiones que tomamos en cada ocasión, y que dan origen a este análisis que será la base para la futura etapa de implementación de la nube de servicios integrados.
+
+
+\subsubsection{Prefacio: ¿Qué es la nube de servicios de la UNLP?}\label{nube:prefacio}
+
+Liminarmente creemos conveniente y necesario explicar \textit{qué} es la nube de la que hablaremos en este trabajo. Por simplicidad, y para no develar detalles técnicos que aún no queremos mencionar, nos centraremos en los aspectos funcionales, en el \textit{qué} y no en el \textit{cómo}, de la fuente de información unificada que utilizamos en las aplicaciones que desarrollamos a diario para la \unlp.
+
+La nube de servicios es un solo sistema web que concentra la información que permite a distintas aplicaciones web, desarrolladas en la \direccionDesarrollo para uso interno de la UNLP, unificar datos y a partir de esta unificación combinar y correlacionar la información que cada una posee. Contiene y provee datos que van desde identificadores únicos para diferentes tipos de documento (como ser \textit{“1 equivale a Documento Nacional de Identidad”}, \textit{“2 a Libreta de Enrolamiento”}, o \textit{“5 a Pasaporte”}, por poner algunos ejemplos), pasando por valores concretos para identificar las Unidades Académicas o Dependencias de la Universidad (\textit{“33 para la Facultad de Informática”}, \textit{“26 para el CeSPI”}, etcétera), hasta datos concretos de las personas relacionadas a la UNLP (\textit{“000000000000000000000031988189 es \nahuelcuesta, alumno de la \facultad, docente con dos cargos de dedicación simple en la misma Unidad Académica”}, o \textit{“000000000000000000000027855859 es \miguelcarbone, alumno de la \facultad, docente con un cargo de dedicación simple en esa UA”}, por tomar dos casos). Mediante los servicios que brinda esta nube se pueden consultar, sin posibilidades de realizar operaciones modificatorias o destructivas, los siguientes grupos de datos:
+
+\begin{itemize}
+  \item Datos de referencia:
+  \begin{itemize}
+    \item Tipos de documento
+    \item Géneros
+    \item Estados civiles
+    \item Países, provincias, partidos y localidades
+    \item Unidades Académicas de la UNLP
+  \end{itemize}
+  \item Información académica:
+  \begin{itemize}
+    \item Carreras
+    \item Planes de estudios
+    \item Materias
+    \item Títulos otorgados
+  \end{itemize}
+  \item Sobre las personas vinculadas a la UNLP (Alumnos y Personal):
+  \begin{itemize}
+    \item Datos personales
+    \item Datos de contacto
+  \end{itemize}
+  \item Sobre los cargos del personal de la UNLP (Docentes, Nodocentes y Autoridades Superiores):
+  \begin{itemize}
+    \item Información histórica
+    \item Quién ocupa el cargo
+    \item A qué Unidad Académica pertenece
+    \item En qué situación se encuentra
+    \item Los recibos de sueldo del cargo
+  \end{itemize}
+\end{itemize}
+
+Las aplicaciones que consumen esta información, los \textit{clientes de la nube}, acceden mediante distintos servicios web a los datos que desean. Por ejemplo, un servicio provee todos los tipos de documento que la nube conoce, incluyendo el identificador único de cada tipo de documento y su descripción; mientras que otro servicio provee la información de contacto detallada de un empleado de la UNLP. De esta forma los clientes deben conocer qué servicios brinda la nube y cómo acceder a cada uno de ellos para poder acceder a la información.
+
+Dada la cantidad de aplicaciones que hoy día utilizan los servicios de esta nube para su funcionamiento básico, es de suma importancia -para las tareas que desempeña nuestra Dirección- que su funcionamiento y \eng{performance} sean óptimos, que la dificultad para mantenerla sea mínima y que la tolerancia a fallos o resiliencia de los servicios sea adecuada.
+
+Habiendo hecho esta breve descripción de qué es la nube de servicios, hemos brindado el contexto necesario para comenzar a explicar su evolución, ahora sí incluyendo detalles técnicos sobre su implementación.
+
+
+\subsubsection{El génesis: aplicaciones como islas}\label{nube:etapa0}
+
+En un principio, cada aplicación funcionaba como un sistema autónomo en su totalidad: no existía comunicación entre los sistemas que estábamos implementando, que hasta ese momento eran relativamente pocos. Cada una definía sus propios datos, tanto los de su dominio particular como aquellos más generales - entiéndase por estos últimos información que categoriza los datos de dominio ya sea georeferenciando las ubicaciones, a las personas por género, por su Dependencia de trabajo o estudio, los documentos de identidad por su tipo, etcétera -. Si bien a simple vista esto puede presentar un claro punto de \eng{refactor} para evitar un inminente problema de duplicación y desnormalización de los datos, en ese punto de madurez de los requerimientos que llegaban a nuestra oficina la necesidad no era evidente y mucho menos imprescindible.
+
+El problema no se hizo esperar, al poco tiempo, fue creciendo la necesidad de comunicar las aplicaciones por diferentes razones que se desprendían de los inconvenientes que comenzaban a surgir con el diseño planteado para las aplicaciones:
+
+\begin{itemize}
+  \item \textbf{Normalización de datos:} las distintas aplicaciones manejaban los datos generales (o de referencia, como los llamaremos de aquí en más) de diferentes maneras, con distintas convenciones, y - lo que es aún más problemático - con diferentes valores concretos para indicar los mismos datos. Por ejemplo, en una aplicación el género femenino era representado con un valor entero 1, mientras que en otra ése era el valor asignado al género masculino. Otro ejemplo más complejo eran las Dependencias de la Universidad, que en cada aplicación tenían diferentes identificadores y descripciones. Esta falta de normalización en los datos hacía virtualmente imposible cruzar la información entre distintas aplicaciones y hacía más compleja cualquier actualización necesaria a esos datos de referencia.\\
+  A esto se le suma el mantenimiento de los datos, es decir, siguiendo con el ejemplo de las Dependencias, si era necesario incorporar una nueva, la misma debía ser cargada en cada una de las aplicaciones que utilizaban ese dato de referencia.
+
+  \item \textbf{Unificación de la forma de obtener la información:} este esquema disconexo también acarreaba otro problema oculto en su organización que era la falta de una interfaz unificada de acceso a los datos de referencia. Así como cada aplicación definía sus datos, esto también implicaba definir el acceso a los mismos, lo cual acababa en tantos métodos distintos de acceso a los datos de referencia como aplicaciones se tenían. Si bien se intentaba mantener un criterio uniforme, las más pequeñas mejoras o personalizaciones en la forma de acceso a un dato de referencia realizadas en una aplicación hacían que ésta fuera diferente del resto. Por ejemplo, en algunas aplicaciones se implementaban mecanismos opcionales de \eng{caching} para agilizar algunas consultas repetitivas a los datos de referencia, requiriendo de un parámetro específico para indicar si se deseaba o no utilizar esa \eng{cache}; mientras que en otras aplicaciones esta noción no existía, y en su lugar implementaban agregaciones de los datos de referencia diferentes al resto porque la aplicación los necesitaba. Este era claramente un escenario poco deseable, principalmente por la característica de nuestro equipo de trabajo: éramos un grupo de desarrolladores relativamente pequeño en el que todos participábamos de la implementación de todas las aplicaciones, por lo que el pivoteo de una aplicación a la otra tenía un \eng{overhead} innecesario a la hora de analizar qué intentaba realizar la misma operación de obtención de datos en una u otra implementación.
+
+  \item \textbf{Eliminar la repetición de datos y de código:} como se esbozó en los puntos anteriores, la falta de estandarización y uniformidad de la información se vio reflejada en las diferentes implementaciones de unidades funcionalmente similares (por no decir idénticas). Esto hizo que los diferentes proyectos de las aplicaciones tuvieran diversas implementaciones (a nivel de código) para realizar las mismas tareas, y que los datos de referencia que éstas manejaban se repitieran (aunque con las diferencias antes mencionadas) en cada una.
+\end{itemize}
+
+
+\subsubsection{Primera iteración: eliminando la repetición y normalizando los datos}\label{nube:etapa1}
+
+Ante la creciente cantidad de aplicaciones, los problemas antes enumerados se hacían cada vez más evidentes. Fue entonces que se decidió pasar a un nuevo enfoque sobre el problema: unificar los datos y el código utilizados en las distintas aplicaciones mediante la implementación de clases y objetos reutilizables en ellas.
+
+Este tipo de solución fue relativamente fácil de implementar dada la homogeneidad de frameworks y librerías que nuestras aplicaciones poseían de base. En ese entonces nuestro \eng{stack} de desarrollo estaba principalmente conformado por PHP 5.3, el \eng{framework} \gls{symfony} y bases de datos MySQL, lo cual nos permitió escribir una única vez una librería (o \eng{plugin}, en la terminología del \eng{framework} utilizado) e incluirla en todos los proyectos muy fácilmente. Al centralizar los datos y la lógica de acceso a los mismos en estas clases reutilizables, eliminábamos la repetición de código y datos, y normalizábamos los datos comunes que las aplicaciones utilizaban; y al mismo tiempo simplificábamos el mantenimiento de estas aplicaciones ya que cualquier cambio o solución a un error detectado en las clases de referencia se efectuaba en un único lugar (el \eng{plugin} que las contenía) y se replicaba en las aplicaciones con sólo actualizar la versión del \eng{plugin} disponible en cada aplicación desde nuestro sistema de control de versiones de código\footnote{\gls{subversion} y \gls{git} son las dos herramientas para versionar el código de los proyectos que hemos utilizado. El pasaje de \gls{subversion} a \gls{git} fue por los beneficios que este último ofrecía en comparación al primero, principalmente el sistema de ramas (\eng{branching}) que utiliza, su esquema descentralizado y el sustancialmente menor tamaño final de los repositorios de código.}.
+
+Las clases de referencia consistían en una interfaz común de acceso a la información que éstas contenían y los datos propiamente dichos escritos en el código. A modo ilustrativo, presentamos aquí un extracto de la clase que contenía los tipos de documento, y un ejemplo de uso de la misma:
+
+%%%
+%%% TODO: Insertar acá contenido de https://gist.github.com/ncuesta/51abb9c3ca3420249052
+%%%
+
+Si bien en principio este acercamiento al problema es altamente beneficioso en comparación a la situación que intenta mejorar, está claramente lejos de ser una solución óptima. En cierto modo, este nuevo enfoque fue el pilar fundamental para la evolución hacia soluciones mejores y más complejas.
+
+El inconveniente con este enfoque era que pese a eliminar la repetición que existía y normalizar los datos, introducía nuevos problemas:
+
+\begin{itemize}
+  \item Si bien los datos de referencia ahora se encontraban unificados a lo largo de todas nuestras aplicaciones, éstos se encontraban \textit{embebidos} estáticamente en el código\footnote{En términos más técnicos, nos encontrábamos ante un indeseable caso de \eng{hard-coded data}. Estábamos unificando nuestra lógica de negocios (código) con los datos del dominio, todo escrito en el fuente de nuestra librería.}. Cada cambio en la información implicaba lanzar una nueva versión del \eng{plugin} para poder reflejarlo en las aplicaciones.
+
+  \item Cada actualización en la lógica de obtención de los datos (o en los datos mismos, por lo detallado en el punto anterior) implicaba actualizar todas las aplicaciones que hacían uso de la librería. Este acoplamiento entre las aplicaciones y la fuente de datos de referencia era otro grave problema que tenía esta organización, ya que todas las aplicaciones seguían incluyendo los datos dentro de sí.
+\end{itemize}
+
+
+\subsubsection{Segunda iteración: haciendo dinámicas las fuentes de datos}\label{nube:etapa2}
+
+Luego de la primera iteración en que logramos unificar los datos de referencia, y una vez pasado el periodo inicial de estabilización de la nueva solución, comenzamos a planificar la siguiente mejora a la forma en que disponíamos de la información: hacer dinámicas las fuentes de datos de referencia.
+
+Si bien el nuevo \eng{approach} hasta este momento subsanaba los inconvenientes que conllevan la repetición y falta de normalización en los datos, éste traía acarreada  la poco deseable nueva situación de que los datos de referencia de nuestras aplicaciones eran estáticos y se encontraban escritos directamente en el código. Como se detalló en la sección anterior, esto dificultaba la actualización de cualquier dato en nuestras aplicaciones y  acoplaba el código con los datos, lo cual es considerado un \gsl{antipatron}. Entonces el paso lógico era llevar esos datos a una fuente dinámica, como una base de datos, administrable desde alguna interfaz amigable, a la que las aplicaciones tuvieran acceso y pudieran consultar.
+
+Fue así que una vez más la homogeneidad de nuestros desarrollos nos facilitó la tarea: modificamos nuestro \eng{plugin} de \gls{symfony} existente para que las clases que antes contenían los datos directamente embebidos dentro de ellas, ahora fuesen abstracciones de tablas en una base de datos dedicada a los datos de referencia. Con este -relativamente sencillo- cambio en nuestro código, la librería común ya soportaba un \gls{backend} dinámico para las fuentes de datos y por ende nuestras aplicaciones daban un salto de calidad al utilizar estos nuevos datos de referencia administrables sin tocar código.
+
+Así, pese los beneficios obtenidos, apareció un nuevo problema: para poder brindar soporte a esta nueva solución debíamos, para cada aplicación que los utilizace, incluir los datos de conexión a la base de datos de referencia y permitir en nuestra infraestructura que la aplicación tenga acceso a esa base de datos central\footnote{Esto implicaba habilitar reglas en firewalls y agregar privilegios a usuarios de la base de datos para conectarse desde distintos hosts.}. Además de estos nuevos requerimientos para cada aplicación, se acarreaban nuevos potenciales inconvenientes:
+
+\begin{itemize}
+  \item Si bien nuestras aplicaciones sólo consultaban la información de referencia que esta base de datos contenía, en caso que los privilegios de acceso a la base de datos fueran demasiado permisivos, se corría el riesgo que cualquier sistema pudiera (accidentalmente o mediante un ataque malintencionado) modificar o borrar la información común a todas las aplicaciones.
+
+  \item Esta nueva arquitectura ponía a ese nodo central de la base de datos bajo gran stress en momentos que el uso de las aplicaciones se incrementaba, por lo que se debía implementar un mecanismo de \eng{caching} artesanal, local a cada aplicación, que aliviase esa carga. Esta técnica, si bien mitigaba el problema, estaba lejos de ser una solución al mismo, ya que cada aplicación consultaría por separado el mismo conjunto de datos al menos una vez cada cierto período de tiempo, lo almacenaría en su caché local, y manejaría de forma desconexa el tiempo que esos datos se consideraban \textit{frescos}, independientemente del resto de las aplicaciones.
+\end{itemize}
+
+El beneficio obtenido al dinamizar la fuente de nuestros datos de referencia, quitando los datos concretos del código del \eng{plugin} de acceso a los mismos, y simplificando la actualización de esta información de forma independiente a nuestras aplicaciones, fue enorme. Pero esta solución aún no eliminaba por completo el acoplamiento entre nuestras aplicaciones y la fuente de datos de referencia. De hecho, introducía nuevos niveles de acoplamiento al hacer que nuestras aplicaciones deban tener acceso a una base de datos (común) y mantener la información de acceso a ésta; al hacer que las distintas aplicaciones puedan potencialmente modificar esa información común sin que ésto sea deseable; al requerir que las políticas de infraestructura permitan la comunicación directa desde múltiples aplicaciones al nodo de la base de datos; al necesitar agregar privilegios de acceso a la base de datos de referencia; y al obligar a las aplicaciones a conocer la implementación interna de cada tipo de dato (su estructura en la base de datos) para poder accederla directamente.
+
+
+\subsubsection{Tercera iteración: unificando el acceso a la información y desacoplando las componentes}\label{nube:etapa3}
+
+
+
+
+
+
+
+
+
+
+
+\cite[Capítulo 4]{tesis:fielding}

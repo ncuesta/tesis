@@ -1,0 +1,13 @@
+% Configuración
+%   - Espacio entre el texto principal y las notas al pie
+\setlength{\skip\footins}{1cm}
+%   - Espacio entre notas al pie
+\setlength{\footnotesep}{0.5cm}
+%   - Formatos
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%   - Resaltado de sintaxis
+\newminted{ruby}{linenos=true,fontsize=\small}
+\newminted{console}{linenos=false,fontsize=\small}

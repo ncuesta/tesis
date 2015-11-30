@@ -1,59 +1,20 @@
 \documentclass[a4paper,12pt,titlepage]{article}
 
-% Paquetes
-\usepackage[spanish,es-lcroman]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{alltt}
-\usepackage{verbatim}
-%   - minted: Highlighting de código con Pygments
-\usepackage{minted}
-%   - cleveref: Intelligent cross-referencing
-\usepackage{cleveref}
-\usepackage{titlesec}
-\usepackage[hyperfootnotes=false]{hyperref}
-%%   - Glosario
-%\usepackage[acronym]{glossaries}
-%   - Visual
-\usepackage{float}
-\usepackage{setspace}
-\usepackage{xspace}
-\usepackage{xcolor}
-\usepackage{graphicx}
-\usepackage{amssymb}
-\usepackage{amsthm}
-%   - Índices
-\usepackage[xindy]{imakeidx}
-
-% Configuración
-%   - Espacio entre el texto principal y las notas al pie
-\setlength{\skip\footins}{1cm}
-%   - Espacio entre notas al pie
-\setlength{\footnotesep}{0.5cm}
-%   - Formatos
-\titleformat{\paragraph}
-{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
-\titlespacing*{\paragraph}
-{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-%   - Resaltado de sintaxis
-\newminted{ruby}{linenos=true,fontsize=\small}
-\newminted{console}{linenos=false,fontsize=\small}
-
-% Definición de ambientes
-%   - displaycode: para mostrar código
-\newenvironment{displaycode}{\begin{alltt}}{\end{alltt}}
-%   - code: para mostrar código
-\newenvironment{code}{\color{Sepia}\verbatim}{\endverbatim}
+\input{inc/paquetes}
+\input{inc/config}
+\input{inc/ambientes}
+\input{inc/comandos}
 
 %% Generación de glosario e índices
-%\input{src/glosario/glosario}
-%\makeglossaries
+\loadglsentries{src/glosario/glosario}
+\makeglossaries
 \makeindex
 
 \begin{document}
 
 % Carátula
 \thispagestyle{empty} % Oculta numeración de las páginas
-%\caratula
+\caratula
 \newpage
 
 % Página en blanco
@@ -62,7 +23,7 @@
 % Meta previa al contenido principal
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
-\setcounter{page}{1} 
+\setcounter{page}{1}
 \pagenumbering{Roman}
 %   - Agradecimientos
 \input{src/meta/agradecimientos}
@@ -86,7 +47,8 @@
 \newpage
 %   - Capítulo I
 \section{Capítulo I}
-\input{src/01-capitulo-1/todo}
+\input{src/01-capitulo-1/objetivo}
+\input{src/01-capitulo-1/historia}
 \newpage
 %   - Capítulo II
 \section{Capítulo II}
@@ -112,7 +74,7 @@
 \bibliographystyle{plain}
 \bibliography{src/bibliografia/mcarbone,src/bibliografia/ncuesta}
 \newpage
-%%   - Glosario
-%\printglossary[title={Glosario}]
+%   - Glosario
+\printglossary[title={Glosario de términos}]
 
 \end{document}

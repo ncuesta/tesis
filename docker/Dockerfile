@@ -16,5 +16,8 @@ WORKDIR /latex
 VOLUME ["/latex"]
 
 COPY ./entrypoint.sh /bin
+RUN ["mkdir", "-p", "/usr/local/share/texmf/tex/latex/contrib"]
+COPY ./support/* /usr/local/share/texmf/tex/latex/contrib/
+RUN ["texhash", "/usr/local/share/texmf"]
 
 ENTRYPOINT ["/bin/entrypoint.sh"]

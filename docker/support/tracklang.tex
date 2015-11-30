@@ -1,0 +1,1674 @@
+%%
+%% This is file `tracklang.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% tracklang.dtx  (with options: `tracklang.tex,package')
+%% 
+%%  tracklang.dtx
+%%  Copyright 2015 Nicola Talbot
+%% 
+%%  This work may be distributed and/or modified under the
+%%  conditions of the LaTeX Project Public License, either version 1.3
+%%  of this license of (at your option) any later version.
+%%  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%%  and version 1.3 or later is part of all distributions of LaTeX
+%%  version 2005/12/01 or later.
+%% 
+%%  This work has the LPPL maintenance status `maintained'.
+%% 
+%%  The Current Maintainer of this work is Nicola Talbot.
+%% 
+%%  This work consists of the files tracklang.dtx and tracklang.ins and the derived files tracklang.sty, tracklang.tex.
+%% 
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+\ifx \@tracklang@languages\undefined
+\else
+  \expandafter\endinput
+\fi
+\long\def\@tracklang@ifundef#1#2#3{%
+  \expandafter\ifx\csname #1\endcsname\relax
+     #2%
+  \else
+     #3%
+  \fi
+}
+\ifx\@nnil\undefined
+  \def\@tracklang@nnil{\@nil}
+\else
+  \let\@tracklang@nnil\@nnil
+\fi
+\ifx\@for\undefined
+  \long\def\@tracklang@for#1:=#2\do#3{%
+    \expandafter\def\expandafter\@fortmp\expandafter{#2}%
+    \ifx\@fortmp\empty
+    \else
+      \expandafter
+        \@tracklang@forloop #2,\@nil,\@nil\@@ #1{#3}%
+    \fi
+  }
+  \long\def\@tracklang@forloop#1,#2,#3\@@ #4#5{%
+   \def #4{#1}%
+   \ifx#4\@tracklang@nnil
+   \else
+     #5%
+     \def #4{#2}%
+     \ifx#4\@tracklang@nnil
+     \else
+       #5%
+       \@tracklang@iforloop #3\@@ #4{#5}%
+     \fi
+   \fi
+  }
+  \long\def\@tracklang@iforloop#1,#2\@@ #3#4{%
+    \def#3{#1}%
+    \ifx#3\@tracklang@nnil
+      \expandafter
+        \@tracklang@fornoop
+    \else
+      #4\relax
+      \expandafter\@tracklang@iforloop
+    \fi
+    #2\@@ #3{#4}%
+  }
+  \long\def\@tracklang@fornoop#1\@@ #2#3{}
+\else
+  \let\@tracklang@for\@for
+\fi
+\ifx\@namedef\undefined
+  \def\@tracklang@namedef#1{\expandafter\def\csname#1\endcsname}
+\else
+  \let\@tracklang@namedef\@namedef
+\fi
+\ifx\@nameuse\undefined
+  \def\@tracklang@nameuse#1{\csname#1\endcsname}
+\else
+  \let\@tracklang@nameuse\@nameuse
+\fi
+\ifx\PackageError\undefined
+  \def\@tracklang@err#1#2{%
+    \errehelp{#2}%
+    \errmessage{tracklang: #1}}
+\else
+  \def\@tracklang@err#1#2{\PackageError{tracklang}{#1}{#2}}
+\fi
+\ifx\IfFileExists\undefined
+ \long\def\@tracklang@IfFileExists#1#2#3{%
+   \openin0=#1 %
+   \ifeof0\relax
+     \def\reserved@a{#3}%
+   \else
+     \closein0\relax
+     \edef\@filef@und{#1 }%
+     \def\reserved@a{#2}%
+   \fi
+   \reserved@a
+ }
+
+\else
+  \let\@tracklang@IfFileExists\IfFileExists
+\fi
+\def\@tracklang@languages{}
+\def\@tracklang@dialects{}
+\def\@tracklang@ifinlist#1#2#3#4{%
+  \def\@tracklang@doifinlist##1,#1,##2\end@tracklang@doifinlist{%
+     \def\@before{##1}%
+     \def\@after{##2}%
+  }%
+  \expandafter\@tracklang@doifinlist\expandafter,#2,#1,\@nil
+    \end@tracklang@doifinlist
+  \ifx\@after\@tracklang@nnil
+    #4%
+  \else
+    #3%
+  \fi
+}
+\def\@tracklang@add#1#2{%
+  \edef\@tracklang@element{#1}%
+  \ifx\@tracklang@element\empty
+  \else
+    \expandafter\@tracklang@ifinlist\expandafter{\@tracklang@element}#2%
+    {%
+    }%
+    {%
+     \ifx\empty#2\relax
+       \let#2\@tracklang@element
+     \else
+       \edef#2{#2,\@tracklang@element}%
+     \fi
+    }%
+  \fi
+}
+\def\AddTrackedDialect#1#2{%
+ \@tracklang@add{#1}{\@tracklang@dialects}%
+ \@tracklang@add{#2}{\@tracklang@languages}%
+ \@tracklang@namedef{@tracklang@fromdialect@#1}{#2}%
+ \@tracklang@ifundef{@tracklang@todialect@#2}%
+ {\@tracklang@namedef{@tracklang@todialect@#2}{#1}}%
+ {%
+   \def\@tracklang@lang{#1}%
+   \expandafter\@tracklang@add\expandafter\@tracklang@lang
+     \csname @tracklang@todialect@#2\endcsname
+ }%
+}
+\def\AddTrackedLanguage#1{%
+  \AddTrackedDialect{#1}{#1}%
+}
+\def\AddTrackedIsoLanguage#1#2#3{%
+  \@tracklang@namedef{@tracklang@#1@isofromlang@#3}{#2}%
+  \@tracklang@ifundef{@tracklang@#1@isotolang@#2}%
+  {\@tracklang@namedef{@tracklang@#1@isotolang@#2}{#3}}%
+  {%
+    \def\@tracklang@lang{#3}%
+    \expandafter\@tracklang@add\expandafter\@tracklang@lang
+      \csname @tracklang@#1@isotolang@#2\endcsname
+  }%
+}
+\def\TrackedLanguageFromIsoCode#1#2{%
+  \@tracklang@nameuse{@tracklang@#1@isotolang@#2}%
+}
+\def\TrackedIsoCodeFromLanguage#1#2{%
+  \@tracklang@nameuse{@tracklang@#1@isofromlang@#2}%
+}
+\def\TrackedLanguageFromDialect#1{%
+ \@tracklang@nameuse{@tracklang@fromdialect@#1}%
+}
+\def\TrackedDialectsFromLanguage#1{%
+ \@tracklang@nameuse{@tracklang@todialect@#1}%
+}
+\def\TwoLetterIsoCountryCode{3166-1}
+\def\TwoLetterIsoLanguageCode{639-1}
+\def\ThreeLetterIsoLanguageCode{639-2}
+\def\TrackPredefinedDialect#1{%
+  \@tracklang@ifundef{@tracklang@add@#1}%
+  {%
+    \@tracklang@err{Dialect `#1' is not predefined}{}%
+  }%
+  {\@tracklang@nameuse{@tracklang@add@#1}}%
+}
+\ifx\@tracklang@declareoption\undefined
+  \def\@tracklang@declareoption#1{}
+\fi
+\def\@tracklang@add@acadian{%
+  \AddTrackedDialect{acadian}{french}%
+  \AddTrackedIsoLanguage{639-1}{fr}{french}%
+}
+\@tracklang@declareoption{acadian}
+\def\@tracklang@add@afrikaans{%
+  \AddTrackedLanguage{afrikaans}%
+  \AddTrackedIsoLanguage{639-1}{af}{afrikaans}%
+  \AddTrackedIsoLanguage{639-2}{afr}{afrikaans}%
+}
+\@tracklang@declareoption{afrikaans}
+\def\@tracklang@add@albanian{%
+  \AddTrackedLanguage{albanian}%
+  \AddTrackedIsoLanguage{639-1}{sq}{albanian}%
+  \AddTrackedIsoLanguage{639-2-B}{alb}{albanian}%
+  \AddTrackedIsoLanguage{639-2-T}{sqi}{albanian}%
+  \AddTrackedIsoLanguage{639-2}{sqi}{albanian}%
+}
+\@tracklang@declareoption{albanian}
+\def\@tracklang@add@amharic{%
+  \AddTrackedLanguage{amharic}%
+  \AddTrackedIsoLanguage{639-1}{am}{amharic}%
+  \AddTrackedIsoLanguage{639-2}{amh}{amharic}%
+}
+\@tracklang@declareoption{amharic}
+\def\@tracklang@add@anglosaxon{%
+  \AddTrackedLanguage{anglosaxon}%
+  \AddTrackedIsoLanguage{639-2}{ang}{anglosaxon}%
+}
+\@tracklang@declareoption{anglosaxon}
+\def\@tracklang@add@apache{%
+  \AddTrackedLanguage{apache}%
+  \AddTrackedIsoLanguage{639-2}{apa}{apache}%
+}
+\@tracklang@declareoption{apache}
+\def\@tracklang@add@arabic{%
+  \AddTrackedLanguage{arabic}%
+  \AddTrackedIsoLanguage{639-1}{ar}{arabic}%
+  \AddTrackedIsoLanguage{639-2}{ara}{arabic}%
+}
+\@tracklang@declareoption{arabic}
+\def\@tracklang@add@armenian{%
+  \AddTrackedLanguage{armenian}%
+  \AddTrackedIsoLanguage{639-1}{hy}{armenian}%
+  \AddTrackedIsoLanguage{639-2-B}{arm}{armenian}%
+  \AddTrackedIsoLanguage{639-2-T}{hye}{armenian}%
+  \AddTrackedIsoLanguage{639-2}{hye}{armenian}%
+}
+\@tracklang@declareoption{armenian}
+\def\@tracklang@add@asturian{%
+  \AddTrackedLanguage{asturian}%
+  \AddTrackedIsoLanguage{639-2}{ast}{asturian}%
+}
+\@tracklang@declareoption{asturian}
+\def\@tracklang@add@american{%
+  \AddTrackedDialect{american}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{US}{american}%
+}
+\@tracklang@declareoption{american}
+\def\@tracklang@add@australian{%
+  \AddTrackedDialect{australian}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{AU}{australian}%
+}
+\@tracklang@declareoption{australian}
+\def\@tracklang@add@austrian{%
+  \AddTrackedDialect{austrian}{german}%
+  \AddTrackedIsoLanguage{639-1}{de}{german}%
+  \AddTrackedIsoLanguage{639-2-B}{ger}{german}%
+  \AddTrackedIsoLanguage{639-2-T}{deu}{german}%
+  \AddTrackedIsoLanguage{639-2}{deu}{german}%
+  \AddTrackedIsoLanguage{3166-1}{AT}{austrian}%
+}
+\@tracklang@declareoption{austrian}
+\def\@tracklang@add@naustrian{%
+  \AddTrackedDialect{naustrian}{german}%
+  \AddTrackedIsoLanguage{639-1}{de}{german}%
+  \AddTrackedIsoLanguage{639-2-B}{ger}{german}%
+  \AddTrackedIsoLanguage{639-2-T}{deu}{german}%
+  \AddTrackedIsoLanguage{639-2}{deu}{german}%
+  \AddTrackedIsoLanguage{3166-1}{AT}{naustrian}%
+}
+\@tracklang@declareoption{naustrian}
+\def\@tracklang@add@bahasa{%
+  \AddTrackedDialect{bahasa}{bahasai}%
+  \AddTrackedIsoLanguage{639-1}{id}{bahasai}%
+  \AddTrackedIsoLanguage{639-2}{ind}{bahasai}%
+  \AddTrackedIsoLanguage{3166-1}{IN}{bahasa}%
+}
+\@tracklang@declareoption{bahasa}
+\def\@tracklang@add@bahasai{%
+  \AddTrackedDialect{bahasai}{bahasai}%
+  \AddTrackedIsoLanguage{639-1}{id}{bahasai}%
+  \AddTrackedIsoLanguage{639-2}{ind}{bahasai}%
+  \AddTrackedIsoLanguage{3166-1}{IN}{bahasai}%
+}
+\@tracklang@declareoption{bahasai}
+\def\@tracklang@add@bahasam{%
+  \AddTrackedLanguage{bahasam}%
+  \AddTrackedIsoLanguage{639-1}{ms}{bahasam}%
+  \AddTrackedIsoLanguage{639-2-B}{may}{bahasam}%
+  \AddTrackedIsoLanguage{639-2-T}{msa}{bahasam}%
+  \AddTrackedIsoLanguage{639-2}{msa}{bahasam}%
+  \AddTrackedIsoLanguage{3166-1}{MY}{bahasam}%
+}
+\@tracklang@declareoption{bahasam}
+\def\@tracklang@add@basque{%
+  \AddTrackedLanguage{basque}%
+  \AddTrackedIsoLanguage{639-1}{eu}{basque}%
+  \AddTrackedIsoLanguage{639-2-B}{baq}{basque}%
+  \AddTrackedIsoLanguage{639-2-T}{eus}{basque}%
+  \AddTrackedIsoLanguage{639-2}{eus}{basque}%
+}
+\@tracklang@declareoption{basque}
+\def\@tracklang@add@bengali{%
+  \AddTrackedLanguage{bengali}%
+  \AddTrackedIsoLanguage{639-1}{bn}{bengali}%
+  \AddTrackedIsoLanguage{639-2}{ben}{bengali}%
+}
+\@tracklang@declareoption{bengali}
+\def\@tracklang@add@brazil{%
+  \AddTrackedDialect{brazil}{portuges}%
+  \AddTrackedIsoLanguage{639-1}{pt}{portuges}%
+  \AddTrackedIsoLanguage{639-2}{por}{portuges}%
+  \AddTrackedIsoLanguage{3166-1}{BR}{brazil}%
+}
+\@tracklang@declareoption{brazil}
+\def\@tracklang@add@brazilian{%
+  \AddTrackedDialect{brazilian}{portuges}%
+  \AddTrackedIsoLanguage{639-1}{pt}{portuges}%
+  \AddTrackedIsoLanguage{639-2}{por}{portuges}%
+  \AddTrackedIsoLanguage{3166-1}{BR}{brazilian}%
+}
+\@tracklang@declareoption{brazilian}
+\def\@tracklang@add@breton{%
+  \AddTrackedLanguage{breton}%
+  \AddTrackedIsoLanguage{639-1}{br}{breton}%
+  \AddTrackedIsoLanguage{639-2}{bre}{breton}%
+  \AddTrackedIsoLanguage{3166-1}{FR}{breton}%
+}
+\@tracklang@declareoption{breton}
+\def\@tracklang@add@british{%
+  \AddTrackedDialect{british}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{GB}{british}%
+}
+\@tracklang@declareoption{british}
+\def\@tracklang@add@bulgarian{%
+  \AddTrackedLanguage{bulgarian}%
+  \AddTrackedIsoLanguage{639-1}{bg}{bulgarian}%
+  \AddTrackedIsoLanguage{639-2}{bul}{bulgarian}%
+}
+\@tracklang@declareoption{bulgarian}
+\def\@tracklang@add@canadian{%
+  \AddTrackedDialect{canadian}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{CA}{canadian}%
+}
+\@tracklang@declareoption{canadian}
+\def\@tracklang@add@canadien{%
+  \AddTrackedDialect{canadien}{french}%
+  \AddTrackedIsoLanguage{639-1}{fr}{french}%
+  \AddTrackedIsoLanguage{639-2-B}{fre}{french}%
+  \AddTrackedIsoLanguage{639-2-T}{fra}{french}%
+  \AddTrackedIsoLanguage{639-2}{fra}{french}%
+  \AddTrackedIsoLanguage{3166-1}{CA}{canadien}%
+}
+\@tracklang@declareoption{canadien}
+\def\@tracklang@add@catalan{%
+  \AddTrackedLanguage{catalan}%
+  \AddTrackedIsoLanguage{639-1}{ca}{catalan}%
+  \AddTrackedIsoLanguage{639-2}{cat}{catalan}%
+}
+\@tracklang@declareoption{catalan}
+\def\@tracklang@add@coptic{%
+  \AddTrackedLanguage{coptic}%
+  \AddTrackedIsoLanguage{639-2}{cop}{coptic}%
+}
+\@tracklang@declareoption{coptic}
+\def\@tracklang@add@croatian{%
+  \AddTrackedLanguage{croatian}%
+  \AddTrackedIsoLanguage{639-1}{hr}{croatian}%
+  \AddTrackedIsoLanguage{639-2}{hrv}{croatian}%
+}
+\@tracklang@declareoption{croatian}
+\def\@tracklang@add@croatia{%
+  \AddTrackedDialect{croatia}{croatian}%
+  \AddTrackedIsoLanguage{639-1}{hr}{croatian}%
+  \AddTrackedIsoLanguage{639-2}{hrv}{croatian}%
+  \AddTrackedIsoLanguage{3166-1}{HR}{croatia}%
+}
+\@tracklang@declareoption{croatia}
+\def\@tracklang@add@istriacountycroatian{%
+  \AddTrackedDialect{istriacountycroatian}{croatian}%
+  \AddTrackedIsoLanguage{639-1}{hr}{croatian}%
+  \AddTrackedIsoLanguage{639-2}{hrv}{croatian}%
+  \AddTrackedIsoLanguage{3166-1}{HR}{istriacountycroatian}%
+}
+\@tracklang@declareoption{istriacountycroatian}
+\def\@tracklang@add@istriacountyitalian{%
+  \AddTrackedDialect{istriacountyitalian}{italian}%
+  \AddTrackedIsoLanguage{639-1}{it}{italian}%
+  \AddTrackedIsoLanguage{639-2}{ita}{italian}%
+  \AddTrackedIsoLanguage{3166-1}{HR}{istriacountyitalian}%
+}
+\@tracklang@declareoption{istriacountyitalian}
+\def\@tracklang@add@czech{%
+  \AddTrackedLanguage{czech}%
+  \AddTrackedIsoLanguage{639-1}{cs}{czech}%
+  \AddTrackedIsoLanguage{639-2-B}{cze}{czech}%
+  \AddTrackedIsoLanguage{639-2-T}{ces}{czech}%
+  \AddTrackedIsoLanguage{639-2}{ces}{czech}%
+}
+\@tracklang@declareoption{czech}
+\def\@tracklang@add@danish{%
+  \AddTrackedLanguage{danish}%
+  \AddTrackedIsoLanguage{639-1}{da}{danish}%
+  \AddTrackedIsoLanguage{639-2}{dan}{danish}%
+}
+\@tracklang@declareoption{danish}
+\def\@tracklang@add@divehi{%
+  \AddTrackedLanguage{divehi}%
+  \AddTrackedIsoLanguage{639-1}{dv}{divehi}%
+  \AddTrackedIsoLanguage{639-2}{div}{divehi}%
+}
+\@tracklang@declareoption{divehi}
+\def\@tracklang@add@dutch{%
+  \AddTrackedLanguage{dutch}%
+  \AddTrackedIsoLanguage{639-1}{nl}{dutch}%
+  \AddTrackedIsoLanguage{639-2-B}{dut}{dutch}%
+  \AddTrackedIsoLanguage{639-2-T}{nld}{dutch}%
+  \AddTrackedIsoLanguage{639-2}{nld}{dutch}%
+}
+\@tracklang@declareoption{dutch}
+\def\@tracklang@add@netherlands{%
+  \AddTrackedDialect{netherlands}{dutch}%
+  \AddTrackedIsoLanguage{639-1}{nl}{dutch}%
+  \AddTrackedIsoLanguage{639-2-B}{dut}{dutch}%
+  \AddTrackedIsoLanguage{639-2-T}{nld}{dutch}%
+  \AddTrackedIsoLanguage{639-2}{nld}{dutch}%
+  \AddTrackedIsoLanguage{3166-1}{NL}{netherlands}%
+}
+\@tracklang@declareoption{netherlands}
+\def\@tracklang@add@english{%
+  \AddTrackedLanguage{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+}
+\@tracklang@declareoption{english}
+\def\@tracklang@add@esperanto{%
+  \AddTrackedLanguage{esperanto}%
+  \AddTrackedIsoLanguage{639-1}{eo}{esperanto}%
+  \AddTrackedIsoLanguage{639-2}{epo}{esperanto}%
+}
+\@tracklang@declareoption{esperanto}
+\def\@tracklang@add@estonian{%
+  \AddTrackedLanguage{estonian}%
+  \AddTrackedIsoLanguage{639-1}{et}{estonian}%
+  \AddTrackedIsoLanguage{639-2}{est}{estonian}%
+}
+\@tracklang@declareoption{estonian}
+\def\@tracklang@add@farsi{%
+  \AddTrackedLanguage{farsi}%
+  \AddTrackedIsoLanguage{639-1}{fa}{farsi}%
+  \AddTrackedIsoLanguage{639-2-B}{per}{farsi}%
+  \AddTrackedIsoLanguage{639-2-T}{fas}{farsi}%
+  \AddTrackedIsoLanguage{639-2}{fas}{farsi}%
+}
+\@tracklang@declareoption{farsi}
+\def\@tracklang@add@persian{%
+  \AddTrackedDialect{persian}{farsi}%
+  \AddTrackedIsoLanguage{639-1}{fa}{farsi}%
+  \AddTrackedIsoLanguage{639-2-B}{per}{farsi}%
+  \AddTrackedIsoLanguage{639-2-T}{fas}{farsi}%
+  \AddTrackedIsoLanguage{639-2}{fas}{farsi}%
+}
+\@tracklang@declareoption{persian}
+\def\@tracklang@add@finnish{%
+  \AddTrackedLanguage{finnish}%
+  \AddTrackedIsoLanguage{639-1}{fi}{finnish}%
+  \AddTrackedIsoLanguage{639-2}{fin}{finnish}%
+}
+\@tracklang@declareoption{finnish}
+\def\@tracklang@add@flemish{%
+  \AddTrackedDialect{flemish}{dutch}%
+  \AddTrackedIsoLanguage{639-1}{nl}{dutch}%
+  \AddTrackedIsoLanguage{639-2-B}{dut}{dutch}%
+  \AddTrackedIsoLanguage{639-2-T}{nld}{dutch}%
+  \AddTrackedIsoLanguage{639-2}{nld}{dutch}%
+  \AddTrackedIsoLanguage{3166-1}{BE}{flemish}%
+}
+\@tracklang@declareoption{flemish}
+\def\@tracklang@add@francais{%
+  \AddTrackedDialect{francais}{french}%
+  \AddTrackedIsoLanguage{639-1}{fr}{french}%
+  \AddTrackedIsoLanguage{639-2-B}{fre}{french}%
+  \AddTrackedIsoLanguage{639-2-T}{fra}{french}%
+  \AddTrackedIsoLanguage{639-2}{fra}{french}%
+}
+\@tracklang@declareoption{francais}
+\def\@tracklang@add@frenchb{%
+  \AddTrackedDialect{frenchb}{french}%
+  \AddTrackedIsoLanguage{639-1}{fr}{french}%
+  \AddTrackedIsoLanguage{639-2-B}{fre}{french}%
+  \AddTrackedIsoLanguage{639-2-T}{fra}{french}%
+  \AddTrackedIsoLanguage{639-2}{fra}{french}%
+}
+\@tracklang@declareoption{frenchb}
+\def\@tracklang@add@french{%
+  \AddTrackedLanguage{french}%
+  \AddTrackedIsoLanguage{639-1}{fr}{french}%
+  \AddTrackedIsoLanguage{639-2-B}{fre}{french}%
+  \AddTrackedIsoLanguage{639-2-T}{fra}{french}%
+  \AddTrackedIsoLanguage{639-2}{fra}{french}%
+}
+\@tracklang@declareoption{french}
+\def\@tracklang@add@france{%
+  \AddTrackedDialect{france}{french}%
+  \AddTrackedIsoLanguage{639-1}{fr}{french}%
+  \AddTrackedIsoLanguage{639-2-B}{fre}{french}%
+  \AddTrackedIsoLanguage{639-2-T}{fra}{french}%
+  \AddTrackedIsoLanguage{639-2}{fra}{french}%
+  \AddTrackedIsoLanguage{3166-1}{FR}{france}%
+}
+\@tracklang@declareoption{france}
+\def\@tracklang@add@belgique{%
+  \AddTrackedDialect{belgique}{french}%
+  \AddTrackedIsoLanguage{639-1}{fr}{french}%
+  \AddTrackedIsoLanguage{639-2-B}{fre}{french}%
+  \AddTrackedIsoLanguage{639-2-T}{fra}{french}%
+  \AddTrackedIsoLanguage{639-2}{fra}{french}%
+  \AddTrackedIsoLanguage{3166-1}{BE}{belgique}%
+}
+\@tracklang@declareoption{belgique}
+\def\@tracklang@add@belgiangerman{%
+  \AddTrackedDialect{belgiangerman}{german}%
+  \AddTrackedIsoLanguage{639-1}{de}{german}%
+  \AddTrackedIsoLanguage{639-2-B}{ger}{german}%
+  \AddTrackedIsoLanguage{639-2-T}{deu}{german}%
+  \AddTrackedIsoLanguage{639-2}{deu}{german}%
+  \AddTrackedIsoLanguage{3166-1}{BE}{belgiangerman}%
+}
+\@tracklang@declareoption{belgiangerman}
+\def\@tracklang@add@friulan{%
+  \AddTrackedLanguage{friulan}%
+  \AddTrackedIsoLanguage{639-2}{fur}{friulan}%
+  \AddTrackedIsoLanguage{3166-1}{IT}{friulan}%
+}
+\@tracklang@declareoption{friulan}
+\def\@tracklang@add@friulian{%
+  \AddTrackedDialect{friulian}{friulan}%
+  \AddTrackedIsoLanguage{639-2}{fur}{friulan}%
+  \AddTrackedIsoLanguage{3166-1}{IT}{friulan}%
+}
+\@tracklang@declareoption{friulian}
+\def\@tracklang@add@friulano{%
+  \AddTrackedDialect{friulano}{friulan}%
+  \AddTrackedIsoLanguage{639-2}{fur}{friulan}%
+  \AddTrackedIsoLanguage{3166-1}{IT}{friulan}%
+}
+\@tracklang@declareoption{friulano}
+\def\@tracklang@add@galician{%
+  \AddTrackedLanguage{galician}%
+  \AddTrackedIsoLanguage{639-1}{gl}{galician}%
+  \AddTrackedIsoLanguage{639-2}{glg}{galician}%
+}
+\@tracklang@declareoption{galician}
+\def\@tracklang@add@galicien{%
+  \AddTrackedDialect{galicien}{galician}%
+  \AddTrackedIsoLanguage{639-1}{gl}{galician}%
+  \AddTrackedIsoLanguage{639-2}{glg}{galician}%
+}
+\@tracklang@declareoption{galicien}
+\def\@tracklang@add@german{%
+  \AddTrackedLanguage{german}%
+  \AddTrackedIsoLanguage{639-1}{de}{german}%
+  \AddTrackedIsoLanguage{639-2-B}{ger}{german}%
+  \AddTrackedIsoLanguage{639-2-T}{deu}{german}%
+  \AddTrackedIsoLanguage{639-2}{deu}{german}%
+}
+\@tracklang@declareoption{german}
+\def\@tracklang@add@deutsch{%
+  \AddTrackedDialect{deutsch}{german}%
+  \AddTrackedIsoLanguage{639-1}{de}{german}%
+  \AddTrackedIsoLanguage{639-2-B}{ger}{german}%
+  \AddTrackedIsoLanguage{639-2-T}{deu}{german}%
+  \AddTrackedIsoLanguage{639-2}{deu}{german}%
+}
+\@tracklang@declareoption{deutsch}
+\def\@tracklang@add@ngerman{%
+  \AddTrackedDialect{ngerman}{german}%
+  \AddTrackedIsoLanguage{639-1}{de}{german}%
+  \AddTrackedIsoLanguage{639-2-B}{ger}{german}%
+  \AddTrackedIsoLanguage{639-2-T}{deu}{german}%
+  \AddTrackedIsoLanguage{639-2}{deu}{german}%
+}
+\@tracklang@declareoption{ngerman}
+\def\@tracklang@add@ngermanDE{%
+  \AddTrackedDialect{ngerman}{german}%
+  \AddTrackedIsoLanguage{639-1}{de}{german}%
+  \AddTrackedIsoLanguage{639-2-B}{ger}{german}%
+  \AddTrackedIsoLanguage{639-2-T}{deu}{german}%
+  \AddTrackedIsoLanguage{639-2}{deu}{german}%
+  \AddTrackedIsoLanguage{3166-1}{DE}{germany}%
+}
+\@tracklang@declareoption{ngermanDE}
+\def\@tracklang@add@greek{%
+  \AddTrackedLanguage{greek}%
+  \AddTrackedIsoLanguage{639-1}{el}{greek}%
+  \AddTrackedIsoLanguage{639-2-B}{gre}{greek}%
+  \AddTrackedIsoLanguage{639-2-T}{ell}{greek}%
+  \AddTrackedIsoLanguage{639-2}{ell}{greek}%
+}
+\@tracklang@declareoption{greek}
+\def\@tracklang@add@hebrew{%
+  \AddTrackedLanguage{hebrew}%
+  \AddTrackedIsoLanguage{639-1}{he}{hebrew}%
+  \AddTrackedIsoLanguage{639-2}{heb}{hebrew}%
+}
+\@tracklang@declareoption{hebrew}
+\def\@tracklang@add@hindi{%
+  \AddTrackedLanguage{hindi}%
+  \AddTrackedIsoLanguage{639-1}{hi}{hindi}%
+  \AddTrackedIsoLanguage{639-2}{hin}{hindi}%
+}
+\@tracklang@declareoption{hindi}
+\def\@tracklang@add@hungarian{%
+  \AddTrackedDialect{hungarian}{magyar}%
+  \AddTrackedIsoLanguage{639-1}{hu}{magyar}%
+  \AddTrackedIsoLanguage{639-2}{hun}{magyar}%
+  \AddTrackedIsoLanguage{3166-1}{HU}{hungarian}%
+}
+\@tracklang@declareoption{hungarian}
+\def\@tracklang@add@magyar{%
+  \AddTrackedLanguage{magyar}%
+  \AddTrackedIsoLanguage{639-1}{hu}{magyar}%
+  \AddTrackedIsoLanguage{639-2}{hun}{magyar}%
+}
+\@tracklang@declareoption{magyar}
+\def\@tracklang@add@icelandic{%
+  \AddTrackedLanguage{icelandic}%
+  \AddTrackedIsoLanguage{639-1}{is}{icelandic}%
+  \AddTrackedIsoLanguage{639-2-B}{ice}{icelandic}%
+  \AddTrackedIsoLanguage{639-2-T}{isl}{icelandic}%
+  \AddTrackedIsoLanguage{639-2}{isl}{icelandic}%
+}
+\@tracklang@declareoption{icelandic}
+\def\@tracklang@add@indon{%
+  \AddTrackedDialect{indon}{bahasai}%
+  \AddTrackedIsoLanguage{639-1}{id}{bahasai}%
+  \AddTrackedIsoLanguage{639-2}{ind}{bahasai}%
+  \AddTrackedIsoLanguage{3166-1}{IN}{indon}%
+}
+\@tracklang@declareoption{indon}
+\def\@tracklang@add@indonesian{%
+  \AddTrackedDialect{indonesian}{bahasai}%
+  \AddTrackedIsoLanguage{639-1}{id}{bahasai}%
+  \AddTrackedIsoLanguage{639-2}{ind}{bahasai}%
+  \AddTrackedIsoLanguage{3166-1}{IN}{indonesian}%
+}
+\@tracklang@declareoption{indonesian}
+\def\@tracklang@add@interlingua{%
+  \AddTrackedLanguage{interlingua}%
+  \AddTrackedIsoLanguage{639-1}{ia}{interlingua}%
+  \AddTrackedIsoLanguage{639-2}{ina}{interlingua}%
+}
+\@tracklang@declareoption{interlingua}
+\def\@tracklang@add@irish{%
+  \AddTrackedLanguage{irish}%
+  \AddTrackedIsoLanguage{639-1}{ga}{irish}%
+  \AddTrackedIsoLanguage{639-2}{gle}{irish}%
+}
+\@tracklang@declareoption{irish}
+\def\@tracklang@add@gaeilge{%
+  \AddTrackedDialect{gaeilge}{irish}%
+  \AddTrackedIsoLanguage{639-1}{ga}{irish}%
+  \AddTrackedIsoLanguage{639-2}{gle}{irish}%
+}
+\@tracklang@declareoption{gaeilge}
+\def\@tracklang@add@IEirish{%
+  \AddTrackedDialect{IEirish}{irish}%
+  \AddTrackedIsoLanguage{639-1}{ga}{irish}%
+  \AddTrackedIsoLanguage{639-2}{gle}{irish}%
+  \AddTrackedIsoLanguage{3166-1}{IE}{IEirish}%
+}
+\@tracklang@declareoption{IEirish}
+\def\@tracklang@add@GBirish{%
+  \AddTrackedDialect{GBirish}{irish}%
+  \AddTrackedIsoLanguage{639-1}{ga}{irish}%
+  \AddTrackedIsoLanguage{639-2}{gle}{irish}%
+  \AddTrackedIsoLanguage{3166-1}{GB}{GBirish}%
+}
+\@tracklang@declareoption{GBirish}
+\@tracklang@declareoption{IEenglish}
+\def\@tracklang@add@IEenglish{%
+  \AddTrackedDialect{IEenglish}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{IE}{IEenglish}%
+}
+\@tracklang@declareoption{IEenglish}
+\def\@tracklang@add@italian{%
+  \AddTrackedLanguage{italian}%
+  \AddTrackedIsoLanguage{639-1}{it}{italian}%
+  \AddTrackedIsoLanguage{639-2}{ita}{italian}%
+}
+\@tracklang@declareoption{italian}
+\def\@tracklang@add@italy{%
+  \AddTrackedDialect{italy}{italian}%
+  \AddTrackedIsoLanguage{639-1}{it}{italian}%
+  \AddTrackedIsoLanguage{639-2}{ita}{italian}%
+  \AddTrackedIsoLanguage{3166-1}{IT}{italy}%
+}
+\@tracklang@declareoption{italy}
+\def\@tracklang@add@vatican{%
+  \AddTrackedDialect{vatican}{italian}%
+  \AddTrackedIsoLanguage{639-1}{it}{italian}%
+  \AddTrackedIsoLanguage{639-2}{ita}{italian}%
+  \AddTrackedIsoLanguage{3166-1}{VA}{vatican}%
+}
+\@tracklang@declareoption{vatican}
+\def\@tracklang@add@sanmarino{%
+  \AddTrackedDialect{sanmarino}{italian}%
+  \AddTrackedIsoLanguage{639-1}{it}{italian}%
+  \AddTrackedIsoLanguage{639-2}{ita}{italian}%
+  \AddTrackedIsoLanguage{3166-1}{SM}{sanmarino}%
+}
+\@tracklang@declareoption{sanmarino}
+\def\@tracklang@add@sloveneistriaitalian{%
+  \AddTrackedDialect{sloveneistriaitalian}{italian}%
+  \AddTrackedIsoLanguage{639-1}{it}{italian}%
+  \AddTrackedIsoLanguage{639-2}{ita}{italian}%
+  \AddTrackedIsoLanguage{3166-1}{SI}{sloveneistriaitalian}%
+}
+\@tracklang@declareoption{sloveneistriaitalian}
+\def\@tracklang@add@jerseyenglish{%
+  \AddTrackedDialect{jerseyenglish}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{JE}{jerseyenglish}%
+}
+\@tracklang@declareoption{jerseyenglish}
+\def\@tracklang@add@jerseyfrench{%
+  \AddTrackedDialect{jerseyfrench}{french}%
+  \AddTrackedIsoLanguage{639-1}{fr}{french}%
+  \AddTrackedIsoLanguage{639-2-B}{fre}{french}%
+  \AddTrackedIsoLanguage{639-2-T}{fra}{french}%
+  \AddTrackedIsoLanguage{639-2}{fra}{french}%
+  \AddTrackedIsoLanguage{3166-1}{JE}{jerseyfrench}%
+}
+\@tracklang@declareoption{jerseyfrench}
+\def\@tracklang@add@guernseyenglish{%
+  \AddTrackedDialect{guernseyenglish}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{GG}{guernseyenglish}%
+}
+\@tracklang@declareoption{guernseyenglish}
+\def\@tracklang@add@guernseyfrench{%
+  \AddTrackedDialect{guernseyfrench}{french}%
+  \AddTrackedIsoLanguage{639-1}{fr}{french}%
+  \AddTrackedIsoLanguage{639-2-B}{fre}{french}%
+  \AddTrackedIsoLanguage{639-2-T}{fra}{french}%
+  \AddTrackedIsoLanguage{639-2}{fra}{french}%
+  \AddTrackedIsoLanguage{3166-1}{GG}{guernseyfrench}%
+}
+\@tracklang@declareoption{guernseyfrench}
+\def\@tracklang@add@kannada{%
+  \AddTrackedLanguage{kannada}%
+  \AddTrackedIsoLanguage{639-1}{kn}{kannada}%
+  \AddTrackedIsoLanguage{639-2}{kan}{kannada}%
+}
+\@tracklang@declareoption{kannada}
+\def\@tracklang@add@lao{%
+  \AddTrackedLanguage{lao}%
+  \AddTrackedIsoLanguage{639-1}{lo}{lao}%
+  \AddTrackedIsoLanguage{639-2}{lao}{lao}%
+}
+\@tracklang@declareoption{lao}
+\def\@tracklang@add@latin{%
+  \AddTrackedLanguage{latin}%
+  \AddTrackedIsoLanguage{639-1}{la}{latin}%
+  \AddTrackedIsoLanguage{639-2}{lat}{latin}%
+}
+\@tracklang@declareoption{latin}
+\def\@tracklang@add@latein{%
+  \AddTrackedDialect{latein}{latin}%
+  \AddTrackedIsoLanguage{639-1}{la}{latin}%
+  \AddTrackedIsoLanguage{639-2}{lat}{latin}%
+}
+\@tracklang@declareoption{latein}
+\def\@tracklang@add@latvian{%
+  \AddTrackedLanguage{latvian}%
+  \AddTrackedIsoLanguage{639-1}{lv}{latvian}%
+  \AddTrackedIsoLanguage{639-2}{lav}{latvian}%
+}
+\@tracklang@declareoption{latvian}
+\def\@tracklang@add@lithuanian{%
+  \AddTrackedLanguage{lithuanian}%
+  \AddTrackedIsoLanguage{639-1}{lt}{lithuanian}%
+  \AddTrackedIsoLanguage{639-2}{lit}{lithuanian}%
+}
+\@tracklang@declareoption{lithuanian}
+\def\@tracklang@add@lsorbian{%
+  \AddTrackedLanguage{lsorbian}%
+  \AddTrackedIsoLanguage{639-2}{dsb}{lsorbian}%
+  \AddTrackedIsoLanguage{3166-1}{DE}{lsorbian}%
+}
+\@tracklang@declareoption{lsorbian}
+\def\@tracklang@add@lowersorbian{%
+  \AddTrackedDialect{lowersorbian}{lsorbian}%
+  \AddTrackedIsoLanguage{639-2}{dsb}{lsorbian}%
+  \AddTrackedIsoLanguage{3166-1}{DE}{lowersorbian}%
+}
+\@tracklang@declareoption{lowersorbian}
+\def\@tracklang@add@malay{%
+  \AddTrackedDialect{malay}{bahasam}%
+  \AddTrackedIsoLanguage{639-1}{ms}{bahasam}%
+  \AddTrackedIsoLanguage{639-2-B}{may}{bahasam}%
+  \AddTrackedIsoLanguage{639-2-T}{msa}{bahasam}%
+  \AddTrackedIsoLanguage{639-2}{msa}{bahasam}%
+  \AddTrackedIsoLanguage{3166-1}{MY}{malay}%
+}
+\@tracklang@declareoption{malay}
+\def\@tracklang@add@meyalu{%
+  \AddTrackedDialect{meyalu}{bahasam}%
+  \AddTrackedIsoLanguage{639-1}{ms}{bahasam}%
+  \AddTrackedIsoLanguage{639-2-B}{may}{bahasam}%
+  \AddTrackedIsoLanguage{639-2-T}{msa}{bahasam}%
+  \AddTrackedIsoLanguage{639-2}{msa}{bahasam}%
+  \AddTrackedIsoLanguage{3166-1}{MY}{meyalu}%
+}
+\@tracklang@declareoption{meyalu}
+\def\@tracklang@add@maltese{%
+  \AddTrackedLanguage{maltese}%
+  \AddTrackedIsoLanguage{639-1}{mt}{maltese}%
+  \AddTrackedIsoLanguage{639-2}{mlt}{maltese}%
+}
+\@tracklang@declareoption{maltese}
+\def\@tracklang@add@maltamaltese{%
+  \AddTrackedDialect{maltamaltese}{maltese}%
+  \AddTrackedIsoLanguage{639-1}{mt}{maltese}%
+  \AddTrackedIsoLanguage{639-2}{mlt}{maltese}%
+  \AddTrackedIsoLanguage{3166-1}{MT}{maltamaltese}%
+}
+\@tracklang@declareoption{maltamaltese}
+\def\@tracklang@add@maltaenglish{%
+  \AddTrackedDialect{maltaenglish}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{MT}{maltaenglish}%
+}
+\@tracklang@declareoption{maltaenglish}
+\def\@tracklang@add@malayalam{%
+  \AddTrackedLanguage{malayalam}%
+  \AddTrackedIsoLanguage{639-1}{ml}{malayalam}%
+  \AddTrackedIsoLanguage{639-2}{mal}{malayalam}%
+}
+\@tracklang@declareoption{malayalam}
+\def\@tracklang@add@marathi{%
+  \AddTrackedLanguage{marathi}%
+  \AddTrackedIsoLanguage{639-1}{mr}{marathi}%
+  \AddTrackedIsoLanguage{639-2}{mar}{marathi}%
+}
+\@tracklang@declareoption{marathi}
+\def\@tracklang@add@newzealand{%
+  \AddTrackedDialect{newzealand}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{NZ}{newzealand}%
+}
+\@tracklang@declareoption{newzealand}
+\def\@tracklang@add@isleofmanenglish{%
+  \AddTrackedDialect{isleofmanenglish}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{IM}{isleofmanenglish}%
+}
+\@tracklang@declareoption{isleofmanenglish}
+\def\@tracklang@add@manx{%
+  \AddTrackedLanguage{manx}%
+  \AddTrackedIsoLanguage{639-1}{gv}{manx}%
+  \AddTrackedIsoLanguage{639-2}{glv}{manx}%
+  \AddTrackedIsoLanguage{3166-1}{IM}{manx}%
+}
+\@tracklang@declareoption{manx}
+\def\@tracklang@add@nko{%
+  \AddTrackedLanguage{nko}%
+  \AddTrackedIsoLanguage{639-2}{nqo}{nko}%
+}
+\@tracklang@declareoption{nko}
+\def\@tracklang@add@nynorsk{%
+  \AddTrackedDialect{nynorsk}{norsk}%
+  \AddTrackedIsoLanguage{639-1}{nn}{norsk}%
+  \AddTrackedIsoLanguage{639-2}{nno}{norsk}%
+  \AddTrackedIsoLanguage{3166-1}{NO}{nynorsk}%
+}
+\@tracklang@declareoption{nynorsk}
+\def\@tracklang@add@norwegian{%
+  \AddTrackedDialect{norwegian}{norsk}%
+  \AddTrackedIsoLanguage{639-1}{nn}{norsk}%
+  \AddTrackedIsoLanguage{639-2}{nno}{norsk}%
+  \AddTrackedIsoLanguage{3166-1}{NO}{norwegian}%
+}
+\@tracklang@declareoption{norwegian}
+\def\@tracklang@add@norsk{%
+  \AddTrackedLanguage{norsk}%
+  \AddTrackedIsoLanguage{639-1}{nn}{norsk}%
+  \AddTrackedIsoLanguage{639-2}{nno}{norsk}%
+  \AddTrackedIsoLanguage{3166-1}{NO}{norsk}%
+}
+\@tracklang@declareoption{norsk}
+\def\@tracklang@add@occitan{%
+  \AddTrackedLanguage{occitan}%
+  \AddTrackedIsoLanguage{639-1}{oc}{occitan}%
+  \AddTrackedIsoLanguage{639-2}{oci}{occitan}%
+}
+\@tracklang@declareoption{occitan}
+\def\@tracklang@add@piedmontese{%
+  \AddTrackedLanguage{piedmontese}%
+  \AddTrackedIsoLanguage{3166-1}{IT}{piedmontese}%
+}
+\@tracklang@declareoption{piedmontese}
+\def\@tracklang@add@piemonteis{%
+  \AddTrackedDialect{piemonteis}{piedmontese}%
+  \AddTrackedIsoLanguage{3166-1}{IT}{piemonteis}%
+}
+\@tracklang@declareoption{piemonteis}
+\def\@tracklang@add@polish{%
+  \AddTrackedLanguage{polish}%
+  \AddTrackedIsoLanguage{639-1}{pl}{polish}%
+  \AddTrackedIsoLanguage{639-2}{pol}{polish}%
+}
+\@tracklang@declareoption{polish}
+\def\@tracklang@add@polutonikogreek{%
+  \AddTrackedDialect{polutonikogreek}{greek}%
+  \AddTrackedIsoLanguage{639-1}{el}{greek}%
+  \AddTrackedIsoLanguage{639-2-B}{gre}{greek}%
+  \AddTrackedIsoLanguage{639-2-T}{ell}{greek}%
+  \AddTrackedIsoLanguage{639-2}{ell}{greek}%
+}
+\@tracklang@declareoption{polutonikogreek}
+\def\@tracklang@add@polutoniko{%
+  \AddTrackedDialect{polutoniko}{greek}%
+  \AddTrackedIsoLanguage{639-1}{el}{greek}%
+  \AddTrackedIsoLanguage{639-2-B}{gre}{greek}%
+  \AddTrackedIsoLanguage{639-2-T}{ell}{greek}%
+  \AddTrackedIsoLanguage{639-2}{ell}{greek}%
+}
+\@tracklang@declareoption{polutoniko}
+\def\@tracklang@add@portuguese{%
+  \AddTrackedDialect{portuguese}{portuges}%
+  \AddTrackedIsoLanguage{639-1}{pt}{portuges}%
+  \AddTrackedIsoLanguage{639-2}{por}{portuges}%
+}
+\@tracklang@declareoption{portuguese}
+\def\@tracklang@add@portuges{%
+  \AddTrackedLanguage{portuges}%
+  \AddTrackedIsoLanguage{639-1}{pt}{portuges}%
+  \AddTrackedIsoLanguage{639-2}{por}{portuges}%
+}
+\@tracklang@declareoption{portuges}
+\def\@tracklang@add@portugal{%
+  \AddTrackedDialect{portgual}{portuges}%
+  \AddTrackedIsoLanguage{639-1}{pt}{portuges}%
+  \AddTrackedIsoLanguage{639-2}{por}{portuges}%
+  \AddTrackedIsoLanguage{3166-1}{PT}{portugal}%
+}
+\@tracklang@declareoption{portugal}
+\def\@tracklang@add@romanian{%
+  \AddTrackedLanguage{romanian}%
+  \AddTrackedIsoLanguage{639-1}{ro}{romanian}%
+  \AddTrackedIsoLanguage{639-2-B}{rum}{romanian}%
+  \AddTrackedIsoLanguage{639-2-T}{ron}{romanian}%
+  \AddTrackedIsoLanguage{639-2}{ron}{romanian}%
+}
+\@tracklang@declareoption{romanian}
+\def\@tracklang@add@romansh{%
+  \AddTrackedLanguage{romansh}%
+  \AddTrackedIsoLanguage{639-1}{rm}{romansh}%
+  \AddTrackedIsoLanguage{639-2}{roh}{romansh}%
+}
+\@tracklang@declareoption{romansh}
+\def\@tracklang@add@romansch{%
+  \AddTrackedDialect{romansch}{romansh}%
+  \AddTrackedIsoLanguage{639-1}{rm}{romansh}%
+  \AddTrackedIsoLanguage{639-2}{roh}{romansh}%
+}
+\@tracklang@declareoption{romansch}
+\def\@tracklang@add@rumantsch{%
+  \AddTrackedDialect{rumantsch}{romansh}%
+  \AddTrackedIsoLanguage{639-1}{rm}{romansh}%
+  \AddTrackedIsoLanguage{639-2}{roh}{romansh}%
+}
+\@tracklang@declareoption{rumantsch}
+\def\@tracklang@add@romanche{%
+  \AddTrackedDialect{romanche}{romansh}%
+  \AddTrackedIsoLanguage{639-1}{rm}{romansh}%
+  \AddTrackedIsoLanguage{639-2}{roh}{romansh}%
+}
+\@tracklang@declareoption{romanche}
+\def\@tracklang@add@russian{%
+  \AddTrackedLanguage{russian}%
+  \AddTrackedIsoLanguage{639-1}{ru}{russian}%
+  \AddTrackedIsoLanguage{639-2}{rus}{russian}%
+}
+\@tracklang@declareoption{russian}
+\def\@tracklang@add@russianb{%
+  \AddTrackedDialect{russianb}{russian}%
+  \AddTrackedIsoLanguage{639-1}{ru}{russian}%
+  \AddTrackedIsoLanguage{639-2}{rus}{russian}%
+}
+\@tracklang@declareoption{russianb}
+\def\@tracklang@add@samin{%
+  \AddTrackedLanguage{samin}%
+  \AddTrackedIsoLanguage{639-1}{se}{samin}%
+  \AddTrackedIsoLanguage{639-2}{sme}{samin}%
+}
+\@tracklang@declareoption{samin}
+\def\@tracklang@add@sanskrit{%
+  \AddTrackedLanguage{sanskrit}%
+  \AddTrackedIsoLanguage{639-1}{sa}{sanskrit}%
+  \AddTrackedIsoLanguage{639-2}{san}{sanskrit}%
+}
+\@tracklang@declareoption{sanskrit}
+\def\@tracklang@add@scottish{%
+  \AddTrackedLanguage{scottish}%
+  \AddTrackedIsoLanguage{639-1}{gd}{scottish}%
+  \AddTrackedIsoLanguage{639-2}{gla}{scottish}%
+}
+\@tracklang@declareoption{scottish}
+\def\@tracklang@add@gaelic{%
+  \AddTrackedDialect{gaelic}{scottish}%
+  \AddTrackedIsoLanguage{639-1}{gd}{scottish}%
+  \AddTrackedIsoLanguage{639-2}{gla}{scottish}%
+}
+\@tracklang@declareoption{gaelic}
+\def\@tracklang@add@serbian{%
+  \AddTrackedLanguage{serbian}%
+  \AddTrackedIsoLanguage{639-1}{sr}{serbian}%
+  \AddTrackedIsoLanguage{639-2}{srp}{serbian}%
+}
+\@tracklang@declareoption{serbian}
+\def\@tracklang@add@slovak{%
+  \AddTrackedLanguage{slovak}%
+  \AddTrackedIsoLanguage{639-1}{sk}{slovak}%
+  \AddTrackedIsoLanguage{639-2-B}{slo}{slovak}%
+  \AddTrackedIsoLanguage{639-2-T}{slk}{slovak}%
+  \AddTrackedIsoLanguage{639-2}{slk}{slovak}%
+}
+\@tracklang@declareoption{slovak}
+\def\@tracklang@add@slovene{%
+  \AddTrackedLanguage{slovene}%
+  \AddTrackedIsoLanguage{639-1}{sl}{slovene}%
+  \AddTrackedIsoLanguage{639-2}{slv}{slovene}%
+}
+\@tracklang@declareoption{slovene}
+\def\@tracklang@add@slovenian{%
+  \AddTrackedDialect{slovenian}{slovene}%
+  \AddTrackedIsoLanguage{639-1}{sl}{slovene}%
+  \AddTrackedIsoLanguage{639-2}{slv}{slovene}%
+}
+\@tracklang@declareoption{slovenian}
+\def\@tracklang@add@slovenia{%
+  \AddTrackedDialect{slovenia}{slovene}%
+  \AddTrackedIsoLanguage{639-1}{sl}{slovene}%
+  \AddTrackedIsoLanguage{639-2}{slv}{slovene}%
+  \AddTrackedIsoLanguage{3166-1}{SI}{slovenia}%
+}
+\@tracklang@declareoption{slovenia}
+\def\@tracklang@add@sloveneistriaslovenian{%
+  \AddTrackedDialect{sloveneistriaslovenian}{slovenian}%
+  \AddTrackedIsoLanguage{639-1}{sl}{slovene}%
+  \AddTrackedIsoLanguage{639-2}{slv}{slovene}%
+  \AddTrackedIsoLanguage{3166-1}{SI}{sloveneistriaslovenian}%
+}
+\@tracklang@declareoption{sloveneistriaslovenian}
+\def\@tracklang@add@spanish{%
+  \AddTrackedLanguage{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+}
+\@tracklang@declareoption{spanish}
+\def\@tracklang@add@spainspanish{%
+  \AddTrackedDialect{spainspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{ES}{spainspanish}%
+}
+\@tracklang@declareoption{spainspanish}
+\def\@tracklang@add@argentinespanish{%
+  \AddTrackedDialect{argentinespanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{AR}{argentinespanish}%
+}
+\@tracklang@declareoption{argentinespanish}
+\def\@tracklang@add@bolivianspanish{%
+  \AddTrackedDialect{bolivianspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{BO}{bolivianspanish}%
+}
+\@tracklang@declareoption{bolivianspanish}
+\def\@tracklang@add@chilianspanish{%
+  \AddTrackedDialect{chilianspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{CL}{chilianspanish}%
+}
+\@tracklang@declareoption{chilianspanish}
+\def\@tracklang@add@columbianspanish{%
+  \AddTrackedDialect{columbianspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{CO}{columbianspanish}%
+}
+\@tracklang@declareoption{columbianspanish}
+\def\@tracklang@add@costaricanspanish{%
+  \AddTrackedDialect{costaricanspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{CR}{costaricanspanish}%
+}
+\@tracklang@declareoption{costaricanspanish}
+\def\@tracklang@add@cubanspanish{%
+  \AddTrackedDialect{cubanspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{CU}{cubanspanish}%
+}
+\@tracklang@declareoption{cubanspanish}
+\def\@tracklang@add@dominicanspanish{%
+  \AddTrackedDialect{dominicanspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{DO}{dominicanspanish}%
+}
+\@tracklang@declareoption{dominicanspanish}
+\def\@tracklang@add@ecudorianspanish{%
+  \AddTrackedDialect{ecudorianspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{EC}{ecudorianspanish}%
+}
+\@tracklang@declareoption{ecudorianspanish}
+\def\@tracklang@add@elsalvadorspanish{%
+  \AddTrackedDialect{elsalvadorspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{SV}{elsalvadorspanish}%
+}
+\@tracklang@declareoption{elsalvadorspanish}
+\def\@tracklang@add@guatemalanspanish{%
+  \AddTrackedDialect{guatemalanspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{GT}{guatemalanspanish}%
+}
+\@tracklang@declareoption{guatemalanspanish}
+\def\@tracklang@add@honduranspanish{%
+  \AddTrackedDialect{honduranspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{HN}{honduranspanish}%
+}
+\@tracklang@declareoption{honduranspanish}
+\def\@tracklang@add@mexicanspanish{%
+  \AddTrackedDialect{mexicanspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{MX}{mexicanspanish}%
+}
+\@tracklang@declareoption{mexicanspanish}
+\def\@tracklang@add@nicaraguanspanish{%
+  \AddTrackedDialect{nicaraguanspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{NI}{nicaraguanspanish}%
+}
+\@tracklang@declareoption{nicaraguanspanish}
+\def\@tracklang@add@panamaspanish{%
+  \AddTrackedDialect{panamaspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{PA}{panamaspanish}%
+}
+\@tracklang@declareoption{panamaspanish}
+\def\@tracklang@add@paraguayspanish{%
+  \AddTrackedDialect{paraguayspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{PY}{paraguayspanish}%
+}
+\@tracklang@declareoption{paraguayspanish}
+\def\@tracklang@add@peruvianspanish{%
+  \AddTrackedDialect{peruvianspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{PE}{peruvianspanish}%
+}
+\@tracklang@declareoption{peruvianspanish}
+\def\@tracklang@add@puertoricospanish{%
+  \AddTrackedDialect{puertoricospanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{PR}{puertoricospanish}%
+}
+\@tracklang@declareoption{puertoricospanish}
+\def\@tracklang@add@uruguayspanish{%
+  \AddTrackedDialect{uruguayspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{UY}{uruguayspanish}%
+}
+\@tracklang@declareoption{uruguayspanish}
+\def\@tracklang@add@venezuelanspanish{%
+  \AddTrackedDialect{venezuelanspanish}{spanish}%
+  \AddTrackedIsoLanguage{639-1}{es}{spanish}%
+  \AddTrackedIsoLanguage{639-2}{spa}{spanish}%
+  \AddTrackedIsoLanguage{3166-1}{VE}{venezuelanspanish}%
+}
+\@tracklang@declareoption{venezuelanspanish}
+\def\@tracklang@add@swedish{%
+  \AddTrackedLanguage{swedish}%
+  \AddTrackedIsoLanguage{639-1}{sv}{swedish}%
+  \AddTrackedIsoLanguage{639-2}{swe}{swedish}%
+}
+\@tracklang@declareoption{swedish}
+\def\@tracklang@add@swissgerman{%
+  \AddTrackedDialect{swissgerman}{german}%
+  \AddTrackedIsoLanguage{639-1}{de}{german}%
+  \AddTrackedIsoLanguage{639-2-B}{ger}{german}%
+  \AddTrackedIsoLanguage{639-2-T}{deu}{german}%
+  \AddTrackedIsoLanguage{639-2}{deu}{german}%
+  \AddTrackedIsoLanguage{3166-1}{CH}{swissgerman}%
+}
+\@tracklang@declareoption{swissgerman}
+\def\@tracklang@add@swissfrench{%
+  \AddTrackedDialect{swissfrench}{french}%
+  \AddTrackedIsoLanguage{639-1}{fr}{french}%
+  \AddTrackedIsoLanguage{639-2-B}{fre}{french}%
+  \AddTrackedIsoLanguage{639-2-T}{fra}{french}%
+  \AddTrackedIsoLanguage{639-2}{fra}{french}%
+  \AddTrackedIsoLanguage{3166-1}{CH}{swissfrench}%
+}
+\@tracklang@declareoption{swissfrench}
+\def\@tracklang@add@swissitalian{%
+  \AddTrackedDialect{swissitalian}{italian}%
+  \AddTrackedIsoLanguage{639-1}{it}{italian}%
+  \AddTrackedIsoLanguage{639-2}{ita}{italian}%
+  \AddTrackedIsoLanguage{3166-1}{CH}{swissitalian}%
+}
+\@tracklang@declareoption{swissitalian}
+\def\@tracklang@add@swissromansh{%
+  \AddTrackedDialect{swissromansh}{romansh}%
+  \AddTrackedIsoLanguage{639-1}{rm}{romansh}%
+  \AddTrackedIsoLanguage{639-2}{roh}{romansh}%
+  \AddTrackedIsoLanguage{3166-1}{CH}{swissromansh}%
+}
+\@tracklang@declareoption{swissromansh}
+\def\@tracklang@add@syriac{%
+  \AddTrackedLanguage{syriac}%
+  \AddTrackedIsoLanguage{639-2}{syr}{syriac}%
+}
+\@tracklang@declareoption{syriac}
+\def\@tracklang@add@tamil{%
+  \AddTrackedLanguage{tamil}%
+  \AddTrackedIsoLanguage{639-1}{ta}{tamil}%
+  \AddTrackedIsoLanguage{639-2}{tam}{tamil}%
+}
+\@tracklang@declareoption{tamil}
+\def\@tracklang@add@telugu{%
+  \AddTrackedLanguage{telugu}%
+  \AddTrackedIsoLanguage{639-1}{te}{telugu}%
+  \AddTrackedIsoLanguage{639-2}{tel}{telugu}%
+}
+\@tracklang@declareoption{telugu}
+\def\@tracklang@add@tai{%
+  \AddTrackedLanguage{tai}%
+  \AddTrackedIsoLanguage{639-2}{tai}{tai}%
+}
+\@tracklang@declareoption{tai}
+\def\@tracklang@add@thai{%
+  \AddTrackedLanguage{thai}%
+  \AddTrackedIsoLanguage{639-1}{th}{thai}%
+  \AddTrackedIsoLanguage{639-2}{tha}{thai}%
+}
+\@tracklang@declareoption{thai}
+\def\@tracklang@add@tibetan{%
+  \AddTrackedLanguage{tibetan}%
+  \AddTrackedIsoLanguage{639-1}{bo}{tibetan}%
+  \AddTrackedIsoLanguage{639-2-B}{tib}{tibetan}%
+  \AddTrackedIsoLanguage{639-2-T}{bod}{tibetan}%
+  \AddTrackedIsoLanguage{639-2}{bod}{tibetan}%
+}
+\@tracklang@declareoption{tibetan}
+\def\@tracklang@add@turkish{%
+  \AddTrackedLanguage{turkish}%
+  \AddTrackedIsoLanguage{639-1}{tr}{turkish}%
+  \AddTrackedIsoLanguage{639-2}{tur}{turkish}%
+}
+\@tracklang@declareoption{turkish}
+\def\@tracklang@add@turkmen{%
+  \AddTrackedLanguage{turkmen}%
+  \AddTrackedIsoLanguage{639-1}{tk}{turkmen}%
+  \AddTrackedIsoLanguage{639-2}{tuk}{turkmen}%
+}
+\@tracklang@declareoption{turkmen}
+\def\@tracklang@add@UKenglish{%
+  \AddTrackedDialect{UKenglish}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{GB}{UKenglish}%
+}
+\@tracklang@declareoption{UKenglish}
+\def\@tracklang@add@ukrainian{%
+  \AddTrackedLanguage{ukrainian}%
+  \AddTrackedIsoLanguage{639-1}{uk}{ukrainian}%
+  \AddTrackedIsoLanguage{639-2}{ukr}{ukrainian}%
+  \AddTrackedIsoLanguage{3166-1}{UA}{ukrainian}%
+}
+\@tracklang@declareoption{ukrainian}
+\def\@tracklang@add@ukraineb{%
+  \AddTrackedDialect{ukraineb}{ukrainian}%
+  \AddTrackedIsoLanguage{639-1}{uk}{ukrainian}%
+  \AddTrackedIsoLanguage{639-2}{ukr}{ukrainian}%
+  \AddTrackedIsoLanguage{3166-1}{UA}{ukraineb}%
+}
+\@tracklang@declareoption{ukraineb}
+\def\@tracklang@add@ukraine{%
+  \AddTrackedDialect{ukraine}{ukrainian}%
+  \AddTrackedIsoLanguage{639-1}{uk}{ukrainian}%
+  \AddTrackedIsoLanguage{639-2}{ukr}{ukrainian}%
+  \AddTrackedIsoLanguage{3166-1}{UA}{ukraine}%
+}
+\@tracklang@declareoption{ukraine}
+\def\@tracklang@add@urdu{%
+  \AddTrackedLanguage{urdu}%
+  \AddTrackedIsoLanguage{639-1}{ur}{urdu}%
+  \AddTrackedIsoLanguage{639-2}{urd}{urdu}%
+}
+\@tracklang@declareoption{urdu}
+\def\@tracklang@add@usorbian{%
+  \AddTrackedLanguage{usorbian}%
+  \AddTrackedIsoLanguage{639-2}{dsb}{usorbian}%
+  \AddTrackedIsoLanguage{3166-1}{DE}{usorbian}%
+}
+\@tracklang@declareoption{usorbian}
+\def\@tracklang@add@uppersorbian{%
+  \AddTrackedDialect{uppersorbian}{usorbian}%
+  \AddTrackedIsoLanguage{639-2}{hsb}{usorbian}%
+  \AddTrackedIsoLanguage{3166-1}{DE}{uppersorbian}%
+}
+\@tracklang@declareoption{uppersorbian}
+\def\@tracklang@add@USenglish{%
+  \AddTrackedDialect{USenglish}{english}%
+  \AddTrackedIsoLanguage{639-1}{en}{english}%
+  \AddTrackedIsoLanguage{639-2}{eng}{english}%
+  \AddTrackedIsoLanguage{3166-1}{US}{USenglish}%
+}
+\@tracklang@declareoption{USenglish}
+\def\@tracklang@add@valencian{%
+  \AddTrackedDialect{valencian}{catalan}%
+  \AddTrackedIsoLanguage{639-1}{ca}{catalan}%
+  \AddTrackedIsoLanguage{639-2}{cat}{catalan}%
+}
+\@tracklang@declareoption{valencian}
+\def\@tracklang@add@valencien{%
+  \AddTrackedDialect{valencien}{catalan}%
+  \AddTrackedIsoLanguage{639-1}{ca}{catalan}%
+  \AddTrackedIsoLanguage{639-2}{cat}{catalan}%
+}
+\@tracklang@declareoption{valencien}
+\def\@tracklang@add@vietnamese{%
+  \AddTrackedLanguage{vietnamese}%
+  \AddTrackedIsoLanguage{639-1}{vi}{vietnamese}%
+  \AddTrackedIsoLanguage{639-2}{vie}{vietnamese}%
+}
+\@tracklang@declareoption{vietnamese}
+\def\@tracklang@add@walloon{%
+  \AddTrackedLanguage{walloon}%
+  \AddTrackedIsoLanguage{639-1}{wa}{walloon}%
+  \AddTrackedIsoLanguage{639-2}{wln}{walloon}%
+}
+\@tracklang@declareoption{walloon}
+\def\@tracklang@add@welsh{%
+  \AddTrackedLanguage{welsh}%
+  \AddTrackedIsoLanguage{639-1}{cy}{welsh}%
+  \AddTrackedIsoLanguage{639-2-B}{wel}{welsh}%
+  \AddTrackedIsoLanguage{639-2-T}{cym}{welsh}%
+  \AddTrackedIsoLanguage{639-2}{cym}{welsh}%
+}
+\@tracklang@declareoption{welsh}
+\def\@tracklang@add@cymraeg{%
+  \AddTrackedDialect{cymraeg}{welsh}%
+  \AddTrackedIsoLanguage{639-1}{cy}{welsh}%
+  \AddTrackedIsoLanguage{639-2-B}{wel}{welsh}%
+  \AddTrackedIsoLanguage{639-2-T}{cym}{welsh}%
+  \AddTrackedIsoLanguage{639-2}{cym}{welsh}%
+}
+\@tracklang@declareoption{cymraeg}
+\def\LetTrackLangOption#1#2{%
+  \expandafter\let\csname @tracklang@add@#1\expandafter\endcsname
+    \csname @tracklang@add@#2\endcsname
+  \@tracklang@declareoption{#1}%
+}
+\LetTrackLangOption{en-US}{american}
+\LetTrackLangOption{en-GB}{british}
+\LetTrackLangOption{en-AU}{australian}
+\LetTrackLangOption{en-NZ}{newzealand}
+\LetTrackLangOption{en-CA}{canadian}
+\LetTrackLangOption{fr-CA}{canadien}
+\LetTrackLangOption{fr-BE}{belgique}
+\LetTrackLangOption{pt-BR}{brazilian}
+\LetTrackLangOption{it-HR}{istriacountyitalian}
+\LetTrackLangOption{nl-BE}{flemish}
+\LetTrackLangOption{fr-FR}{france}
+\LetTrackLangOption{de-DE}{ngermanDE}
+\LetTrackLangOption{de-BE}{belgiangerman}
+\LetTrackLangOption{en-GG}{guernseyenglish}
+\LetTrackLangOption{fr-GG}{guernseyfrench}
+\LetTrackLangOption{it-IT}{italy}
+\LetTrackLangOption{mt-MT}{maltamaltese}
+\LetTrackLangOption{en-MT}{maltaenglish}
+\LetTrackLangOption{en-IM}{isleofmanenglish}
+\LetTrackLangOption{en-JE}{jerseyenglish}
+\LetTrackLangOption{fr-JE}{jerseyfrench}
+\LetTrackLangOption{nl-NL}{netherlands}
+\LetTrackLangOption{pt-PT}{portugal}
+\LetTrackLangOption{it-SM}{sanmarino}
+\LetTrackLangOption{sl-SI}{slovenia}
+\LetTrackLangOption{it-SI}{sloveneistriaitalian}
+\LetTrackLangOption{es-ES}{spainspanish}
+\LetTrackLangOption{es-AR}{argentinespanish}
+\LetTrackLangOption{es-BO}{bolivianspanish}
+\LetTrackLangOption{es-CL}{chilianspanish}
+\LetTrackLangOption{es-CO}{columbianspanish}
+\LetTrackLangOption{es-CR}{costaricanspanish}
+\LetTrackLangOption{es-CU}{cubanspanish}
+\LetTrackLangOption{es-DO}{dominicanspanish}
+\LetTrackLangOption{es-EC}{ecudorianspanish}
+\LetTrackLangOption{es-SV}{elsalvadorspanish}
+\LetTrackLangOption{es-GT}{guatemalanspanish}
+\LetTrackLangOption{es-HN}{honduranspanish}
+\LetTrackLangOption{es-MX}{mexicanspanish}
+\LetTrackLangOption{es-NI}{nicaraguanspanish}
+\LetTrackLangOption{es-PA}{panamaspanish}
+\LetTrackLangOption{es-PY}{paraguayspanish}
+\LetTrackLangOption{es-PE}{peruvianspanish}
+\LetTrackLangOption{es-PR}{puertoricospanish}
+\LetTrackLangOption{es-UY}{uruguayspanish}
+\LetTrackLangOption{es-VE}{venezuelanspanish}
+\LetTrackLangOption{de-CH}{swissgerman}
+\LetTrackLangOption{fr-CH}{swissfrench}
+\LetTrackLangOption{it-CH}{swissitalian}
+\LetTrackLangOption{rm-CH}{swissromansh}
+\LetTrackLangOption{it-VA}{vatican}
+\LetTrackLangOption{ga-IE}{IEirish}
+\LetTrackLangOption{ga-GB}{GBirish}
+\LetTrackLangOption{en-IE}{IEenglish}
+\long\def\IfTrackedLanguage#1#2#3{%
+  \edef\@tracklang@element{#1}%
+  \ifx\@tracklang@element\empty
+    #3%
+  \else
+    \expandafter\@tracklang@ifinlist\expandafter{\@tracklang@element}%
+      \@tracklang@languages
+    {%
+      #2%
+    }%
+    {%
+      #3%
+    }%
+  \fi
+}
+\long\def\IfTrackedDialect#1#2#3{%
+  \@tracklang@ifundef{@tracklang@fromdialect@#1}{#3}{#2}%
+}
+\long\def\IfTrackedIsoCode#1#2#3#4{%
+  \@tracklang@ifundef{@tracklang@#1@isotolang@#2}{#4}{#3}%
+}
+\long\def\IfTrackedLanguageHasIsoCode#1#2#3#4{%
+  \@tracklang@ifundef{@tracklang@#1@isofromlang@#2}{#4}{#3}%
+}
+\long\def\ForEachTrackedLanguage#1#2{%
+  \@tracklang@for#1:=\@tracklang@languages\do{#2}%
+}
+\long\def\ForEachTrackedDialect#1#2{%
+  \@tracklang@for#1:=\@tracklang@dialects\do{#2}%
+}
+\long\def\AnyTrackedLanguages#1#2{%
+  \ifx\@tracklang@languages\empty
+    #2%
+  \else
+    #1%
+  \fi
+}
+\long\def\IfTrackedLanguageFileExists#1#2#3#4#5{%
+   \def\CurrentTrackedTag{}%
+   \def\CurrentTrackedDialect{#1}%
+   \def\CurrentTrackedLanguage{}%
+   \def\CurrentTrackedRegion{}%
+   \def\CurrentTrackedIsoCode{}%
+   \IfTrackedDialect{#1}%
+   {%
+     \IfTrackedLanguageHasIsoCode{3166-1}{#1}%
+     {%
+       \edef\CurrentTrackedRegion{%
+         \TrackedIsoCodeFromLanguage{3166-1}{#1}}%
+     }%
+     {}%
+     \edef\CurrentTrackedLanguage{\TrackedLanguageFromDialect{#1}}%
+     \edef\CurrentTrackedTag{#1}%
+     \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+     {#4}%
+     {%
+       \IfTrackedLanguageHasIsoCode
+         {639-1}{\CurrentTrackedLanguage}
+       {%
+          \edef\CurrentTrackedIsoCode{%
+             \TrackedIsoCodeFromLanguage
+               {639-1}{\CurrentTrackedLanguage}}%
+          \ifx\CurrentTrackedRegion\@empty
+            \let\CurrentTrackedTag\CurrentTrackedIsoCode
+            \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+            {#4}
+            {%
+              \IfTrackedLanguageHasIsoCode
+                {639-2}{\CurrentTrackedLanguage}
+              {%
+                 \edef\CurrentTrackedIsoCode{%
+                    \TrackedIsoCodeFromLanguage
+                      {639-2}{\CurrentTrackedLanguage}}%
+                 \let\CurrentTrackedTag\CurrentTrackedIsoCode
+                 \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+                 {#4}%
+                 {%
+                   \let\CurrentTrackedTag\CurrentTrackedLanguage
+                   \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}{#4}{#5}%
+                 }%
+              }%
+              {%
+               \let\CurrentTrackedTag\CurrentTrackedLanguage
+               \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}{#4}{#5}%
+              }%
+            }%
+          \else
+            \edef\CurrentTrackedTag{%
+              \CurrentTrackedIsoCode-\CurrentTrackedRegion}%
+            \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+            {#4}
+            {%
+              \IfTrackedLanguageHasIsoCode
+              {639-2}{\CurrentTrackedLanguage}
+              {%
+                \let\org@currenttrackedisocode\CurrentTrackedIsoCode
+                \edef\CurrentTrackedIsoCode{%
+                  \TrackedIsoCodeFromLanguage
+                  {639-2}{\CurrentTrackedLanguage}}%
+                \edef\CurrentTrackedTag{%
+                  \CurrentTrackedIsoCode-\CurrentTrackedRegion}%
+                \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+                {#4}%
+                {%
+                  \let\CurrentTrackedTag\org@currenttrackedisocode
+                  \let\org@currenttrackedisocode\CurrentTrackedIsoCode
+                  \let\CurrentTrackedIsoCode\CurrentTrackedTag
+                  \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+                  {#4}
+                  {%
+                    \let\CurrentTrackedIsoCode\org@currenttrackedisocode
+                    \let\CurrentTrackedTag\CurrentTrackedIsoCode
+                    \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+                    {#4}%
+                    {%
+                      \let\CurrentTrackedTag\CurrentTrackedRegion
+                      \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+                      {#4}%
+                      {%
+                        \let\CurrentTrackedTag\CurrentTrackedLanguage
+                        \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}{#4}{#5}%
+                      }%
+                    }%
+                  }%
+                }%
+              }%
+              {%
+                \let\CurrentTrackedTag\CurrentTrackedIsoCode
+                \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+                {#4}%
+                {%
+                  \let\CurrentTrackedTag\CurrentTrackedRegion
+                  \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+                  {#4}%
+                  {%
+                    \let\CurrentTrackedTag\CurrentTrackedLanguage
+                    \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}{#4}{#5}%
+                  }%
+                }%
+              }%
+            }%
+          \fi
+       }%
+       {%
+         \IfTrackedLanguageHasIsoCode
+           {639-2}{\CurrentTrackedLanguage}
+         {%
+            \edef\CurrentTrackedIsoCode{%
+               \TrackedIsoCodeFromLanguage
+               {639-2}{\CurrentTrackedLanguage}}%
+            \ifx\CurrentTrackedRegion\@empty
+              \let\CurrentTrackedTag\CurrentTrackedIsoCode
+              \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+              {#4}%
+              {%
+                \let\CurrentTrackedTag\CurrentTrackedLanguage
+                \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}{#4}{#5}%
+              }%
+            \else
+              \edef\CurrentTrackedTag{%
+                \CurrentTrackedIsoCode-\CurrentTrackedRegion}%
+              \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+              {#4}%
+              {%
+                \let\CurrentTrackedTag\CurrentTrackedIsoCode
+                \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+                {#4}%
+                {%
+                  \let\CurrentTrackedTag\CurrentTrackedRegion
+                  \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+                  {#4}%
+                  {%
+                    \let\CurrentTrackedTag\CurrentTrackedLanguage
+                    \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}{#4}{#5}%
+                  }%
+                }%
+              }%
+            \fi
+         }%
+         {%
+           \ifx\CurrentTrackedRegion\@empty
+             \let\CurrentTrackedTag\CurrentTrackedLanguage
+             \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}{#4}{#5}%
+           \else
+             \let\CurrentTrackedTag\CurrentTrackedRegion
+             \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}%
+             {#4}%
+             {%
+               \let\CurrentTrackedTag\CurrentTrackedLanguage
+               \@tracklang@IfFileExists{#2\CurrentTrackedTag#3}{#4}{#5}%
+             }%
+           \fi
+         }%
+       }%
+     }%
+   }%
+   {#5}% unknown dialect
+}
+\endinput
+%%
+%% End of file `tracklang.tex'.

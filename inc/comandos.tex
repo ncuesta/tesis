@@ -1,0 +1,46 @@
+% Comandos personalizados
+
+% \fechaPresentacion :: para escribir la fecha de presentación del trabajo
+\newcommand{\fechaPresentacion}{\today}
+% \unlp :: para escribir "Universidad Nacional de La Plata"
+\newcommand{\unlp}{Universidad Nacional de La Plata}
+% \facultad :: para escribir "Facultad de Informática"
+\newcommand{\facultad}{Facultad de Informática}
+% \cespi :: para escribir "CeSPI"
+\newcommand{\cespi}{CeSPI}
+% \direccionDesarrollo :: Para escribir "Dirección de Desarrollo del CeSPI"
+\newcommand{\direccionDesarrollo}{Dirección de Desarrollo del \cespi}
+% \tituloTrabajo :: Para escribir el título de la tesina
+\newcommand{\tituloTrabajo}{Propuesta de rediseño de la nube de servicios de la UNLP}
+% \miguelcarbone :: para escribir "Miguel Carbone"
+\newcommand{\miguelcarbone}{Miguel Carbone}
+% \carbonemiguel :: para escribir "Carbone, Miguel"
+\newcommand{\carbonemiguel}{Carbone, Miguel}
+% \nahuelcuesta :: para escribir "José Nahuel Cuesta Luengo"
+\newcommand{\nahuelcuesta}{José Nahuel Cuesta Luengo}
+% \cuestanahuel :: para escribir "Cuesta Luengo, José Nahuel"
+\newcommand{\cuestanahuel}{Cuesta Luengo, José Nahuel}
+
+% \eng{English expression} :: para denotar que "English expression" está en inglés
+\newcommand{\eng}[1]{\textit{#1}}
+
+% \caratula :: para generar la carátula de la tesina
+\newcommand{\caratula}{
+  \begin{center}
+    \huge{\unlp}\\
+    \vspace{5mm}
+    \large{\facultad}\\
+    \vspace{5mm}
+    \large{Tesina de la Licenciatura}\\
+    \vspace{15mm}
+    \huge{\tituloTrabajo}\\
+    \vspace{10mm}
+    \large{\textbf{\carbonemiguel} \\ \textbf{\cuestanahuel}}\\
+    \vspace{30mm}
+    \large{Directora: Banchoff Tzancoff, Claudia}\\
+    \large{Co-Directora: Queiruga, Claudia}\\
+    \large{Asesor Profesional: Rodriguez, Christian Adrián}\\
+    \vspace{20mm}
+    \normalsize{\fechaPresentacion}\\
+  \end{center}
+}

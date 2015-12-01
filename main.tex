@@ -11,70 +11,68 @@
 \makeindex
 
 \begin{document}
+  % Carátula
+  \thispagestyle{empty} % Oculta numeración de las páginas
+  \caratula
+  \newpage
 
-% Carátula
-\thispagestyle{empty} % Oculta numeración de las páginas
-\caratula
-\newpage
+  % Página en blanco
+  \newpage
 
-% Página en blanco
-\newpage
+  % Meta previa al contenido principal
+  \setcounter{secnumdepth}{4}
+  \setcounter{tocdepth}{4}
+  \setcounter{page}{1}
+  \pagenumbering{Roman}
+  %   - Agradecimientos
+  \input{src/meta/agradecimientos}
+  \newpage
+  %   - Tabla de contenidos
+  \tableofcontents
+  \newpage
+  %   - Lista de figuras
+  \listoffigures
+  \newpage
+  %   - Lista de tablas
+  \listoftables
+  \newpage
 
-% Meta previa al contenido principal
-\setcounter{secnumdepth}{4}
-\setcounter{tocdepth}{4}
-\setcounter{page}{1}
-\pagenumbering{Roman}
-%   - Agradecimientos
-\input{src/meta/agradecimientos}
-\newpage
-%   - Tabla de contenidos
-\tableofcontents
-\newpage
-%   - Lista de figuras
-\listoffigures
-\newpage
-%   - Lista de tablas
-\listoftables
-\newpage
+  % Contenido principal
+  \pagenumbering{arabic}
+  \setcounter{secnumdepth}{0}
+  %   - Introducción
+  \section{Introducción}
+  \input{src/00-intro/introduccion}
+  \newpage
+  %   - Capítulo I
+  \section{Capítulo I}
+  \input{src/01-capitulo-1/objetivo}
+  \input{src/01-capitulo-1/historia}
+  \newpage
+  %   - Capítulo II
+  \section{Capítulo II}
+  \input{src/02-capitulo-2/todo}
+  \newpage
+  %   - Capítulo III
+  \section{Capítulo III}
+  \input{src/03-capitulo-3/todo}
+  \newpage
+  %   - Capítulo IV
+  \section{Capítulo IV}
+  \input{src/04-capitulo-4/todo}
+  \newpage
 
-% Contenido principal
-\pagenumbering{arabic}
-\setcounter{secnumdepth}{0}
-%   - Introducción
-\section{Introducción}
-\input{src/00-intro/introduccion}
-\newpage
-%   - Capítulo I
-\section{Capítulo I}
-\input{src/01-capitulo-1/objetivo}
-\input{src/01-capitulo-1/historia}
-\newpage
-%   - Capítulo II
-\section{Capítulo II}
-\input{src/02-capitulo-2/todo}
-\newpage
-%   - Capítulo III
-\section{Capítulo III}
-\input{src/03-capitulo-3/todo}
-\newpage
-%   - Capítulo IV
-\section{Capítulo IV}
-\input{src/04-capitulo-4/todo}
-\newpage
-
-% Apéndice
-\appendix
-\newpage
-%   - Anexo I: Detalle de las aplicaciones cliente de la nube
-\section{Anexo I}
-\input{src/anexos/01-detalle-clientes-nube}
-\newpage
-%   - Bibliografía
-\bibliographystyle{plain}
-\bibliography{src/bibliografia/mcarbone,src/bibliografia/ncuesta}
-\newpage
-%   - Glosario
-\printglossary[title={Glosario de términos}]
-
+  % Apéndice
+  \appendix
+  \newpage
+  %   - Anexo I: Detalle de las aplicaciones cliente de la nube
+  \section{Anexo I}
+  \input{src/anexos/01-detalle-clientes-nube}
+  \newpage
+  %   - Bibliografía
+  \bibliographystyle{plain}
+  \bibliography{src/bibliografia/mcarbone,src/bibliografia/ncuesta}
+  \newpage
+  %   - Glosario
+  \printglossary[title={Glosario de términos}]
 \end{document}

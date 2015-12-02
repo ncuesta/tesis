@@ -1,36 +1,83 @@
 \newglossaryentry{term:antipatron} {
-  name = {Antipatrón de diseño de software},
+  name = {antipatrón de diseño de software},
   description = {es un patrón de diseño que encamina el software a una situación desfavorable o problemática},
-  sort = {antipatron}
+  sort = {antipatrondedisenodesoftware}
+}
+
+\newglossaryentry{term:aplicacionessatelitales} {
+  name = {aplicaciones satelitales},
+  description = {término que hemos acuñado en nuestro trabajo diario para calificar a aquellas aplicaciones que utilizan la nube de servicios de la UNLP},
+  sort = {aplicacionessatelitales}
 }
 
 \newglossaryentry{term:backend} {
-  name = {\textit{backend}},
+  name = {backend},
   description = {\textit{TODO}},
   sort = {backend}
 }
+
+\newglossaryentry{term:endpoint} {
+  name = {endpoint},
+  description = {\textit{TODO}},
+  sort = {endpoint}
+}
+
 \newglossaryentry{scm:git} {
-  name = {\textit{git}},
+  name = {git},
   description = {https://git-scm.com},
-  sort = {backend}
+  sort = {git}
+}
+
+\newglossaryentry{term:hypermedia} {
+  name = {hypermedia},
+  description = {forma básica de conexión de contenidos en la web, estableciendo vínculos lógicos a distintos niveles o hipervínculos entre los distintos medios que la componen},
+  sort = {hypermedia}
+}
+
+\newglossaryentry{term:refactor} {
+  name = {refactor},
+  description = {técnica utilizada en el desarrollo de software en la que, luego de identificar puntos posibles de mejora para una pieza de software, se modifica su implementación interna manteniendo su interfaz externa y comportamiento},
+  sort = {refactor}
 }
 
 \newglossaryentry{term:rest} {
-  name = {\textit{REST}},
+  name = {REST},
   description = {es un estilo de arquitectura de sistemas distribuidos definida por Roy T. Fielding en su tesis Doctoral},
   sort = {rest}
 }
 
+\newglossaryentry{term:restful} {
+  name = {RESTful},
+  description = {término que se utiliza para denotar aquellas \glspl{acro:api} que cumplen, al menos parcialmente, con las propiedades de la arquitectura de sistemas distribuidos \gls{acro:rest}.},
+  sort = {restful}
+}
+
 \newglossaryentry{scm:subversion} {
-  name = {\textit{subversion}},
+  name = {subversion},
   description = {http://subversion.apache.org},
   sort = {subversion}
 }
 
 \newglossaryentry{fw:symfony} {
-  name = {\textit{symfony}},
+  name = {symfony},
   description = {es un \eng{framework} web desarrollado en el lenguaje PHP, que al momento de elaboración del presente trabajo se encuentra en su segunda versión mayor. A modo de referencia, en nuestros desarrollos siempre utilizamos la versión 1.x. – http://symfony.com},
   sort = {symfony}
 }
 
-\newacronym{api}{API}{\eng{Application Programming Interface}}
+\newglossaryentry{ws:webservice} {
+  name = {Web Service},
+  description = {estándar desarrollado por la W3C que engloba diferentes tecnologías utilizadas para realizar comunicaciones máquina-máquina sobre el medio web - http://www.w3.org/TR/ws-arch/\#whatis y http://www.w3.org/TR/ws-arch/\#technology - TODO: Referenciar brevemente al punto donde se definan los WS.},
+  sort = {webservice}
+}
+
+\newacronym{acro:api}{API}{\eng{Application Programming Interface}}
+\newacronym{lang:html}{HTML}{\eng{HyperText Markup Language}}
+\newacronym{proto:http}{HTTP}{\eng{HyperText Transfer Protocol}}
+\newacronym{lang:json}{JSON}{\eng{JavaScript Object Notation}}
+\newacronym{acro:rest}{REST}{\eng{REpresentational State Transfer}}
+\newacronym{ws:soap}{SOAP}{\eng{Simple Object Access Protocol}}
+\newacronym{acro:uri}{URI}{\eng{Uniform Resource Identifier}}
+\newacronym{acro:url}{URL}{\eng{Uniform Resource Locator}}
+ % el lenguaje para describir \glspl{ws:webservice}, basado en \gls{lang:xml} – http://www.w3.org/TR/2003/WD-wsdl20-20031110
+\newacronym{ws:wsdl}{WSDL}{\eng{Web Services Description Language}}
+\newacronym{lang:xml}{XML}{\eng{eXtensible Markup Language}}

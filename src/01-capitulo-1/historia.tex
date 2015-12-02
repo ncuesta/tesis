@@ -1,11 +1,13 @@
-\subsection{Historia: ¿Cómo llegamos a donde estamos?}\label{nube:historia}
+\subsection{Historia: ¿Cómo llegamos a donde estamos?}
+\label{nube:historia}
 
 Como desarrolladores y analistas del \cespi, dependencia de la \unlp encargada de fomentar, implementar y administrar TICs, hemos participado del relevamiento, la implementación, la puesta en producción y el mantenimiento de varias aplicaciones web de uso diario por los agentes de las distintas Unidades Académicas y demás Dependencias administrativas de esta Alta Casa de estudios. Así, en el transcurso de más de 7 años de experiencia, hemos migrado entre distintos paradigmas arquitectónicos en el desarrollo de las aplicaciones y su intercomunicación.
 
 En este capítulo haremos una reseña de lo ocurrido en este tiempo, separando en etapas marcadas por los distintos enfoques que fuimos dando a la problemática de alimentar las distintas aplicaciones que desarrollamos para la UNLP, indicando las razones y decisiones que tomamos en cada ocasión, y que dan origen a este análisis que será la base para la futura etapa de implementación de la nube de servicios integrados.
 
 
-\subsubsection{Prefacio: ¿Qué es la nube de servicios de la UNLP?}\label{nube:prefacio}
+\subsubsection{Prefacio: ¿Qué es la nube de servicios de la UNLP?}
+\label{nube:prefacio}
 
 Liminarmente creemos conveniente y necesario explicar \textit{qué} es la nube de la que hablaremos en este trabajo. Por simplicidad, y para no develar detalles técnicos que aún no queremos mencionar, nos centraremos en los aspectos funcionales, en el \textit{qué} y no en el \textit{cómo}, de la fuente de información unificada que utilizamos en las aplicaciones que desarrollamos a diario para la \unlp.
 
@@ -49,7 +51,8 @@ Dada la cantidad de aplicaciones que hoy día utilizan los servicios de esta nub
 Habiendo hecho esta breve descripción de qué es la nube de servicios, hemos brindado el contexto necesario para comenzar a explicar su evolución, ahora sí incluyendo detalles técnicos sobre su implementación.
 
 
-\subsubsection{El génesis: aplicaciones como islas}\label{nube:etapa0}
+\subsubsection{El génesis: aplicaciones como islas}
+\label{nube:etapa0}
 
 En un principio, cada aplicación funcionaba como un sistema autónomo en su totalidad: no existía comunicación entre los sistemas que estábamos implementando, que hasta ese momento eran relativamente pocos. Cada una definía sus propios datos, tanto los de su dominio particular como aquellos más generales - entiéndase por estos últimos información que categoriza los datos de dominio ya sea georeferenciando las ubicaciones, a las personas por género, por su Dependencia de trabajo o estudio, los documentos de identidad por su tipo, etcétera -. Si bien a simple vista esto puede presentar un claro punto de \eng{refactor} para evitar un inminente problema de duplicación y desnormalización de los datos, en ese punto de madurez de los requerimientos que llegaban a nuestra oficina la necesidad no era evidente y mucho menos imprescindible.
 
@@ -65,7 +68,8 @@ El problema no se hizo esperar, al poco tiempo, fue creciendo la necesidad de co
 \end{itemize}
 
 
-\subsubsection{Primera iteración: eliminando la repetición y normalizando los datos}\label{nube:etapa1}
+\subsubsection{Primera iteración: eliminando la repetición y normalizando los datos}
+\label{nube:etapa1}
 
 Ante la creciente cantidad de aplicaciones, los problemas antes enumerados se hacían cada vez más evidentes. Fue entonces que se decidió pasar a un nuevo enfoque sobre el problema: unificar los datos y el código utilizados en las distintas aplicaciones mediante la implementación de clases y objetos reutilizables en ellas.
 
@@ -88,7 +92,8 @@ El inconveniente con este enfoque era que pese a eliminar la repetición que exi
 \end{itemize}
 
 
-\subsubsection{Segunda iteración: haciendo dinámicas las fuentes de datos}\label{nube:etapa2}
+\subsubsection{Segunda iteración: haciendo dinámicas las fuentes de datos}
+\label{nube:etapa2}
 
 Luego de la primera iteración en que logramos unificar los datos de referencia, y una vez pasado el periodo inicial de estabilización de la nueva solución, comenzamos a planificar la siguiente mejora a la forma en que disponíamos de la información: hacer dinámicas las fuentes de datos de referencia.
 
@@ -107,16 +112,175 @@ Así, pese los beneficios obtenidos, apareció un nuevo problema: para poder bri
 El beneficio obtenido al dinamizar la fuente de nuestros datos de referencia, quitando los datos concretos del código del \eng{plugin} de acceso a los mismos, y simplificando la actualización de esta información de forma independiente a nuestras aplicaciones, fue enorme. Pero esta solución aún no eliminaba por completo el acoplamiento entre nuestras aplicaciones y la fuente de datos de referencia. De hecho, introducía nuevos niveles de acoplamiento al hacer que nuestras aplicaciones deban tener acceso a una base de datos (común) y mantener la información de acceso a ésta; al hacer que las distintas aplicaciones puedan potencialmente modificar esa información común sin que ésto sea deseable; al requerir que las políticas de infraestructura permitan la comunicación directa desde múltiples aplicaciones al nodo de la base de datos; al necesitar agregar privilegios de acceso a la base de datos de referencia; y al obligar a las aplicaciones a conocer la implementación interna de cada tipo de dato (su estructura en la base de datos) para poder accederla directamente.
 
 
-\subsubsection{Tercera iteración: unificando el acceso a la información y desacoplando las componentes}\label{nube:etapa3}
+\subsubsection{Tercera iteración: unificando el acceso a la información y desacoplando las componentes}
+\label{nube:etapa3}
+
+En este punto, la cantidad de aplicaciones conectadas a la nube de servicios que habíamos desarrollado había alcanzado prácticamente la decena. Este creciente número de sistemas que debían acceder directamente a las fuentes compartidas de información hacía evidente la necesidad de un nuevo \gls{term:refactor}: cada aplicación necesitaba ser mantenida no sólo por su dominio propio sino también ante cualquier modificación realizada a las fuentes de información de referencia, además debíamos tener el cuidado y la conducta de no realizar operaciones de escritura desde ninguna de las \gls{term:aplicacionessatelitales} de la nube sobre los datos que ésta última contiene.
+
+Estas complicaciones adicionales a la implementación de los sistemas propiamente dichos nos dejaban en claro la premisa principal con la cual debíamos replantear el diseño de la nube: la información debía aislarse, asegurarse y ser de sólo lectura, pero sin hacer más complejo el acceso a la misma.
+
+Con esa premisa como \eng{leitmotiv}, decidimos centralizar en un lugar los datos que las aplicaciones necesitaban consumir: una única fuente que serviría la información mediante una interfaz web a sus clientes. Con este cambio en el diseño estaríamos cumpliendo tres de los cuatro pilares que guiaban esta etapa del desarrollo:
+
+\begin{itemize}
+  \item La información se encontraría aislada ya que al tener una única aplicación accediéndola (el nuevo proveedor centralizado de información) dejaría de ser necesario que cada aplicación se conecte directamente a la base de datos que hasta ese momento era compartida.
+
+  \item Al tratarse de una aplicación, asegurar la información sería cuestión de definir un protocolo de acceso a la misma con políticas concretas sobre quién y cómo podría consumirla.
+
+  \item De manera similar al punto anterior, hacer que el acceso a la información fuera de sólo lectura sería cuestión de no proveer medios para que los clientes realicen escrituras sobre la misma.
+\end{itemize}
+
+Para el punto restante necesitábamos definir la interfaz y el protocolo mediante los cuales las \gls{term:aplicacionessatelitales} accederían a la información. Tratándose de aplicaciones web separadas en distintos servidores la forma evidente de implementar la comunicación sería utilizando la web como medio, pero restaba definir cómo dialogarían las aplicaciones cliente con el proveedor para obtener los datos. En nuestra experiencia hasta ese momento habíamos trabajado con \glspl{ws:webservice} para realizar comunicaciones entre diferentes aplicaciones mediante la web, pero a partir de esa experiencia teníamos nuestras reservas sobre este estándar, principalmente:
+
+\begin{itemize}
+  \item Su implementación nos resultaba excesivamente complicada, al involucrar muchos puntos de acción y acababa siendo propensa a errores humanos. El protocolo general de los \glspl{ws:webservice} contiene diversos elementos que intervienen en cada parte de la comunicación entre los dos sistemas:
+  \begin{itemize}
+    \item El proveedor del servicio utiliza \gls{ws:wsdl} para describir qué servicios brinda, de qué forma deben accederse, qué formato deben tener los parámetros, y cómo estará estructurada la respuesta. Esta definición de los servicios se mantenía en un documento \gls{lang:xml} que debía ser actualizado cada vez que los datos, puntos de acceso, parámetros esperados y/o la estructura del proyecto cambiaba, agregando un punto más de falla humana al proceso de desarrollo.
+
+    \item El proveedor y el cliente se comunican utilizando el framework \gls{ws:soap} para intercambio de mensajes y codifican en documentos \gls{lang:xml} los mensajes que intercambiarán. Este protocolo de acceso a la información agrega un \eng{overhead} a la comunicación por sobre lo que cualquier comunicación web, basada en el protocolo \gls{proto:http}\footnote{En secciones siguientes desarrollaremos en mayor profundidad las partes principales de este protocolo que atañen al presente trabajo a fin de dar un marco tecnológico concreto a nuestras definiciones.}, que sabíamos podía ser evitado si utilizásemos otro mecanismo para estos fines.
+  \end{itemize}
+
+  \item Tal como indicamos en el punto anterior, este protocolo agrega pasos que no considerábamos estrictamente necesarios y esto repercutía en los tiempos de acceso a la información. Si tenemos en consideración que ahora tendríamos una aplicación a la que principalmente se accedería para consumir estos servicios, las respuestas deberían ser lo más \textit{magras} posibles, eliminando todo consumo innecesario de recursos para generar y transmitir las mismas, y este protocolo no encuadraba en nuestro planteo.
+\end{itemize}
+
+Por estos motivos principales fue que descartamos la utilización de \glspl{ws:webservice} como el protocolo de comunicación entre el servidor de la información y los clientes.
+
+Fue entonces que optamos por probar a una alternativa que venía creciendo en popularidad por el último tiempo: las \glspl{acro:api} \gls{acro:rest}. En un sentido general, una \gls{acro:api} es la interfaz que brinda un programa, librería o framework para que podamos operar programáticamente con su lógica y datos, y si bien es un término amplio, a partir de la tesis doctoral de Roy T. Fielding \cite[``Architectural Styles and the Design of Network-based Software Architectures'']{tesis:fielding} las \glspl{acro:api} \gls{acro:rest} tomaban un sentido especialmente fundamental en el funcionamiento de las aplicaciones web. Fielding tomó una tecnología existente, \gls{proto:http}, y utilizó sus elementos para definir un conjunto de principios que las aplicaciones deben cumplir en una arquitectura de sistemas distribuidos \gls{term:hypermedia}, asignando a las partes del protocolo \gls{proto:http} un sentido lógico que encuadraba perfectamente en nuestras necesidades. En la siguiente sección describiremos la concepción informal que tomamos de la idea de servicios \gls{acro:rest} para definir el diseño que implementamos en esta etapa, que es como hasta hoy está definida la nube de servicios de la UNLP.
 
 
+\paragraph{Arquitectura de servicios web basada en REST}
+
+Si bien en ese entonces no hicimos un análisis teórico profundo de la tesis doctoral de Fielding, el concepto de una \gls{acro:api} \gls{acro:rest} encuadraba naturalmente en la forma en que una aplicación web funciona y en el mecanismo que utiliza para hacer disponible para otras aplicaciones la información que posee.
+
+Nuestra comprensión de una \gls{acro:api} \gls{term:restful} consistía principalmente en tres elementos: \textit{servicios}, \textit{recursos} y \textit{clientes}. Los \textit{servicios} eran partes de una aplicación web (el servidor o proveedor de servicios) que al recibir peticiones respondían con representaciones textuales de los \textit{recursos} (la información) utilizables para luego presentarlos al usuario. Los \textit{clientes}, por su parte, eran los encargados de realizar esas peticiones al proveedor de servicios para obtener los datos que necesitaban y así presentarlos al usuario en el contexto adecuado.
+
+El proveedor de servicios tenía una \gls{acro:url} base que los clientes conocían, y a través de la cual accedían a sus servicios; estos servicios se identificaban con una \gls{acro:uri} relativa a la \gls{acro:url} del proveedor de servicios (o \gls{term:endpoint}) y ante una petición respondían con un documento \gls{lang:json} que representaba la estructura del recurso que el servicio abstraía; y los clientes, las otras aplicaciones web que hacían uso de la nube de servicios, utilizaban esa información en formato \gls{lang:json} para presentar al usuario de una forma amigable los recursos obtenidos del servicio.
+
+Supongamos el siguiente escenario: un alumno de la UNLP accede al sistema web de Becas que se encuentra disponible en http://becas.unlp.edu.ar. Por brevedad, simplificaremos el alcance de la solicitud a una supuesta página de la aplicación que provee un listado de las becas disponibles para cada Unidad Académica de la UNLP. Para poder obtener las Unidades Académicas, la aplicación de Becas asumirá el rol de cliente de la nube de servicios de la UNLP (el proveedor de servicios) y realizará una petición al servicio de unidades académicas que la \gls{acro:api} ofrece. Al recibir esta petición, el servicio de la nube obtiene los datos necesarios para armar el listado de Unidades Académicas y responde al cliente con un documento \gls{lang:json} que representa todos los atributos de las distintas Unidades existentes. Luego, la aplicación de Becas toma esta respuesta del servicio, la trabaja internamente, organiza la información interna que posee de las becas acorde al criterio solicitado y termina por generar el \gls{lang:html}, ya que se trata de una aplicación web, del listado de becas disponibles para cada Unidad Académica en un formato amigable y entendible para el usuario. Visto este caso en un diagrama, las interacciones involucradas son las siguientes:
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{src/images/01-capitulo-1/ejemplo-rest-becas.jpg}
+  \caption{Interacciones involucradas.}
+  \label{fig:ejemplo-rest-becas}
+\end{figure}
+
+% TODO: Agregar la referencia al capítulo cuando se defina (\ref{...})
+En el capítulo XXX realizaremos el desarrollo pertinente de la definición de la arquitectura de aplicaciones distribuidas \gls{acro:rest} que Fielding publicó, dando de esa forma un marco teórico adecuado a las definiciones de nuestra nueva arquitectura para la nube de servicios.
 
 
+\paragraph{El diseño final: el Integrador}
 
+Luego de analizar las posibilidades que brindaba el uso de los principios \gls{acro:rest} en detalle, realizamos el primer diseño de cómo quedarían definidos los distintos servicios o \gls{term:endpoint} y decidimos darle un nombre: el \textit{Integrador}, una mezcla entre título de historieta\footnote{En cierto modo, nos recuerda historietas como Castigador (\eng{The Punisher}, de \eng{Marvel Comics}) – https://es.wikipedia.org/wiki/Punisher} y \eng{Terminator}, que nos acompaña hasta el día de hoy cuando hacemos referencia a la aplicación \textit{detrás} de la nube de servicios.
 
+Realizando un enfoque más pragmático que correcto para el diseño, definimos servicios que retornan documentos \gls{lang:json} para cada una de las entidades que se podían consultar sin realmente analizar si serían realmente útiles, o si siquiera se accederían alguna vez. Fue de esta forma que la \gls{acro:api} se compuso de los más de 100 \gls{term:endpoint} que tiene hoy, que no siguen una misma línea en su diseño,  no tienen una estructura estándar de respuesta, y de los cuales efectivamente se usa tan solo el 46\%\footnote{Esta cifra surge de los datos que tenemos en nuestra herramienta de analíticas. De los 105 servicios que existen, 56 no registran accesos en el último año.}. A continuación listamos todos los servicios provistos por la nube, identificados por los patrones de sus URLs (omitiremos el dominio y el protocolo para simplificar la lista):
 
-
-
-
-
-\cite[Capítulo 4]{tesis:fielding}
+% TODO: Acomodar esto y limpiarlo un poco, es una negrada. Al menos llevarlo a un anexo.
+\begingroup
+  \fontsize{10pt}{12pt}\selectfont
+  \begin{itemize}
+    \item \begin{verbatim}/api/academic_data.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/academic_degree_type.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_degree_type.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/academic_degree_type.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/academic_unit_college_degree.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/academic_unit_college_degree.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/career.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/career.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme/:career_programme_id/career_programme_degree.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme/:career_programme_id/career_programme_degree.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme/:career_programme_id/career_subject.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme/:career_programme_id/career_subject.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/degree.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/degree.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/degree/:degree_id/career_programme_degree.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/degree/:degree_id/career_programme_degree.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/paycheck.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/paycheck.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/paycheck.json/search/:query\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/paycheck.json/search/:query/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/person.json\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/person.json/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/person.json/search/:query\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit/:id/person.json/search/:query/count\end{verbatim}
+    \item \begin{verbatim}/api/academic_unit_college_degree.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/career.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/career_programme.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/career_programme_degree.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/career_subject.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/census_data.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/city.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/country.json\end{verbatim}
+    \item \begin{verbatim}/api/country.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/country.json/count\end{verbatim}
+    \item \begin{verbatim}/api/country/:id/state.json\end{verbatim}
+    \item \begin{verbatim}/api/country/:id/state.json/count\end{verbatim}
+    \item \begin{verbatim}/api/country/:id/state/:state_id/department.json\end{verbatim}
+    \item \begin{verbatim}/api/country/:id/state/:state_id/department.json/count\end{verbatim}
+    \item \begin{verbatim}/api/country/:id/state/:state_id/department/:department_id/city.json\end{verbatim}
+    \item \begin{verbatim}/api/country/:id/state/:state_id/department/:department_id/city.json/count\end{verbatim}
+    \item \begin{verbatim}/api/degree.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/department.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/document_type.json\end{verbatim}
+    \item \begin{verbatim}/api/document_type.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/document_type.json/count\end{verbatim}
+    \item \begin{verbatim}/api/gender.json\end{verbatim}
+    \item \begin{verbatim}/api/gender.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/gender.json/count\end{verbatim}
+    \item \begin{verbatim}/api/marital_status.json\end{verbatim}
+    \item \begin{verbatim}/api/marital_status.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/marital_status.json/count\end{verbatim}
+    \item \begin{verbatim}/api/official_scale.json\end{verbatim}
+    \item \begin{verbatim}/api/official_scale.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/official_scale.json/count\end{verbatim}
+    \item \begin{verbatim}/api/official_scale/:id/personal_scale.json\end{verbatim}
+    \item \begin{verbatim}/api/official_scale/:id/personal_scale.json/count\end{verbatim}
+    \item \begin{verbatim}/api/paycheck.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/person.json\end{verbatim}
+    \item \begin{verbatim}/api/person.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/person.json/count\end{verbatim}
+    \item \begin{verbatim}/api/person.json/search/:id\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/academic_data.json\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/academic_data.json/count\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/academic_unit/:academic_unit_id/paycheck.json\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/academic_unit/:academic_unit_id/paycheck.json/count\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/academic_unit/:academic_unit_id/paycheck.json/search/:query\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/academic_unit/:academic_unit_id/paycheck.json/search/:query/count\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/census_data.json\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/census_data.json/count\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/is_graduated.json/:query_1/:query_2/:query_3\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/paycheck.json\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/paycheck.json/count\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/paycheck.json/search/:query\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/paycheck.json/search/:query/count\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/person_email.json\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/person_email.json/count\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/person_high_study.json\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/person_high_study.json/count\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/person_role.json\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/person_role.json/count\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/personal_age.json\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/personal_age.json/count\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/personal_charge.json\end{verbatim}
+    \item \begin{verbatim}/api/person/:id/personal_charge.json/count\end{verbatim}
+    \item \begin{verbatim}/api/person_email.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/person_high_study.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/person_role.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/personal_age.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/personal_charge.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/personal_scale.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/state.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/student_status.json\end{verbatim}
+    \item \begin{verbatim}/api/student_status.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/student_status.json/count\end{verbatim}
+    \item \begin{verbatim}/api/study_category.json\end{verbatim}
+    \item \begin{verbatim}/api/study_category.json/:id\end{verbatim}
+    \item \begin{verbatim}/api/study_category.json/count\end{verbatim}
+    \item \begin{verbatim}/api/study_category/:id/study_type.json\end{verbatim}
+    \item \begin{verbatim}/api/study_category/:id/study_type.json/count\end{verbatim}
+    \item \begin{verbatim}/api/study_type.json/:id\end{verbatim}
+  \end{itemize}
+\endgroup

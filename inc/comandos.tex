@@ -9,7 +9,7 @@
 % \cespi :: para escribir "CeSPI"
 \newcommand{\cespi}{CeSPI}
 % \direccionDesarrollo :: Para escribir "Dirección de Desarrollo del CeSPI"
-\newcommand{\direccionDesarrollo}{Dirección de Desarrollo del \cespi}
+\newcommand{\direccionDesarrollo}{Dirección de Desarrollo del \cespi\xspace}
 % \tituloTrabajo :: Para escribir el título de la tesina
 \newcommand{\tituloTrabajo}{Propuesta de rediseño de la nube de servicios de la UNLP}
 % \miguelcarbone :: para escribir "Miguel Carbone"
@@ -44,3 +44,6 @@
     \normalsize{\fechaPresentacion}\\
   \end{center}
 }
+
+% \icode{texto preformateado} :: para imprimir como fixed-width "texto preformateado" (útil para código inline)
+\newcommand{\icode}[1]{\begin{verbatim}#1\end{verbatim}}

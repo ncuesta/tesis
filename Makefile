@@ -18,6 +18,7 @@ $(MAIN).pdf: $(MAIN).tex
 	$(MAKE) gls
 	$(MAKE) bib
 	$(TEX) $<
+	$(TEX) $<
 
 gls:
 	ln -s $(AUX_DIR)/$(MAIN).xdy

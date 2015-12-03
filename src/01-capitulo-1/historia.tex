@@ -173,114 +173,26 @@ Luego de analizar las posibilidades que brindaba el uso de los principios \gls{a
 
 Realizando un enfoque más pragmático que correcto para el diseño, definimos servicios que retornan documentos \gls{lang:json} para cada una de las entidades que se podían consultar sin realmente analizar si serían realmente útiles, o si siquiera se accederían alguna vez. Fue de esta forma que la \gls{acro:api} se compuso de los más de 100 \gls{term:endpoint} que tiene hoy, que no siguen una misma línea en su diseño,  no tienen una estructura estándar de respuesta, y de los cuales efectivamente se usa tan solo el 46\%\footnote{Esta cifra surge de los datos que tenemos en nuestra herramienta de analíticas. De los 105 servicios que existen, 56 no registran accesos en el último año.}. A continuación listamos todos los servicios provistos por la nube, identificados por los patrones de sus URLs (omitiremos el dominio y el protocolo para simplificar la lista):
 
-% TODO: Acomodar esto y limpiarlo un poco, es una negrada. Al menos llevarlo a un anexo.
-\begingroup
-  \fontsize{10pt}{12pt}\selectfont
-  \begin{itemize}
-    \item \begin{verbatim}/api/academic_data.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/academic_degree_type.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_degree_type.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/academic_degree_type.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/academic_unit_college_degree.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/academic_unit_college_degree.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/career.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/career.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme/:career_programme_id/career_programme_degree.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme/:career_programme_id/career_programme_degree.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme/:career_programme_id/career_subject.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/career/:career_id/career_programme/:career_programme_id/career_subject.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/degree.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/degree.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/degree/:degree_id/career_programme_degree.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/degree/:degree_id/career_programme_degree.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/paycheck.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/paycheck.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/paycheck.json/search/:query\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/paycheck.json/search/:query/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/person.json\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/person.json/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/person.json/search/:query\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit/:id/person.json/search/:query/count\end{verbatim}
-    \item \begin{verbatim}/api/academic_unit_college_degree.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/career.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/career_programme.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/career_programme_degree.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/career_subject.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/census_data.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/city.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/country.json\end{verbatim}
-    \item \begin{verbatim}/api/country.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/country.json/count\end{verbatim}
-    \item \begin{verbatim}/api/country/:id/state.json\end{verbatim}
-    \item \begin{verbatim}/api/country/:id/state.json/count\end{verbatim}
-    \item \begin{verbatim}/api/country/:id/state/:state_id/department.json\end{verbatim}
-    \item \begin{verbatim}/api/country/:id/state/:state_id/department.json/count\end{verbatim}
-    \item \begin{verbatim}/api/country/:id/state/:state_id/department/:department_id/city.json\end{verbatim}
-    \item \begin{verbatim}/api/country/:id/state/:state_id/department/:department_id/city.json/count\end{verbatim}
-    \item \begin{verbatim}/api/degree.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/department.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/document_type.json\end{verbatim}
-    \item \begin{verbatim}/api/document_type.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/document_type.json/count\end{verbatim}
-    \item \begin{verbatim}/api/gender.json\end{verbatim}
-    \item \begin{verbatim}/api/gender.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/gender.json/count\end{verbatim}
-    \item \begin{verbatim}/api/marital_status.json\end{verbatim}
-    \item \begin{verbatim}/api/marital_status.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/marital_status.json/count\end{verbatim}
-    \item \begin{verbatim}/api/official_scale.json\end{verbatim}
-    \item \begin{verbatim}/api/official_scale.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/official_scale.json/count\end{verbatim}
-    \item \begin{verbatim}/api/official_scale/:id/personal_scale.json\end{verbatim}
-    \item \begin{verbatim}/api/official_scale/:id/personal_scale.json/count\end{verbatim}
-    \item \begin{verbatim}/api/paycheck.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/person.json\end{verbatim}
-    \item \begin{verbatim}/api/person.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/person.json/count\end{verbatim}
-    \item \begin{verbatim}/api/person.json/search/:id\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/academic_data.json\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/academic_data.json/count\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/academic_unit/:academic_unit_id/paycheck.json\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/academic_unit/:academic_unit_id/paycheck.json/count\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/academic_unit/:academic_unit_id/paycheck.json/search/:query\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/academic_unit/:academic_unit_id/paycheck.json/search/:query/count\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/census_data.json\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/census_data.json/count\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/is_graduated.json/:query_1/:query_2/:query_3\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/paycheck.json\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/paycheck.json/count\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/paycheck.json/search/:query\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/paycheck.json/search/:query/count\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/person_email.json\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/person_email.json/count\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/person_high_study.json\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/person_high_study.json/count\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/person_role.json\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/person_role.json/count\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/personal_age.json\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/personal_age.json/count\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/personal_charge.json\end{verbatim}
-    \item \begin{verbatim}/api/person/:id/personal_charge.json/count\end{verbatim}
-    \item \begin{verbatim}/api/person_email.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/person_high_study.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/person_role.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/personal_age.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/personal_charge.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/personal_scale.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/state.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/student_status.json\end{verbatim}
-    \item \begin{verbatim}/api/student_status.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/student_status.json/count\end{verbatim}
-    \item \begin{verbatim}/api/study_category.json\end{verbatim}
-    \item \begin{verbatim}/api/study_category.json/:id\end{verbatim}
-    \item \begin{verbatim}/api/study_category.json/count\end{verbatim}
-    \item \begin{verbatim}/api/study_category/:id/study_type.json\end{verbatim}
-    \item \begin{verbatim}/api/study_category/:id/study_type.json/count\end{verbatim}
-    \item \begin{verbatim}/api/study_type.json/:id\end{verbatim}
-  \end{itemize}
-\endgroup
+\input{src/01-capitulo-1/_endpoints-nube-actual}
+
+Sin entrar en detalles sobre cada punto, se puede observar claramente la falta de consistencia en la definición de las \glspl{acro:url}, la sobrecarga de niveles de anidamiento en servicios como el que devuelve las materias del plan de estudios de una carrera de una Unidad Académica (\lstinline$/api/academic_unit/:id/career/:career_id/career_programme/:career_programme_id/career_subject.json$) que anida esos 3 niveles para mostrar la información, aunque los identificadores únicos de cada elemento podrían usarse, en una estructura más plana, para acceder directamente al último nivel, algo así como (\lstinline$/api/career_programme/:career_programme_id/career_subject.json$) y así simplificar las \glspl{acro:url}.
+
+Estos problemas sumados a la falta de documentación sobre cómo usar los diferentes servicios, qué parámetros reciben y qué estructura tiene la respuesta cada uno, hacen más complejo el uso de esta \gls{acro:api} tanto para desarrolladores que la venimos utilizando hace tiempo, como para nuevos integrantes del equipo a los que queremos sumar a alguna aplicación que haga uso de estos servicios.
+
+\paragraph{El Integrador: implementación}
+
+La nube de servicios, como aplicación, fue un desarrollo más realizado en PHP 5 y el framework \gls{fw:symfony} 1.4, utilizando MySQL como motor para las 5 bases de datos que utiliza para proveer la información:
+
+\begin{itemize}
+  \item Una base de datos donde se almacena información propia de la aplicación: tokens de acceso, estadísticas de acceso, información de clientes de la \gls{acro:api}.
+  \item Una segunda base de datos para los datos de referencia de los que ya hemos hablado (tipos de documento, países, etcétera).
+  \item Una tercera base en la que se mantiene actualizada la información que nos llega desde la oficina de Liquidaciones del CeSPI, la cual se transforma mediante procesos \gls{acro:etl}\footnote{Técnica que se utiliza para tomar datos de una o múltiples fuentes de información, modificarla y cargarla en una o más almacenes de datos.}\cite{paper:etl} para normalizarla antes de guardarla en esta base de datos.
+  \item Una cuarta para la información que proviene de los SIU Guarani de las distintas Unidades Académicas, la cual es actualizada directamente por el grupo de Sistemas Académicos del \cespi.
+  \item Y una quinta base de datos donde se unifican y mezclan los datos de las últimas 3 bases datos mencionadas, de manera tal que se logre una trazabilidad de la persona como un todo a lo largo de su \textit{vida en la UNLP}, ya sea como alumno, docente o nodocente.
+\end{itemize}
+
+La aplicación se realizó sin considerar algunos aspectos claves para mejorar la \eng{performance} del lado de los clientes de la \gls{acro:api}, como puede ser utilizar cabeceras de \eng{caching}, compresión de respuestas, utilizar \eng{caches} compartidas y otras estrategias que desarrollaremos más en detalle como parte de nuestro análisis para el futuro de la nube de servicios.
+
+Para las \gls{term:aplicacionessatelitales}, se realizó un \eng{plugin} de \gls{fw:symfony} que abstraía en clases y objetos la mayoría de los servicios existentes, implementando cierto mecanismo de caching local a cada aplicación, pero que al ser decisiones realizadas meramente del lado del cliente, existían situaciones en las que la información almacenada en esa cache local quedaba \eng{stale} (desactualizada) con respecto a lo que la \gls{acro:api} devolvía como el dato \eng{fresh}, por lo que se debió implementar en algunos casos un mecanismo manual de vaciado de \eng{cache} para subsanar estas situaciones.
+
+En resumen: la implementación fue adecuada y funcional para las necesidades del momento, pero con el tiempo esas necesidades y, principalmente, la tecnología fueron cambiando, lo cual fue acrecentando gradualmente la necesidad de un nuevo análisis y replanteo para la solución actual.

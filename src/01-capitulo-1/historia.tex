@@ -186,7 +186,7 @@ La nube de servicios, como aplicación, fue un desarrollo más realizado en PHP 
 \begin{itemize}
   \item Una base de datos donde se almacena información propia de la aplicación: tokens de acceso, estadísticas de acceso, información de clientes de la \gls{acro:api}.
   \item Una segunda base de datos para los datos de referencia de los que ya hemos hablado (tipos de documento, países, etcétera).
-  \item Una tercera base en la que se mantiene actualizada la información que nos llega desde la oficina de Liquidaciones del CeSPI, la cual se transforma mediante procesos \gls{acro:etl}\footnote{Técnica que se utiliza para tomar datos de una o múltiples fuentes de información, modificarla y cargarla en una o más almacenes de datos.}\cite{paper:etl} para normalizarla antes de guardarla en esta base de datos.
+  \item Una tercera base en la que se mantiene actualizada la información que nos llega desde la oficina de Liquidaciones del CeSPI, la cual se transforma mediante procesos \gls{acro:etl}\footnote{Técnica que se utiliza para tomar datos de una o múltiples fuentes de información, modificarla y cargarla en una o más almacenes de datos. En nuestro caso utilizamos la herramienta Kettle de la versión de comunidad de la suite Pentaho para transformar los datos fuente, que nos llegan en archivos de texto plano, en inserciones normalizadas en nuestra base de datos MySQL.}\cite{paper:etl} para normalizarla antes de guardarla en esta base de datos.
   \item Una cuarta para la información que proviene de los SIU Guarani de las distintas Unidades Académicas, la cual es actualizada directamente por el grupo de Sistemas Académicos del \cespi.
   \item Y una quinta base de datos donde se unifican y mezclan los datos de las últimas 3 bases datos mencionadas, de manera tal que se logre una trazabilidad de la persona como un todo a lo largo de su \textit{vida en la UNLP}, ya sea como alumno, docente o nodocente.
 \end{itemize}
@@ -196,3 +196,6 @@ La aplicación se realizó sin considerar algunos aspectos claves para mejorar l
 Para las \gls{term:aplicacionessatelitales}, se realizó un \eng{plugin} de \gls{fw:symfony} que abstraía en clases y objetos la mayoría de los servicios existentes, implementando cierto mecanismo de caching local a cada aplicación, pero que al ser decisiones realizadas meramente del lado del cliente, existían situaciones en las que la información almacenada en esa cache local quedaba \eng{stale} (desactualizada) con respecto a lo que la \gls{acro:api} devolvía como el dato \eng{fresh}, por lo que se debió implementar en algunos casos un mecanismo manual de vaciado de \eng{cache} para subsanar estas situaciones.
 
 En resumen: la implementación fue adecuada y funcional para las necesidades del momento, pero con el tiempo esas necesidades y, principalmente, la tecnología fueron cambiando, lo cual fue acrecentando gradualmente la necesidad de un nuevo análisis y replanteo para la solución actual.
+
+\subsubsection{Cuarta iteración: este trabajo}
+\label{nube:etapa4}

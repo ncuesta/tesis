@@ -34,6 +34,30 @@
   sort = {hypermedia}
 }
 
+\newglossaryentry{db:memcached} {
+  name = {Memcached},
+  description = {es un almacen de datos en memoria distribuido \eng{open source}, organizado en pares clave-valor que es habitualmente utilizado como cache compartida para evitar accesos a recursos más costosos del lado del servidor. - http://memcached.org},
+  sort = {memcached}
+}
+
+\newglossaryentry{db:nosql} {
+  name = {NoSQL},
+  description = {nueva tendencia en motores de bases de datos que están orientadas a mejorar problemas posibles del paradigma tradicional de las bases de datos relacionales. Como principio, son no relacionales, distribuidas y escalables horizontalmente. Algunos ejemplos son Hadoop, Cassandra, CouchDB y MongoDB},
+  sort = {nosql}
+}
+
+\newglossaryentry{fw:rails} {
+  name = {Ruby on Rails},
+  description = {es un \eng{framework} hecho en Ruby para el desarrollo ágil de aplicaciones web. Es, de hecho, \textit{el} \eng{framework} web por excelencia del lenguaje. – http://rubyonrails.org},
+  sort = {rubyonrails}
+}
+
+\newglossaryentry{db:redis} {
+  name = {Redis},
+  description = {es un almacen en memoria de datos de código abierto, que suele ser utilizado como \eng{cache}, base de datos de alto rendimiento (para conjuntos reducidos de datos) o cola de mensajes entre procesos distribuidos. - http://redis.io},
+  sort = {redis}
+}
+
 \newglossaryentry{term:refactor} {
   name = {refactor},
   description = {técnica utilizada en el desarrollo de software en la que, luego de identificar puntos posibles de mejora para una pieza de software, se modifica su implementación interna manteniendo su interfaz externa y comportamiento},
@@ -50,6 +74,12 @@
   name = {RESTful},
   description = {término que se utiliza para denotar aquellas \glspl{acro:api} que cumplen, al menos parcialmente, con las propiedades de la arquitectura de sistemas distribuidos \gls{acro:rest}.},
   sort = {restful}
+}
+
+\newglossaryentry{fw:sinatra} {
+  name = {Sinatra},
+  description = {es un \gls{acro:dsl} para el desarrollo ágil de aplicaciones web implementado en el lenguaje Ruby. – http://sinatrarb.com},
+  sort = {sinatra}
 }
 
 \newglossaryentry{scm:subversion} {
@@ -71,12 +101,15 @@
 }
 
 \newacronym{acro:api}{API}{\eng{Application Programming Interface}}
+\newacronym{acro:dsl}{DSL}{\eng{Domain-Specific Language}}
 \newacronym{acro:etl}{ETL}{\eng{Extract, Transform and Load}}
+\newacronym{acro:hateoas}{HATEOAS}{\eng{Hypertext As The Engine Of Application State}}
 \newacronym{lang:html}{HTML}{\eng{HyperText Markup Language}}
 \newacronym{proto:http}{HTTP}{\eng{HyperText Transfer Protocol}}
 \newacronym{lang:json}{JSON}{\eng{JavaScript Object Notation}}
 \newacronym{acro:rest}{REST}{\eng{REpresentational State Transfer}}
 \newacronym{ws:soap}{SOAP}{\eng{Simple Object Access Protocol}}
+\newacronym{acro:ttl}{TTL}{\eng{Time To Live}}
 \newacronym{acro:uri}{URI}{\eng{Uniform Resource Identifier}}
 \newacronym{acro:url}{URL}{\eng{Uniform Resource Locator}}
  % el lenguaje para describir \glspl{ws:webservice}, basado en \gls{lang:xml} – http://www.w3.org/TR/2003/WD-wsdl20-20031110

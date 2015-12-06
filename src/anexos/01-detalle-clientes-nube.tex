@@ -1,3 +1,143 @@
-\subsection{Aplicaciones cliente de la nube de servicios de la UNLP}\label{anexo:detalle-clientes}
+\section{Anexo I}
+\label{anexo:detalle-clientes}
 
-\textbf{\textit{TODO}}
+\subsection{Aplicaciones cliente de la nube de servicios de la UNLP}
+
+Como ya hemos mencionado antes, la nube de servicios de la \unlp es el almacén de datos de referencia y de dominio general de las aplicaciones de uso interno de la UNLP que desarrollamos en nuestra oficina. En esta sección daremos un marco más concreto en referencia a qué aplicaciones la utilizan de manera que el lector pueda comprender en detalle el alcance y las interacciones existentes que movilizan el rediseño motivo del presente trabajo.
+
+Por último, detallaremos las dependencias existenes entre las distintas aplicaciones y la nube de servicios, indicando qué \glspl{acro:api} utiliza cada una.
+
+
+\subsubsection{Albergue Universitario}
+\label{anexo:detalle-clientes:albergue}
+
+Esta aplicación permite la gestión administrativa, de personal y de alumnos alojados en el Albergue Universitario de la \unlp. Los usuarios del sistema son el personal administrativo, del comedor y de Guardia Edilicia que desempeñan sus tareas en esa institución, permitiéndoles manejar las entradas y salidas de los alumnos, planificar las comidas acorde a la cantidad de comensales, y llevar un registro detallado de las actividades que por reglamento deben realizar los alumnos como parte de la beca que les permite residir en el albergue.
+
+Es una aplicación desarrollada en \gls{fw:rails} versión 3, que actualmente se encuentra en etapa de mantenimiento correctivo de errores.
+
+
+\subsubsection{Asociador}
+\label{anexo:detalle-clientes:asociador}
+
+El Asociador de documentos es una aplicación desarrollada para el uso conjunto entre el área de Digitalización de documentos del \cespi y la Dirección de Salud de la \unlp. Su objetivo es permitir que ése área suba en formato PDF las carpetas médicas históricas que digitaliza y luego las asocie a los agentes de la \unlp, de modo tal que el personal de la Dirección de Salud pueda consultar en línea dichas carpetas sin necesidad de contar con una oficina llena de biblioratos con las carpetas médicas otorgadas en los últimos 20 años en soporte papel.
+
+Esta aplicación está desarrollada en \gls{fw:rails} versión 3, y actualmente se encuentra en etapa de mantenimiento correctivo de errores.
+
+
+\subsubsection{Becas UNLP}
+\label{anexo:detalle-clientes:becas}
+
+La aplicación de Becas de la \unlp posee dos partes principales: una pública donde los alumnos (y futuros alumnos) de la \unlp pueden identificarse y solicitar algunas de las becas que la Universidad ofrece, y una privada accesible por personal de la Dirección de Becas que les permite realizar la asignación de las becas acorde a un órden de mérito que calcula el sistema, habilitar o deshabilitar becas de entre la oferta existente y agregar nuevas para que sean publicadas.
+
+Está desarrollada en \gls{fw:symfony} versión 1.4, y actualmente se encuentra en etapa de mantenimiento correctivo de errores con soporte para nuevos requerimientos.
+
+
+\subsubsection{Libretas Sanitarias}
+\label{anexo:detalle-clientes:libretas}
+
+Permite al personal de la Dirección de Salud la gestión de la información referente a las libretas sanitarias de los alumnos de la \unlp, la obtención de turnos y la consulta del estado de los trámites relacionados.
+
+Se encuentra implementada con el \eng{framework} \gls{fw:rails} versión 3, y en este momento se encuentra bajo proceso de \gls{term:refactor} y migración a \gls{fw:rails} versión 4.
+
+
+\subsubsection{Licencias Médicas}
+\label{anexo:detalle-clientes:licencias}
+
+La Dirección de Salud de la UNLP utiliza este sistema para gestionar las solicitudes de carpetas médicas, el tratamiento de esas solicitudes y el seguimiento de las eventuales licencias otorgadas a partir de ellas o las juntas médicas que pudieran surgir.
+
+Esta aplicación fue desarrollada en \gls{fw:symfony} versión 1.2, y se encuentra en etapa de mantenimiento correctivo de errores. Tenemos planificada para la segunda mitad del año 2016 una reescritura de la aplicación para actualizar su \eng{stack} y extender su funcionalidad para brindar mejor soporte a situaciones no previstas en la versión actual, como por ejemplo permitir que los agentes de la \unlp soliciten en línea sus licencias, en lugar de tener que presentar en papel o telefónicamente los pedidos.
+
+
+\subsubsection{Programa ``Mejor Aire''}
+\label{anexo:detalle-clientes:mejor-aire}
+
+Aplicación que gestiona las inscripciones de agentes de la \unlp al programa ``Mejor Aire'', una iniciativa de la Universidad para ayudar a dejar de fumar. Los inscriptos al programa participan semanalmente de reuniones de grupo y tienen controles periódicos para hacer un seguimiento de su evolución en el proceso. Mediante esta aplicación, los profesionales que llevan adelante el programa organizan los turnos, la asistencia a las reuniones y registran los chequeos realizados a cada inscripto.
+
+Este sistema fue desarrollado utilizando \gls{fw:symfony} 1.2, y actualmente se encuentra en etapa de mantenimiento correctivo de errores.
+
+
+\subsubsection{Proyectos de Extensión}
+\label{anexo:detalle-clientes:extension}
+
+El sistema actual de gestión de Proyectos de Extensión de la \unlp es el resultado de dos iteraciones de análisis de requerimientos e implementación, a partir de las cuales se depuraron las necesidades reales que la Secretaría de Extensión Universitario tenía para la versión \eng{on line} del proceso de presentación, acreditación, evaluación y adjudicación de los proyectos postulados para el programa de subsidio de proyectos de extensión de la Universidad Nacional de La Plata. La aplicación es utilizada por los directores y miembros de los proyectos para presentar sus propuestas, por los Secretarios de Extensión para avalar los proyectos presentados desde su Unidad Académica, por los integrantes de las comisiones evaluadoras para analizar y calificar las presentaciones, y por el personal de la Secretaría de Extensión para el otorgamiento final y seguimiento posterior de los proyectos subsidiados.
+
+Este sistema fue reescrito en el año 2015, pasando de un desarrollo en \gls{fw:symfony} 1.1 a una aplicación totalmente renovada y con mucha más funcionalidad implementada utilizando el \eng{framework} \gls{fw:rails} versión 4. Se encuentra en desarrollo activo.
+
+
+\subsubsection{Recibos de sueldo}
+\label{anexo:detalle-clientes:recibos}
+
+La aplicación de Recibos de sueldo permite a los agentes de la \unlp acceder de manera cómoda y a todo momento a sus recibos de sueldo, con la posibilidad de descargarlos para utilizarlos a su conveniencia, sin necesidad de acercarse a la oficina de Personal de su Dependencia para obtenerlos.
+
+Esta aplicación también fue reescrita por completo en el año 2015, proceso mediante el cual pasó de ser un sistema \gls{fw:symfony} 1.4 a uno desarrollado con \gls{fw:rails} versión 4. Se encuentra en etapa de mantenimiento correctivo de errores e implementación de nuevos requerimientos, en caso que surjan.
+
+
+\subsubsection{Responsables}
+\label{anexo:detalle-clientes:responsables}
+
+Este sistema centraliza la información que la oficina de Responsables de la \unlp gestiona para el seguimiento y la rendición de cuentas sobre el destino dado a los fondos que la Universidad posee. Registra todos los gastos imputados a las distintas partidas presupuestarias, cerciorándose que no existan inconsistencias entre los montos otorgados, su destino y el uso efectivo de los mismos.
+
+Fue desarrollada con \gls{fw:rails} versión 3, y en la actualidad se encuentra en etapa de mantenimiento correctivo de errores.
+
+
+\subsubsection{Acceso Único (\gls{acro:sso})}
+\label{anexo:detalle-clientes:sso}
+
+En el año 2015 se implementó de manera global la centralización de cuentas de usuario de los agentes de la \unlp para las aplicaciones que nuestra \direccionDesarrollo realiza, haciendo que cada persona disponga de una única cuenta que le permita acceder a aquellas aplicaciones que utilice para su labor diaria, así como también a sus datos personales y recibos de sueldo. Este proceso comprendió la creación de más de 5000 cuentas de usuario, la implementación de un proceso de autoregistro para los agentes y capacitaciones para los agentes de las oficinas de Personal de cada Dependencia en su uso.
+
+Es una aplicación desarrollada en tres partes, dos de gestión (una para autogestión de cada usuario) y otra de administración general de los datos de usuarios, permisos y aplicaciones utilizando \gls{fw:rails} versión 4 y otra que implementa el estándar \gls{acro:saml} para proveer autenticación y autorización al resto de las aplicaciones. Se encuentra en mantenimiento correctivo de errores, con una planificación para extender su funcionalidad en el año 2016.
+
+
+\subsubsection{Sueldos}
+\label{anexo:detalle-clientes:sueldos}
+
+La aplicación de Sueldos de la UNLP es una reimplementación completa del sistema que actualmente se encuentra en uso para liquidar los sueldos de la Universidad. Como aplicación, además de realizar el cálculo de la liquidación de sueldos, es el puntapié inicial para un sistema integral de gestión de recursos humanos de la \unlp. Este proyecto lleva alrededor de dos años en desarrollo y está planificado para ser puesto en producción en la primer mitad del año 2016.
+
+Esta aplicación está desarrollada en \gls{fw:rails} versión 4, y se encuentra en desarrollo activo.
+
+
+\subsubsection{Títulos}
+\label{anexo:detalle-clientes:titulos}
+
+Aplicación desarrollada para la Oficina de Títulos que digitaliza el proceso de solicitud de los títulos otorgados por la \unlp a sus alumnos, comprendiendo todas las etapas involucradas en el mismo desde la solicitud inicial hasta la entrega final del título en papel.
+
+Este sistema fue desarrollado utilizando \gls{fw:rails} 3, se encuentra en mantenimiento correctivo de errores. Se tiene planificada su reescritura para el año 2016 debido a recientes cambios en el alcance inicialmente definido.
+
+
+\subsubsection{Dependencias con la nube de servicios}
+\label{anexo:detalle-clientes:dependencias-nube}
+
+A continuación se presenta un cuadro que describe qué grupos de datos de los que provee la nube de servicios utilizan las aplicaciones enumeradas en este anexo.
+
+En este cuadro se indica con un tilde (\checkmark) en qué grupos de \glspl{acro:api} depende cada aplicación, siendo los posibles grupos los siguientes:
+
+\begin{itemize}
+  \item \textbf{Ref} comprende las \glspl{acro:api} de datos de referencia.
+  \item \textbf{Alumnos} abarca las \glspl{acro:api} de datos de alumnos de la UNLP.
+  \item \textbf{Personal} referencia las \glspl{acro:api} de datos de agentes que trabajan en la \unlp.
+  \item \textbf{Usuarios} indica que la aplicación usa las \glspl{acro:api} de datos de cuentas de usuarios registrados en el Sistema de Acceso Único.
+\end{itemize}
+
+\begin{table}[h!]
+  %\begin{tabular*}{\textwidth}{ @{\extracolsep{\fill}} | p{0.4\textwidth} | m{0.15\textwidth} | m{0.15\textwidth} | m{0.15\textwidth} | m{0.15\textwidth} | }
+  \begin{tabular*}{\textwidth}{ @{\extracolsep{\fill}} | p{0.39\textwidth} | c | c | c | c | }
+    \hline
+    \textbf{Aplicación}                           & \textbf{Ref} & \textbf{Alumnos}  & \textbf{Personal} & \textbf{Usuarios} \\ \hline
+    \nameref{anexo:detalle-clientes:albergue}     & \checkmark   & \checkmark        &                   &                   \\ \hline
+    \nameref{anexo:detalle-clientes:asociador}    & \checkmark          &                   & \checkmark        &                   \\ \hline
+    \nameref{anexo:detalle-clientes:becas}        & \checkmark          & \checkmark        &                   &                   \\ \hline
+    \nameref{anexo:detalle-clientes:libretas}     & \checkmark          & \checkmark        &                   &                   \\ \hline
+    \nameref{anexo:detalle-clientes:licencias}    & \checkmark          &                   & \checkmark        &                   \\ \hline
+    \nameref{anexo:detalle-clientes:mejor-aire}   & \checkmark          &                   & \checkmark        &                   \\ \hline
+    \nameref{anexo:detalle-clientes:extension}    & \checkmark          & \checkmark        & \checkmark        & \checkmark        \\ \hline
+    \nameref{anexo:detalle-clientes:recibos}      & \checkmark          &                   & \checkmark        &                   \\ \hline
+    \nameref{anexo:detalle-clientes:responsables} & \checkmark          &                   &                   &                   \\ \hline
+    \nameref{anexo:detalle-clientes:sso}          & \checkmark          & \checkmark        & \checkmark        & \checkmark        \\ \hline
+    \nameref{anexo:detalle-clientes:sueldos}      & \checkmark          &                   & \checkmark        &                   \\ \hline
+    \nameref{anexo:detalle-clientes:titulos}      & \checkmark          & \checkmark        &                   &                   \\ \hline
+  \end{tabular*}
+  \caption{Dependencias de las aplicaciones con los servicios de la nube.}
+  \label{anexo:detalle-clientes:dependencias-nube:tabla}
+\end{table}
+
+\clearpage

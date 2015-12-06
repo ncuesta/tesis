@@ -30,16 +30,10 @@
   %   - Tabla de contenidos
   \tableofcontents
   \newpage
-  %   - Lista de figuras
-  \listoffigures
-  \newpage
-  %   - Lista de tablas
-  \listoftables
-  \newpage
 
   % Contenido principal
   \pagenumbering{arabic}
-  \setcounter{secnumdepth}{0}
+  \setcounter{secnumdepth}{4}
   %   - Introducción
   \section{Introducción}
   \input{src/00-intro/introduccion}
@@ -63,6 +57,11 @@
   \input{src/04-capitulo-4/todo}
   \newpage
 
+  %   - Sin organizar aún
+  \section{\textit{SIN ORGANIZAR}}
+  \input{src/sin-organizar/rest}
+  \newpage
+
   % Apéndice
   \appendix
   \newpage
@@ -76,4 +75,10 @@
   \newpage
   %   - Glosario
   \printglossary[title={Glosario de términos}]
+  \newpage
+  %   - Lista de figuras
+  \listoffigures
+  \newpage
+  %   - Lista de tablas
+  \listoftables
 \end{document}

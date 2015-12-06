@@ -20,8 +20,8 @@
   \newpage
 
   % Meta previa al contenido principal
-  \setcounter{secnumdepth}{4}
-  \setcounter{tocdepth}{4}
+  \setcounter{secnumdepth}{0}
+  \setcounter{tocdepth}{3}
   \setcounter{page}{1}
   \pagenumbering{Roman}
   %   - Agradecimientos
@@ -33,11 +33,12 @@
 
   % Contenido principal
   \pagenumbering{arabic}
-  \setcounter{secnumdepth}{4}
   %   - Introducción
   \section{Introducción}
   \input{src/00-intro/introduccion}
   \newpage
+  %   - Meta previa a capítulos
+  \setcounter{secnumdepth}{3}
   %   - Capítulo I
   \section{Capítulo I}
   \input{src/01-capitulo-1/objetivo}

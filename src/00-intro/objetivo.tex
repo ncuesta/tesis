@@ -1,0 +1,18 @@
+\subsection{Objetivo}
+\label{objetivo}
+
+Este trabajo tiene como principal objetivo proponer un nuevo diseño para la arquitectura de la nube de servicios para aplicaciones de la \unlp que mejore el que actualmente se encuentra en producción y solucione los problemas que en él encontramos.
+
+Abordaremos nuestra propuesta apuntando a cumplir con los siguientes principios:
+
+\begin{itemize}
+  \item \textbf{Escalabilidad:} el diseño debe permitir escalar horizontalmente los nodos involucrados en la provisión de los servicios.
+
+  \item \textbf{Redundancia:} los servicios críticos deben poder tener instancias redundantes para garantizar la máxima disponibilidad posible.
+
+  \item \textbf{Desacoplamiento:} las aplicaciones de gestión de los datos deben separarse de los servicios que proveen esos datos. Como un efecto directo de esto, crecen las posibilidades de escalar los servicios independientemente de las aplicaciones que los utilizan. Junto con la redundancia, esto tiende a eliminar cualquier \gls{acro:spof} y posibles cuellos de botella en la línea de atención de los requerimientos que la nube reciba.
+
+  \item \textbf{Simplicidad:} tanto el desarrollo como la incorporación de nuevos servicios a los existentes deben ser sencillos. Eliminar todo lo que no sea estrictamente necesario, evitando el \gls{term:bloating} de la nube de servicios.
+
+  \item \textbf{Estandarización:} seguir estándares existentes para los distintos puntos de intercambio de información, tanto a nivel de estructura de las respuestas, como de comunicación y autenticación de los servicios. De esta forma, la documentación y posible publicación de los servicios será más sencilla y amigable para los desarrolladores, así como también estará apoyada en definiciones razonables tomadas a partir de la experiencia de \textit{jugadores más grandes} de la industria.
+\end{itemize}

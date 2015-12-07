@@ -5,7 +5,7 @@
 \input{inc/ambientes}
 \input{inc/comandos}
 
-%% Generación de glosario e índices
+% Generación de glosario e índices
 \loadglsentries{src/glosario/glosario}
 \makeglossaries
 \makeindex
@@ -16,12 +16,16 @@
   \caratula
   \newpage
 
+  % Lista de tareas pendientes (borrar al finalizar)
+  \listoftodos
+  \newpage
+
   % Página en blanco
   \newpage
 
   % Meta previa al contenido principal
   \setcounter{secnumdepth}{0}
-  \setcounter{tocdepth}{3}
+  \setcounter{tocdepth}{4}
   \setcounter{page}{1}
   \pagenumbering{Roman}
   %   - Agradecimientos
@@ -34,34 +38,20 @@
   % Contenido principal
   \pagenumbering{arabic}
   %   - Introducción
-  \section{Introducción}
-  \input{src/00-intro/introduccion}
-  \newpage
+  \input{src/00-intro/_layout}
   %   - Meta previa a capítulos
-  \setcounter{secnumdepth}{3}
+  \setcounter{secnumdepth}{4}
   %   - Capítulo I
-  \section{Capítulo I}
-  \input{src/01-capitulo-1/objetivo}
-  \newpage
-  \input{src/01-capitulo-1/historia}
-  \newpage
+  \input{src/01-capitulo-1/_layout}
   %   - Capítulo II
-  \section{Capítulo II}
-  \input{src/02-capitulo-2/todo}
-  \newpage
+  \input{src/02-capitulo-2/_layout}
   %   - Capítulo III
-  \section{Capítulo III}
-  \input{src/03-capitulo-3/todo}
-  \newpage
+  \input{src/03-capitulo-3/_layout}
   %   - Capítulo IV
-  \section{Capítulo IV}
-  \input{src/04-capitulo-4/todo}
-  \newpage
+  \input{src/04-capitulo-4/_layout}
 
   %   - Sin organizar aún
-  \section{\textit{SIN ORGANIZAR}}
-  \input{src/sin-organizar/rest}
-  \newpage
+  \input{src/sin-organizar/_layout}
 
   % Apéndice
   \appendix
@@ -81,7 +71,6 @@
   \newpage
   %   - Lista de figuras
   \listoffigures
-  \newpage
   %   - Lista de tablas
   \listoftables
 \end{document}

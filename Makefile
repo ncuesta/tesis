@@ -33,3 +33,9 @@ dist:
 
 clean:
 	rm -rfv $(AUX_DIR)/* _minted-main $(MAIN).xdy
+
+pyg-lexers:
+	pygmentize -L lexers
+
+pyg-styles:
+	pygmentize -L styles

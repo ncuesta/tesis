@@ -9,13 +9,23 @@
 \titlespacing*{\paragraph}
 {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 %   - Resaltado de sintaxis
-\newminted{ruby}{linenos=true,fontsize=\small}
-\newminted{console}{linenos=false,fontsize=\small}
+\setminted{
+  fontsize=\small,
+  style=colorful % o style=bw para blanco y negro
+}
+%     + Define el ambiente {phpcode} para código PHP
+\newminted{php}{linenos}
+%     + Define el comando \phpfile{path} para código PHP desde archivos externos
+\newmintedfile{php}{linenos}
+%     + Define el ambiente {rubycode} para código Ruby
+\newminted{ruby}{linenos}
+%     + Define el comando \rubyfile{path} para código ruby desde archivos externos
+\newmintedfile{ruby}{linenos}
 %   - Formato de los glosarios
 \setglossarystyle{altlist}
 %   - Formato de bloques preformateados
 \lstset{
-basicstyle=\small\ttfamily,
-columns=flexible,
-breaklines=true
+  basicstyle=\small\ttfamily,
+  columns=flexible,
+  breaklines=true
 }

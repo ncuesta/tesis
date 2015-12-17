@@ -18,12 +18,27 @@ En el proceso de autogestión de un nuevo usuario, el agente debe completar los 
 
 \begin{enumerate}
   \item El agente ingresa a la aplicación de autogestión e indica que desea registrar un nuevo usuario.
+
   \item La aplicación le solicita que se identifique mediante su documento de identidad.
+
   \item Una vez identificado el usuario, se le pide que indique en qué Dependencias de la UNLP presta servicios a modo de \gls{term:captcha} para evitar bots que intenten registrar usuarios en masa y personas malintencionadas que deseen registrar usuarios en nombre de agentes reales.
+
   \item Al validar correctamente esta información, se pide al agente que elija un nombre de usuario que utilizará como identificación y algunos datos más para contactarlo en caso de tener problemas con su dirección de correo electrónico principal.
-  \item Finalmente, se le presentan todos los datos ingresados para su confirmación y si el agente los acepta, se le envía un correo electrónico con un formulario para presentar firmado en la oficina de Personal de alguna de las Dependencias donde presta servicios, teniendo un paso de validación humana de la información\footnote{Este paso adicional, si bien puede sonar contradictorio con el resto del proceso \eng{online} planteado, fue requerido por las autoridades de la Universidad para fortalecer los posibles chequeos realizados sobre los datos recibidos mediante este servicio público de registro.}.
+
+  \item Finalmente, se le presentan todos los datos ingresados para su confirmación y si el agente los acepta, se le envía un correo electrónico con un formulario para presentar firmado en la oficina de Personal de alguna de las Dependencias donde presta servicios, teniendo un paso de validación humana de la información\footnote{Este paso adicional, si bien puede sonar contradictorio con el resto del proceso \eng{online} planteado, fue requerido por las autoridades de la Universidad para fortalecer los chequeos realizados sobre los datos recibidos mediante este servicio público de registro.}.
+
   \item Luego de presentar ese formulario y que sus datos sean debidamente corroborados por algún empleado de la oficina de Personal correspondiente, el usuario es aprobado y se dispara el envío de un nuevo correo al agente, en el cual se le consignan su usuario y una clave provisoria para que ingrese por primera vez a los sistemas de la UNLP. Con este paso, se finaliza el proceso de registro del nuevo usuario para el agente.
 \end{enumerate}
+
+Desde el punto de vista de nuestra aplicación, este proceso se ve un tanto reducido ya que no es necesario que incluyamos los pasos que ocurren por fuera del \textit{mundo virtual} o en la aplicación de gestión que utilizan los empleados de las oficinas de Personal de las Dependencias, ya que quedan afuera de su alcance. Formalizaremos los pasos que se realizan en este sistema con el diagrama de flujos presentado a continuación para su mayor referencia.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{src/images/04-capitulo-4/diagrama-flujo-registro.jpg}
+  \caption{Proceso de autoregistro de un nuevo usuario de acceso único.}
+  \label{fig:diagrama-flujo-registro}
+\end{figure}
+
 
 Realizando una descomposición en servicios del proceso anterior, identificamos las siguientes dependencias con servicios de la nueva nube\todo{¿Dar un nombre a la nueva nube? - @ncuesta}:
 

@@ -39,17 +39,16 @@ Desde el punto de vista de nuestra aplicación, este proceso se ve un tanto redu
   \label{fig:diagrama-flujo-registro}
 \end{figure}
 
-
 Realizando una descomposición en servicios del proceso anterior, identificamos las siguientes dependencias con servicios de la nueva nube\todo{¿Dar un nombre a la nueva nube? - @ncuesta}:
 
 \begin{itemize}
-  \item \textbf{Servicios de referencia:} para visualizar y elegir Dependencias (o Unidades Académicas) y tipos de documento.
+  \item \textbf{Servicios de referencia:} para visualizar y marcar las Dependencias (o Unidades Académicas) y para ofrecer para su selección los tipos de documento de identidad.
   \item \textbf{Servicios de información sobre el personal:} como vía para identificar a la persona y luego consultar las Unidades Académicas en las cuales presta sus servicios.
   \item \textbf{Servicios de usuarios:} para la consulta de la existencia de un usuario para la persona seleccionada y para la creación del nuevo usuario.
+  \item \textbf{Servicio de notificaciones:} para el envío de correos electrónicos.\todo{Ver si lo incluimos}
 \end{itemize}
 
-\todo{Terminar de definir el caso testigo}
-
+El desarrollo del prototipo funcional implica, además de realizar el \gls{term:refactor} de la aplicación cliente de registro existente en la actualidad, la implementación desde cero de los servicios (y la lógica en el cliente para el acceso a éstos) siguiendo la nueva estructura, el protocolo de autenticación y los estándares para la comunicación de nuestra propuesta. Al hacer esta prueba de concepto, hemos obtenido \todo{¿Está bien usar el pasado acá?} una noción palpable del costo de llevar estos cambios a nuestras aplicaciones, lo cual da un alto valor agregado a esta experiencia cuando llegue el momento de estimar el tiempo y los recursos necesarios para llevar adelante este cambio en los desarrollos existentes y futuros de nuestro equipo.
 
 Hemos elegido este caso testigo porque se compone de una serie de interacciones entre distintos servicios que brindan una noción de la complejidad que pueden tener las operaciones a realizar utilizando la nube de servicios, más allá de las simples consultas de datos de referencia que habitualmente manejamos. El hecho de incorporar diferentes servicios, englobados en distintas áreas de acción, nos permite también mostrar cómo funcionan las instancias de las aplicaciones que proveen esos servicios, cómo interactúan con la aplicación cliente y con los elementos intermediarios de la comunicación (entiéndase \eng{caches} compartidas, balanceadores de carga, \eng{proxies} reversos y la capa de mediación ofrecida por \nameref{soa:tecnologias:kong}).
 

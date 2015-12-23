@@ -3,11 +3,11 @@ OUT_DIR = pdf
 MAIN = main
 OUT = tesis.pdf
 
-TEX = pdflatex -output-directory $(AUX_DIR) -interaction nonstopmode -shell-escape
+TEX = lualatex -output-directory $(AUX_DIR) -interaction nonstopmode -shell-escape
 BIB = bibtex
 GLS = makeglossaries
 
-.PHONY: all bib gls dist clean
+.PHONY: all bib gls dist clean shell
 
 all: $(OUT) dist
 
@@ -39,3 +39,6 @@ pyg-lexers:
 
 pyg-styles:
 	pygmentize -L styles
+
+shell:
+	/bin/bash

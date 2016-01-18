@@ -36,8 +36,14 @@
 
 \newglossaryentry{scm:git} {
   name = {git},
-  description = {https://git-scm.com},
+  description = {\url{https://git-scm.com}},
   sort = {git}
+}
+
+\newglossaryentry{acro:hmac} {
+  name = {HMAC},
+  description = {\eng{Hash Message Authentication Code}, protocolo criptográfico para la firma de mensajes, definido en la RFC 2104. - \url{https://tools.ietf.org/html/rfc2104}},
+  sort = {hmac}
 }
 
 \newglossaryentry{term:hypermedia} {
@@ -46,9 +52,15 @@
   sort = {hypermedia}
 }
 
+\newglossaryentry{acro:jwt} {
+  name = {JWT},
+  description = {\eng{JSON Web Tokens}, estándar de intercambio de mensajes utilizando tokens de control definido en la RFC 7519. - \url{https://tools.ietf.org/html/rfc7519}},
+  sort = {jwt}
+}
+
 \newglossaryentry{db:memcached} {
   name = {Memcached},
-  description = {es un almacen de datos en memoria distribuido \eng{open source}, organizado en pares clave-valor que es habitualmente utilizado como cache compartida para evitar accesos a recursos más costosos del lado del servidor. - http://memcached.org},
+  description = {es un almacen de datos en memoria distribuido \eng{open source}, organizado en pares clave-valor que es habitualmente utilizado como cache compartida para evitar accesos a recursos más costosos del lado del servidor. - \url{http://memcached.org}},
   sort = {memcached}
 }
 
@@ -60,13 +72,13 @@
 
 \newglossaryentry{fw:rails} {
   name = {Ruby on Rails},
-  description = {es un \eng{framework} hecho en Ruby para el desarrollo ágil de aplicaciones web. Es, de hecho, \textit{el} \eng{framework} web por excelencia del lenguaje. – http://rubyonrails.org},
+  description = {es un \eng{framework} hecho en Ruby para el desarrollo ágil de aplicaciones web. Es, de hecho, \textit{el} \eng{framework} web por excelencia del lenguaje. – \url{http://rubyonrails.org}},
   sort = {rubyonrails}
 }
 
 \newglossaryentry{db:redis} {
   name = {Redis},
-  description = {es un almacen en memoria de datos de código abierto, que suele ser utilizado como \eng{cache}, base de datos de alto rendimiento (para conjuntos reducidos de datos) o cola de mensajes entre procesos distribuidos. - http://redis.io},
+  description = {es un almacen en memoria de datos de código abierto, que suele ser utilizado como \eng{cache}, base de datos de alto rendimiento (para conjuntos reducidos de datos) o cola de mensajes entre procesos distribuidos. - \url{http://redis.io}},
   sort = {redis}
 }
 
@@ -90,30 +102,33 @@
 
 \newglossaryentry{fw:sinatra} {
   name = {Sinatra},
-  description = {es un \gls{acro:dsl} para el desarrollo ágil de aplicaciones web implementado en el lenguaje Ruby. – http://sinatrarb.com},
+  description = {es un \gls{acro:dsl} para el desarrollo ágil de aplicaciones web implementado en el lenguaje Ruby. – \url{http://sinatrarb.com}},
   sort = {sinatra}
 }
 
 \newglossaryentry{scm:subversion} {
   name = {subversion},
-  description = {http://subversion.apache.org},
+  description = {\url{http://subversion.apache.org}},
   sort = {subversion}
 }
 
 \newglossaryentry{fw:symfony} {
   name = {symfony},
-  description = {es un \eng{framework} web desarrollado en el lenguaje PHP, que al momento de elaboración del presente trabajo se encuentra en su segunda versión mayor. A modo de referencia, en nuestros desarrollos siempre utilizamos la versión 1.x. – http://symfony.com},
+  description = {es un \eng{framework} web desarrollado en el lenguaje PHP, que al momento de elaboración del presente trabajo se encuentra en su segunda versión mayor. A modo de referencia, en nuestros desarrollos siempre utilizamos la versión 1.x. – \url{http://symfony.com}},
   sort = {symfony}
 }
 
 \newglossaryentry{ws:webservice} {
   name = {Web Service},
-  description = {estándar desarrollado por la W3C que engloba diferentes tecnologías utilizadas para realizar comunicaciones máquina-máquina sobre el medio web - http://www.w3.org/TR/ws-arch/\#whatis y http://www.w3.org/TR/ws-arch/\#technology - TODO: Referenciar brevemente al punto donde se definan los WS.},
+  description = {estándar desarrollado por la W3C que engloba diferentes tecnologías utilizadas para realizar comunicaciones máquina-máquina sobre el medio web - \url{http://www.w3.org/TR/ws-arch/\#whatis} y \url{http://www.w3.org/TR/ws-arch/\#technology} - TODO: Referenciar brevemente al punto donde se definan los WS.},
   sort = {webservice}
 }
 
+\newacronym{acro:acl}{ACL}{\eng{Access Control List}}
 \newacronym{acro:api}{API}{\eng{Application Programming Interface}}
+\newacronym{acro:cors}{CORS}{\eng{Cross-Origin Resource Sharing}}
 \newacronym{acro:dsl}{DSL}{\eng{Domain-Specific Language}}
+\newacronym{acro:esb}{ESB}{\eng{Enterprise Service Bus}}
 \newacronym{acro:etl}{ETL}{\eng{Extract, Transform and Load}}
 \newacronym{acro:hateoas}{HATEOAS}{\eng{Hypertext As The Engine Of Application State}}
 \newacronym{lang:html}{HTML}{\eng{HyperText Markup Language}}
@@ -124,6 +139,7 @@
 \newacronym{acro:soa}{SOA}{\eng{Service-Oriented Architecture}}
 \newacronym{ws:soap}{SOAP}{\eng{Simple Object Access Protocol}}
 \newacronym{acro:spof}{SPOF}{\eng{Single Point Of Failure}}
+\newacronym{acro:ssl}{SSL}{\eng{Secure Sockets Layer}}
 \newacronym{acro:sso}{SSO}{\eng{Single Sign-On}}
 \newacronym{acro:ttl}{TTL}{\eng{Time To Live}}
 \newacronym{acro:uri}{URI}{\eng{Uniform Resource Identifier}}

@@ -20,45 +20,64 @@ A continuación presentamos un breve listado de las extensiones que Kong ofrece 
 \begin{itemize}
   \item \textbf{Autenticación:} Kong provee \eng{plugins} para agregar autenticación a las \glspl{acro:api} mediante distintas estrategias:
   \begin{itemize}
-    \item \textbf{Basic:} Autenticación mediante usuario y contraseña. \url{https://getkong.org/plugins/basic-authentication}
-    \item \textbf{Key:} Autenticación mediante una clave de \gls{acro:api}. \url{https://getkong.org/plugins/key-authentication}
-    \item \textbf{OAuth 2.0:} Autenticación mediante el protocolo OAuth 2.0. \url{https://getkong.org/plugins/oauth2-authentication}
-    \item \textbf{\gls{acro:hmac}:} Permite autenticar la identidad del cliente (\eng{consumer}) mediante firmas \gls{acro:hmac} en los mensajes. \url{https://getkong.org/plugins/hmac-authentication}
-    \item \textbf{\gls{acro:jwt}:} Provee autenticación mediante el uso del estándar JSON Web Tokens. \url{https://getkong.org/plugins/jwt}
+    \item \textbf{Basic:} Autenticación mediante usuario y contraseña. \\
+    \url{https://getkong.org/plugins/basic-authentication}
+    \item \textbf{Key:} Autenticación mediante una clave de \gls{acro:api}. \\
+    \url{https://getkong.org/plugins/key-authentication}
+    \item \textbf{OAuth 2.0:} Autenticación mediante el protocolo OAuth 2.0. \\
+    \url{https://getkong.org/plugins/oauth2-authentication}
+    \item \textbf{\gls{acro:hmac}:} Permite autenticar la identidad del cliente (\eng{consumer}) mediante firmas \gls{acro:hmac} en los mensajes. \\
+    \url{https://getkong.org/plugins/hmac-authentication}
+    \item \textbf{\gls{acro:jwt}:} Provee autenticación mediante el uso del estándar JSON Web Tokens. \\
+    \url{https://getkong.org/plugins/jwt}
   \end{itemize}
 
   \item \textbf{Seguridad:} Las siguientes extensiones de Kong proveen capas adicinales de seguridad a los servicios:
   \begin{itemize}
-    \item \textbf{\gls{acro:acl}:} Agrega listas de control de acceso para limiter qué consumers pueden acceder a qué \glspl{acro:api}. \url{https://getkong.org/plugins/acl}
-    \item \textbf{\gls{acro:cors}:} Permite que se realicen requerimientos desde distintos dominios con las limitaciones que impongamos, algo ideal para la implementación de clientes puramente desarrollados en JavaScript que corran por completo en el navegador de los usuarios. \url{https://getkong.org/plugins/cors}
-    \item \textbf{\gls{acro:ssl}:} Agrega la posibilidad de establecer conexiones verificables mediante la inclusión de certificados \gls{acro:ssl} a los servicios que proveemos, tanto individual como globalmente, sin necesidad de hacerlo en cada uno de los puntos de acceso de las \glspl{acro:api}. \url{https://getkong.org/plugins/ssl}
-    \item \textbf{Restricciones por dirección IP:} Posibilita manejar listas blancas y listas negras de direcciones IP que pueden realizar requerimientos a nuestros servicios. \url{https://getkong.org/plugins/ip-restriction}
+    \item \textbf{\gls{acro:acl}:} Agrega listas de control de acceso para limiter qué consumers pueden acceder a qué \glspl{acro:api}. \\
+    \url{https://getkong.org/plugins/acl}
+    \item \textbf{\gls{acro:cors}:} Permite que se realicen requerimientos desde distintos dominios con las limitaciones que impongamos, algo ideal para la implementación de clientes puramente desarrollados en JavaScript que corran por completo en el navegador de los usuarios. \\
+    \url{https://getkong.org/plugins/cors}
+    \item \textbf{\gls{acro:ssl}:} Agrega la posibilidad de establecer conexiones verificables mediante la inclusión de certificados \gls{acro:ssl} a los servicios que proveemos, tanto individual como globalmente, sin necesidad de hacerlo en cada uno de los puntos de acceso de las \glspl{acro:api}. \\
+    \url{https://getkong.org/plugins/ssl}
+    \item \textbf{Restricciones por dirección IP:} Posibilita manejar listas blancas y listas negras de direcciones IP que pueden realizar requerimientos a nuestros servicios. \\
+    \url{https://getkong.org/plugins/ip-restriction}
   \end{itemize}
 
   \item \textbf{Control de tráfico:} Estas extensiones habilitan reglas de control sobre el tráfico entrante y saliente de nuestras \glspl{acro:api}:
   \begin{itemize}
-    \item \textbf{Límite de tasa de consulta (\eng{Rate limiting}):} Permite limitar la cantidad de requerimientos que un cliente puede hacer a los servicios en un periodo de tiempo dado. \url{https://getkong.org/plugins/rate-limiting}
-    \item \textbf{Límite de tasa de respuesta (\eng{Response rate limiting}):} Hace posible limitar la cantidad de respuestas que los servicios envían en un periodo de tiempo dado (aplica límites sobre el tráfico saliente). \url{https://getkong.org/plugins/response-rate-limiting}
-    \item \textbf{Límite de tamaño de solicitud (\eng{Request size limiting}):} Bloquea aquellos requerimientos cuyo cuerpo exceda un límite que especifiquemos en su tamaño. \url{https://getkong.org/plugins/request-size-limiting}
+    \item \textbf{Límite de tasa de consulta (\eng{Rate limiting}):} Permite limitar la cantidad de requerimientos que un cliente puede hacer a los servicios en un periodo de tiempo dado. \\
+    \url{https://getkong.org/plugins/rate-limiting}
+    \item \textbf{Límite de tasa de respuesta (\eng{Response rate limiting}):} Hace posible limitar la cantidad de respuestas que los servicios envían en un periodo de tiempo dado (aplica límites sobre el tráfico saliente). \\
+    \url{https://getkong.org/plugins/response-rate-limiting}
+    \item \textbf{Límite de tamaño de solicitud (\eng{Request size limiting}):} Bloquea aquellos requerimientos cuyo cuerpo exceda un límite que especifiquemos en su tamaño. \\
+    \url{https://getkong.org/plugins/request-size-limiting}
   \end{itemize}
 
   \item \textbf{Analíticas y monitoreo:} Tal vez el punto con menos opciones que provee Kong, ya que posee un único \eng{plugin} que agregue funcionalidad en este aspecto:
   \begin{itemize}
-    \item \textbf{Galileo:} Integra el servicio de analíticas y monitoreo de \glspl{acro:api} Galileo, una plataforma paga de \eng{Business Inteligence} desarrollada por Mashape, los creadores de Kong. \url{https://getkong.org/plugins/galileo}
+    \item \textbf{Galileo:} Integra el servicio de analíticas y monitoreo de \glspl{acro:api} Galileo, una plataforma paga de \eng{Business Inteligence} desarrollada por Mashape, los creadores de Kong. \\
+    \url{https://getkong.org/plugins/galileo}
   \end{itemize}
 
   \item \textbf{Transformaciones:} Mediante estas extensiones, podemos realizar modificaciones a las peticiones o las respuestas de un servicio cuando pasa por Kong:
   \begin{itemize}
-    \item \textbf{Transformación de peticiones (\eng{Request transformer}):} Modifica la solicitud antes de enviarla al servicio correspondiente. \url{https://getkong.org/plugins/request-transformer}
-    \item \textbf{Transformación de respuestas (\eng{Response tranformer}):} Altera la respuesta obtenida desde la \gls{acro:api} antes de enviarla al cliente del servicio. \url{https://getkong.org/plugins/response-transformer}
+    \item \textbf{Transformación de peticiones (\eng{Request transformer}):} Modifica la solicitud antes de enviarla al servicio correspondiente. \\
+    \url{https://getkong.org/plugins/request-transformer}
+    \item \textbf{Transformación de respuestas (\eng{Response tranformer}):} Altera la respuesta obtenida desde la \gls{acro:api} antes de enviarla al cliente del servicio. \\
+    \url{https://getkong.org/plugins/response-transformer}
   \end{itemize}
 
   \item \textbf{Registro de eventos (\eng{Logging}):} Estos \eng{plugins} permiten escribir a logs de registro las solicitudes y respuestas que pasan por Kong mediante distintas estrategias:
   \begin{itemize}
-    \item \textbf{TCP:} Envía la información al log mediante una conexión realizada con un servidor que habla el protocolo TCP. \url{https://getkong.org/plugins/tcp-log}
-    \item \textbf{UDP:} Ídem anterior, excepto que usando protocolo UDP. \url{https://getkong.org/plugins/udp-log}
-    \item \textbf{HTTP:} \eng{Plugin} similar a los anteriores, excepto que lo hace contra un servidor que habla el protocolo HTTP. \url{https://getkong.org/plugins/http-log}
-    \item \textbf{Archivo (\eng{File}):} Escribe la información en archivo local al servidor de Kong. \url{https://getkong.org/plugins/file-log}
+    \item \textbf{TCP:} Envía la información al log mediante una conexión realizada con un servidor que habla el protocolo TCP. \\
+    \url{https://getkong.org/plugins/tcp-log}
+    \item \textbf{UDP:} Ídem anterior, excepto que usando protocolo UDP. \\
+    \url{https://getkong.org/plugins/udp-log}
+    \item \textbf{HTTP:} \eng{Plugin} similar a los anteriores, excepto que lo hace contra un servidor que habla el protocolo HTTP. \\
+    \url{https://getkong.org/plugins/http-log}
+    \item \textbf{Archivo (\eng{File}):} Escribe la información en archivo local al servidor de Kong. \\
+    \url{https://getkong.org/plugins/file-log}
   \end{itemize}
 \end{itemize}
 

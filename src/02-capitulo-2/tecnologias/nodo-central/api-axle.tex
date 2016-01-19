@@ -1,3 +1,22 @@
 \paragraph{API Axle}
 
-Ver \url{http://apiaxle.com}
+Este es otro producto que comenzamos a analizar ya que parece tener características similares a \nameref{soa:tecnologias:kong} y \nameref{soa:tecnologias:api-umbrella}:
+
+\begin{itemize}
+  \item Funciona como un proxy reverso que se ubica delante de los servicios que queremos que provea.
+  \item Utiliza \nameref{soa:tecnologias:nginx} como base para atender requerimientos entrantes.
+  \item Implementa limitación de tasa de consultas, autenticación por clave de acceso, cache de respuestas, entre otros.
+  \item Almacena en una base de datos \gls{db:redis} las estadísticas de uso.
+\end{itemize}
+
+\subparagraph{Licencia}
+
+Este producto está licenciado bajo GPL v3\footnote{\url{https://github.com/apiaxle/apiaxle/blob/develop/GPL-3.0.txt}}.
+
+\subparagraph{Estado del proyecto}
+
+Lamentablemente, al indagar un poco más en profundidad sobre este producto notamos que el proyecto no tiene actividad desde Mayo de 2015 y que su documentación es escasa e incompleta. La falta de ejemplos reales y de casos testigo que respalden el uso de la herramienta completan un panorama no muy alentador para considerar esta herramienta entre las opciones para nuestra nueva arquitectura.
+
+\subparagraph{Conclusión}
+
+La falta de mantenimiento, documentación y datos que respalden la posibilidad de usar API Axle seriamente en producción, sumados a la complejidad para instalar la herramienta para hacer una prueba de concepto nos detuvo al momento de continuar analizando este producto.

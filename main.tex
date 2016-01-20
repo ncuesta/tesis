@@ -13,11 +13,8 @@
 \begin{document}
   % Carátula
   \thispagestyle{empty} % Oculta numeración de las páginas
+  \setcounter{page}{0}
   \caratula
-  \newpage
-
-  % Lista de tareas pendientes (borrar al finalizar)
-  \listoftodos
   \newpage
 
   % Página en blanco
@@ -28,6 +25,11 @@
   \setcounter{tocdepth}{4}
   \setcounter{page}{1}
   \pagenumbering{Roman}
+
+  % Lista de tareas pendientes (borrar al finalizar)
+  \listoftodos
+  \newpage
+
   %   - Agradecimientos
   \input{src/meta/agradecimientos}
   \newpage

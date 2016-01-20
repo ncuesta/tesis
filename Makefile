@@ -3,7 +3,7 @@ OUT_DIR = pdf
 MAIN = main
 OUT = tesis.pdf
 
-TEX = lualatex -output-directory $(AUX_DIR) -interaction nonstopmode -shell-escape
+TEX = lualatex -output-directory $(AUX_DIR) -interaction nonstopmode -shell-escape -file-line-error-style
 BIB = bibtex
 GLS = makeglossaries
 
@@ -11,7 +11,7 @@ GLS = makeglossaries
 
 all: $(OUT) dist
 
-$(OUT): $(MAIN).pdf
+$(OUT): clean $(MAIN).pdf
 
 $(MAIN).pdf: $(MAIN).tex
 	$(TEX) $<

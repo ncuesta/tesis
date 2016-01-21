@@ -14,6 +14,9 @@ RUN apt-get install -y make
 RUN apt-get install -y luatex \
                        texlive-luatex \
                        texlive-xetex
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 
 WORKDIR /latex
 VOLUME ["/latex"]

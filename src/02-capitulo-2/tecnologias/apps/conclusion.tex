@@ -1,8 +1,26 @@
 \paragraph{Conclusión}
 
-Ruby on Rails, porque...
+Al analizar estas dos opciones decidimos realizar una pequeña prueba de concepto implementando una parte de la \gls{acro:api} de datos de referencia en \nameref{soa:tecnologias:rails} y en \nameref{soa:tecnologias:sinatra}. Esto no sólo nos permitió comparar el rendimiento de ambas versiones en términos de sus tiempos de respuesta, si no que además pudimos contrastar el esfuerzo necesario para desarrollar la misma solución en los dos contextos.
 
-% TODO: ACOMODAR ESTO
-\textit{Tomado desde \url{http://edgeguides.rubyonrails.org/api_app.html\#why-use-rails-for-json-apis-questionmark}:}
+\subparagraph{En términos de \eng{performance}}
 
-\textit{The first question a lot of people have when thinking about building a JSON API using Rails is: ``isn't using Rails to spit out some JSON overkill? Shouldn't I just use something like Sinatra?''.\\* For very simple APIs, this may be true. However, even in very HTML-heavy applications, most of an application's logic is actually outside of the view layer.\\* The reason most people use Rails is that it provides a set of defaults that allows us to get up and running quickly without having to make a lot of trivial decisions.}
+Desde una visión estrictamente numérica, ...
+
+\todo{Completar con datos empíricos de los tiempos de respuesta de la api con Rails y con Sinatra}
+
+\subparagraph{Desde el punto de vista del desarrollador}
+
+Además de su rendimiento, otro factor importante a la hora de elegir un framework para el desarrollo es tener una noción de en qué medida agiliza y facilita la implementación de la aplicación propiamente dicha. Algunos casos en que la herramienta podría impactar negativamente en el desarrollo son:
+
+\begin{itemize}
+  \item Si el desarrollador se ve obligado a tomar decisiones no funcionales muy seguido,
+  \item si el framework necesita ser complementado con un número alto de librerías de terceros para cubrir los requerimientos,
+  \item si extender la funcionalidad del framework implica mucha investigación y trabajo manual, o
+  \item si simplemente el conjunto de funcionalidad que éste ofrece no es suficiente.
+\end{itemize}
+
+Cualquiera de estas situaciones que enumeramos a modo de ejemplo funciona como indicador de que la herramienta elegida no está a la altura de las circunstancias, y eso fue exactamente lo que nos ocurrió al implementar la prueba de concepto con \nameref{soa:tecnologias:sinatra}. Nos encontramos con la necesidad de implementar y gestionar manualmente la conexión a la base de datos, con la falta de organización clara del código del proyecto, y con una complejidad innecesaria para implementar técnicas de caching.
+
+Por el contrario, al implementar la prueba de concepto con \nameref{soa:tecnologias:rails} no existieron estos retrasos en el desarrollo. El posible inconveniente que puede existir al adoptar Rails como framework para el desarrollo es la curva de aprendizaje del mismo, pero en nuestro caso no es un factor a considerar debido a que ya poseemos experiencia con él tanto nosotros como el resto de nuestro equipo de trabajo. El desarrollo de esa prueba de concepto fue mucho más ágil que en el caso de \nameref{soa:tecnologias:sinatra} y principalmente prácticamente no tuvimos que tomar decisiones triviales o considerar cómo organizar el código del proyecto, ya que el mismo framework nos facilitaba esas decisiones.
+
+Por esas razones es que hemos optado por usar el framework \nameref{soa:tecnologias:rails} como base para el desarrollo de los servicios de la nueva versión de la nube de la UNLP.

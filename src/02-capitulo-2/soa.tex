@@ -1,5 +1,5 @@
 \subsection{Historia de la Arquitectura de Software}
-\label{historia}
+\label{soa:historia}
 
 Los sistemas mainframe de la década del 60’s y 70’s, como la serie IBM System/360, raramente se comunicaban entre sí.  Cuando las comunicaciones fueron requeridas, el proceso de transferencia de información de un sistema a otro, era realizado por medio de una cinta.  Con el tiempo, sin embargo, el acceso en tiempo real entre sistemas se hizo necesaria, sobre todo porque el número de sistemas dentro de una organización se multiplicaron. Esta necesidad fue especialmente evidente en los mercados financieros, donde se requieren transacciones en tiempo real, que a menudo se extendían a través de las empresas.
 Inicialmente, el acceso en tiempo real se lograba vía comunicaciones de socket de bajo nivel, usualmente escritas en lenguaje assembler o C.  La programación de sockets era compleja y requería amplios conocimientos en los protocolos de redes.  Más tarde, entraron en escena protocolos como, \gls{acro:nfs} y \gls{acro:ftp}, que permitieron abstraerse de la complejidad de los sockets.
@@ -21,7 +21,7 @@ Los mensajes SOAP RPC-style también sufrieron las mismas limitaciones inherente
 % se puede agregar mas del libro Open Source SOA - Advent of SOA - pp 7-8, hay un gráfico que esta bueno
 
 \subsection{Arquitecturas Orientadas a Servicios}
-\label{soa}
+\label{soa:definicion}
 
 La Arquitectura Orientada a Servicios (\gls{acro:soa}) establece un marco de diseño para la integración de aplicaciones independientes permitiendo acceder desde la red a sus funcionalidades, las cuales se ofrecen como servicio.  Habitualmente \gls{acro:soa} es implementado mediante Servicios Web, tecnología basada en estándares e independiente de la plataforma que provee los datos, de esta manera \gls{acro:soa} puede descomponer las aplicaciones monolíticas en un conjunto de servicios.
 % citar el párrafor anterior del paper de Microsoft: La arquitectura SOA de Microsoft aplicada al mundo real, esto o redactarlo de otra manera. (pp 2-3)

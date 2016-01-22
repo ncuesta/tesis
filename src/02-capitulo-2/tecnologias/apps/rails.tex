@@ -1,4 +1,26 @@
 \paragraph{Ruby on Rails}
+\label{soa:tecnologias:rails}
 
-\subparagraph{Rails + Grape}
-\subparagraph{Rails API}
+Ruby on Rails, o simplemente Rails, es \textit{el} framework para desarrollo de aplicaciones web del lenguaje Ruby. Con más de 10 años de madurez y evolución, se ha convertido en el estándar \textit{de facto} a la hora de considerar los cimientos sobre los cuales basar el desarrollo de una aplicación web, ya sea a pequeña, mediana o gran escala.
+
+\subparagraph{Un framework, muchas librerías}
+
+Es un framework que sigue el patrón de diseño \gls{acro:mvc}, que organiza en tres capas la lógica del dominio de una aplicación y ayuda a delimitar claramente las incumbencias y responsabilidades de cada una de esas capas. Junto con esta organización siguiendo buenas prácticas probadas a lo largo de sus vastos años de existencia, Rails guía a los desarrolladores en el uso de técnicas beneficiosas como la realización de pruebas sobre el código de las aplicaciones (técnica conocida como \eng{testing}), la organización clara y limpia del código, y el uso de librerías consolidadas. Esas librerías son lo que conforman internamente a Rails:
+
+\begin{itemize}
+  \item Un conjunto de extensiones al lenguaje que simplifican y mejoran su usabilidad: \texttt{ActiveSupport}.
+  \item Una capa de abstracción que permite manejar el modelo (la \textit{M} de \gls{acro:mvc}, datos y lógica de negocios) con y sin bases de datos: \texttt{ActiveRecord} y \texttt{ActiveModel}.
+  \item Los controladores (la \textit{C} de \gls{acro:mvc}) que se encargan de aceptar y tratar los requerimientos entrantes a la aplicación, teniendo en cuenta aspectos importantes de seguridad, y de obtener la información necesaria para generar las respuestas: \texttt{ActionController} (parte de \texttt{ActionPack}).
+  \item Un potente motor de generación de vistas (la \textit{V} de \gls{acro:mvc}) que permite generar código \gls{lang:html}, \gls{lang:json} o \gls{lang:xml} entre otros, para ser enviado en las respuestas a los clientes: \texttt{ActionView} (parte de \texttt{ActionPack}).
+  \item Una serie de componentes adicionales que permiten realizar tareas comunes en las aplicaciones web, como el envío de correos electrónicos, comunicaciones mediante Web Sockers, o el manejo de trabajos en segundo plano: \texttt{ActionMailer}, \texttt{ActionCable} y \texttt{ActiveJob}.
+\end{itemize}
+
+Rails integra estas librerías de manera tal que el desarrollo de la aplicación es ágil y se centra en la implementación de su lógica en sí, ya que el framework elimina decisiones triviales respecto a cómo organizar y gestionar elementos básicos comunes a cualquier aplicación web. Ese es otro gran punto a favor a la hora de ponderar Ruby on Rails y otras opciones.
+
+\subparagraph{El costo de Rails}
+
+Ruby on Rails es una herramienta altamente potente y estable, pero que posee una contra respecto a otras opciones: su uso puede traer aparejadas penalizaciones en el rendimiento de nuestra aplicación. Para casos muy sencillos, con dominios muy reducidos, el uso de Rails puede llegar a ser contraproducente debido al \eng{overhead} que puede agregar la gran cantidad de componentes que posee. Podemos tomar como ejemplo nuestra situación: necesitamos realizar aplicaciones web para proveer los servicios de nuestra nube, por lo cual no utilizaremos partes comunes a una aplicación web tradicional como pueden ser el manejo de sesiones de los clientes, la generación de vistas en otros formatos que no sean \gls{lang:json}, el envío de correos electrónicos\footnote{En general no será utilizado, aunque tenemos planes de implementar un servicio de notificaciones que sí lo haría.}, por nombrar algunos. Para situaciones como la nuestra, en general se suele optar por otros frameworks con funcionalidad más reducida, que eliminan ese \eng{overhead} que agrega Rails, por lo que en nuestro caso sería contraproducente la utilización de éste. O al menos lo era, hasta la versión \texttt{4.2}.
+
+\subparagraph{\texttt{rails --api}}
+
+En su versión \texttt{5.0} (la versión más reciente al momento de escritura del presente trabajo), Ruby on Rails  incorpora un nuevo \textit{modo} de creación de aplicaciones web: el modo \texttt{--api}. Esto permite iniciar aplicaciones configuradas con un subconjunto reducido de componentes, obtenido a partir de la eliminación de aquellos que no son necesarios para el desarrollo de \glspl{acro:api} web, y preparadas para servir contenido en formato \gls{lang:json} por defecto, aprovechando las técnicas de caching principales para este tipo de aplicaciones.

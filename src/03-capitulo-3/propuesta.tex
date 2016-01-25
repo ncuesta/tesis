@@ -3,10 +3,11 @@
 
 \textit{Deberíamos incluir el gráfico que utiliza los elementos de REST para definir la arquitectura. Justificar por punto del objetivo el diseño propuesto.}\\
 
+\todo{Faltan referenciar térmimos como cache, varnish, agregar a bibliografía RFCs}
+
 Por lo expuesto anteriormente, se propone una arquitectura más desacoplada a la planteada con el \textit{Integrador}, permitiendo de esta manera minimizar el costo del mantenimiento, desarrollo y simplificando el deployment en entornos de producción.  Una solución basada en estándares que permita integrar sistemas heterogéneos, aceptando el hecho de que la mayoría de los sistemas legados que se encuentran en producción, se mantendrán y logrando de esta manera, que la infraestructura subyasente facilite la incorporación de cambios que puedan surgir como necesidades de la Organización.
 
-La estrategia de orientación a servicios permite la creación de servicios y aplicaciones compuestas que pueden existir con independencia de la tecnologías subyacentes.
-% citar el párrafo anterior del paper de Microsoft: La arquitectura SOA de Microsoft aplicada al mundo real, esto o redactarlo de otra manera. (pp 3)
+La estrategia de orientación a servicios permite la creación de servicios y aplicaciones compuestas que pueden existir con independencia de la tecnologías subyacentes\cite{microsoft2006}.
 
 El modelo de servicios facilita el acceso y consumo de la información a traves de la red.  Dado que los servicios son independientes y autónomos, pueden combinarse tantas veces como sean necesarias de manera sencilla, generando nuevas aplicaciones que respondan a las necesidades cambiantes de la Organización.
 
@@ -52,7 +53,7 @@ En su funcionamiento básico, el balanceador redirige las peticiones a alguno de
 Como se mencionó anteriormente, el balanceador puede ser usado como failover, permitiendo la continuidad del servicio, luego del fallo de uno o más backends.
 Los backends son monitoreados continuamente por el balanceador, cuando uno de estos falla, el balanceador deja de enviar tráfico al backend caído.  Luego cuando el backend vuelva a estar online, el balanceador podrá enviarle tráfico nuevamente.
 
-Delante del balanceador, se implementará una caché compartida utilizando Varnish, la misma evitará los accesos al balanceador, que puedan impactar de forma directa en alguna de las instancias replicadas de la \textit{API de Servicios} y \textit{API de Referencias}.
+Delante del balanceador, se implementará una caché compartida utilizando \gls{db:varnish}, la misma evitará los accesos al balanceador, que puedan impactar de forma directa en alguna de las instancias replicadas de la \textit{API de Servicios} y \textit{API de Referencias}.
 
 Según la RFC 7234, una memoria cache, almacena respuestas en pos de reducir el tiempo de respuesta y el consumo del ancho de banda. Así mismo, una memoria cache compartida, es una cache que almacena respuestas para ser usadas por más de un usuario. Más adelante se tratará en detalle el uso de caches compartidas.
 
@@ -60,11 +61,9 @@ Como bien se indicó anteriormente, una caché compartida evitará los accesos a
 
 \subsubsection{Estandarización}
 
-Como mencionamos anteriormente, para cada aplicación se deberá implementar una \gls{acro:api} de acceso a datos propios generados localmente, esta re-escritura se realizará basándose en la especificación JSON API, la cual se encuentra en su versión estable 1.0.
-Según el diccionario de la Real Academia Española,  un estándar es lo “que sirve como tipo, modelo, norma, patrón o referencia”, en nuestro caso, la estandarización es el proceso por el cual se establecen normas comúnmente aceptadas que permiten la comunicación de diferentes aplicaciones.
+Como mencionamos anteriormente, para cada aplicación se deberá implementar una \gls{acro:api} de acceso a datos propios generados localmente, esta re-escritura se realizará basándose en la especificación \gls{acro:jsonapi}, la cual se encuentra en su versión estable 1.0.
+Según el diccionario de la Real Academia Española,  un estándar es lo que sirve como tipo, modelo, norma, patrón o referencia, en nuestro caso, la estandarización es el proceso por el cual se establecen normas comúnmente aceptadas que permiten la comunicación de diferentes aplicaciones.
 
 Esta estandarización facilitará el desarrollo de clientes que consuman de los diferentes servicios de las \glspl{acro:api}, ya que contamos con reglas que especifican cómo se podrá acceder a los datos, cuál será su estructura de respuesta, incluso logramos independencia del lenguaje con el que se escriban estos clientes, quienes deben respetar las especificaciones para implementar el acceso a los servicios.
 
-\textit{Quizás se pueda hablar algo de JSON API, por ej. soporta el patrón linked service}
-
-Por lo tanto, la utilización de JSON API como estructura de intercambio e interacción \gls{acro:api} <=> Aplicación, radica en el uso de un estándar que ha alcanzado un nivel de madurez que permite hoy contar con su versión 1.0.
+Por lo tanto, la utilización de \gls{acro:jsonapi} como estructura de intercambio e interacción \gls{acro:api} <=> Aplicación, radica en el uso de un estándar que ha alcanzado un nivel de madurez que permite hoy contar con su versión 1.0.

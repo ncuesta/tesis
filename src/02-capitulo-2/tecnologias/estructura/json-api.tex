@@ -1,29 +1,2 @@
 \paragraph{JSON API}
 \label{soa:tecnologias:json-api}
-
-JSON API es una especificación surgida en 2013 que intenta definir tanto cómo deben los clientes formular las peticiones, así como la forma en que los servidores deben responder a ellas, fomentando la eficiencia en el uso de recursos. Al momento de escritura del presente trabajo, esta especificación se encuentra en su versión \texttt{1.0} y con una versión \texttt{1.1} en proceso de definiciones.
-
-En este análisis resumiremos de manera concisa los puntos sobresalientes de la especificación.
-
-\subparagraph{\eng{Media type} dedicado}
-
-Tanto los datos que el cliente envía en su petición como la respuesta del servidor deben indicar el \eng{media type} dedicado de JSON API: \texttt{application/vnd.api+json}\footnote{Este tipo de contenido fue asignado por la IANA - \url{http://www.iana.org/assignments/media-types/application/vnd.api+json}}.
-
-Este tipo de contenidos es una definición de estructura basada en el lenguaje \gls{lang:json}. Denominaremos ``documentos JSON API'' a aquellos documentos \gls{lang:json} que adhieran a este \eng{media type}.
-
-\subparagraph{Estructura general de los documentos JSON API}
-
-Los documentos deben contener como elemento raiz un objeto, en el cual son admisibles las siguientes propiedades de primer nivel:
-
-\begin{itemize}
-  \item \texttt{data}: la información principal del documento, puede ser un recurso o una colección de éstos.
-  \item \texttt{errors}: indicadores de cualquier error que hubiera ocurrido.
-  \item \texttt{meta}: especifica metadatos sobre la información.
-  \item \texttt{jsonapi}: descripción de la implementación del servidor JSON API.
-  \item \texttt{links}: conjunto de vínculos hypermedia relacionados a la información principal.
-  \item \texttt{included}: recursos incluidos en el documento por estar relacionados al objeto principal.
-\end{itemize}
-
-\subparagraph{Los recursos}
-
-TODO

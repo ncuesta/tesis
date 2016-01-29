@@ -41,7 +41,7 @@ En una arquitectura en la que se implemente un \gls{acro:esb}, las aplicaciones 
 Interceptors
 La otra forma donde un \gls{acro:esb} basado en un protocolo de punto a punto puede soportar llamadas de servicio indirectas, es proporcionando los llamados ``interceptors'' o ``proxies''. Un enfoque sencillo, es reemplazar el \eng{endpoint} físico que ofrece el servicio, con \eng{hardware} o \eng{software} que sirve como balanceador de carga. Los consumidores siguen utilizando un \eng{endpoint} oficial, donde se delega la verdadera tarea, cuando los mensajes llegan, el balanceador de carga los envía a los diferentes proveedores de servicios de físicos que conoce.\cite[p.~52]{josuttis2007}.
 
-\begin{figure}
+\begin{figure}[H]
   \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/esb/esb-interceptors-load-balancer.png}
   \caption{Un ESB con balanceador de carga para los proveedores de servicios}
   \label{fig:esb-interceptors-load-balancer}

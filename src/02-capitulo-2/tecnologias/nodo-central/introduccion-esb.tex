@@ -25,7 +25,18 @@ El rol principal de un \gls{acro:esb}, es proveer interoperabilidad.  Debido a q
 Otra tarea fundamental de un \gls{acro:esb}, es el ruteo, debe existir alguna manera de acceder a un servicio desde un consumidor a un proveedor, y luego enviar la respuesta de vuelta desde el proveedor hasta el consumidor.
 Dependiendo de la tecnología utilizada, y el nivel de inteligencia proporcionada, esta tarea puede ser trivial, o puede requerir procesamiento muy complicado.
 
-Hay que tener en cuenta que no existe requerimiento alguno para que el \gls{acro:esb} sea homogéneo.  Aunque podría ser mejor usar una sola tecnología para la implementación de los servicios, raramente es el caso. \gls{acro:soa}, por su propia naturaleza, acepta heterogeneidad. Eso incluye la heterogeneidad en middleware y protocolos. Incluso con un estándar como web service, múltiples instancias pueden diferir.  Tarde o temprano, se introducirá un nuevo estándar o una nueva versión del estándar que hace las cosas mejor y más fácil. Tan pronto como empiece a utilizar el nuevo estándar (junto a la antigua tecnología), el \gls{acro:esb} se volverá heterogéneo.\cite[p.~49]{josuttis2007}
+Hay que tener en cuenta que no existe requerimiento alguno para que el \gls{acro:esb} sea homogéneo.  Aunque podría ser mejor usar una sola tecnología para la implementación de los servicios, raramente es el caso. \gls{acro:soa}, por su propia naturaleza, acepta heterogeneidad. Eso incluye la heterogeneidad en middleware y protocolos. Incluso con un estándar como web service, múltiples instancias pueden diferir.  Tarde o temprano, se introducirá un nuevo estándar o una nueva versión del estándar que hace las cosas mejor y más fácil. Tan pronto como empiece a utilizar el nuevo estándar (junto a la antigua tecnología), el \gls{acro:esb} se volverá heterogéneo\cite[p.~49]{josuttis2007}.
 
 Idealmente, el cambio de tecnología en el \gls{acro:esb}, no debe tener ningún impacto en los proveedores y consumidores, deben ser capaces de utilizar la misma \gls{acro:api}, y sólo debe cabmiar el mapeo.
-Es decir, desde el punto de vista de los proveedores y consumidores, la \gls{acro:api} de servicios debe ser transparente. Sin embargo, esto por lo general requiere que el \gls{acro:esb} incluya la \gls{acro:api} de servicios para cualquier plataforma específica. Si el \gls{acro:esb} requiere un sólo protocolo específico, los consumidores y proveedores tienen que lidiar con las modificaciones de este protocolo.\cite[p.~50]{josuttis2007}
+Es decir, desde el punto de vista de los proveedores y consumidores, la \gls{acro:api} de servicios debe ser transparente. Sin embargo, esto por lo general requiere que el \gls{acro:esb} incluya la \gls{acro:api} de servicios para cualquier plataforma específica. Si el \gls{acro:esb} requiere un sólo protocolo específico, los consumidores y proveedores tienen que lidiar con las modificaciones de este protocolo\cite[p.~50]{josuttis2007}.
+
+% ver si es necesario desarrollar previamente el tema
+
+Interceptors
+La otra forma donde un \gls{acro:esb} basado en un protocolo de punto a punto puede soportar llamadas de servicio indirectas, es proporcionando los llamados ``interceptors'' o ``proxies''. Un enfoque sencillo, es reemplazar el \eng{endpoint} físico que ofrece el servicio, con \eng{hardware} o \eng{software} que sirve como balanceador de carga. Los consumidores siguen utilizando un \eng{endpoint} oficial, donde se delega la verdadera tarea, cuando los mensajes llegan, el balanceador de carga los envía a los diferentes proveedores de servicios de físicos que conoce.\cite[p.~52]{josuttis2007}.
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/esb-interceptors-load-balancer.png}
+  \caption{Un ESB con balanceador de carga para los proveedores de servicios}
+  \label{fig:esb-interceptors-load-balancer}
+\end{figure}

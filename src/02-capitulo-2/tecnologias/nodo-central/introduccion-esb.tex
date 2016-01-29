@@ -30,13 +30,19 @@ Hay que tener en cuenta que no existe requerimiento alguno para que el \gls{acro
 Idealmente, el cambio de tecnología en el \gls{acro:esb}, no debe tener ningún impacto en los proveedores y consumidores, deben ser capaces de utilizar la misma \gls{acro:api}, y sólo debe cabmiar el mapeo.
 Es decir, desde el punto de vista de los proveedores y consumidores, la \gls{acro:api} de servicios debe ser transparente. Sin embargo, esto por lo general requiere que el \gls{acro:esb} incluya la \gls{acro:api} de servicios para cualquier plataforma específica. Si el \gls{acro:esb} requiere un sólo protocolo específico, los consumidores y proveedores tienen que lidiar con las modificaciones de este protocolo\cite[p.~50]{josuttis2007}.
 
+% hablar de conexiones ponit to point
+% página 50 SOA in Practice - 5.3.1 Point-to-Point Connections Versus Mediation
+% agregar figua con topología de interconexión entre aplicaciones, topología en malla
+
+En una arquitectura en la que se implemente un \gls{acro:esb}, las aplicaciones se comunicarán a través del bus, que actúa como \eng{message broker} entre las aplicaciones. De esta manera se reduce el número de conexión punto-a-punto que se necesitan para permitir que se comunique una aplicación con otra.  Al reducir el número de puntos de contacto entre las diferentes aplicaciones, se simplifica el proceso de mantenimiento y actulización de un sistema.
+
 % ver si es necesario desarrollar previamente el tema
 
 Interceptors
 La otra forma donde un \gls{acro:esb} basado en un protocolo de punto a punto puede soportar llamadas de servicio indirectas, es proporcionando los llamados ``interceptors'' o ``proxies''. Un enfoque sencillo, es reemplazar el \eng{endpoint} físico que ofrece el servicio, con \eng{hardware} o \eng{software} que sirve como balanceador de carga. Los consumidores siguen utilizando un \eng{endpoint} oficial, donde se delega la verdadera tarea, cuando los mensajes llegan, el balanceador de carga los envía a los diferentes proveedores de servicios de físicos que conoce.\cite[p.~52]{josuttis2007}.
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/esb-interceptors-load-balancer.png}
+  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/esb/esb-interceptors-load-balancer.png}
   \caption{Un ESB con balanceador de carga para los proveedores de servicios}
   \label{fig:esb-interceptors-load-balancer}
 \end{figure}

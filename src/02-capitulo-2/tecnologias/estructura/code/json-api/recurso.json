@@ -1,0 +1,62 @@
+{
+  "data": {
+    "type": "document_types",
+    "id": "0",
+    "attributes": {
+      "abbreviation": "DNI",
+      "code": 0,
+      "name": "Documento Nacional de Identidad"
+    },
+    "relationships": {
+      "people": {
+        "links": {
+          "self": "/document_types/0/relationships/people",
+          "related": "/document_types/0/people"
+        },
+        "data": [
+          { "type": "people", "id": "000000000000000000000000027855859" },
+          { "type": "people", "id": "000000000000000000000000031988189" }
+        ]
+      }
+    }
+  },
+  "links": {
+    "self": "/document_types/0"
+  },
+  "included": [
+    {
+      "type": "people",
+      "id": "000000000000000000000000027855859",
+      "attributes": {
+        "name": "Miguel",
+        "surname": "Carbone",
+        "document_number": "27855859"
+      },
+      "relationships": {
+        "document_type": {
+          "data": { "type": "document_types", "id": "0" }
+        }
+      },
+      "links": {
+        "self": "/people/000000000000000000000000027855859"
+      }
+    },
+    {
+      "type": "people",
+      "id": "000000000000000000000000031988189",
+      "attributes": {
+        "name": "Jose Nahuel",
+        "surname": "Cuesta Luengo",
+        "document_number": "31988189"
+      },
+      "relationships": {
+        "document_type": {
+          "data": { "type": "document_types", "id": "0" }
+        }
+      },
+      "links": {
+        "self": "/people/000000000000000000000000031988189"
+      }
+    }
+  ]
+}

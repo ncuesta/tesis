@@ -26,4 +26,20 @@ Los documentos deben contener como elemento raiz un objeto, en el cual son admis
 
 \subparagraph{Los recursos}
 
-TODO
+Los elementos principales de información de un documento JSON API son los recursos. Cada recurso debe al menos tener dos propiedades: \texttt{id} y \texttt{type}, excepto cuando se trate de un \textit{nuevo} elemento que esté siendo creado por el cliente del servicio en cuyo caso el \texttt{id} puede omitirse. Además de estas propiedades obligatorias un recurso puede tener las propiedades \texttt{attributes}, \texttt{relationships}, \texttt{links} y \texttt{meta}, donde las dos primeras son objetos \gls{lang:json} que indican los atributos del recurso y posibles elementos relacionados respectivamente, y las últimas dos tienen sentidos similares a las propiedades homónimas del elemento raiz mencionadas en el apartado anterior que describe la estructura general de un documento JSON API. En el mismo sentido, los recursos pueden identificarse mediante una versión reducida de sí mismos que sólo contenga las propiedades \texttt{id} y \texttt{type}, caso en el cual se los denomina ``objetos identificadores de recursos''.
+
+En este punto, la especificación hace una recomendación respecto de los campos (dentro de los \texttt{attributes} de un recurso) que representan \textit{asociaciones lógicas} o claves foráneas a otros recursos: los valores de clave foránea apuntando hacia otros recursos no deberían aparecer entre los atributos del recurso; en cambio debieran tener su entrada dedicada entre las \textit{relationships} del mismo.
+
+Las relaciones de un recurso son objetos \glspl{lang:json} que pueden tener las siguientes propiedades:
+
+\begin{itemize}
+  \item \texttt{links}: un objeto \glspl{lang:json} que puede tener dos propiedades, \texttt{self} (\gls{acro:url} mediante la cual se puede manipular la relación en sí) y \texttt{related} (\gls{acro:url} del recurso asociado en sí, que no debe ser dependiente de la existencia de la relación).
+  \item \texttt{data}: uno o varios (acorde a la cardinalidad de la relación) objetos identificadores de recursos para los recursos asociados.
+  \item \texttt{meta}: un objeto \glspl{lang:json} con metadatos sobre el recurso.
+\end{itemize}
+
+La especificación, con miras a hacer un uso más eficiente de los recursos, define también los ``documentos compuestos'' que son aquellos que incluyen en la misma estructura la información relacionada a los recursos asociados a la información principal del documento, es decir, aquellos recursos referenciados en alguna de las relaciones. La información de estos recursos adicionales debe realizarse dentro de una clave \texttt{included} de primer nivel en la raiz del documento JSON API. Al incorporar esta información adicional al documento, se reducen la cantidad de peticiones necesarias para obtener un recurso y sus elementos relacionados, reduciendo la utilización de recursos necesaria para completar la tarea.
+
+A continuación se presenta, a modo de ejemplo, un documento JSON API de un recurso:
+
+\jsonfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/recurso.json}

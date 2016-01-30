@@ -87,7 +87,11 @@ Basándonos en los pasos detallados en la guía oficial de Kong\footnote{\url{ht
 
 Para iniciar los dos servicios requeridos por Kong para su funcionamiento (Apache Cassandra y Kong mismo), ejecutamos la siguiente secuencia de comandos:
 
-\bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/kong/00-preparacion.sh}
+\begin{listing}[H]
+  \bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/kong/00-preparacion.sh}
+  \caption{Preparación y arranque de Kong}
+  \label{soa:tecnologias:kong:bash-preparacion}
+\end{listing}
 
 Con el último comando comprobamos que el servicio está funcionando y que responde con la información de la instancia en ejecución, en formato \gls{lang:json}. Ahora que Kong está correctamente instalado y ejecutándose, podemos pasar a configurarlo y probar su funcionamiento.
 
@@ -100,11 +104,19 @@ Por defecto Kong atiende requerimientos en dos puertos diferentes:
 
 Teniendo esto en cuenta, procederemos a configurar una \gls{acro:api} de pruebas en Kong, utilizando el servicio online Mockbin\footnote{\url{http://mockbin.com}} que ofrece \glspl{term:endpoint} que imitan una \gls{acro:api} real para este tipo de situaciones.
 
-\bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/kong/01-agregar-mockbin.sh}
+\begin{listing}[H]
+  \bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/kong/01-agregar-mockbin.sh}
+  \caption{Comandos para agregar un \gls{acro:api} a Kong}
+  \label{soa:tecnologias:kong:bash-agregar-mockbin}
+\end{listing}
 
 Una vez agregada una \gls{acro:api}, en nuestro caso lo más probable será que querramos limitar su acceso mediante políticas de seguridad. A tal fin, agregaremos autenticación mediante clave con el \eng{plugin} \textbf{Key} de Kong.
 
-\bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/kong/02-habilitar-key-auth.sh}
+\begin{listing}[H]
+  \bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/kong/02-habilitar-key-auth.sh}
+  \caption{Comandos para habilitar autenticación mediante clave y probar Kong}
+  \label{soa:tecnologias:kong:bash-habilitar-key-auth}
+\end{listing}
 
 Con esta breve prueba de concepto, hemos comprobado que tanto la instalación como el uso de Kong son sencillos, lo cual lo hace un gran candidato para su utilización como nodo central de la nueva arquitectura de la nube de servicios de la \unlp.
 
@@ -112,7 +124,7 @@ Con esta breve prueba de concepto, hemos comprobado que tanto la instalación co
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/kong/kong-arq.jpg}
-  \caption{Esquema de integración de Kong en nuestra propuesta.}
+  \caption{Esquema de integración de Kong en nuestra propuesta}
   \label{fig:integracion-kong-arquitectura}
 \end{figure}
 

@@ -40,6 +40,35 @@ Las relaciones de un recurso son objetos \glspl{lang:json} que pueden tener las 
 
 La especificación, con miras a hacer un uso más eficiente de los recursos, define también los ``documentos compuestos'' que son aquellos que incluyen en la misma estructura la información relacionada a los recursos asociados a la información principal del documento, es decir, aquellos recursos referenciados en alguna de las relaciones. La información de estos recursos adicionales debe realizarse dentro de una clave \texttt{included} de primer nivel en la raiz del documento JSON API. Al incorporar esta información adicional al documento, se reducen la cantidad de peticiones necesarias para obtener un recurso y sus elementos relacionados, reduciendo la utilización de recursos necesaria para completar la tarea.
 
-A continuación se presenta, a modo de ejemplo, un documento JSON API de un recurso:
-
 \jsonfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/recurso.json}
+\captionof{listing}{Documento JSON API representando un recurso\label{soa:tecnologias:json-api:recurso}}
+
+\subparagraph{Obtención de la información}
+
+Las peticiones de acceso de lectura a la información deben ser realizadas utilizando el método \gls{proto:http} \texttt{GET} y utilizando alguna de las \glspl{acro:url} provistas en los documentos JSON API como vínculos \texttt{self} o \texttt{related}. Por ejemplo, las peticiones presentadas a continuación son válidas para obtener información a partir del documento JSON API presentado anteriormente.
+
+Esta petición se puede utilizar para obtener la colección de tipos de documentos:
+
+\begin{listing}[H]
+  \httpfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/obtener-coleccion.http}
+  \caption{Petición de una colección de recursos JSON API}
+  \label{soa:tecnologias:json-api:obtener-colecccion}
+\end{listing}
+
+Esta otra para obtener todas las personas relacionadas con el tipo de documento con \texttt{id} \texttt{"0"}:
+
+\begin{listing}[H]
+  \httpfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/obtener-recurso-relacionado.http}
+  \caption{Petición de un recurso relacionado en JSON API}
+  \label{soa:tecnologias:json-api:obtener-recurso-relacionado}
+\end{listing}
+
+Y la siguiente para obtener una persona en particular:
+
+\begin{listing}[H]
+  \httpfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/obtener-recurso.http}
+  \caption{Petición de un recurso en JSON API}
+  \label{soa:tecnologias:json-api:obtener-recurso}
+\end{listing}
+
+Las respuestas \textit{exitosas} a estas peticiones deben devolver un código de estado \gls{proto:http} \texttt{200 OK} junto con el recurso (o un elemento nulo, en caso de no existir el recurso identificado) o la colección de recursos (o una colección vacía, en caso de no poseer elementos).

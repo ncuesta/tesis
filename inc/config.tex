@@ -22,15 +22,18 @@
 \newminted{ruby}{linenos}
 %     + Define el comando \rubyfile{path} para código ruby desde archivos externos
 \newmintedfile{ruby}{linenos}
-%     + Define el ambiente {clicode} para comandos de CLI
+%     + Define el ambiente {bashcode} para comandos de CLI
 \newminted{bash}{}
-%     + Define el comando \clifile{path} para comandos de CLI desde archivos externos
+%     + Define el comando \bashfile{path} para comandos de CLI desde archivos externos
 \newmintedfile{bash}{}
 %     + Define el ambiente {jsoncode} para código JSON
-\newminted{json}{linenos}
+\newminted{json}{}
 %     + Define el comando \jsonfile{path} para código JSON desde archivos externos
-\newmintedfile{json}{linenos}
-%     + Define el ambiente {clicode} para comandos de CLI
+\newmintedfile{json}{}
+%     + Define el ambiente {httpcode} para sesiones HTTP
+\newminted{http}{linenos}
+%     + Define el comando \httpfile{path} para sesiones HTTP desde archivos externos
+\newmintedfile{http}{}
 %   - Formato de los glosarios
 \setglossarystyle{altlist}
 %   - Formato de bloques preformateados
@@ -42,3 +45,6 @@
 %   - Formato de los \subparagraphs para que tengan un salto de línea que los separe del texto
 \titleformat{\subparagraph}{\normalfont\normalsize\bfseries}{\thesubparagraph}{1em}{}
 \titlespacing*{\subparagraph}{\parindent}{3.25ex plus 1ex minus .2ex}{.75ex plus .1ex}
+%   - Nombre y título para los bloques de código de minted
+\renewcommand{\listingscaption}{Bloque de código}
+\renewcommand{\listoflistingscaption}{Listado de bloques de código}

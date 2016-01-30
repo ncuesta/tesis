@@ -11,7 +11,7 @@ Este producto está publicado bajo licencia MIT\footnote{\url{https://github.com
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/api-umbrella/api-umbrella-arq.png}
-  \caption{Arquitectura interna de API Umbrella.}
+  \caption{Arquitectura interna de API Umbrella}
   \label{fig:arquitectura-interna-api-umbrella}
 \end{figure}
 
@@ -34,7 +34,7 @@ En particular, el \eng{Gatekeeper} merece un gráfico propio describiendo su flu
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/api-umbrella/api-umbrella-gatekeeper.png}
-  \caption{Lógica de decisión del \eng{Gatekeeper} de API Umbrella.}
+  \caption{Lógica de decisión del \eng{Gatekeeper} de API Umbrella}
   \label{fig:api-umbrella-gatekeeper}
 \end{figure}
 
@@ -42,7 +42,11 @@ En particular, el \eng{Gatekeeper} merece un gráfico propio describiendo su flu
 
 Al igual que en el caso de \nameref{soa:tecnologias:kong}, y ya que NREL provee una imagen oficial para ejecutar API Umbrella, utilizamos Docker para realizar una prueba de concepto del producto. A continuación detallamos los pasos realizados.
 
-\bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/api-umbrella/00-preparacion.sh}
+\begin{listing}[H]
+  \bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/api-umbrella/00-preparacion.sh}
+  \caption{Preparación y arranque de API Umbrella}
+  \label{soa:tecnologias:api-umbrella:bash-preparacion}
+\end{listing}
 
 Una vez ejecutados los comandos anteriores, tendremos una instancia de API Umbrella en ejecución en el equipo local que podrá ser accedida desde los puertos \texttt{80} y \texttt{443} de \url{localhost}. Adicionalmente al planteo que \nameref{soa:tecnologias:kong} hace con respecto a la forma de administrar el producto mediante el uso de servicios de gestión, API Umbrella también utiliza un archivo de configuración en formato \gls{lang:yaml} que puede resultar más conveniente para poder utilizar un sistema de control de versiones para versionar su contenido, pero que también implica replicarlo en cada instancia del producto que querramos ejecutar.
 
@@ -50,19 +54,23 @@ En el archivo de configuración debemos mínimamente definir las direcciones de 
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/api-umbrella/api-backend.png}
-  \caption{Interfaz web de carga de un \eng{backend} de servicios de API Umbrella.}
+  \caption{Interfaz web de carga de un \eng{backend} de servicios de API Umbrella}
   \label{fig:api-umbrella-api-backend}
 \end{figure}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/api-umbrella/api-key-request.png}
-  \caption{Interfaz web de solicitud de clave de acceso a los servicios de API Umbrella.}
+  \caption{Interfaz web de solicitud de clave de acceso a los servicios de API Umbrella}
   \label{fig:api-umbrella-api-key-request}
 \end{figure}
 
 Para poder utilizar este nuevo \gls{term:endpoint} debemos obtener una clave de acceso (\eng{\gls{acro:api} key}), y para esto API Umbrella provee una interfaz web dedicada que puede observarse en la \autoref{fig:api-umbrella-api-key-request}. Completando los datos solicitados obtendremos nuestra clave de acceso para que nuestras peticiones sean autorizadas, en nuestro caso obtuvimos la clave \texttt{6dn6iL7xTuR1bvSWdRccpP7DCFp5X2OnhdYZzkrI}. Utilizando esta clave y la \gls{acro:url} definida anteriormente, podemos realizar las siguientes peticiones para probar el correcto funcionamiento del producto:
 
-\bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/api-umbrella/01-pruebas.sh}
+\begin{listing}[H]
+  \bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/api-umbrella/01-pruebas.sh}
+  \caption{Prueba de uso de API Umbrella}
+  \label{soa:tecnologias:api-umbrella:bash-pruebas}
+\end{listing}
 
 Con estos comandos pudimos comprobar varias situaciones:
 
@@ -77,7 +85,7 @@ Luego de realizar algunas peticiones, podemos utilizar la potente herramienta de
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/api-umbrella/analytics.png}
-  \caption{Interfaz web de análisis del uso de los servicios de API Umbrella.}
+  \caption{Interfaz web de análisis del uso de los servicios de API Umbrella}
   \label{fig:api-umbrella-analytics}
 \end{figure}
 

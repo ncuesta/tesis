@@ -78,7 +78,11 @@ Este tipo de solución fue relativamente fácil de implementar dada la homogenei
 
 Las clases de referencia consistían en una interfaz común de acceso a la información que éstas contenían y los datos propiamente dichos escritos en el código. A modo ilustrativo, presentamos aquí un extracto de la clase que contenía los tipos de documento, y un ejemplo de uso de la misma:
 
-\phpfile{src/01-capitulo-1/code/document_type.php}
+\begin{listing}[H]
+  \phpfile{src/01-capitulo-1/code/document_type.php}
+  \caption{Ejemplo de clase PHP de referencia de la etapa 1 de la nube de servicios}
+  \label{nube:ejemplo-php-etapa-1}
+\end{listing}
 
 Si bien en principio este acercamiento al problema es altamente beneficioso en comparación a la situación que intenta mejorar, está claramente lejos de ser una solución óptima. En cierto modo, este nuevo enfoque fue el pilar fundamental para la evolución hacia soluciones mejores y más complejas.
 
@@ -158,7 +162,7 @@ Supongamos el siguiente escenario: un alumno de la UNLP accede al sistema web de
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/images/01-capitulo-1/ejemplo-rest-becas.jpg}
-  \caption{Interacciones involucradas.}
+  \caption{Interacciones involucradas}
   \label{fig:ejemplo-rest-becas}
 \end{figure}
 

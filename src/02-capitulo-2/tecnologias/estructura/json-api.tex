@@ -71,4 +71,36 @@ Y la siguiente para obtener una persona en particular:
   \label{soa:tecnologias:json-api:obtener-recurso}
 \end{listing}
 
-Las respuestas \textit{exitosas} a estas peticiones deben devolver un código de estado \gls{proto:http} \texttt{200 OK} junto con el recurso (o un elemento nulo, en caso de no existir el recurso identificado) o la colección de recursos (o una colección vacía, en caso de no poseer elementos).
+Las respuestas exitosas a estas peticiones deben devolver un código de estado \gls{proto:http} \texttt{200 OK} junto con el recurso (o un elemento nulo, en caso de no existir el recurso identificado y estar siendo solicitado a través de una relación) o la colección de recursos (o una colección vacía, en caso de no poseer elementos). En el caso de las peticiones para obtener un único recurso inexistente que no sean realizadas a través de la \gls{acro:url} de una relación, el servidor deberá responder con un código de estado \gls{proto:http} \texttt{404 Not Found}.
+
+El documento JSON API expuesto en el bloque de código \autoref{soa:tecnologias:json-api:recurso} es un ejemplo del cuerpo de una respuesta exitosa que debiera responder con el siguiente encabezado \gls{proto:http}:
+
+\begin{listing}[H]
+  \httpfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/respuesta-200-ok.http}
+  \caption{Encabezado HTTP de respuesta exitosa JSON API}
+  \label{soa:tecnologias:json-api:respuesta-200-ok}
+\end{listing}
+
+Similarmente, el extracto presentado en el bloque de código \autoref{soa:tecnologias:json-api:respuesta-200-obtener-coleccion} representa una respuesta exitosa a una petición sobre la colección de tipos de documento.
+
+\begin{listing}
+  \httpfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/respuesta-200-obtener-coleccion.http}
+  \caption{Respuesta exitosa a petición de una colección de recursos en JSON API}
+  \label{soa:tecnologias:json-api:respuesta-200-obtener-coleccion}
+\end{listing}
+
+Si en cambio la petición fuese exitosa pero su respuesta no contuviese elementos, las respuestas serían las presentadas en los bloques de código \autoref{soa:tecnologias:json-api:respuesta-200-recurso-nulo} (para un recurso singular) y \autoref{soa:tecnologias:json-api:respuesta-200-coleccion-vacia} para una colección.
+
+\begin{listing}
+  \httpfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/respuesta-200-recurso-nulo.http}
+  \caption{Respuesta JSON API para una petición exitosa a un recurso no encontrado}
+  \label{soa:tecnologias:json-api:respuesta-200-recurso-nulo}
+\end{listing}
+
+\begin{listing}
+  \httpfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/respuesta-200-coleccion-vacia.http}
+  \caption{Respuesta JSON API para una petición exitosa a una colección de recursos vacía}
+  \label{soa:tecnologias:json-api:respuesta-200-coleccion-vacia}
+\end{listing}
+
+En los ejemplos anteriores se demuestra el uso del valor nulo (\texttt{null}) y la colección vacía (\texttt{[]}) para denotar la respuesta a una petición exitosa pero que no arroja coincidencias.

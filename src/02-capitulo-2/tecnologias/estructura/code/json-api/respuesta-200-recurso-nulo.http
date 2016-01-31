@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "/document_types/0"
+  },
+  "data": null
+}

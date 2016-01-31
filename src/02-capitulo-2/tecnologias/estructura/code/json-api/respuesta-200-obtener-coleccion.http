@@ -1,0 +1,26 @@
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "/document_types"
+  },
+  "data": [{
+    "type": "document_types",
+    "id": "0",
+    "attributes": {
+      "abbreviation": "DNI",
+      "code": 0,
+      "name": "Documento Nacional de Identidad"
+    }
+  },
+  {
+    "type": "document_types",
+    "id": "1",
+    "attributes": {
+      "abbreviation": "DNT",
+      "code": 1,
+      "name": "DNI Temporario"
+    }
+  }]
+}

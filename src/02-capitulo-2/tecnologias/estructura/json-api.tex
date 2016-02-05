@@ -43,7 +43,7 @@ La especificación, con miras a hacer un uso más eficiente de los recursos, def
 \jsonfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/recurso.json}
 \captionof{listing}{Documento JSON API representando un recurso\label{soa:tecnologias:json-api:recurso}}
 
-\subparagraph{Obtención de la información}
+\subparagraph{Obtención de recursos}
 
 Las peticiones de acceso de lectura a la información deben ser realizadas utilizando el método \gls{proto:http} \texttt{GET} y utilizando alguna de las \glspl{acro:url} provistas en los documentos JSON API como vínculos \texttt{self} o \texttt{related}. Por ejemplo, las peticiones presentadas a continuación son válidas para obtener información a partir del documento JSON API presentado anteriormente.
 
@@ -104,3 +104,15 @@ Si en cambio la petición fuese exitosa pero su respuesta no contuviese elemento
 \end{listing}
 
 En los ejemplos anteriores se demuestra el uso del valor nulo (\texttt{null}) y la colección vacía (\texttt{[]}) para denotar la respuesta a una petición exitosa pero que no arroja coincidencias.
+
+\subparagraph{Obtención de relaciones}
+
+Como se mencionó anteriormente, las relaciones pueden tener un vínculo a sí mismas (\texttt{self}) que permita manipular la relación en sí y no a los recursos que ésta vincula. Esa \gls{acro:url} consultada con el método \gls{proto:http} \texttt{GET} nos permite consultar la información asociada a esa relación, obteniendo como dato principal el recurso o los recursos involucrados en ella en forma de identificadores de recursos (objetos \gls{lang:json} con las propiedades \texttt{id} y \texttt{type} únicamente).
+
+El servidor responderá con un código de estado \gls{proto:http} \texttt{200 OK} en caso de tratarse de una consulta exitosa, y con un \texttt{404 Not Found} si se tratase de una petición a una relación sobre un recurso principal inexistente.
+
+\begin{listing}
+  \httpfile{src/02-capitulo-2/tecnologias/estructura/code/json-api/respuesta-200-obtener-relacion.http}
+  \caption{Respuesta JSON API para una petición exitosa a una relación}
+  \label{soa:tecnologias:json-api:respuesta-200-obtener-relacion}
+\end{listing}

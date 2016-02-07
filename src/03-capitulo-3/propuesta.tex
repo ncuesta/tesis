@@ -1,7 +1,7 @@
 \subsection{Propuesta de diseño}
 \label{propuesta}
 
-\textit{Deberíamos incluir el gráfico que utiliza los elementos de REST para definir la arquitectura. Justificar por punto del objetivo el diseño propuesto.}\\
+\textit{Deberíamos incluir el gráfico que utiliza los elementos de REST para definir la arquitectura. Justificar por punto del objetivo el diseño propuesto.}
 
 \todo{Se puede agregar algo referente al patrón Microservices Architecture Pattern http://www.oreilly.com/programming/free/files/software-architecture-patterns.pdf}
 
@@ -9,32 +9,39 @@
 % se puede sacar algo referente al opensource
 % otro que puede servir Migrating to the Cloud?
 
-Por lo expuesto anteriormente, se propone una arquitectura más desacoplada a la planteada con el \textit{Integrador}, permitiendo de esta manera minimizar el costo del mantenimiento, desarrollo y simplificando el deployment en entornos de producción.  Una solución basada en estándares que permita integrar sistemas heterogéneos, aceptando el hecho de que la mayoría de los sistemas legados que se encuentran en producción, se mantendrán y logrando de esta manera, que la infraestructura subyasente facilite la incorporación de cambios que puedan surgir como necesidades de la organización.
+Por lo expuesto anteriormente, se propone una arquitectura más desacoplada a la planteada con el Integrador, permitiendo de esta manera minimizar el costo del mantenimiento, desarrollo y simplificando su instalación (\eng{deployment}) en entornos de producción. Una solución basada en estándares que permita integrar sistemas heterogéneos, aceptando el hecho de que la mayoría de los sistemas legados que se encuentran en producción, se mantendrán y logrando de esta manera, que la infraestructura subyacente facilite la incorporación de cambios que puedan surgir como necesidades del \cespi y la \unlp.
 
-El modelo de servicios facilita el acceso y consumo de la información a traves de la red.  Dado que los servicios son independientes y autónomos, pueden combinarse tantas veces como sean necesarias de manera sencilla, generando nuevas aplicaciones que respondan a las necesidades cambiantes de la organización.  Por lo tanto, estrategia de orientación a servicios permite la creación de servicios y aplicaciones compuestas que pueden existir con independencia de la tecnologías subyacentes\cite{microsoft2006}.
+El modelo de servicios facilita el acceso y consumo de la información a través de la red. Dado que los servicios son independientes y autónomos, pueden combinarse tantas veces como sea necesario de manera sencilla, generando nuevas aplicaciones que respondan a las necesidades en constante evolución de nuestra Casa de estudios. Esta posible agregación y combinación de servicios para resolver situaciones presentes y futuras convierten en una opción altamente beneficiosa el uso de una estrategia orientada a servicios, con el fin de crear de servicios y aplicaciones compuestas que pueden existir con independencia de las tecnologías subyacentes\cite{microsoft2006}.
 
-El resultado final es una organización que se adapta fácilmente a los cambios, creando y reutilizando servicios y aplicaciones...
+El resultado final es una nube, con conjunto de servicios y una creciente flota de aplicaciones dependientes de éstos, que se adapta fácilmente a los cambios.
 
-\todo{falta enganche con las subsecciones}
+En este capítulo profundizaremos la aplicación concreta de los conceptos vistos hasta aquí en el presente trabajo, explicando a través de los puntos mencionados en la \autoref{objetivo}.
 
-\subsubsection{Redundancia y Escalabilidad}
 
-\todo{antes hablar o introducir el término o patro microservices arquitecture - \url{http://microservices.io/patterns/microservices.html}}
+\subsubsection{Redundancia y escalabilidad}
 
-Cuando hablamos de escalabilidad, podemos basarnos en el modelo de escalabilidad llamado \eng{scale cube}.
-En este modelo, escalar aplicaciones corriendo clones detrás de un balanceador, es conocido como \eng{X-axis scaling}.  Las otras dos formas de escalar son: \eng{Y-axis scaling} y \eng{Z-axis scaling}.
-En la arquitectura de microservicios, se aplica fundamentalemnte \eng{Y-axis scaling}, descomponiendo la aplicación en un conjunto de servicios colaborativos.  Cada servicio implementa un conjunto de funciones estrictamente, relacionadas.\cite{website:akfpartners-scale-cube}.
+\todo{antes hablar o introducir el término o patrón microservices arquitecture - \url{http://microservices.io/patterns/microservices.html}}
 
-\begin{figure}
+Cuando hablamos de escalabilidad, podemos basarnos en el modelo llamado \eng{scale cube}\cite{website:akfpartners-scale-cube}. Este modelo clasifica las distintas formas de escalar las aplicaciones en 3 sentidos, tomando como analogía las 3 dimensiones de un cubo:
+
+\begin{itemize}
+  \item \textbf{Escalar sobre el eje \textit{X}:} (\eng{X-axis scaling}, en inglés) Esta es la técnica más comúnmente utilizada para incrementar la disponibilidad de las aplicaciones. Consiste en el uso de instancias replicadas de la aplicación (idénticas a la original), ubicadas detrás de un balanceador de carga que reparte entre ellas el trabajo.
+  \item \textbf{Escalar sobre el eje \textit{Y}:} (\eng{Y-axis scaling}, en inglés) Esta es una técnica que se encuentra en auge con el \textit{moméntum} que están teniendo los microservicios. Se basa en la descomposición funcional de la aplicación en un conjunto de servicios colaborativos, donde cada uno implementa un pequeño conjunto de funciones. En este caso, la disponibilidad se incrementa al separar en componentes más pequeñas la unidad funcional mayor que es la aplicación, dividiendo el trabajo independientemente entre ellas.
+  \item \textbf{Escalar sobre el eje \textit{Z}:} (\eng{Z-axis scaling}, en inglés) En este enfoque se toma como base la replicación de instancias presente en \eng{X-axis scaling} y a esto se agrega una capa superior de abstracción que separa el conjunto de datos que cada instancia (o conjunto de éstas) atenderá, acorde a algún criterio lógico como puede ser el cliente que realice la petición (privilegiando unos clientes sobre otros).
+\end{itemize}
+
+\begin{figure}[H]
   \includegraphics[width=\linewidth]{src/images/03-capitulo-3/scale_cube.jpg}
-  \caption{Tres dimensiones para escalar}
+  \caption{El modelo de escalabilidad \eng{scale cube}}
   \label{fig:scale-cube}
 \end{figure}
 
 La arquitectura de servicios debe ser replicable y escalable.  Para lograr esto, cada \gls{acro:api} correrá en una instancia virtual, la misma se replicará tantas veces como sean necesarias (\eng{X-axis scaling}).  El acceso a esta arquitectura replicada, será a través de un balanceador de carga, que servirá tanto, para balancear la carga como failover, dando continuidad a los servicios en caso de que alguna de las instancias replicadas fallen.
 
 La característica fundamental de un balanceador de carga, es ser capaz de distribuir las peticiones entrantes, a un grupo de servidores (backends) de acuerdo a un scheduler.  Dependiendo de la complejidad del scheduler, la selección del backend podría ser aleatoria o round robin.  Algoritmos de balanceo más sofisticados, tienen en cuenta otros factores como por ej. carga del backend, tiempo de respuesta, número de conexiones activas, ubicación geográfica, etc.
+
 En su funcionamiento básico, el balanceador redirige las peticiones a alguno de los backends, que luego contestan al balanceador, para que finalmente, sea el balanceador el que entregue la respuesta al cliente, sin que este último sepa que fue redirigido a otro servidor.  De esta manera se evitan los accesos directos desde los clientes a los servidores backends.
+
 Como se mencionó anteriormente, el balanceador puede ser usado como failover, permitiendo la continuidad del servicio, luego del fallo de uno o más backends.  Los backends son monitoreados continuamente por el balanceador, cuando uno de estos falla, el balanceador deja de enviar tráfico al backend caído.  Luego cuando el backend vuelva a estar online, el balanceador podrá enviarle tráfico nuevamente.
 
 Delante del balanceador, se implementará una caché compartida utilizando \gls{db:varnish}, la misma evitará los accesos al balanceador, que puedan impactar de forma directa en alguna de las instancias replicadas de la \textit{API de Servicios} y \textit{API de Referencias}.

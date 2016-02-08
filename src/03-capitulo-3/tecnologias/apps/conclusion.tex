@@ -4,9 +4,9 @@ Al analizar estas dos opciones decidimos realizar una pequeña prueba de concept
 
 \subparagraph{En términos de \eng{performance}}
 
-Desde una visión estrictamente numérica, ...
+Desde una visión estrictamente numérica ambas alternativas se comportaron de manera similar, obteniendo tiempos de respuesta promedio por debajo de los \textbf{\texttt{150} milisegundos} en general. Al habilitar la cache local y las cabeceras de caching en el caso de la implementada con \nameref{soa:tecnologias:rails}, las respuestas aprovechando esos niveles de cache bajaron al orden de los \textbf{\texttt{10} ó \texttt{20} milisegundos}, lo cual fue un tremendo salto de velocidad de respuesta.
 
-\todo{Completar con datos empíricos de los tiempos de respuesta de la api con Rails y con Sinatra}
+Si bien nos fue de gran utilidad implementar estas pruebas de concepto, desde el punto de vista de la \eng{performance} estrictamente no existe una diferencia determinante que indique claramente qué herramienta utilizar. Es por esto que debemos considerar otro enfoque para la comparación: el de la productividad del desarrollador.
 
 \subparagraph{Desde el punto de vista del desarrollador}
 

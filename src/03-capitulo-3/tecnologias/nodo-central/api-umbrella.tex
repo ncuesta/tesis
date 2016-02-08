@@ -10,7 +10,7 @@ Este producto está publicado bajo licencia MIT\footnote{\url{https://github.com
 \subparagraph{Arquitectura interna}
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/api-umbrella/api-umbrella-arq.png}
+  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/api-umbrella/api-umbrella-arq.png}
   \caption{Arquitectura interna de API Umbrella}
   \label{fig:arquitectura-interna-api-umbrella}
 \end{figure}
@@ -33,7 +33,7 @@ En particular, el \eng{Gatekeeper} merece un gráfico propio describiendo su flu
 \end{itemize}
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/api-umbrella/api-umbrella-gatekeeper.png}
+  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/api-umbrella/api-umbrella-gatekeeper.png}
   \caption{Lógica de decisión del \eng{Gatekeeper} de API Umbrella}
   \label{fig:api-umbrella-gatekeeper}
 \end{figure}
@@ -43,7 +43,7 @@ En particular, el \eng{Gatekeeper} merece un gráfico propio describiendo su flu
 Al igual que en el caso de \nameref{soa:tecnologias:kong}, y ya que NREL provee una imagen oficial para ejecutar API Umbrella, utilizamos Docker para realizar una prueba de concepto del producto. A continuación detallamos los pasos realizados.
 
 \begin{listing}[H]
-  \bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/api-umbrella/00-preparacion.sh}
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/api-umbrella/00-preparacion.sh}
   \caption{Preparación y arranque de API Umbrella}
   \label{soa:tecnologias:api-umbrella:bash-preparacion}
 \end{listing}
@@ -53,13 +53,13 @@ Una vez ejecutados los comandos anteriores, tendremos una instancia de API Umbre
 En el archivo de configuración debemos mínimamente definir las direcciones de correo de los usuarios que podrán acceder a la interfaz web de administración que API Umbrella provee en \url{https://localhost/admin}. Una vez identificados con alguna de esas cuentas de usuario, podremos proceder a utilizar la interfaz web para agregar una \gls{acro:api} para que API Umbrella haga de proxy de la misma. Siguiendo el ejemplo de la documentación del producto, agregamos la \gls{acro:api} de geocodificación de Google, indicando el \eng{\gls{acro:api} backend} con la dirección del servicio provisto por Google y el prefijo de las \glspl{acro:url} que nuestra instancia asociará a dicho servicio (utilizamos \texttt{/google/}), como puede observarse en la \autoref{fig:api-umbrella-api-backend}. Luego de dar de alta esta información, publicamos los cambios mediante la interfaz web y así dejamos públicamente disponible el servicio de geocodificación en nuestra instancia de API Umbrella mediante el prefijo de \gls{acro:url} \url{http://localhost/google/}.
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/api-umbrella/api-backend.png}
+  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/api-umbrella/api-backend.png}
   \caption{Interfaz web de carga de un \eng{backend} de servicios de API Umbrella}
   \label{fig:api-umbrella-api-backend}
 \end{figure}
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/api-umbrella/api-key-request.png}
+  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/api-umbrella/api-key-request.png}
   \caption{Interfaz web de solicitud de clave de acceso a los servicios de API Umbrella}
   \label{fig:api-umbrella-api-key-request}
 \end{figure}
@@ -67,7 +67,7 @@ En el archivo de configuración debemos mínimamente definir las direcciones de 
 Para poder utilizar este nuevo \gls{term:endpoint} debemos obtener una clave de acceso (\eng{\gls{acro:api} key}), y para esto API Umbrella provee una interfaz web dedicada que puede observarse en la \autoref{fig:api-umbrella-api-key-request}. Completando los datos solicitados obtendremos nuestra clave de acceso para que nuestras peticiones sean autorizadas, en nuestro caso obtuvimos la clave \texttt{6dn6iL7xTuR1bvSWdRccpP7DCFp5X2OnhdYZzkrI}. Utilizando esta clave y la \gls{acro:url} definida anteriormente, podemos realizar las siguientes peticiones para probar el correcto funcionamiento del producto:
 
 \begin{listing}[H]
-  \bashfile{src/02-capitulo-2/tecnologias/nodo-central/code/api-umbrella/01-pruebas.sh}
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/api-umbrella/01-pruebas.sh}
   \caption{Prueba de uso de API Umbrella}
   \label{soa:tecnologias:api-umbrella:bash-pruebas}
 \end{listing}
@@ -84,7 +84,7 @@ Con estos comandos pudimos comprobar varias situaciones:
 Luego de realizar algunas peticiones, podemos utilizar la potente herramienta de análisis de tráfico y respuestas que provee API Umbrella para tener una idea del uso que nuestra instancia está teniendo, junto con datos como quién, cuándo, cuánto, cómo y desde dónde está usando nuestras \glspl{acro:api}. En la \autoref{fig:api-umbrella-analytics} se puede apreciar, a modo de ejemplo, parte de información que se puede obtener mediante esta herramienta.
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/tecnologias/api-umbrella/analytics.png}
+  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/api-umbrella/analytics.png}
   \caption{Interfaz web de análisis del uso de los servicios de API Umbrella}
   \label{fig:api-umbrella-analytics}
 \end{figure}

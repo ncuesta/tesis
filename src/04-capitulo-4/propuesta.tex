@@ -1,7 +1,14 @@
 \subsection{Propuesta de diseño}
 \label{propuesta}
 
-\textit{Deberíamos incluir el gráfico que utiliza los elementos de REST para definir la arquitectura. Justificar por punto del objetivo el diseño propuesto.}
+\todo{Relacionar REST con nuestra propuesta. Utilizar como referencia el capítulo 6 de Fielding: \url{https://www.ics.uci.edu/~fielding/pubs/dissertation/evaluation.htm} y tomar la \autoref{fig:ejemplo-rest-nueva-arquitectura}}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{src/images/04-capitulo-4/nueva-arq-segun-rest.jpg}
+  \caption{Visión \gls{acro:rest} de la nueva arquitectura propuesta}
+  \label{fig:ejemplo-rest-nueva-arquitectura}
+\end{figure}
+
 
 \todo{Se puede agregar algo referente al patrón Microservices Architecture Pattern http://www.oreilly.com/programming/free/files/software-architecture-patterns.pdf}
 
@@ -31,7 +38,7 @@ Cuando hablamos de escalabilidad, podemos basarnos en el modelo llamado \eng{sca
 \end{itemize}
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/scale_cube.jpg}
+  \includegraphics[width=\linewidth]{src/images/04-capitulo-4/scale_cube.jpg}
   \caption{El modelo de escalabilidad \eng{scale cube}}
   \label{fig:scale-cube}
 \end{figure}
@@ -86,7 +93,7 @@ Los sistemas distribuidos potencialmente tienen mas fallos que los sistemas mono
 Un fallo en cascada ocurre cuando un error en una capa, provoca un fallo en la capa llamada.\cite[p.~65]{nygard2007}  Mike Nygard describe en su libro ``Release It!''\cite{nygard2007}, varios patrones tolerantes a fallos, de los cuales el mas popular es \eng{circuit breaker}.
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/circuit_breaker.png}
+  \includegraphics[width=\linewidth]{src/images/04-capitulo-4/circuit_breaker.png}
   \caption{Circuit Breaker}
   \label{fig:circuit_breaker}
 \end{figure}

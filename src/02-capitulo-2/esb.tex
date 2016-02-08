@@ -49,12 +49,13 @@ Aunque el problema de interoperabilidad se resolvió, era complicado su mantenim
 % página 50 SOA in Practice - 5.3.1 Point-to-Point Connections Versus Mediation
 % agregar figua con topología de interconexión entre aplicaciones, topología en malla
 
-En una arquitectura en la que se implemente un \gls{acro:esb}, las aplicaciones se comunicarán a través del bus, que actúa como \eng{message broker} entre las aplicaciones. De esta manera se reduce el número de conexión punto-a-punto que se necesitan para permitir que se comunique una aplicación con otra.  Al reducir el número de puntos de contacto entre las diferentes aplicaciones, se simplifica el proceso de mantenimiento y actulización de un sistema.
+En una arquitectura en la que se implemente un \gls{acro:esb}, las aplicaciones se comunicarán a través del bus, que actúa como \eng{message broker} entre las aplicaciones. De esta manera se reduce el número de conexiones punto-a-punto que se necesitan para permitir que se comunique una aplicación con otra.  Al reducir el número de puntos de contacto entre las diferentes aplicaciones, se simplifica el proceso de mantenimiento y actulización de un sistema.
 
 % ver si es necesario desarrollar previamente el tema
 
 Interceptors
-La otra forma donde un \gls{acro:esb} basado en un protocolo de punto a punto puede soportar llamadas de servicio indirectas, es proporcionando los llamados ``interceptors'' o ``proxies''. Un enfoque sencillo, es reemplazar el \eng{endpoint} físico que ofrece el servicio, con \eng{hardware} o \eng{software} que sirve como balanceador de carga. Los consumidores siguen utilizando un \eng{endpoint} oficial, donde se delega la verdadera tarea, cuando los mensajes llegan, el balanceador de carga los envía a los diferentes proveedores de servicios que conoce.\cite[p.~52]{josuttis2007}.
+
+La otra forma donde un \gls{acro:esb} basado en un protocolo de punto a punto puede soportar llamadas de servicio indirectas, es proporcionando los llamados ``interceptors'' o ``proxies''. Un enfoque sencillo, es reemplazar el \eng{endpoint} físico que ofrece el servicio, con \eng{hardware} o \eng{software} que sirve como balanceador de carga. Los consumidores siguen utilizando un \eng{endpoint} oficial, donde se delega la verdadera tarea.  Cuando los mensajes llegan, el balanceador de carga los distribuye a los diferentes proveedores de servicios.\cite[p.~52]{josuttis2007}
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/esb/esb-interceptors-load-balancer.png}

@@ -40,7 +40,7 @@ En la década pasada nuevos estándares como \gls{ws:soap} aparecieron en escena
 \end{figure}
 
 
-\paragraph{El ESB como mediador}
+\subsubsection{El ESB como mediador}
 
 % página 50 SOA in Practice - 5.3.1 Point-to-Point Connections Versus Mediation
 % agregar figua con topología de interconexión entre aplicaciones, topología en malla
@@ -48,7 +48,7 @@ En la década pasada nuevos estándares como \gls{ws:soap} aparecieron en escena
 En una arquitectura en la que se implemente un \gls{acro:esb}, las aplicaciones se comunican a través de este bus central, que actúa como \eng{message broker} entre ellas. Este esquema arquitectónico se llama ``Mediación'' (\eng{Mediation}). De esta manera se reduce el número de conexiones punto a punto que se necesitan para permitir las comunicaciones entre aplicaciones. Al reducir el número de puntos de contacto entre las diferentes aplicaciones, se simplifica el proceso de mantenimiento y actulización de un sistema, decrementando el grado de dependencia directa que pueda existir entre cada instancia.
 
 
-\paragraph{El ESB como interceptor}
+\subsubsection{El ESB como interceptor}
 
 La otra forma donde un \gls{acro:esb} basado en un protocolo de punto a punto puede proporcionar indirección a las llamadas de servicio, es proporcionando los llamados \eng{interceptors} o \eng{proxies}. Estos elementos, que forman parte del \gls{acro:esb}, se ubican por delante de los servicios existentes y delegan en ellos las peticiones, pero sólo luego de procesarlas ellos y decidir la mejor forma de tratarlas. Un enfoque sencillo es reemplazar el \eng{endpoint} físico que ofrece un servicio, con \eng{hardware} o \eng{software} que sirva como balanceador de carga. Los consumidores siguen utilizando un \eng{endpoint} oficial, donde se delega la verdadera tarea, solo que cuando los mensajes llegan, el interceptor los distribuye a los diferentes proveedores de servicios\cite[p.~52]{josuttis2007}.
 

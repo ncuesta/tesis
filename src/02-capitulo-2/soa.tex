@@ -40,6 +40,28 @@ En el pasado se han propuesto una gran cantidad de métodos para resolver el pro
 
 \todo{Tratar los 9 principios en SOA: \url{http://simplicable.com/new/the-9-principles-of-soa-design}}
 
+\begin{itemize}
+  \item Contratos de servicio estandarizados: la interfaz de un servicio (su contrato con el cliente) tiene que estar explícitamente declarado. Los campos  que forman parte de este interfaz deben estar correctamente tipados y ser conocidos. Con la ayuda de los estándares como \gls{ws:wsdl} y \gls{lang:xsd}, el contrato del servicio es autodescriptivo.
+
+  \item Servicios con bajo acoplamiento: hace referencia al nivel de dependencia entre servicios, entre el proveedor y el consumidor. Cuanto menos acoplamiento, mayor independencia para el diseño del servicio y su posterior evolución
+
+  \item Abstracción: este principio pone el enfásis en ocultar los detalles internos del servicio, debe ser una caja negra, únicamente definido por su contrato, que a su vez es el mínimo acoplamiento posible con el consumidor del mismo
+
+  \item Reusabilidad: la arquitectura \gls{acro:soa} no busca la sustitución de las lógicas de negocio actuales sino que proporciona una forma de reaprovechar todos estos activos encapsulandolos en servicios para que a su vez puedan ser reutilizados por otros servicios.
+
+  \item Autonomia: Este principio indica que el servicio tiene un alto grado de control sobre su entorno de ejecución y sobre la lógica que encapsula
+
+  \item Sin estado: el tratamiento de la información del estado afectaría gravemente a la escalabilidad del servicio, poniendo en riesgo su disponibilidad. Idealmente, todos los datos que necesita el servicio para trabajar provienen de los parámetros de entrada.
+
+  \item Capacidad de descubrimiento: al servicio se lo dota de meta datos, gracias a los cuales puede ser descubierto de manera efectiva. Estos meta datos pueden ser interpretados de manera automática pudiendo ser reutilizados. Para ello es necesario disponer de un mecanismo de descubrimiento (llamado registro de servicios) como por ejemplo el \gls{acro:uddi}).
+
+  \item Composición: define la capacidad de un servicio (servicio básico) para formar parte de un servicio más complejo. A medida de que la arquitectura \gls{acro:soa} se consolide, los nuevos servicios (de más alto nivel) podrán implementarse a partir de los servicios de más bajo nivel ya existentes. La implementación de nuevos servicios se reducirá al mínimo y los nuevos se crearán a partir de otros ya pre existentes.
+
+  \item Interoperabilidad: Cada uno de los principios anteriores contribuye a la interoperabilidad de alguna manera. En las arquitecturas \gls{acro:soa}, el problema de la falta de esta cualidad es uno de los más importantes. Hay que tener en cuenta que muchos de los servicios que intervienen se implementan con una tecnología diferente, incluso con un sistema operativo distinto.
+  Por ejemplo, se puede tener un servicio realizado en Java ejecutándose sobre Linux que invoca a otro implementado en .net corriendo en una máquina con Windows. Históricamente las especificaciones que dan forma a los servicios web (como \gls{ws:wsdl}, \gls{acro:soap}, etc.) eran tan ambiguos que las dos partes estaban prácticamente condenadas a no entenderse. Iniciativas como el Basic Profile 1.0 han contribuido a eliminar estas ambiguedades, simplificando estos estándares, logrando que el consumidor y el proveedor del servicio puedan comunicarse entre sí.
+  \todo{ver esto ultimo, es la primera vez q lo veo (Basic Profile)}
+
+\end{itemize}
 
 %% Se podría agregar en el caso que se necesiten mas definiciones:
 % SOA is not a concrete architecture: it is something that leads to a concrete architecture.

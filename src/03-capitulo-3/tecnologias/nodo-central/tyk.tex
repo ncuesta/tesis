@@ -1,4 +1,46 @@
 \paragraph{Tyk}
 \label{soa:tecnologias:tyk}
 
+\subparagraph{Licencia}
+
+
+\subparagraph{Extensiones disponibles (\eng{plugins})}
+
+\begin{itemize}
+  \item RESTful API - Full programatic access to the internals makes it easy to manage your API users, keys and Api Configuration from within your systems.
+  \item Multiple access protocols - Tyk soporta múltiples métodos de acceso a la \gls{acro:api}: \eng{Token-based}, \eng{HMAC}, \eng{Basic Auth}, \eng{OAuth2}, \eng{JSON Web Token} y \eng{Keyless}.
+  \item Rate Limiting - Easily rate limit your API users, rate limiting is granular and can be applied on a per-key basis
+  \item Quotas - Enforce usage quotas on users to manage capacity or charge for tiered access
+  \item Granular Access Control - Grant API access on a version by version basis, grant keys access to multiple APIs or just a single version
+  \item Policies - Create policies to apply to quotas, rate limits and access rights to block sets of keys
+  \item Path by path permissions - For highly tiered systems, grant access to only specific endpoints and methods
+  \item Key Expiry - permite controlar cuando expira una \eng{Key}.
+  \item API Versioning - API Versions can be easily set and deprecated at a specific time and date
+  \item Blacklist/Whitelist/Ignored endpoint access - Enforce strict security models on a version-by-version basis to your access points
+  \item Analyitcs logging - Registro detallado de los accesos a las \glspl{acro:api}.
+  \item Zero downtime restarts - Las configuraciones de Tyk pueden realizarse dinámicamente, reiniciar los servicios, sin que esto afecte los requerimientos activos.
+  \item Web hooks - fácilmente se pueden integrar notificaciones y eventos??? que permitirán mejorar el monitoreo.
+  \item IP White-listing - Acceso autorizado solo a las direcciones IP indicadas
+  \item Size Limits - Permite limitar el tamañan de las peticiones que llegan a la \gls{acro:api}, evitando que los sevicios sean saturados por peticiones
+  \item Batch requests - Enable batch request processing for your API clients to minimise calls they need to make to your API, both synchronous and asynchronous supported.
+  \item Health checks - Easily query your Tyk nodes to see how your APIs are performing
+  \item Mock APIs - Create mock APIs easily using extended path management
+  \item API Blueprint support - Import API Blueprints (JSON format) from Apiary to quickly get started
+  \item Swagger support - Import swagger files to get started quickly from your existing documentation
+  \item Scriptable middleware - Add your own custom middleware components before and after the Tyk middleware stack to pre- and post-process requests and integrate with your stack.
+  \item Scriptable event handlers - Write you own event handlers in JavaScript to script actions against key API events
+  \item Request and Response transformations - Use simple templates to transform body data and add or remove headers on-the-fly on inbound and outbound requests from your API
+  \item Caching - Cache API responses by endpoint or globally with a simple caching layer, increasing the responsiveness of your API and lowering the load on your servers
+  \item Portal - Tyk offers a highly flexible portal solution for you to on-board developers (requires dashboard)
+  \item API Documentation The new Tyk Portal supports both API Blueprint and Swagger documentation generation that is fully templateable.
+  \item Active Monitoring Actively monitor tokens an organisations and set webhooks when they reach key quota milestones.
+  \item Virtual Endpoints Like AWS Lambda functions, you can run JavaScript snippets on endpoints to handle complex service interactions such as request batching.
+  \item Focus on microservices Use circuit breaker patterns, hard timeouts, and round-robin load balancing to get the most out of your services
+  \item Service Discovery Support Using Etcd or Eureka? If your service discovery platform exposes a rest endpoint for your microservices, Tyk can consume it and dynamically reconfigure itself
+  \item Uptime Awareness Tyk can actively poll your API endpoints and notify you when there is downtime using our built-in events system, webhooks or custom JavaScript scripting.
+  \item Uptime Analytics Want to see how your services are holding up over time? Alongside our detailed API usage analytics, you can use our dashboard to view the uptime of your various endpoints and services over time, with detailed error breakdowns by API and version.
+\end{itemize}
+
+\subparagraph{Instalación y prueba}
+
 Ver \url{https://tyk.io}

@@ -2,3 +2,9 @@
 \label{conclusion}
 
 \todo{Escribir la conclusión del trabajo a partir de lo analizado y desarrollado}
+
+Al hacer una prueba de concepto, hemos obtenido una noción palpable del costo de llevar estos cambios a nuestras aplicaciones, lo cual da un alto valor agregado a esta experiencia cuando llegue el momento de estimar el tiempo y los recursos necesarios para llevar adelante este cambio en los desarrollos existentes y futuros de nuestro equipo.
+
+Con la implementación de una porción de la nueva arquitectura también pudimos experimentar los beneficios del uso del patrón de microservicios. Los puntos más fuertes derivados del uso de este patrón fueron la agilidad obtenida para el desarrollo, la facilidad para realizar despliegues independientes de los servicios en el ambiente de producción y, por sobre todas las cosas, el alto grado de desacoplamiento que acaban por tener los servicios entre sí y con respecto a las aplicaciones que los utilizan. Al separar los servicios por alcance, no presenta dificultades respetar el principio de una sola responsabilidad; y al separar las aplicaciones de los servicios, centralizando la lógica de negocios en estos últimos, se simplifican las aplicaciones clientes y se eliminan los posibles puntos de duplicación de código que pudieran existir en caso de tener la misma lógica de negocios presente en más de una aplicación\footnote{Este tipo de situaciones no nos es ajena, ya que en la actualidad tenemos diferentes aplicaciones que tienen en común parte de su lógica de negocios y por eso acaban duplicando porciones de código, con el impacto negativo que esa repetición conlleva.}.
+
+La inclusión de \nameref{soa:tecnologias:tyk} como nodo central fue otro factor ...

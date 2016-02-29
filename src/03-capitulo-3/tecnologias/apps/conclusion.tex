@@ -1,15 +1,15 @@
-\paragraph{Conclusión}
+\subsubsection{Conclusión}
 \label{soa:tecnologias:apps:conclusion}
 
 Al analizar estas dos opciones decidimos realizar una pequeña prueba de concepto implementando una parte de la \gls{acro:api} de datos de referencia en \nameref{soa:tecnologias:rails} y en \nameref{soa:tecnologias:sinatra}. Esto no sólo nos permitió comparar el rendimiento de ambas versiones en términos de sus tiempos de respuesta, si no que además pudimos contrastar el esfuerzo necesario para desarrollar la misma solución en los dos contextos.
 
-\subparagraph{En términos de \eng{performance}}
+\paragraph{En términos de \eng{performance}}
 
 Desde una visión estrictamente numérica ambas alternativas se comportaron de manera similar, obteniendo tiempos de respuesta promedio por debajo de los \textbf{\texttt{150} milisegundos} en general. Al habilitar la cache local y las cabeceras de caching en el caso de la implementada con \nameref{soa:tecnologias:rails}, las respuestas aprovechando esos niveles de cache bajaron al orden de los \textbf{\texttt{10} ó \texttt{20} milisegundos}, lo cual fue un tremendo salto de velocidad de respuesta.
 
 Si bien nos fue de gran utilidad implementar estas pruebas de concepto, desde el punto de vista de la \eng{performance} estrictamente no existe una diferencia determinante que indique claramente qué herramienta utilizar. Es por esto que debemos considerar otro enfoque para la comparación: el de la productividad del desarrollador.
 
-\subparagraph{Desde el punto de vista del desarrollador}
+\paragraph{Desde el punto de vista del desarrollador}
 
 Además de su rendimiento, otro factor importante a la hora de elegir un framework para el desarrollo es tener una noción de en qué medida agiliza y facilita la implementación de la aplicación propiamente dicha. Algunos casos en que la herramienta podría impactar negativamente en el desarrollo son:
 

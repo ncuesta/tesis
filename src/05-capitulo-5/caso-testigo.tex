@@ -61,7 +61,7 @@ El desarrollo del prototipo funcional implica:
 
   \item Implementar desde cero una nueva versión de la aplicación cliente de registro, respetando los pasos antes descriptos, que consuma toda la información de los servicios de la \cloud. Esta nueva versión difiere en su concepción de la versión actualmente implementada en que no tendrá acceso a la base de datos de usuarios. De hecho, no tendrá acceso a \textit{ninguna} base de datos, ya que realizará todas sus operaciones de manera volátil dependiendo completamente de los servicios de la \cloud para acceder a la capa de persistencia en base de datos.
 
-  \item Desarrollar una \textit{gema} (nombre que reciben las librerías reutilizables en el lenguaje Ruby) que encapsule la lógica de acceso a los servicios, desde la autenticación hasta la consulta y abstracción en objetos de las respuestas de sus \apis, basándose en el estándar elegido para la codificación de la información.
+  \item Desarrollar una \textit{gema} (nombre que reciben las librerías reutilizables en el lenguaje Ruby) que encapsule la lógica de acceso a los servicios, desde la autenticación hasta la consulta y abstracción en objetos de las respuestas de sus \glspl{acro:api}, basándose en el estándar elegido para la codificación de la información.
 \end{itemize}
 
 Hemos elegido este caso testigo porque se compone de una serie de interacciones entre distintos servicios que brindan una noción de la complejidad que pueden tener las operaciones a realizar utilizando la nube de servicios, más allá de las simples consultas de datos de referencia que habitualmente manejamos. El hecho de incorporar diferentes servicios, englobados en distintas áreas de acción, nos permite también mostrar cómo funcionan las instancias de las aplicaciones que proveen esos servicios, cómo interactúan con la aplicación cliente y con los elementos intermediarios de la comunicación (entiéndase \eng{caches} compartidas, balanceadores de carga, \eng{proxies} reversos y la capa de mediación ofrecida por \nameref{soa:tecnologias:kong}).
@@ -69,6 +69,6 @@ Hemos elegido este caso testigo porque se compone de una serie de interacciones 
 En este informe intentaremos no entrar en detalles innecesarios sobre la implementación de la aplicación cliente ni de la capa de lógica del negocio de los servicios, para sí ahondar sobre temas relevantes desde el punto de vista de la comprensión de las entidades participantes en las comunicaciones. De todas formas, se deja disponible el código fuente de los distintos apartados para su referencia en \todo{Agregar link al código fuente de la implementación}.
 
 
-\subsubsection{Desarrollo de un prototipo funcional}
+\subsubsection{Desarrollo del prototipo funcional}
 
 \todo{Documentar el desarrollo}

@@ -66,8 +66,38 @@ El desarrollo del prototipo funcional implica:
 
 Hemos elegido este caso testigo porque se compone de una serie de interacciones entre distintos servicios que brindan una noción de la complejidad que pueden tener las operaciones a realizar utilizando la nube de servicios, más allá de las simples consultas de datos de referencia que habitualmente manejamos. El hecho de incorporar diferentes servicios, englobados en distintas áreas de acción, nos permite también mostrar cómo funcionan las instancias de las aplicaciones que proveen esos servicios, cómo interactúan con la aplicación cliente y con los elementos intermediarios de la comunicación (entiéndase \eng{caches} compartidas, balanceadores de carga, \eng{proxies} reversos y la capa de mediación ofrecida por \nameref{soa:tecnologias:tyk}).
 
-En este informe intentaremos no entrar en detalles innecesarios sobre la implementación de la aplicación cliente ni de la capa de lógica del negocio de los servicios, para sí ahondar sobre temas relevantes desde el punto de vista de la comprensión de las entidades participantes en las comunicaciones. De todas formas, se adjunta al presente informe el código fuente de los distintos apartados para su referencia.
+En este informe intentaremos no entrar en detalles innecesarios sobre la implementación de la aplicación cliente ni de la capa de lógica del negocio de los servicios, para sí ahondar sobre temas relevantes desde el punto de vista de la comprensión de las entidades participantes en las comunicaciones. Para su referencia, se adjunta al presente informe el código fuente de los distintos apartados que hemos implementado en este capítulo.
 
+
+\subsubsection{Arquitectura}
+
+Partiendo de lo propuesto en la \autoref{propuesta}, el primer paso dentro de la implementación del prototipo funcional para este caso testigo es acotar la arquitectura, diseñarla y preparar los nodos en ella involucrados. Para esto, pueden observarse en la \autoref{fig:arquitectura-caso-testigo} los componentes lógicos del prototipo:
+
+\begin{itemize}
+  \item \textbf{Aplicación de registro:} Esta es la implementación de una aplicación cliente de la \cloud. Es la cara visible hacia los usuarios públicos, y si bien en este caso particular hemos decidido implementarla utilizando \gls{fw:rails} por cuestiones prácticas, podría implementarse utilizando otras tecnologías como \eng{frameworks} web JavaScript que se ejecuten meramente del lado del cliente, PHP o Java, por nombrar algunas. De todos los componentes de la arquitectura, este es el único que se encuentra lógicamente por fuera de la \cloud. Esta separación del resto la hacemos evidente porque en este caso se trata de una aplicación desarrollada por nosotros mismos, pero en el futuro bien podría tratarse de una aplicación desarrollada por terceros, pertenecientes o no a la \unlp.
+
+  \item \textbf{API Gateway (ESB):} Este nodo se encarga de ser la capa que aisla los clientes de la \gls{acro:api}, brindando el acceso a los mismos desde un único punto. Como hemos visto con anterioridad, es el encargado de autorizar las peticiones entrantes, chequear que se encuentren dentro de los límites para ellas establecidos, mantener y utilizar una capa de caching intermedio, y finalmente balancear la carga de los backends de servicios con un mecanismo de Round Robin que asigna una petición entrante \textit{no cacheada} a cada backend por vez. Complementariamente a esta tarea, el producto elegido en nuestro análisis para este rol (\nameref{soa:tecnologias:tyk}) provee una interfaz web de gestión para los usuarios internos que administran el acceso a los servicios (en principio, nosotros) con gráficos estadísticos del uso de nuestras \glspl{acro:api} que resulta de gran utilidad.
+
+  \item \textbf{API de referencia:} Esta, como el resto de las \glspl{acro:api} implementadas, provee un conjunto de servicios relacionados a una única incumbencia lógica, siguiendo el principio de una sola responsabilidad\footnote{También conocido como \eng{Single Responsibility Principle} en inglés. Este es uno de los cinco principios SOLID de diseño de software que apuntan a mejorar la calidad y facilidad de mantener de un desarrollo.} e implementando el patrón de microservicios. En el caso de este componente, su incumbencia es brindar los servicios de consulta de datos de referencia acotados a los necesarios para alcance de este caso testigo: tipos de documento y unidades acdémicas.
+
+  \item \textbf{API de personal:} Este nodo se encarga de brindar los servicios relacionados a la información de personal de la \unlp.
+
+  \item \textbf{API de usuarios:}
+
+  \item \textbf{API de notificaciones:}
+
+  \item \textbf{Capa de persistencia:}
+
+  \item \textbf{Cache compartida:}
+\end{itemize}
+
+Para demostrar las posibilidades de escalabilidad de esta arquitectura, hemos replicado los nodos de servicios para correr dos instancias de cada uno, las cuales serán balanceadas de manera transparente por \nameref{soa:tecnologias:tyk}.
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{src/images/05-capitulo-5/arquitectura-caso-testigo.jpg}
+  \caption{Visión lógica de la arquitectura del caso testigo}
+  \label{fig:arquitectura-caso-testigo}
+\end{figure}
 
 \subsubsection{Desarrollo del prototipo funcional}
 

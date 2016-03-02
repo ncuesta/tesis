@@ -1,31 +1,34 @@
 \subsection{Caso testigo}
 \label{caso-testigo}
 
-Habiendo desarrollado la propuesta de rediseño que motiva el presente trabajo, creemos conveniente tomar un caso testigo que sirva de ejemplo práctico para hacer concretos los conceptos teóricos que hemos tenido en cuenta para el análisis, a la vez que sirva de disparador para una implementación preliminar acotada del nuevo diseño sobre los elementos de la nube de servicios.
+Habiendo desarrollado la propuesta de rediseño que motiva el presente trabajo, creemos conveniente tomar un caso testigo que sirva de ejemplo práctico para hacer concretos los conceptos teóricos que hemos tenido en cuenta para el análisis, a la vez que sirva de disparador para una implementación preliminar acotada del nuevo diseño sobre los elementos de la nube de servicios. De aquí en más, para distinguir la nube actual (el Integrador) de la nueva arquitectura que estamos planteando, utilizaremos el nombre clave \cloud para hacer referencia a esta última.
 
 \subsubsection{Alcance}
 
-La situación que utilizaremos como caso testigo es el proceso de registro de un nuevo usuario de \gls{acro:sso} de la nube de servicios de la \unlp. Si bien \textit{a priori} puede parecer un tanto sencillo para tomarlo de referencia, una vez que definamos concretamente todos los pasos involucrados en este proceso se hará evidente la elección realizada.
+La situación que utilizaremos como caso testigo es el proceso de registro de un nuevo usuario de \gls{acro:sso} de la nube de servicios de la \unlp. Si bien \textit{a priori} puede parecer un tanto sencillo para tomarlo de referencia, una vez que definamos en concreto todos los pasos involucrados en este proceso se hará evidente la elección realizada.
 
 Aquellos agentes que forman parte del personal de la UNLP pueden tener un usuario único para acceder a las aplicaciones que nuestra Dirección desarrolla, ya sea para consultar sus recibos de haberes, utilizar una aplicación como parte de sus tareas diarias, presentar proyectos de extensión cuando la convocatoria se encuentre abierta o para acceder a cualquier aplicación que a futuro pudiéramos publicar. Para registrar su usuario, el agente dispone de dos vías:
 
 \begin{itemize}
   \item La vía analógica: solicitando la creación del usuario, de manera presencial y por escrito, a la oficina de Personal de alguna de las Dependencias donde desempeña sus funciones. Por tratarse de un proceso manual y \eng{offline}, no lo consideraremos para este caso testigo.
+
   \item La vía digital: utilizando la \hyperref[anexo:detalle-clientes:sso]{aplicación de autogestión} que hemos desarrollado para realizar el registro del nuevo usuario en línea. \textit{Esta} es la vía que utilizaremos en nuestro planteo.
 \end{itemize}
 
 En el proceso de autogestión de un nuevo usuario, el agente debe completar los datos solicitados en una serie de pasos preestablecidos que lo guían hasta llegar a obtener el acceso a las aplicaciones que utilizan este esquema de \gls{acro:sso}\footnote{En realidad, inicialmente obtiene acceso únicamente a ver sus \hyperref[anexo:detalle-clientes:recibos]{recibos de haberes} y cargar su \textit{currículum de extensionista} en la aplicación de \hyperref[anexo:detalle-clientes:extension]{Proyectos de Extensión}. Para ingresar al resto de las aplicaciones un usuario autorizado le debe asignar los roles necesarios para cada aplicación.}. Podemos resumir estos pasos para el registro en:
 
 \begin{enumerate}
-  \item El agente ingresa a la aplicación de autogestión e indica que desea registrar un nuevo usuario.
+  \item El agente ingresa a la aplicación de autogestión e indica que desea registrar un nuevo usuario. Para esto, debe ingresar una dirección de correo institucional propia para recibir por esa vía un vínculo de acceso para comenzar efectivamente el registro de su nuevo usuario.
 
-  \item La aplicación le solicita que se identifique mediante su documento de identidad.
+  \item Al ingresar al vínculo de acceso que le llega a su correo, la aplicación solicita al agente que se identifique mediante su tipo y número de documento de identidad y en respuesta a ésto le indica si se lo tiene entre los agentes de la Universidad que aún no tienen usuario de acceso único.
 
-  \item Una vez identificado el usuario, se le pide que indique en qué Dependencias de la UNLP presta servicios a modo de \gls{term:captcha} para evitar bots que intenten registrar usuarios en masa y personas malintencionadas que deseen registrar usuarios en nombre de agentes reales.
+  \item Una vez identificado el agente, se le sugiere un nombre de usuario siguiendo el formato estándar de nombres de usuario, el cual puede ser modificado como parte de la carga de información que se está realizando. Se chequea que este usuario no se encuentre en uso y que respete dicho formato estándar.
 
-  \item Al validar correctamente esta información, se pide al agente que elija un nombre de usuario que utilizará como identificación y algunos datos más para contactarlo en caso de tener problemas con su dirección de correo electrónico principal.
+  \item Luego de elegido el nombre de usuario, se permite al agente ingresar una dirección de correo electrónico alternativa para tener un segundo medio de contacto.
 
-  \item Finalmente, se le presentan todos los datos ingresados para su confirmación y si el agente los acepta, se le envía un correo electrónico con un formulario para presentar firmado en la oficina de Personal de alguna de las Dependencias donde presta servicios, teniendo un paso de validación humana de la información\footnote{Este paso adicional, si bien puede sonar contradictorio con el resto del proceso \eng{online} planteado, fue requerido por las autoridades de la Universidad para fortalecer los chequeos realizados sobre los datos recibidos mediante este servicio público de registro.}.
+  \item Para cerrar la carga de datos personales, se le pide que indique en qué Dependencias de la UNLP presta servicios. Esto se hace a modo de \gls{term:captcha} para evitar \eng{bots} que intenten registrar usuarios en masa y personas malintencionadas que deseen registrar usuarios en nombre de agentes reales.
+
+  \item Al validar correctamente esta información, se le presentan todos los datos ingresados para su confirmación y si el agente los acepta, se le envía un correo electrónico con un formulario para presentar firmado en la oficina de Personal de alguna de las Dependencias donde presta servicios, teniendo un paso de validación humana de la información\footnote{Este paso adicional, si bien puede sonar contradictorio con el resto del proceso \eng{online} planteado, fue requerido por las autoridades de la Universidad para fortalecer los chequeos realizados sobre los datos recibidos mediante este servicio público de registro.}.
 
   \item Luego de presentar ese formulario y que sus datos sean debidamente corroborados por algún empleado de la oficina de Personal correspondiente, el usuario es aprobado y se dispara el envío de un nuevo correo al agente, en el cual se le consignan su usuario y una clave provisoria para que ingrese por primera vez a los sistemas de la UNLP. Con este paso, se finaliza el proceso de registro del nuevo usuario para el agente.
 \end{enumerate}
@@ -39,22 +42,63 @@ Desde el punto de vista de nuestra aplicación, este proceso se ve un tanto redu
   \label{fig:diagrama-flujo-registro}
 \end{figure}
 
-Realizando una descomposición en servicios del proceso anterior, identificamos las siguientes dependencias con servicios de la nueva nube\todo{¿Dar un nombre a la nueva nube? - @ncuesta}:
+Realizando una descomposición en servicios del proceso anterior, identificamos las siguientes dependencias con servicios de la \cloud:
 
 \begin{itemize}
   \item \textbf{Servicios de referencia:} para visualizar y marcar las Dependencias (o Unidades Académicas) y para ofrecer para su selección los tipos de documento de identidad.
+
   \item \textbf{Servicios de información sobre el personal:} como vía para identificar a la persona y luego consultar las Unidades Académicas en las cuales presta sus servicios.
-  \item \textbf{Servicios de usuarios:} para la consulta de la existencia de un usuario para la persona seleccionada y para la creación del nuevo usuario.
-  \item \textbf{Servicio de notificaciones:} para el envío de correos electrónicos.\todo{Ver si lo incluimos}
+
+  \item \textbf{Servicios de usuarios:} para la consulta de la existencia de un usuario para la persona seleccionada, sugerir nombres de usuario que respeten el formato estándar definido y para la creación del nuevo usuario.
+
+  \item \textbf{Servicio de notificaciones:} para el envío de correos electrónicos. Destacamos en este punto que para limitar el alcance del caso testigo dejaremos la implementación de este servicio como un trabajo a futuro, ya que su existencia no es limitante para poder desarrollar los pasos de registro que se realizan en línea.
 \end{itemize}
 
-El desarrollo del prototipo funcional implica, además de realizar el \gls{term:refactor} de la aplicación cliente de registro existente en la actualidad, la implementación desde cero de los servicios (y la lógica en el cliente para el acceso a éstos) siguiendo la nueva estructura, el protocolo de autenticación y los estándares para la comunicación de nuestra propuesta. Al hacer esta prueba de concepto, hemos obtenido \todo{¿Está bien usar el pasado acá?} una noción palpable del costo de llevar estos cambios a nuestras aplicaciones, lo cual da un alto valor agregado a esta experiencia cuando llegue el momento de estimar el tiempo y los recursos necesarios para llevar adelante este cambio en los desarrollos existentes y futuros de nuestro equipo.
+El desarrollo del prototipo funcional implica:
 
-Hemos elegido este caso testigo porque se compone de una serie de interacciones entre distintos servicios que brindan una noción de la complejidad que pueden tener las operaciones a realizar utilizando la nube de servicios, más allá de las simples consultas de datos de referencia que habitualmente manejamos. El hecho de incorporar diferentes servicios, englobados en distintas áreas de acción, nos permite también mostrar cómo funcionan las instancias de las aplicaciones que proveen esos servicios, cómo interactúan con la aplicación cliente y con los elementos intermediarios de la comunicación (entiéndase \eng{caches} compartidas, balanceadores de carga, \eng{proxies} reversos y la capa de mediación ofrecida por \nameref{soa:tecnologias:kong}).
+\begin{itemize}
+  \item Implementar desde cero los servicios de la \cloud antes mencionados (de referencia, de información sobre el personal y de usuarios), en los cuales incluiremos únicamente los \eng{endpoints} necesarios para solventar la lógica del caso testigo.
 
-En este informe intentaremos no entrar en detalles innecesarios sobre la implementación de la aplicación cliente ni de la capa de lógica del negocio de los servicios, para sí ahondar sobre temas relevantes desde el punto de vista de la comprensión de las entidades participantes en las comunicaciones. De todas formas, se deja disponible el código fuente de los distintos apartados para su referencia en \todo{Agregar link al código fuente de la implementación}.
+  \item Implementar desde cero una nueva versión de la aplicación cliente de registro, respetando los pasos antes descriptos, que consuma toda la información de los servicios de la \cloud. Esta nueva versión difiere en su concepción de la versión actualmente implementada en que no tendrá acceso a la base de datos de usuarios. De hecho, no tendrá acceso a \textit{ninguna} base de datos, ya que realizará todas sus operaciones de manera volátil dependiendo completamente de los servicios de la \cloud para acceder a la capa de persistencia en base de datos.
+
+  \item Desarrollar una \textit{gema} (nombre que reciben las librerías reutilizables en el lenguaje Ruby) que encapsule la lógica de acceso a los servicios, desde la autenticación hasta la consulta y abstracción en objetos de las respuestas de sus \glspl{acro:api}, basándose en el estándar elegido para la codificación de la información.
+\end{itemize}
+
+Hemos elegido este caso testigo porque se compone de una serie de interacciones entre distintos servicios que brindan una noción de la complejidad que pueden tener las operaciones a realizar utilizando la nube de servicios, más allá de las simples consultas de datos de referencia que habitualmente manejamos. El hecho de incorporar diferentes servicios, englobados en distintas áreas de acción, nos permite también mostrar cómo funcionan las instancias de las aplicaciones que proveen esos servicios, cómo interactúan con la aplicación cliente y con los elementos intermediarios de la comunicación (entiéndase \eng{caches} compartidas, balanceadores de carga, \eng{proxies} reversos y la capa de mediación ofrecida por \nameref{soa:tecnologias:tyk}).
+
+En este informe intentaremos no entrar en detalles innecesarios sobre la implementación de la aplicación cliente ni de la capa de lógica del negocio de los servicios, para sí ahondar sobre temas relevantes desde el punto de vista de la comprensión de las entidades participantes en las comunicaciones. Para su referencia, se adjunta al presente informe el código fuente de los distintos apartados que hemos implementado en este capítulo.
 
 
-\subsubsection{Desarrollo de un prototipo funcional}
+\subsubsection{Arquitectura}
 
-Documentar el desarrollo
+Partiendo de lo propuesto en la \autoref{propuesta}, el primer paso dentro de la implementación del prototipo funcional para este caso testigo es acotar la arquitectura, diseñarla y preparar los nodos en ella involucrados. Para esto, pueden observarse en la \autoref{fig:arquitectura-caso-testigo} los componentes lógicos del prototipo:
+
+\begin{itemize}
+  \item \textbf{Aplicación de registro:} Esta es la implementación de una aplicación cliente de la \cloud. Es la cara visible hacia los usuarios públicos, y si bien en este caso particular hemos decidido implementarla utilizando \gls{fw:rails} por cuestiones prácticas, podría implementarse utilizando otras tecnologías como \eng{frameworks} web JavaScript que se ejecuten meramente del lado del cliente, PHP o Java, por nombrar algunas. De todos los componentes de la arquitectura, este es el único que se encuentra lógicamente por fuera de la \cloud. Esta separación del resto la hacemos evidente porque en este caso se trata de una aplicación desarrollada por nosotros mismos, pero en el futuro bien podría tratarse de una aplicación desarrollada por terceros, pertenecientes o no a la \unlp.
+
+  \item \textbf{API Gateway (ESB):} Este nodo se encarga de ser la capa que aisla los clientes de la \gls{acro:api}, brindando el acceso a los mismos desde un único punto. Como hemos visto con anterioridad, es el encargado de autorizar las peticiones entrantes, chequear que se encuentren dentro de los límites para ellas establecidos, mantener y utilizar una capa de caching intermedio, y finalmente balancear la carga de los backends de servicios con un mecanismo de Round Robin que asigna una petición entrante \textit{no cacheada} a cada backend por vez. Complementariamente a esta tarea, el producto elegido en nuestro análisis para este rol (\nameref{soa:tecnologias:tyk}) provee una interfaz web de gestión para los usuarios internos que administran el acceso a los servicios (en principio, nosotros) con gráficos estadísticos del uso de nuestras \glspl{acro:api} que resulta de gran utilidad.
+
+  \item \textbf{API de referencia:} Esta, como el resto de las \glspl{acro:api} implementadas, provee un conjunto de servicios relacionados a una única incumbencia lógica, siguiendo el principio de una sola responsabilidad\footnote{También conocido como \eng{Single Responsibility Principle} en inglés. Este es uno de los cinco principios SOLID de diseño de software que apuntan a mejorar la calidad y facilidad de mantener de un desarrollo.} e implementando el patrón de microservicios. En el caso de este componente, su incumbencia es brindar los servicios de consulta de datos de referencia acotados a los necesarios para alcance de este caso testigo: tipos de documento y unidades acdémicas.
+
+  \item \textbf{API de personal:} Este nodo se encarga de brindar los servicios relacionados a la información de personal de la \unlp.
+
+  \item \textbf{API de usuarios:}
+
+  \item \textbf{API de notificaciones:}
+
+  \item \textbf{Capa de persistencia:}
+
+  \item \textbf{Cache compartida:}
+\end{itemize}
+
+Para demostrar las posibilidades de escalabilidad de esta arquitectura, hemos replicado los nodos de servicios para correr dos instancias de cada uno, las cuales serán balanceadas de manera transparente por \nameref{soa:tecnologias:tyk}.
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{src/images/05-capitulo-5/arquitectura-caso-testigo.jpg}
+  \caption{Visión lógica de la arquitectura del caso testigo}
+  \label{fig:arquitectura-caso-testigo}
+\end{figure}
+
+\subsubsection{Desarrollo del prototipo funcional}
+
+\todo{Documentar el desarrollo}

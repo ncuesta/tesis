@@ -1,17 +1,17 @@
-\paragraph{JSON API}
+\subsubsection{JSON API}
 \label{soa:tecnologias:json-api}
 
 JSON API es una especificación surgida en 2013 que intenta definir tanto cómo deben los clientes formular las peticiones, así como la forma en que los servidores deben responder a ellas, fomentando la eficiencia en el uso de recursos. Al momento de escritura del presente trabajo, esta especificación se encuentra en su versión \texttt{1.0} y con una versión \texttt{1.1} en proceso de definiciones.
 
 En este análisis resumiremos de manera concisa los puntos sobresalientes de la especificación.
 
-\subparagraph{\eng{Media type} dedicado}
+\paragraph{\eng{Media type} dedicado}
 
 Tanto los datos que el cliente envía en su petición como la respuesta del servidor deben indicar el \eng{media type} dedicado de JSON API: \texttt{application/vnd.api+json}\footnote{Este tipo de contenido fue asignado por la IANA - \url{http://www.iana.org/assignments/media-types/application/vnd.api+json}}.
 
 Este tipo de contenidos es una definición de estructura basada en el lenguaje \gls{lang:json}. Denominaremos ``documentos JSON API'' a aquellos documentos \gls{lang:json} que adhieran a este \eng{media type}.
 
-\subparagraph{Estructura general de los documentos JSON API}
+\paragraph{Estructura general de los documentos JSON API}
 
 Los documentos deben contener como elemento raiz un objeto, en el cual son admisibles las siguientes propiedades de primer nivel:
 
@@ -24,7 +24,7 @@ Los documentos deben contener como elemento raiz un objeto, en el cual son admis
   \item \texttt{included}: recursos incluidos en el documento por estar relacionados al objeto principal.
 \end{itemize}
 
-\subparagraph{Los recursos}
+\paragraph{Los recursos}
 
 Los elementos principales de información de un documento JSON API son los recursos. Cada recurso debe al menos tener dos propiedades: \texttt{id} y \texttt{type}, excepto cuando se trate de un \textit{nuevo} elemento que esté siendo creado por el cliente del servicio en cuyo caso el \texttt{id} puede omitirse. Además de estas propiedades obligatorias un recurso puede tener las propiedades \texttt{attributes}, \texttt{relationships}, \texttt{links} y \texttt{meta}, donde las dos primeras son objetos \gls{lang:json} que indican los atributos del recurso y posibles elementos relacionados respectivamente, y las últimas dos tienen sentidos similares a las propiedades homónimas del elemento raiz mencionadas en el apartado anterior que describe la estructura general de un documento JSON API. En el mismo sentido, los recursos pueden identificarse mediante una versión reducida de sí mismos que sólo contenga las propiedades \texttt{id} y \texttt{type}, caso en el cual se los denomina ``objetos identificadores de recursos''.
 
@@ -43,7 +43,7 @@ La especificación, con miras a hacer un uso más eficiente de los recursos, def
 \jsonfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/recurso.json}
 \captionof{listing}{Documento JSON API representando un recurso\label{soa:tecnologias:json-api:recurso}}
 
-\subparagraph{Obtención de recursos}
+\paragraph{Obtención de recursos}
 
 Las peticiones de acceso de lectura a la información deben ser realizadas utilizando el método \gls{proto:http} \texttt{GET} y utilizando alguna de las \glspl{acro:url} provistas en los documentos JSON API como vínculos \texttt{self} o \texttt{related}. Por ejemplo, las peticiones presentadas a continuación son válidas para obtener información a partir del documento JSON API presentado anteriormente.
 
@@ -105,7 +105,7 @@ Si en cambio la petición fuese exitosa pero su respuesta no contuviese elemento
 
 En los ejemplos anteriores se demuestra el uso del valor nulo (\texttt{null}) y la colección vacía (\texttt{[]}) para denotar la respuesta a una petición exitosa pero que no arroja coincidencias.
 
-\subparagraph{Obtención de relaciones}
+\paragraph{Obtención de relaciones}
 
 Como se mencionó anteriormente, las relaciones pueden tener un vínculo a sí mismas (\texttt{self}) que permita manipular la relación en sí y no a los recursos que ésta vincula. Esa \gls{acro:url} consultada con el método \gls{proto:http} \texttt{GET} nos permite consultar la información asociada a esa relación, obteniendo como dato principal el recurso o los recursos involucrados en ella en forma de identificadores de recursos (objetos \gls{lang:json} con las propiedades \texttt{id} y \texttt{type} únicamente).
 
@@ -117,7 +117,7 @@ El servidor responderá con un código de estado \gls{proto:http} \texttt{200 OK
   \label{soa:tecnologias:json-api:respuesta-200-obtener-relacion}
 \end{listing}
 
-\subparagraph{Inclusión de recursos relacionados}
+\paragraph{Inclusión de recursos relacionados}
 
 \todo{Completar spec de JSON API}
 % Una forma interesante de aproximarse al problema de \eng{N + 1}

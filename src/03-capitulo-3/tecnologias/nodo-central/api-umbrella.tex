@@ -1,13 +1,13 @@
-\paragraph{API Umbrella}
+\subsubsection{API Umbrella}
 \label{soa:tecnologias:api-umbrella}
 
 Es un producto open source desarrollado por la NREL (\eng{National Renewable Energy Laboratory}) que actualmente está en uso por el Gobierno de Estados Unidos en la \gls{acro:api} su sitio de \eng{open data}. Su función es la de un proxy que se ubica delante de las aplicaciones que proveen las \glspl{acro:api} (los \eng{\gls{acro:api} backends}) y procesa los requerimientos entrantes para esos servicios con un conjunto de reglas configurables, envía esos requerimientos a los proveedores correspondientes para finalmente enviar al cliente la respuesta. En la superficie es similar a Kong, pero su arquitectura interna es mucho más compleja, como veremos en breve.
 
-\subparagraph{Licencia}
+\paragraph{Licencia}
 
 Este producto está publicado bajo licencia MIT\footnote{\url{https://github.com/NREL/api-umbrella/blob/master/LICENSE.txt}}.
 
-\subparagraph{Arquitectura interna}
+\paragraph{Arquitectura interna}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/api-umbrella/api-umbrella-arq.png}
@@ -38,7 +38,7 @@ En particular, el \eng{Gatekeeper} merece un gráfico propio describiendo su flu
   \label{fig:api-umbrella-gatekeeper}
 \end{figure}
 
-\subparagraph{Instalación y prueba}
+\paragraph{Instalación y prueba}
 
 Al igual que en el caso de \nameref{soa:tecnologias:kong}, y ya que NREL provee una imagen oficial para ejecutar API Umbrella, utilizamos Docker para realizar una prueba de concepto del producto. A continuación detallamos los pasos realizados.
 
@@ -89,7 +89,7 @@ Luego de realizar algunas peticiones, podemos utilizar la potente herramienta de
   \label{fig:api-umbrella-analytics}
 \end{figure}
 
-\subparagraph{Madurez}
+\paragraph{Madurez}
 
 Al momento de comenzar a analizar los productos para el presente trabajo, API Umbrella se encontraba en activo desarrollo, definición y evolución. Su arquitectura interna era muy cambiante y aún le faltaban pruebas reales en ambientes productivos para poder cerrar las definiciones, por lo cual sus propios autores aconsejaban su uso únicamente para desarrollo\footnote{Hasta Diciembre de 2015, la documentación oficial del producto mostraba la leyenda ``\eng{This version is for development only}'' (``Esta versión es únicamente para desarrollo'')}.
 

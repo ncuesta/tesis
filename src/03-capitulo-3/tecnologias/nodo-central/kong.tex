@@ -1,4 +1,4 @@
-\paragraph{Kong}
+\subsubsection{Kong}
 \label{soa:tecnologias:kong}
 
 Es una herramienta desarrollada por la empresa Mashape que permite la fácil administración de \glspl{acro:api}, centralizando el acceso a las mismas desde uno o más servidores que se encargan de llevar registro de qué servicios ofrecen, recibir los requerimientos para éstos y delegar la generación de las respuestas a los \glspl{term:backend} destinados a tal fin.
@@ -7,11 +7,11 @@ Kong funciona con una versión modificada de \nameref{soa:tecnologias:nginx}, ha
 
 Básicamente, Kong se ubica entre los clientes y las instancias vivas de las \glspl{acro:api}, recibiendo los requerimientos para luego de aplicar las reglas que se le hayan especificado, enviarlos al servicio que corresponda.
 
-\subparagraph{Licencia}
+\paragraph{Licencia}
 
 Kong está publicado bajo licencia Apache 2.0\footnote{La misma puede ser consultada accediendo a \url{https://getkong.org/license/}}.
 
-\subparagraph{Extensiones disponibles (\eng{plugins})}
+\paragraph{Extensiones disponibles (\eng{plugins})}
 
 Este producto permite extender su funcionalidad y comportamiento básico mediante la adición de \eng{plugins} que brindan variadas funciones. Adicionalmente, en caso que necesitemos agregar comportamiento que no se encuentra disponible, podemos implementarlo nosotros mismos y contribuir nuestro propia extensión a la comunidad.
 
@@ -81,7 +81,7 @@ A continuación presentamos un breve listado de las extensiones que Kong ofrece 
   \end{itemize}
 \end{itemize}
 
-\subparagraph{Instalación y prueba}
+\paragraph{Instalación y prueba}
 
 Basándonos en los pasos detallados en la guía oficial de Kong\footnote{\url{https://github.com/Mashape/docker-kong}} para su instalación y ejecución mediante Docker\footnote{Desarrollar el potencial de Docker y las posibilidades que abre desde el punto de vista tanto de desarrollo de aplicaciones como de administración de las mismas en producción merecería un capítulo entero. Debido a que esto excede el alcance del presente trabajo, nos limitaremos a definir a Docker como una herramienta que permite ejecutar servicios (de cualquier tipo) en ambientes livianos aislados basados en GNU/Linux, los cuales ya empaquetan el servicio y cualquier dependencia que éste pudiera tener. Docker corre sobre un sistema operativo base que soporte la tecnología de contenedores (\eng{containers}). Para mayor información, se puede consultar el sitio oficial de Docker: \url{https://www.docker.com/what-docker}}, realizamos pruebas de concepto para analizar la factibilidad de implementación de esta herramienta, las cuales resultaron altamente satisfactorias. A continuación, reproduciremos las pruebas realizadas en el ambiente local\footnote{De ahí que todas las referencias a servicios que en estos pasos se realizan son utilizando \url{http://localhost}}, indicando los comandos ejecutados y las salidas obtenidas (en general acotadas a los datos relevantes para el caso). Para sintetizar los pasos, omitiremos la preparación del ambiente Docker, aunque se podría resumir simplemente en instalar dicha herramienta en el equipo donde se ejecutarán los contenedores.
 
@@ -120,7 +120,7 @@ Una vez agregada una \gls{acro:api}, en nuestro caso lo más probable será que 
 
 Con esta breve prueba de concepto, hemos comprobado que tanto la instalación como el uso de Kong son sencillos, lo cual lo hace un gran candidato para su utilización como nodo central de la nueva arquitectura de la nube de servicios de la \unlp.
 
-\subparagraph{Integración con nuestro diseño}
+\paragraph{Integración con nuestro diseño}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/kong/kong-arq.jpg}

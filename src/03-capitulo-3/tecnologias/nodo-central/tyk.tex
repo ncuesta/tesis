@@ -7,15 +7,20 @@
 \subparagraph{Extensiones disponibles (\eng{plugins})}
 
 \begin{itemize}
-  \item RESTful API - Full programatic access to the internals makes it easy to manage your API users, keys and Api Configuration from within your systems.
+  \item RESTful API - Posee una \gls{acro:api} RESTful, que permite configurar Tyk.
   \item Multiple access protocols - Tyk soporta múltiples métodos de acceso a la \gls{acro:api}: \eng{Token-based}, \eng{HMAC}, \eng{Basic Auth}, \eng{OAuth2}, \eng{JSON Web Token} y \eng{Keyless}.
-  \item Rate Limiting - Easily rate limit your API users, rate limiting is granular and can be applied on a per-key basis
+  \item Rate Limiting - Fácilmente permite configurar el \eng{rate limit} para cada \eng{API Key}, configurando la cantidad de peticiones por segundo y el tiempo de expiración (1 hora, 6 horas, 12 horas, 24 horas, 1 semana, 1 mes o nunca expira).
   \item Quotas - Enforce usage quotas on users to manage capacity or charge for tiered access
   \item Granular Access Control - Grant API access on a version by version basis, grant keys access to multiple APIs or just a single version
-  \item Policies - Create policies to apply to quotas, rate limits and access rights to block sets of keys
-  \item Path by path permissions - For highly tiered systems, grant access to only specific endpoints and methods
-  \item Key Expiry - permite controlar cuando expira una \eng{Key}.
-  \item API Versioning - API Versions can be easily set and deprecated at a specific time and date
+  \item Policies - Permite crear políticas, para aplicar \eng{quotas}, \eng{rate limit} y \eng{access rights} en a un conjunto de \eng{Keys}.
+  \item Path by path permissions - Permite configurar permisos de acceso para cada \eng{endpoint}, indicando el método.
+  \item Key Expiry - Permite controlar cuando expira una \eng{Key}.
+  \item API Versioning - Permite versionar la API de tres maneras diferentes:
+  \begin{itemize}
+    \item mediante una clave en el encabezado http, por ej. x-api-version
+    \item por URL o Form parameter
+    \item por el primer elemento de una URL, ej. /v1/resource/id
+  \end{itemize}
   \item Blacklist/Whitelist/Ignored endpoint access - Enforce strict security models on a version-by-version basis to your access points
   \item Analyitcs logging - Registro detallado de los accesos a las \glspl{acro:api}.
   \item Zero downtime restarts - Las configuraciones de Tyk pueden realizarse dinámicamente, reiniciar los servicios, sin que esto afecte los requerimientos activos.
@@ -23,10 +28,10 @@
   \item IP White-listing - Acceso autorizado solo a las direcciones IP indicadas
   \item Size Limits - Permite limitar el tamañan de las peticiones que llegan a la \gls{acro:api}, evitando que los sevicios sean saturados por peticiones
   \item Batch requests - Enable batch request processing for your API clients to minimise calls they need to make to your API, both synchronous and asynchronous supported.
-  \item Health checks - Easily query your Tyk nodes to see how your APIs are performing
-  \item Mock APIs - Create mock APIs easily using extended path management
-  \item API Blueprint support - Import API Blueprints (JSON format) from Apiary to quickly get started
-  \item Swagger support - Import swagger files to get started quickly from your existing documentation
+  \item Health checks - Permite verificar el estado de los nodos.
+  \item Mock APIs - Permite crear \glspl{acro:api} de prueba.
+  \item API Blueprint support - Permite importar rápidamente una \gls{acro:api} en formato JSON.
+  \item Swagger support - Permite importar archivos que respeten la especificación \gls{term:swagger}.
   \item Scriptable middleware - Add your own custom middleware components before and after the Tyk middleware stack to pre- and post-process requests and integrate with your stack.
   \item Scriptable event handlers - Write you own event handlers in JavaScript to script actions against key API events
   \item Request and Response transformations - Use simple templates to transform body data and add or remove headers on-the-fly on inbound and outbound requests from your API

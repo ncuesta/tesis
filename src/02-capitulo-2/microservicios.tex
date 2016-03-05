@@ -15,3 +15,7 @@ El patrón de microservicios, trata estas cuestiones, separando la aplicación e
   \caption{Arquitectura básica de microservicios}
   \label{fig:basic_microservices_arquitecture_pattern}
 \end{figure}
+
+Debido a que los componentes principales de una aplicación, se dividen en partes mas pequeñas, deployables de manera individual, las aplicaciones construídas utilizando el patrón de arquitectura de microservicios, son generalmente mas robustas, proporcionan una mejor escalabilidad y pueden soportar fácilmente ``continuous delivery''.\todo{ver como traducir esto!!!}
+
+Otra ventaja de este patrón, es la que permite deployar en tiempo real en ambientes de producción, reduciendo significativamente la necesidad de deployments mensuales o semanales.  Dado que el cambio generalmente se encuentra aislado a un \eng{service component}, solo los \eng{service components} que cambian tienen que ser deployados.

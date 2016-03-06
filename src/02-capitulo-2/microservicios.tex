@@ -28,13 +28,12 @@ Como se puede observar en \cite[p.~34]{richards2015}, se realiza un análisis de
   Además, aplicaciones desarrolladas con este patrón, tienden a generarse con bajo acoplamiento, lo que ayuda en la incorporación de los cambios.
 
   \item \eng{Testability}
-  Dado a la separación y aislamiento de las funcionalidad de negocio, el test de regresión para un \eng{service component} en particular, resulta más sencillo y factible, que un test de regresión realizado a toda una aplicación monolítica.  Además, dado que los \eng{service components} en este patrón están débilmente acoplados, hay menos posibilidades de que un desarrollador ``rompa'' la aplicación debido a la incorporación de un cambio reciente.
+  Dada la separación y aislamiento de las funcionalidad de negocio, el test de regresión para un \eng{service component} en particular, resulta más sencillo y factible, que un test de regresión realizado a toda una aplicación monolítica.  Además, ya que los \eng{service components} en este patrón están débilmente acoplados, hay menos posibilidades de que un desarrollador ``rompa'' la aplicación debido a la incorporación de un cambio reciente.
 
-  \item Con respecto a la \eng{performance}, en general este patrón, debido a la naturaleza distribuida de la arquitectura de microservicios, no aporta en el desarrollo de aplicaciones de alto rendimiento.
+  \item Con respecto a la \eng{performance}, en general este patrón no aporta en el desarrollo de aplicaciones de alto rendimiento, debido a la naturaleza distribuida de la arquitectura de microservicios
 
-  \item Desde el punto de vista de la \eng{scalability}, las aplicaciones se encuentran separadas en unidades deployables, cada \eng{service component} puede escalarse individualmente, permitiendo afinar la escalabilidad de acuerdo a las necesidades de la aplicación.
+  \item Desde el punto de vista de la escalabilidad, las aplicaciones se encuentran separadas en unidades deployables, cada \eng{service component} puede escalarse individualmente, permitiendo afinar la escalabilidad de acuerdo a las necesidades de la aplicación.
 
-  \item \eng{Ease of development}
-  Como la funcionalidad se encuentra separada en diferentes \eng{service components}, el desarrollo se vuelve mas sencillo, debido a un alcance mas pequeño y asilado.
+  \item \eng{Ease of development}, como la funcionalidad se encuentra separada en diferentes \eng{service components}, el desarrollo se vuelve mas sencillo, debido a un alcance mas pequeño y asilado.
 
 \end{itemize}

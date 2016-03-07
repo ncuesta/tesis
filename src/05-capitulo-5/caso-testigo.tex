@@ -101,4 +101,40 @@ Para demostrar las posibilidades de escalabilidad de esta arquitectura, hemos re
 
 \subsubsection{Desarrollo del prototipo funcional}
 
-\todo{Documentar el desarrollo}
+Para el desarrollo de la arquitectura de nuestro caso testigo hemos seguido los principios que utilizamos en nuestra oficina de trabajo, tanto en la metodología ágil de desarrollo empleada, como en las herramientas fundamentales que se basan en productos \eng{Open Source}:
+
+\begin{itemize}
+  \item Para el versionado de nuestro código utilizamos el sistema de control de versiones \gls{scm:git}, con la interfaz web que brinda el producto GitLab\footnote{\url{https://about.gitlab.com}}.
+
+  \item Para el desarrollo usamos ambientes locales en nuestras computadoras, replicando un entorno similar a aquel en que finalmente vivirán las aplicaciones en producción.
+
+  \item Para armar la topología de producción, utilizamos máquinas virtuales sobre un entorno de virtualización basado en Proxmox\footnote{\url{http://www.proxmox.com/en/proxmox-ve}}, en el cual creamos libremente tantas instancias virtuales como necesitamos.
+
+  \item Para el sistema base de cada instancia virtual utilizamos una versión reducida de la distribución de GNU/Linux Ubuntu, que se encuentra modificada y simplificada para correr en máquinas virtuales consumiendo menos recursos.
+
+  \item Para la resolución de los nombres de las instancias virtuales instalamos un servidor de DNS BIND9\footnote{\url{https://kb.isc.org/article/AA-01031}} utilizando el subdominios para cada host pertenecientes a la zona \url{tesis.desarrollo.unlp.edu.ar}.
+
+  \item Para aislar la arquitectura y evitar problemas de seguridad, utilizamos un esquema de red privada local al servidor de Proxmox, al cual accedimos mediante modificaciones a las tablas de \eng{routing} en nuestros equipos y la inclusión del servidor de DNS dedicado a la zona de nuestras instancias virtuales para la resolución de los nombres de cada equipo.
+
+  \item Para los \eng{deployments} utilizamos Capistrano 3\footnote{\url{http://capistranorb.com}}, una herramienta altamente personalizable que automatiza los pasos necesarios para realizar la configuración, preparación, distribución y ejecución de cada una de nuestras aplicaciones (la cliente y las \glspl{acro:api}).
+
+  \item Para la configuración de \nameref{soa:tecnologias:tyk} utilizamos \eng{Tyk Dashboard}, la herramienta gratuita pero de código cerrado que distribuyen los creadores del API Gateway. En caso de no desear utilizar esa herramienta por no ser Software Libre podríamos utilizar la \gls{acro:api} REST que \nameref{soa:tecnologias:tyk} brinda para realizar esas configuraciones, pero en este caso usamos la interfaz web para poder familiarizarnos con la configuración y gestión del producto de manera más sencilla.
+
+  \item Para la implementación de los servicios siguiendo el estándar \nameref{soa:tecnologias:json-api} utilizamos una \textit{gema} que simplificó en varios órdenes de magnitud el desarrollo: \texttt{ActiveModelSerializers}\footnote{\url{https://github.com/rails-api/active_model_serializers}}. Esta gema brinda la lógica de presentación necesaria para estructurar las respuestas acorde a la especificación \nameref{soa:tecnologias:json-api} que elegimos para dar forma a las respuestas de la \cloud.
+
+  \item Para la implementación de la lógica de acceso a los servicios de la \cloud desarrollamos una gema propia que reutilizamos en toda aquella aplicación que funcionaba como cliente, inclusive en las aplicaciones Rails que funcionaban como \gls{acro:api} y debían consumir información de otros servicios. Un ejemplo de esto último es el servicio de personas (parte de la \gls{acro:api} de personal), en el cual se hace referencia al tipo de documento de la persona, el cual se encuentra efectivamente en el servicio de tipos de documento que brinda la \gls{acro:api} de referencia. Del lado del servicio de personas, el tipo de documento se identifica a partir de su clave identificatoria, y cuando se necesita acceder a los atributos del tipo de documento (descripción o abreviatura) se realiza una petición como cliente del servicio de tipos de documento, pasando por el API Gateway como lo haría cualquier otro cliente.
+\end{itemize}
+
+A lo largo del desarrollo de las distintas partes involucradas en la implementación del caso testigo, pudimos apreciar cómo los conceptos clave enunciados hasta este punto en el presente trabajo se hacían presentes. Notamos desde la facilidad para realizar los \eng{deployments} virtualmente sin tiempo de caída del servicio, hasta la simplicidad introducida en el desarrollo como producto de la clara separación de incumbencias por cada \eng{service component}.
+
+También nos gratificamos al confirmar que las elecciones de tecnologías que realizamos habían sido atinadas y altamente beneficiosas, entre otras cuestiones, porque:
+
+\begin{itemize}
+  \item \nameref{soa:tecnologias:rails} fue un medio muy veloz para tener de manera sencilla y ágil las aplicaciones completamente funcionales, implementando técnicas de caching altamente favorables para la performance general de las aplicaciones.
+
+  \item la adopción del estándar \nameref{soa:tecnologias:json-api}, tanto para la estructura de las respuestas de los servicios como para los mecanismos de realización de las peticiones, nos permitió utilizar gemas en ambos extremos de la comunicación que hicieron innecesaria la implementación de la lógica de conexión, transporte, serialización y des-serialización de la información.
+
+  \item el uso de \nameref{soa:tecnologias:tyk} como API Gateway permitió que ignoremos detalles de autenticación y limitación por uso de recursos (\eng{rate limiting}) al implementar nuestros servicios. Adicionalmente, obtuvimos beneficios agregados como poder realizar balanceo de carga de las instancias de las \glspl{acro:api} con una configuración extremadamente sencilla, la gestión centralizada de claves de acceso, la recolección y visualización de datos estadísticos analíticos de uso de los diferentes endpoints, y el chequeo de \eng{uptime} (tiempo en que el servicio está activo y funcionando correctamente) de las \glspl{acro:api}.
+\end{itemize}
+
+\todo{Terminar esta descripción de la experiencia del desarrollo.}

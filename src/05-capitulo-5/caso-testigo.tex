@@ -152,3 +152,47 @@ Como resultado de esta experiencia fue gratificante confirmar que las elecciones
 
   \item \todo{Terminar de decir en qué nos beneficiaron las tecnologías elegidas}
 \end{itemize}
+
+\subsubsection{Resultado}
+
+A continuación presentamos algunas capturas de pantalla en las que se pueden apreciar los distintos pasos implementados para la aplicación testigo de Registro de un nuevo usuario \gls{acro:sso} de la \unlp. Estos pasos pueden considerarse la implementación concreta del flujo expuesto anteriormente en la \autoref{fig:diagrama-flujo-registro} de este mismo capítulo.
+
+En primer lugar, el usuario accede al sitio de registro, donde se le ofrece registrarse o acceder con su usuario y contraseña. Por ser el caso que nos atañe, seguiremos el camino del registro en las próximas capturas. En la \autoref{fig:caso-testigo:captura-000} podemos apreciar una captura de esta página.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth,keepaspectratio]{src/images/05-capitulo-5/capturas/page_000.png}
+  \caption{Paso 0: bienvenida a la aplicación de Registro}
+  \label{fig:caso-testigo:captura-000}
+\end{figure}
+
+En el paso siguiente, se pide al interesado en registrarse que ingrese su correo personal e institucional. Este correo debiera ser una dirección válida, perteneciente a un dominio terminado en \texttt{unlp.edu.ar}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth,keepaspectratio]{src/images/05-capitulo-5/capturas/page_001.png}
+  \caption{Paso 1: inicio del registro}
+  \label{fig:caso-testigo:captura-001}
+\end{figure}
+
+Una vez ingresado el correo electrónico, este es validado y en caso de cumplirse con los requerimientos antes expuestos, se le envía un correo electrónico a la dirección ingresada con un vínculo para continuar con el proceso de registro. Este paso es necesario para confirmar la dirección ingresada por el solicitante. Este paso puede apreciarse en la \autoref{fig:caso-testigo:captura-001}. En el momento en que se inicia el proceso de registro y justo antes de enviar este correo electrónico, se invoca al servicio de \eng{tókens} de la \gls{acro:api} de usuarios, el cual retorna un tóken con un código único\footnote{Más específicamente, utilizamos un \gls{term:uuid} como código único.} que es utilizado para generar una URL única para cada inicio de registro. Esos tókens tienen un tiempo de vida de una hora y pasado este tiempo, debe generarse uno nuevo comenzando desde el principio el proceso de registro.
+
+Por los motivos expuestos con anterioridad hemos decidido no implementar el servicio de notificaciones, por lo cual en la aplicación cliente implementada el usuario es llevado directamente al paso siguiente, tal como si hubiera recibido el correo electrónico y hubiera accedido al vínculo que habría en él.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth,keepaspectratio]{src/images/05-capitulo-5/capturas/page_002.png}
+  \caption{Paso 2: identificación del nuevo usuario}
+  \label{fig:caso-testigo:captura-002}
+\end{figure}
+
+En el paso siguiente, se presenta al usuario un formulario de carga de información para que se identifique, ingresando su tipo y número de documento, lo cual dispara una consulta asíncrona mediante AJAX a la \gls{acro:api} de personas y muestra la información acorde a los datos ingresados (pudiendo mostrarse el nombre de la persona en caso exitoso o un indicador de que la persona no es un agente de la UNLP). Si los datos se corresponden con una persona que no posea un usuario, se iniciará una segunda consulta asíncrona al servicio de nombres de usuario de la misma \gls{acro:api} para que sugiera un usuario válido acorde a la política de nombres de usuario a partir del nombre y apellido de la persona identificada. Finalmente se solicita un correo electrónico alternativo y que se indiquen las Dependencias en las que el solicitante presta servicios, a modo de \eng{captcha} para confirmar que se trate de un registro legítimo. Este paso puede observarse en la \autoref{fig:caso-testigo:captura-002}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth,keepaspectratio]{src/images/05-capitulo-5/capturas/page_003.png}
+  \caption{Paso 3: confirmación de los datos}
+  \label{fig:caso-testigo:captura-003}
+\end{figure}
+
+Por último, se presentan los datos ingresados para que el solicitante los confirme y genere efectivamente el nuevo usuario de \gls{acro:sso}, como puede verse en la \autoref{fig:caso-testigo:captura-003}. En caso de encontrar inconsistencias, puede optar por volver al paso anterior y corregirlas. Una vez confirmados los datos, se le enviará un correo mediante la \gls{acro:api} de notificaciones con los datos de la transacción y el formulario que deberá acercar personalmente a la oficina de Personal de su Dependencia. Adicionalmente, se hará un llamado al servicio de creación de usuarios de la \gls{acro:api} de usuarios para persistir la información, dejando el nuevo usuario en estado \textit{pendiente de aprobación}, para que sea aprobado por los agentes de la oficina antes mencionada cuando reciban el formulario de solicitud firmado por el solicitante. Con esto daría fin al circuito de registro que hemos tomado como caso testigo.

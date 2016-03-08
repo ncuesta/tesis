@@ -20,7 +20,7 @@ Existen diferentes opiniones acerca del rol exacto y responsabilidades de un \gl
   \item Monitoreo y registro de actividades (\eng{logging}).
 \end{itemize}
 
-El rol principal de estas herramientas es proveer interoperabilidad. Debido a que integran diferentes plataformas y lenguajes de programación, una parte fundamental de esta función es la transformación de datos.
+El rol principal de un \gls{acro:esb} es proveer interoperabilidad. Debido a que integran diferentes plataformas y lenguajes de programación, una parte fundamental de esta función es la transformación de datos.
 Otra tarea fundamental de un \gls{acro:esb} es el ruteo, ya que debe existir alguna manera de acceder desde un consumidor a un proveedor de servicios y luego se debe poder enviar la respuesta de regreso desde el proveedor hacia el consumidor. Dependiendo de la tecnología utilizada y el nivel de inteligencia proporcionado, esta tarea puede ser trivial o puede tornarse compleja.
 
 Hay que tener en cuenta que no existe requerimiento alguno para que el dominio del \gls{acro:esb} sea homogéneo. Aunque podría ser mejor usar una sola tecnología para la implementación de los servicios, raramente es el caso, y \gls{acro:soa}, por su propia naturaleza, acepta la heterogeneidad. Eso incluye la heterogeneidad en middleware y protocolos. Incluso con un estándar como los web services, múltiples implementaciones pueden diferir entre sí. Tarde o temprano, se introducirá un nuevo estándar o una nueva versión del estándar que hace las cosas mejor y más fácil. Tan pronto como empiece a utilizar el nuevo estándar (junto a la antigua tecnología), el \gls{acro:esb} se volverá heterogéneo\cite[p.~49]{josuttis2007}.

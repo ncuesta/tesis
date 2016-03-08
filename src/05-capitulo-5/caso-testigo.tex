@@ -80,7 +80,7 @@ Partiendo de lo propuesto en la \autoref{propuesta}, el primer paso dentro de la
 
   \item \textbf{Cache de Gateway:} para obtener mejor rendimiento general de la \cloud, implementamos una Cache de Gateway ubicada por detrás del API Gateway. Esta capa adicional de caching nos permite evitar volver a procesar en los \eng{service components} peticiones que estén frescas en esa cache, incrementando la performance general de los servicios. Se encuentra implementada con \nameref{soa:tecnologias:varnish}, la cache de alto rendimiento antes analizada y que hemos elegido para este rol.
 
-  \item \textbf{Balanceador de carga:}
+  \item \textbf{Balanceador de carga:} para brindar la versatilidad de agregar o quitar tantas instancias de los \eng{service components} como se desee, incluimos un balanceador de carga antes de éstos para distribuir los requerimientos entrantes. Este se encuentra implementado con un \nameref{soa:teconologias:nginx} que realiza la delegación de las peticiones mediante un Round Robin.
 
   \item \textbf{API de referencia:} esta, como el resto de las \glspl{acro:api} implementadas, provee un conjunto de servicios relacionados a una única incumbencia lógica, siguiendo el principio de una sola responsabilidad\footnote{También conocido como \eng{Single Responsibility Principle} en inglés. Este es uno de los cinco principios SOLID de diseño de software que apuntan a mejorar la calidad y facilidad de mantener de un desarrollo.} e implementando el \hyperref[microservicios]{patrón de microservicios} tratado con anterioridad. En el caso de este \eng{service component}, su incumbencia es brindar los servicios de consulta de datos de referencia acotados a los necesarios para alcance de este caso testigo: tipos de documento y unidades acdémicas. Se encuentra implementada con el framework \nameref{soa:tecnologias:rails} en su versión 5 en modo \texttt{--api}.
 
@@ -97,7 +97,7 @@ Partiendo de lo propuesto en la \autoref{propuesta}, el primer paso dentro de la
 
 Para demostrar las posibilidades de escalabilidad de esta arquitectura, hemos replicado los nodos de servicios para correr dos instancias de cada uno, las cuales serán balanceadas de manera transparente por \nameref{soa:tecnologias:tyk}.
 
-\begin{figure}
+\begin{figure}[H]
   \includegraphics[width=\linewidth]{src/images/05-capitulo-5/arquitectura-caso-testigo.jpg}
   \caption{Visión lógica de la arquitectura del caso testigo}
   \label{fig:arquitectura-caso-testigo}
@@ -150,7 +150,7 @@ Como resultado de esta experiencia fue gratificante confirmar que las elecciones
 
   \item el uso de \nameref{soa:tecnologias:tyk} como API Gateway permitió que ignoremos detalles de autenticación y limitación por uso de recursos (\eng{rate limiting}) al implementar nuestros servicios. Adicionalmente, obtuvimos beneficios agregados como poder realizar balanceo de carga de las instancias de las \glspl{acro:api} con una configuración extremadamente sencilla, la gestión centralizada de claves de acceso, la recolección y visualización de datos estadísticos analíticos de uso de los diferentes endpoints, y el chequeo de \eng{uptime} (tiempo en que el servicio está activo y funcionando correctamente) de las \glspl{acro:api}.
 
-  \item \todo{Terminar de decir en qué nos beneficiaron las tecnologías elegidas}
+  \item como parte del desarrollo, unificamos los criterios base para las aplicaciones que funcionarían como \eng{service component}, creando una plantilla de aplicación en modo \gls{acro:api} para utilizar de punto de partida al iniciar el desarrollo de este tipo de aplicaciones Rails.
 \end{itemize}
 
 \subsubsection{Resultado}

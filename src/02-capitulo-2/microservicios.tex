@@ -10,8 +10,9 @@ En este contexto es que queremos centrarnos en un patrón de diseño de sistemas
 Las aplicaciones monolíticas típicamente consisten en componentes fuertemente acoplados, que son parte de una única unidad desplegable (\eng{deployable}), resultando poco práctica y dificultosa la incorporación de cambios, el \eng{testing} y el \eng{deployment} de la aplicación. Es por esto que las grandes organizaciones de IT con aplicaciones de estas características, suelen manejarse con ciclos \textit{mensuales} de \eng{deployment} para sus productos.
 
 El patrón de microservicios trata estas cuestiones, separando la aplicación en múltiples unidades \eng{deployables} (llamadas \eng{service components}), que pueden ser desarrolladas, testeadas y deployadas independientemente de otros \eng{service components}. \todo{quizás tengamos que hablar mas de service component}.\cite[p.~27]{richards2015}
+\autoref{fig:basic_microservices_arquitecture_pattern}
 
-\begin{figure}
+\begin{figure}[H]
   \includegraphics[width=\linewidth]{src/images/02-capitulo-2/basic_microservices_arquitecture_pattern.png}
   \caption{Arquitectura básica de microservicios}
   \label{fig:basic_microservices_arquitecture_pattern}
@@ -19,7 +20,18 @@ El patrón de microservicios trata estas cuestiones, separando la aplicación en
 
 Debido a que los componentes principales de una aplicación se dividen en partes mas pequeñas y deployables de manera individual, las aplicaciones construídas utilizando el patrón de arquitectura de microservicios son generalmente mas robustas, proporcionan una mejor escalabilidad y pueden dar soporte fácilmente a ``continuous delivery'', permitiendo actualizar los ambientes de producción mediante \eng{deployments} en tiempo real y \textit{en caliente}, reemplazando la necesidad de deployments mensuales o semanales. \cite[p.~33]{richards2015} Todo esto es posible, dado que el cambio generalmente se encuentra aislado a un \eng{service component}, y solo las unidades que cambian tienen que ser deployadas. Como se mencionó anteriormente, esta es una notable mejora frente al desarrollo de aplicaciones monolíticas, donde el fuerte acoplamiento en sus componentes deriva en aplicaciones \textit{frágiles} que suelen fallar con cada nuevo \eng{deployment} realizado.
 
-\todo{ver si se agrega la explicación de la diferentes topologías, o resumen nuestro}
+Si bien existen decenas de formas para implementar el patrón de arquitectura de microservicios, las tres principales topologías son: \eng{API REST-based}, \eng{application REST-based}, y \eng{centralized messaging}.
+
+Según lo investigado, entendemos que será necesario implementar la topología \eng{centralized messaging}, la cual se adecúa a nuestra necesidades.  Esta topología es similar a la topología \eng{application REST-based}, solo que en lugar de utilizar REST para acceder remotamente a un \eng{service component}, utiliza un \eng{message broker} centralizado y liviano.  No hay que confundir esta topología con el patrón \gls{acro:soa} o consideralo como un ``SOA-Lite''.  Este \eng{message broker} no realiza orquestración, tranformación ni ruteo complejo, más bien, es sólo una capa de transporte ligera, para acceder a los \eng{services componets} remotos.  Los beneficios obtenidos con esta topología, en lugar de utilizar una topología sencilla \eng{REST-based} son: mecanismos avanzados de colas, mensajería asíncrona, monitoreo, control de errores, \eng{rate-limit}, seguridad, balanceo de carga y escalabilidad.
+\autoref{fig:centralized_messaging_topology}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/centralized_messaging_topology.png}
+  \caption{Centralized Messaging Topology}
+  \label{fig:centralized_messaging_topology}
+\end{figure}
+
+El punto único de falla y el cuello de botella que se observa en esta arquitectura, puede ser abordado implementando un cluster de brokers (dividiendo una instancia del broker en múltiples instancias y repartiendo la carga en cada una de estas).\cite[p.~31]{richards2015}
 
 Como se puede observar en \cite[p.~34]{richards2015}, se realiza un análisis de las siguientes características del patrón de arquitectura de microservicios:
 

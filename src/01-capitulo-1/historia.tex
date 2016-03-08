@@ -1,7 +1,7 @@
 \subsection{Historia: ¿Cómo llegamos a donde estamos?}
 \label{nube:historia}
 
-Como desarrolladores y analistas del \cespi, dependencia de la \unlp encargada de fomentar, implementar y administrar TICs, hemos participado del relevamiento, la implementación, la puesta en producción y el mantenimiento de varias aplicaciones web de uso diario por los agentes de las distintas Unidades Académicas y demás Dependencias administrativas de esta Alta Casa de estudios. Así, en el transcurso de más de 7 años de experiencia, hemos migrado entre distintos paradigmas arquitectónicos en el desarrollo de las aplicaciones y su intercomunicación.
+Como desarrolladores y analistas del {\cespi}, dependencia de la {\unlp} encargada de fomentar, implementar y administrar TICs, hemos participado del relevamiento, la implementación, la puesta en producción y el mantenimiento de varias aplicaciones web de uso diario por los agentes de las distintas Unidades Académicas y demás Dependencias administrativas de esta Alta Casa de estudios. Así, en el transcurso de más de 7 años de experiencia, hemos migrado entre distintos paradigmas arquitectónicos en el desarrollo de las aplicaciones y su intercomunicación.
 
 En este capítulo haremos una reseña de lo ocurrido en este tiempo, separando en etapas marcadas por los distintos enfoques que fuimos dando a la problemática de alimentar las distintas aplicaciones que desarrollamos para la UNLP, indicando las razones y decisiones que tomamos en cada ocasión, y que dan origen a este análisis que será la base para la futura etapa de implementación de la nube de servicios integrados.
 
@@ -9,9 +9,9 @@ En este capítulo haremos una reseña de lo ocurrido en este tiempo, separando e
 \subsubsection{Prefacio: ¿Qué es la nube de servicios de la UNLP?}
 \label{nube:prefacio}
 
-Liminarmente creemos conveniente y necesario explicar \textit{qué} es la nube de la que hablaremos en este trabajo. Por simplicidad, y para no develar detalles técnicos que aún no queremos mencionar, nos centraremos en los aspectos funcionales, en el \textit{qué} y no en el \textit{cómo}, de la fuente de información unificada que utilizamos en las aplicaciones que desarrollamos a diario para la \unlp.
+Liminarmente creemos conveniente y necesario explicar \textit{qué} es la nube de la que hablaremos en este trabajo. Por simplicidad, y para no develar detalles técnicos que aún no queremos mencionar, nos centraremos en los aspectos funcionales, en el \textit{qué} y no en el \textit{cómo}, de la fuente de información unificada que utilizamos en las aplicaciones que desarrollamos a diario para la {\unlp}.
 
-La nube de servicios es un solo sistema web que concentra la información que permite a distintas aplicaciones web, desarrolladas en la \direccionDesarrollo para uso interno de la UNLP, unificar datos y a partir de esta unificación combinar y correlacionar la información que cada una posee. Contiene y provee datos que van desde identificadores únicos para diferentes tipos de documento (a modo ilustrativo, \textit{“1 equivale a Documento Nacional de Identidad”}, \textit{“2 a Libreta de Enrolamiento”} o \textit{“5 a Pasaporte”}), pasando por valores concretos para identificar las Unidades Académicas o Dependencias de la Universidad (\textit{“33 para la Facultad de Informática”}, \textit{“26 para el CeSPI”}, etcétera), hasta datos concretos de las personas relacionadas a la UNLP (\textit{“000000000000000000000031988189 es \nahuelcuesta, alumno de la \facultad, docente con dos cargos de dedicación simple en la misma Unidad Académica”}, o \textit{“000000000000000000000027855859 es \miguelcarbone, alumno de la \facultad, docente con un cargo de dedicación simple en esa UA”}, por tomar dos casos). Mediante los servicios que brinda esta nube se pueden consultar, sin posibilidades de realizar operaciones modificatorias o destructivas, los siguientes grupos de datos:
+La nube de servicios es un solo sistema web que concentra la información que permite a distintas aplicaciones web, desarrolladas en la {\direccionDesarrollo} para uso interno de la UNLP, unificar datos y a partir de esta unificación combinar y correlacionar la información que cada una posee. Contiene y provee datos que van desde identificadores únicos para diferentes tipos de documento (a modo ilustrativo, \textit{“1 equivale a Documento Nacional de Identidad”}, \textit{“2 a Libreta de Enrolamiento”} o \textit{“5 a Pasaporte”}), pasando por valores concretos para identificar las Unidades Académicas o Dependencias de la Universidad (\textit{“33 para la Facultad de Informática”}, \textit{“26 para el CeSPI”}, etcétera), hasta datos concretos de las personas relacionadas a la UNLP (\textit{“000000000000000000000031988189 es \nahuelcuesta, alumno de la \facultad, docente con dos cargos de dedicación simple en la misma Unidad Académica”}, o \textit{“000000000000000000000027855859 es \miguelcarbone, alumno de la \facultad, docente con un cargo de dedicación simple en esa UA”}, por tomar dos casos). Mediante los servicios que brinda esta nube se pueden consultar, sin posibilidades de realizar operaciones modificatorias o destructivas, los siguientes grupos de datos:
 
 \begin{itemize}
   \item Datos de referencia:
@@ -22,7 +22,7 @@ La nube de servicios es un solo sistema web que concentra la información que pe
     \item Países, provincias, partidos y localidades
     \item Unidades Académicas de la UNLP
   \end{itemize}
-  \item Información académica\footnote{Este grupo de servicios será eliminado en el futuro, debido al desacoplamiento de estos servicios de nuestra nube y su delegación en el Grupo de Sistemas Académicos del \cespi, los reales \textit{dueños} de la información.}:
+  \item Información académica\footnote{Este grupo de servicios será eliminado en el futuro, debido al desacoplamiento de estos servicios de nuestra nube y su delegación en el Grupo de Sistemas Académicos del {\cespi}, los reales \textit{dueños} de la información.}:
   \begin{itemize}
     \item Carreras
     \item Planes de estudios
@@ -190,7 +190,7 @@ La nube de servicios, como aplicación, fue un desarrollo más realizado en PHP 
 
   \item Una tercera base en la que se mantiene actualizada la información que nos llega desde la oficina de Liquidaciones del CeSPI, la cual se transforma mediante procesos \gls{acro:etl}\footnote{Técnica que se utiliza para tomar datos de una o múltiples fuentes de información, modificarla y cargarla en una o más almacenes de datos. En nuestro caso utilizamos la herramienta Kettle de la versión de comunidad de la suite Pentaho para transformar los datos fuente, que nos llegan en archivos de texto plano, en inserciones normalizadas en nuestra base de datos MySQL.}\cite{paper:etl} para normalizarla antes de guardarla en esta base de datos.
 
-  \item Una cuarta para la información que proviene de los SIU Guarani de las distintas Unidades Académicas, la cual es actualizada directamente por el grupo de Sistemas Académicos del \cespi.
+  \item Una cuarta para la información que proviene de los SIU Guarani de las distintas Unidades Académicas, la cual es actualizada directamente por el grupo de Sistemas Académicos del {\cespi}.
 
   \item Y una quinta base de datos donde se unifican y mezclan los datos de las últimas 3 bases datos mencionadas, de manera tal que se logre una trazabilidad de la persona como un todo a lo largo de su \textit{vida en la UNLP}, ya sea como alumno, docente o no docente.
 \end{itemize}

@@ -1,34 +1,34 @@
 % Comandos personalizados
 
-% \fechaPresentacion :: para escribir la fecha de presentación del trabajo
+% {\fechaPresentacion} :: para escribir la fecha de presentación del trabajo
 \newcommand{\fechaPresentacion}{\today}
-% \unlp :: para escribir "Universidad Nacional de La Plata"
-\newcommand{\unlp}{Universidad Nacional de La Plata\xspace}
-% \facultad :: para escribir "Facultad de Informática"
-\newcommand{\facultad}{Facultad de Informática\xspace}
-% \cespi :: para escribir "CeSPI"
-\newcommand{\cespi}{CeSPI\xspace}
-% \direccionDesarrollo :: Para escribir "Dirección de Desarrollo del CeSPI"
-\newcommand{\direccionDesarrollo}{Dirección de Desarrollo del \cespi}
-% \tituloTrabajo :: Para escribir el título de la tesina
+% {\unlp} :: para escribir "Universidad Nacional de La Plata"
+\newcommand{\unlp}{Universidad Nacional de La Plata}
+% {\facultad} :: para escribir "Facultad de Informática"
+\newcommand{\facultad}{Facultad de Informática}
+% {\cespi} :: para escribir "CeSPI"
+\newcommand{\cespi}{CeSPI}
+% {\direccionDesarrollo} :: Para escribir "Dirección de Desarrollo del CeSPI"
+\newcommand{\direccionDesarrollo}{Dirección de Desarrollo del {\cespi}}
+% {\tituloTrabajo} :: Para escribir el título de la tesina
 \newcommand{\tituloTrabajo}{Propuesta de rediseño de la nube de servicios de la UNLP}
 % \tituloTrabajoDosLineas :: Para escribir el título de la tesina en dos líneas (carátula)
 \newcommand{\tituloTrabajoDosLineas}{Propuesta de rediseño de la nube\\* de servicios de la UNLP}
-% \miguelcarbone :: para escribir "Miguel Carbone"
+% {\miguelcarbone} :: para escribir "Miguel Carbone"
 \newcommand{\miguelcarbone}{Miguel Carbone}
-% \carbonemiguel :: para escribir "Carbone, Miguel"
+% {\carbonemiguel} :: para escribir "Carbone, Miguel"
 \newcommand{\carbonemiguel}{Carbone, Miguel}
-% \nahuelcuesta :: para escribir "José Nahuel Cuesta Luengo"
+% {\nahuelcuesta} :: para escribir "José Nahuel Cuesta Luengo"
 \newcommand{\nahuelcuesta}{José Nahuel Cuesta Luengo}
-% \cuestanahuel :: para escribir "Cuesta Luengo, José Nahuel"
+% {\cuestanahuel} :: para escribir "Cuesta Luengo, José Nahuel"
 \newcommand{\cuestanahuel}{Cuesta Luengo, José Nahuel}
-% \cloud :: para escribir el nombre clave de la nueva nube
-\newcommand{\cloud}{\textit{Cloud}~}
+% {\cloud} :: para escribir el nombre clave de la nueva nube
+\newcommand{\cloud}{Cloud}
 
 % \eng{English expression} :: para denotar que "English expression" está en inglés
 \newcommand{\eng}[1]{\textit{#1}}
 
-% \caratula :: para generar la carátula de la tesina
+% {\caratula} :: para generar la carátula de la tesina
 \newcommand{\caratula}{
   \begin{center}
     \includegraphics{src/images/caratula/unlp.png}\\
@@ -40,7 +40,8 @@
     \vspace{15mm}
     \huge{\tituloTrabajoDosLineas}\\
     \vspace{10mm}
-    \large{\textbf{\carbonemiguel} \\ \textbf{\cuestanahuel}}\\
+    \large{\textbf{\carbonemiguel} \\
+    \textbf{\cuestanahuel}}\\
     \vspace{20mm}
     \large{Directoras: Banchoff Tzancoff, Claudia y Queiruga, Claudia}\\
     \large{Asesor Profesional: Rodriguez, Christian Adrián}\\
@@ -49,5 +50,5 @@
   \end{center}
 }
 
-% \checkmark :: para imprimir un check (tilde)
+% {\checkmark} :: para imprimir un check (tilde)
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}

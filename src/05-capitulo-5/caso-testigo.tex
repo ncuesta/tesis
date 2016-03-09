@@ -78,7 +78,7 @@ Partiendo de lo propuesto en la \autoref{propuesta}, el primer paso dentro de la
 
   \item \textbf{API Gateway (ESB):} este nodo se encarga de ser la capa que aisla los clientes de la \gls{acro:api}, brindando el acceso a los mismos desde un único punto. Como hemos visto con anterioridad, es el encargado de autorizar las peticiones entrantes y de chequear que se encuentren dentro de los límites para ellas establecidos, puede proveer una capa de caching intermedio, y también balancear la carga de los backends de servicios con un mecanismo de Round Robin que asigna una petición entrante \textit{no cacheada} a cada backend por vez. Complementariamente a estas tareas, el producto elegido en nuestro análisis para este rol (\nameref{soa:tecnologias:tyk}) provee una interfaz web de gestión para los usuarios internos que administran el acceso a los servicios (en principio, nosotros) con gráficos estadísticos del uso de nuestras \glspl{acro:api} que resulta de gran utilidad.
 
-  \item \textbf{Cache de Gateway:} para obtener mejor rendimiento general de la \cloud, implementamos una Cache de Gateway ubicada por detrás del API Gateway. Esta capa adicional de caching nos permite evitar volver a procesar en los \eng{service components} peticiones que estén frescas en esa cache, incrementando la performance general de los servicios. Se encuentra implementada con \nameref{soa:tecnologias:varnish}, la cache de alto rendimiento antes analizada y que hemos elegido para este rol.
+  \item \textbf{Cache de Gateway:} para obtener mejor rendimiento general de la {\cloud}, implementamos una Cache de Gateway ubicada por detrás del API Gateway. Esta capa adicional de caching nos permite evitar volver a procesar en los \eng{service components} peticiones que estén frescas en esa cache, incrementando la performance general de los servicios. Se encuentra implementada con \nameref{soa:tecnologias:varnish}, la cache de alto rendimiento antes analizada y que hemos elegido para este rol.
 
   \item \textbf{Balanceador de carga:} para brindar la versatilidad de agregar o quitar tantas instancias de los \eng{service components} como se desee, incluimos un balanceador de carga antes de éstos para distribuir los requerimientos entrantes. Este se encuentra implementado con un \nameref{soa:teconologias:nginx} que realiza la delegación de las peticiones mediante un Round Robin.
 
@@ -155,7 +155,7 @@ Como resultado de esta experiencia fue gratificante confirmar que las elecciones
 
 \subsubsection{Resultado}
 
-A continuación presentamos algunas capturas de pantalla en las que se pueden apreciar los distintos pasos implementados para la aplicación testigo de Registro de un nuevo usuario \gls{acro:sso} de la \unlp. Estos pasos pueden considerarse la implementación concreta del flujo expuesto anteriormente en la \autoref{fig:diagrama-flujo-registro} de este mismo capítulo.
+A continuación presentamos algunas capturas de pantalla en las que se pueden apreciar los distintos pasos implementados para la aplicación testigo de Registro de un nuevo usuario \gls{acro:sso} de la {\unlp}. Estos pasos pueden considerarse la implementación concreta del flujo expuesto anteriormente en la \autoref{fig:diagrama-flujo-registro} de este mismo capítulo.
 
 En primer lugar, el usuario accede al sitio de registro, donde se le ofrece registrarse o acceder con su usuario y contraseña. Por ser el caso que nos atañe, seguiremos el camino del registro en las próximas capturas. En la \autoref{fig:caso-testigo:captura-000} podemos apreciar una captura de esta página.
 

@@ -64,8 +64,6 @@ También se debe tener en cuenta que esta solución permite independizarse del l
 
 \subsubsection{Simplicidad}
 
-TODO: Hablar de microservicios, de deployments separados, mantenimiento más fácil, desarrollo enfocado claramente en cada aplicación (API) y testeabilidad mejorada.
-
 Como se desarrolló en \autoref{microservicios}, las aplicaciones monolíticas consisten en componentes fuertemente acoplados, que son parte de una única unidad \eng{deployable}, resultando dificultosa la incorporación de cambios, \eng{testing} y \eng{deployment} de la aplicación.  El patrón de microservicios trata estas cuestiones, separando la aplicación en múltiples unidades \eng{deployables}, que pueden ser desarrolladas, testeadas y desplegadas de forma independientemente.
 
 El hecho de dividir la aplicación en componentes pequeños y \eng{deployables} de manera independiente, facilita el desarrollo, \eng{testing} y puesta en producción, esto se debe a que el cambio se encuentra aislado a un \eng{service component} y permite un mayor control.  Por lo tanto, hemos optado por seguir el patrón de arquitectura de microservicios para el diseño de la nube de servicios de la {\unlp}.
@@ -80,7 +78,7 @@ Los sistemas distribuidos tienen potencialmente más fallos que los sistemas mon
   \label{fig:circuit_breaker}
 \end{figure}
 
-Para implementar una infraestructura de servicios tolerante a fallos, los servicios estarán replicados en varias instancias virtuales y, como detallamos antes, delante de éstas se implementará un balanceador de carga, al mismo tiempo que se deberá trabajar en limitar el alcance de un fallo a nivel de servicio.
+Para implementar una infraestructura tolerante a fallos, los servicios deberán estar replicados en varias instancias virtuales y, como detallamos antes, delante de éstas se implementará un balanceador de carga, que permitirá distribuir las peticiones realizadas entre las instancias virtuales, al mismo tiempo, se deberá trabajar en limitar el alcance del fallo a nivel de servicio.  Cabe aclarar que el partón de microservicios, realiza un aporte importante en este orden, ya que al dividir la aplicación en \eng{service components} ailamos el problema, facilitando luego su eventual solución y \eng{deployment} en producción.
 
 \subsubsection{Estandarización}
 

@@ -40,8 +40,10 @@ Las relaciones de un recurso son objetos \glspl{lang:json} que pueden tener las 
 
 La especificación, con miras a hacer un uso más eficiente de los recursos, define también los ``documentos compuestos'' que son aquellos que incluyen en la misma estructura la información relacionada a los recursos asociados a la información principal del documento, es decir, aquellos recursos referenciados en alguna de las relaciones. La información de estos recursos adicionales debe realizarse dentro de una clave \texttt{included} de primer nivel en la raiz del documento JSON API. Al incorporar esta información adicional al documento, se reducen la cantidad de peticiones necesarias para obtener un recurso y sus elementos relacionados, reduciendo la utilización de recursos necesaria para completar la tarea.
 
-\jsonfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/recurso.json}
-\captionof{listing}{Documento JSON API representando un recurso\label{soa:tecnologias:json-api:recurso}}
+\begingroup
+  \jsonfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/recurso.json}
+  \captionof{listing}{Documento JSON API representando un recurso\label{soa:tecnologias:json-api:recurso}}
+\endgroup
 
 \paragraph{Obtención de recursos}
 

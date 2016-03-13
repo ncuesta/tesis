@@ -67,7 +67,7 @@ También se debe tener en cuenta que esta solución permite independizarse del l
 
 Como se desarrolló en \autoref{microservicios}, las aplicaciones monolíticas consisten en componentes fuertemente acoplados, que son parte de una única unidad \eng{deployable}, resultando dificultosa la incorporación de cambios, \eng{testing} y \eng{deployment} de la aplicación.  El patrón de microservicios trata estas cuestiones, separando la aplicación en múltiples unidades \eng{deployables}, que pueden ser desarrolladas, testeadas y desplegadas de forma independientemente.
 
-El hecho de dividir la aplicación en componentes pequeños y \eng{deployables} de manera independiente, facilita el desarrollo, \eng{testing} y puesta en producción, esto se debe a que el cambio se encuentra aislado a un \eng{service component} y permite un mayor control.  Por lo tanto, hemos optado por seguir el patrón de arquitectura de microservicios para el diseño de la nube de servicios de la {\unlp}.
+El hecho de dividir la aplicación en componentes pequeños y \eng{deployables} de manera independiente, facilita el desarrollo, \eng{testing} y puesta en producción, esto se debe a que el cambio se encuentra aislado a un \eng{service component}, permitiendo un mayor control.  Es por esto que hemos optado por seguir el patrón de arquitectura de microservicios para el diseño de la nube de servicios de la {\unlp}.
 
 \subsubsection{Tolerancia a fallos}
 
@@ -91,10 +91,9 @@ Esta estandarización facilitará el desarrollo de clientes que consuman informa
 
 \subsubsection{El uso del ESB}
 
-\todo{Completar esto del ESB}
+Al ahondar en SOA e investigar diferentes tecnologías y patrones de arquitectura de software (\eng{layered arquitecture}, \eng{event-driven arquitecture}, \eng{microservices arquitecture}), vimos en el de patrón de microservicios una mejora sustancial, en simplicidad y alcance, que se adecuaba a nuestras necesidades, por eso reemplazamos el ESB por un \eng{API Gateway} que funciona como un ``message broker liviano''.
 
-Al ahondar en SOA y conocer más otros patrones, vimos en el de microservicios una mejora sustancial en simplicidad y alcance que se adecuaba más a nuestras necesidades que el gran monstruo de la arquitectura SOA, y por eso hasta reemplazamos el ESB por un API Gateway que funciona como un ``message broker liviano''.
-
+El \eng{API Gateway} implementado cumple con todas las tareas que realiza un \gls{acro:esb} (proveer conectividad, ruteo sencillo, manejo de seguridad, fiabilidad en los servicios, monitoreo y registro de actividades), menos en la transformación de datos y ruteo inteligente.  Esto resulta suficiente para el alcance de este trabajo, el cual nos permitirá lograr experiencia en la materia, para luego decidir, en caso de ser necesario, cambiar el ``message broker'' por un ESB robusto, como podría ser Mule ESB, Fuse ESB, WSO2 ESB, Synapse, entre otros.  Cabe aclarar, que este cambio no sería trascendental, ya que se trata de una capa de la arquitectura totalmente aislada que provee varios servicios (proveer conectividad, ruteo, manejo de seguridad, fiabilidad en los servicios, monitoreo y registro de actividades), los cuales se encuentran encapsulados o agrupados, lo que permitirá ser reemplazada sin afectar el resto de la arquitectura.  Esto es posible, debido que desde el inicio, basamos el diseño de la arquitectura en los principios que propone \gls{acro:soa}, logrando obtener los beneficios que este marco de diseño para la integración de aplicaciones propone.
 
 \subsubsection{La arquitectura propuesta}
 

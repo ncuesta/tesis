@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,titlepage,hidelinks]{article}
+\documentclass[a4paper,12pt,titlepage,hidelinks,final]{article}
 
 \input{inc/paquetes}
 \input{inc/config}
@@ -34,13 +34,15 @@
   \input{src/meta/agradecimientos}
   \newpage
   %   - Tabla de contenidos
-  \tableofcontents
+  \begingroup
+    \setlength{\parskip}{0pt}   % Sin separación entre párrafos
+    \setlength{\parindent}{0pt} % Sin sangría en cada párrafo
+    \tableofcontents
+  \endgroup
   \newpage
 
   % Contenido principal
   \pagenumbering{arabic}      % Tipo de numeración de páginas a usar
-  \setlength{\parskip}{0.6em} % Separación entre párrafos
-  \setlength{\parindent}{2em} % Separación entre párrafos
   %   - Introducción
   \input{src/00-intro/_layout}
   %   - Meta previa a capítulos

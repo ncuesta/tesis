@@ -1,18 +1,18 @@
 \subsection{Caso testigo}
 \label{caso-testigo}
 
-Habiendo desarrollado la propuesta de rediseño que motiva el presente trabajo, creemos conveniente tomar un caso testigo que sirva de ejemplo práctico para hacer concretos los conceptos teóricos que hemos tenido en cuenta para el análisis, a la vez que sirva de disparador para una implementación preliminar acotada del nuevo diseño sobre los elementos de la nube de servicios. De aquí en más, para distinguir la nube actual (el Integrador) de la nueva arquitectura que estamos planteando, utilizaremos el nombre clave \textit{\cloud} para hacer referencia a esta última.
+Habiendo desarrollado la propuesta de rediseño que motiva el presente trabajo, creemos conveniente tomar un caso testigo que sirva de ejemplo práctico para hacer concretos los conceptos teóricos que hemos tenido en cuenta para el análisis, a la vez que sirva de disparador para una implementación preliminar acotada del nuevo diseño sobre los elementos de la nube de servicios.
 
 \subsubsection{Alcance}
 
 La situación que utilizaremos como caso testigo, es el proceso de registro de un nuevo usuario de \gls{acro:sso} de la nube de servicios de la {\unlp}. Si bien \textit{a priori} puede parecer un tanto sencillo para tomarlo de referencia, una vez que definamos en concreto todos los pasos involucrados en este proceso se hará evidente la elección realizada.
 
-Aquellos agentes que forman parte del personal de la UNLP pueden tener un usuario único para acceder a las aplicaciones que nuestra Dirección desarrolla, ya sea para consultar sus recibos de haberes, utilizar una aplicación como parte de sus tareas diarias, presentar proyectos de extensión cuando la convocatoria se encuentre abierta o para acceder a cualquier aplicación que a futuro pudiéramos publicar. Para registrar su usuario, el agente dispone de dos vías:
+Aquellos agentes que forman parte del personal de la UNLP pueden tener un usuario único para acceder a las aplicaciones que nuestro equipo desarrolla, ya sea para consultar sus recibos de haberes, utilizar una aplicación como parte de sus tareas diarias, presentar proyectos de extensión cuando la convocatoria se encuentre abierta o para acceder a cualquier aplicación que a futuro pudiéramos publicar. Para registrar su usuario, el agente dispone de dos vías:
 
 \begin{itemize}
   \item La vía analógica: solicitando la creación del usuario, de manera presencial y por escrito, a la oficina de Personal de alguna de las Dependencias donde desempeña sus funciones. Por tratarse de un proceso manual y \eng{offline}, no lo consideraremos para este caso testigo.
 
-  \item La vía digital: utilizando la \hyperref[anexo:detalle-clientes:sso]{aplicación de autogestión} que hemos desarrollado para realizar el registro del nuevo usuario en línea. \textit{Esta} es la vía que utilizaremos en nuestro planteo.
+  \item La vía digital: utilizando la \hyperref[anexo:detalle-clientes:sso]{aplicación de autogestión} que hemos desarrollado para realizar el registro en línea del nuevo usuario. \textit{Esta} es la vía que utilizaremos en nuestro planteo.
 \end{itemize}
 
 En el proceso de autogestión de un nuevo usuario, el agente debe completar los datos solicitados en una serie de pasos preestablecidos que lo guían hasta llegar a obtener el acceso a las aplicaciones que utilizan este esquema de \gls{acro:sso}\footnote{En realidad, inicialmente obtiene acceso únicamente a ver sus \hyperref[anexo:detalle-clientes:recibos]{recibos de haberes} y cargar su \textit{currículum de extensionista} en la aplicación de \hyperref[anexo:detalle-clientes:extension]{Proyectos de Extensión}. Para ingresar al resto de las aplicaciones un usuario autorizado le debe asignar los roles necesarios para cada aplicación. Para más información sobre las aplicaciones integradas al \gls{acro:sso} y la nube de servicios, referirse al \autoref{anexo:detalle-clientes}.}. Podemos resumir los pasos para el registro en:
@@ -22,7 +22,7 @@ En el proceso de autogestión de un nuevo usuario, el agente debe completar los 
 
   \item Al ingresar al vínculo de acceso que le llega a su correo, la aplicación solicita al agente que se identifique mediante su tipo y número de documento de identidad y en respuesta a ésto le indica si se encuentra entre los agentes de la Universidad que aún no tienen usuario de acceso único.
 
-  \item Una vez identificado el agente, se le sugiere un nombre de usuario siguiendo la política de nombres de usuario, el cual puede ser modificado como parte de la carga de información que se está realizando. Se chequea que este usuario esté disponible y que respete dicha política.
+  \item Una vez identificado el agente, se le sugiere un nombre de usuario siguiendo la política de nombres de usuario, el cual puede ser modificado como parte de la carga de información que se está realizando. Se valida que este usuario esté disponible y que respete dicha política.
 
   \item Luego de elegido el nombre de usuario, se permite al agente ingresar una dirección de correo electrónico alternativa para tener un segundo medio de contacto.
 
@@ -80,7 +80,7 @@ Partiendo de la \autoref{propuesta}, el primer paso dentro de la implementación
 
   \item \textbf{Cache de Gateway:} para obtener mejor rendimiento general de la {\cloud}, implementamos una Cache de Gateway ubicada por detrás del API Gateway. Esta capa adicional de caching nos permite evitar volver a procesar en los \eng{service components} peticiones que estén frescas en esa cache, incrementando la performance general de los servicios. Se encuentra implementada con \nameref{soa:tecnologias:varnish}, cache de alto rendimiento antes analizada y que hemos elegido para este rol.
 
-  \item \textbf{Balanceador de carga:} para brindar la versatilidad de agregar o quitar tantas instancias de los \eng{service components} como se desee, incluimos un balanceador de carga antes de éstos para distribuir los requerimientos entrantes. Este se encuentra implementado con un \nameref{soa:teconologias:nginx} que realiza la delegación de las peticiones mediante un Round Robin.
+  \item \textbf{Balanceador de carga:} para brindar la versatilidad de agregar o quitar tantas instancias de los \eng{service components} como se desee, incluimos un balanceador de carga antes de éstos para distribuir los requerimientos entrantes. Este se encuentra implementado con un \nameref{soa:tecnologias:nginx} que realiza la delegación de las peticiones mediante un Round Robin.
 
   \item \textbf{API de referencia:} esta, como el resto de las \glspl{acro:api} implementadas, provee un conjunto de servicios relacionados a una única incumbencia lógica, siguiendo el principio de una sola responsabilidad\footnote{También conocido como \eng{Single Responsibility Principle} en inglés. Este es uno de los cinco principios SOLID de diseño de software que apuntan a mejorar la calidad y facilidad del mantenimiento de un desarrollo.} e implementando el \hyperref[microservicios]{patrón de microservicios} tratado con anterioridad. En el caso de este \eng{service component}, su incumbencia es brindar los servicios de consulta de datos de referencia acotados a los necesarios para alcance de este caso testigo: tipos de documento y unidades acdémicas. Se encuentra implementada con el framework \nameref{soa:tecnologias:rails} en su versión 5 en modo \texttt{--api}.
 

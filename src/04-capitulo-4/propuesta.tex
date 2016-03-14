@@ -91,16 +91,6 @@ Esta estandarización facilitará el desarrollo de clientes que consuman informa
 
 \subsubsection{El uso del ESB}
 
-Al ahondar en SOA e investigar diferentes tecnologías y patrones de arquitectura de software (\eng{layered arquitecture}, \eng{event-driven arquitecture}, \eng{microservices arquitecture}), vimos en el de patrón de microservicios una mejora sustancial, en simplicidad y alcance, que se adecuaba a nuestras necesidades, por eso reemplazamos el ESB por un \eng{API Gateway} que funciona como un ``message broker liviano''.
+Al ahondar en SOA e investigar diferentes tecnologías y patrones de arquitectura de software (\eng{layered arquitecture}, \eng{event-driven arquitecture}, \eng{microservices arquitecture}), vimos en el patrón de microservicios una mejora sustancial, en simplicidad y alcance, que se adecuaba a nuestras necesidades, por eso reemplazamos el ESB por un \eng{API Gateway} que funciona como un ``message broker liviano''.
 
-El \eng{API Gateway} implementado cumple con todas las tareas que realiza un \gls{acro:esb} (proveer conectividad, ruteo sencillo, manejo de seguridad, fiabilidad en los servicios, monitoreo y registro de actividades), menos en la transformación de datos y ruteo inteligente.  Esto resulta suficiente para el alcance de este trabajo, el cual nos permitirá lograr experiencia en la materia, para luego decidir, en caso de ser necesario, cambiar el ``message broker'' por un ESB robusto, como podría ser Mule ESB, Fuse ESB, WSO2 ESB, Synapse, entre otros.  Cabe aclarar, que este cambio no sería trascendental, ya que se trata de una capa de la arquitectura totalmente aislada que provee varios servicios (proveer conectividad, ruteo, manejo de seguridad, fiabilidad en los servicios, monitoreo y registro de actividades), los cuales se encuentran encapsulados o agrupados, lo que permitirá ser reemplazada sin afectar el resto de la arquitectura.  Esto es posible, debido que desde el inicio, basamos el diseño de la arquitectura en los principios que propone \gls{acro:soa}, logrando obtener los beneficios que este marco de diseño para la integración de aplicaciones propone.
-
-\subsubsection{La arquitectura propuesta}
-
-\todo{Ver si esto sirve, contar qué producto va en qué parte}
-
-\begin{figure}
-  \includegraphics[width=\linewidth]{src/images/04-capitulo-4/nueva-arq-segun-rest.jpg}
-  \caption{Visión \gls{acro:rest} de la nueva arquitectura propuesta}
-  \label{fig:ejemplo-rest-nueva-arquitectura}
-\end{figure}
+El \eng{API Gateway} implementado cumple con todas las tareas que realiza un \gls{acro:esb} (proveer conectividad, ruteo sencillo, manejo de seguridad, fiabilidad en los servicios, monitoreo y registro de actividades), menos en la transformación de datos y ruteo inteligente.  Esto resulta suficiente para el alcance de este trabajo, el cual nos permitirá lograr experiencia en la materia, para luego decidir, en caso de ser necesario, cambiar el ``message broker'' por un \gls{acro:esb} robusto, como podría ser Mule ESB, Fuse ESB, WSO2 ESB o Synapse, entre otros.  Cabe aclarar, que este cambio no sería trascendental, ya que se trata de una capa de la arquitectura totalmente desacoplada que provee varios servicios (proveer conectividad, ruteo, manejo de seguridad, fiabilidad en los servicios, monitoreo y registro de actividades), los cuales se encuentran encapsulados o agrupados, lo que permitirá ser reemplazada sin afectar el resto de la arquitectura.  Esto es posible debido a que desde el inicio, basamos el diseño de la arquitectura en los principios que propone \gls{acro:soa}, logrando obtener los beneficios que este marco de diseño para la integración de aplicaciones propone.

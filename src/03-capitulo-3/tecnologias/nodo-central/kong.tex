@@ -1,7 +1,7 @@
 \subsubsection{Kong}
 \label{soa:tecnologias:kong}
 
-Es una herramienta desarrollada por la empresa Mashape que permite la fácil administración de \glspl{acro:api}, centralizando el acceso a las mismas desde uno o más servidores que se encargan de llevar registro de qué servicios ofrecen, recibir los requerimientos para éstos y delegar la generación de las respuestas a los \glspl{term:backend} destinados a tal fin.
+Es una herramienta desarrollada por la empresa Mashape que permite la fácil administración de \glspl{acro:api}, centralizando el acceso a las mismas desde uno o más servidores que se encargan de llevar registro de qué servicios ofrecen, recibir los requerimientos para éstos y delegar la generación de las respuestas a los \textit{backends} destinados a tal fin.
 
 Kong funciona con una versión modificada de \nameref{soa:tecnologias:nginx}, haciendo las de \eng{proxy} reverso y proveyendo una estructura extensible mediante el uso de agregados (\eng{plugins}) para brindar funcionalidad adicional a la básica, como ser autenticación, registro en logs, limitación de datos (\eng{rate limiting}), \eng{caching}, por nombrar algunos. Toda su información se almacena en una base de datos no relacional Apache Cassandra, altamente escalable por naturaleza.
 

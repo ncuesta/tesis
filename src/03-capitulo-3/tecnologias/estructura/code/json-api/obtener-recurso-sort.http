@@ -1,0 +1,2 @@
+GET /people?page[number]=2&page[size]=30 HTTP/1.1
+Accept: application/vnd.api+json

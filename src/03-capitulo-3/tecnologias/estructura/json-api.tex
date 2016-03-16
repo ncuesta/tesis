@@ -121,4 +121,46 @@ El servidor responderá con un código de estado \gls{proto:http} \texttt{200 OK
 
 \paragraph{Inclusión de recursos relacionados}
 
-% Una forma interesante de aproximarse al problema de \eng{N + 1}...
+El estándar define una forma para reducir la cantidad de peticiones realizadas a los servicios mediante la inclusión de recursos secundarios o \textit{relacionados} al recurso o conjunto de recursos principal. La forma de indicar que se desea utilizar esta funcionalidad es mediante la especificación del parámetro \texttt{include} con un valor que contenga una o más relaciones del recurso (o recursos asociados) separadas por coma. Por ejemplo, el valor presentado en el bloque \autoref{soa:tecnologias:json-api:obtener-recurso-include} indicaría que se incluyan recursos relacionados.
+
+\begin{listing}
+  \httpfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/obtener-recurso-include.http}
+  \caption{Petición de un recurso y relaciones asociadas en JSON API}
+  \label{soa:tecnologias:json-api:obtener-recurso-include}
+\end{listing}
+
+\paragraph{Selección de campos}
+
+Otra forma incluida en la especificación orientada a la reducción del uso de recursos son los \eng{sparse fieldsets}, recursos que son consultados indicando específicamente qué campos se deben incluir en la respuesta. Así como el apartado anterior explica una forma de reducir requerimientos, este explica una forma de reducir el tamaño de cada respuesta, e inclusive ambos pueden combinarse para reducir la cantidad de campos de diferentes recursos en una misma respuesta JSON API. Es justamente por este tipo de situaciones en que una misma respuesta podría incluir diferentes recursos de diferentes tipos que la forma de especificar qué campos se desean obtener en la respuesta es mediante el parámetro \texttt{fields} el cual es un arreglo de claves y valores, donde las claves son tipos de recursos y los valores los campos a incluir en la respuesta. A continuación, en el bloque de código \autoref{soa:tecnologias:json-api:obtener-recurso-fields}, se presenta un ejemplo de petición utilizando esta posibilidad definida por JSON API.
+
+\begin{listing}
+  \httpfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/obtener-recurso-fields.http}
+  \caption{Petición de un recurso utilizando \eng{sparse fieldsets} e \texttt{include} en JSON API}
+  \label{soa:tecnologias:json-api:obtener-recurso-fields}
+\end{listing}
+
+\paragraph{Especificación de orden}
+
+Al realizar una petición de una colección, donde normalmente se retornará más de un elemento, la especificación reserva el parámetro \texttt{sort} para indicar diferentes criterios de ordenamiento de los recursos en la respuesta. El formato para el valor del parámetro \texttt{sort} es una lista de campos, separados por coma, en la que se puede anteponer un símbolo menos (\texttt{-}) a cada campo en que se quiera indicar un orden descendente. En el bloque de código \autoref{soa:tecnologias:json-api:obtener-recurso-sort} se puede observar un ejemplo de esto.
+
+\begin{listing}
+  \httpfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/obtener-recurso-sort.http}
+  \caption{Petición indicando el orden de una colección de recursos en JSON API}
+  \label{soa:tecnologias:json-api:obtener-recurso-sort}
+\end{listing}
+
+\paragraph{Paginación de colecciones}
+
+JSON API define también una forma estandarizada de limitación de la cantidad de recursos incluidos en cada respuesta a las peticiones realizadas a las colecciones, la cual llama \textit{paginación}. Esta técnica divide en \textit{páginas} de una cierta cantidad de elementos (\textit{tamaño de página}), accesibles mediante un índice o \textit{número de página}, siendo \texttt{1} el número de la primera página.
+
+A fin de que los clientes puedan especificar qué tamaño de página desean utilizar y qué número de página desean obtener, JSON API reserva el parámetro \texttt{page} y define que será un arreglo de clave-valor con dos claves posibles: \texttt{size} y \texttt{number}, para indicar el tamaño y el número de página, respectivamente. En el bloque de código \autoref{soa:tecnologias:json-api:obtener-recurso-page} se muestra un ejemplo de una petición que indica estos parámetros. Si el cliente no especificase nada respecto de la paginación, el servidor puede implementar un comportamiento por defecto a su criterio.
+
+\begin{listing}
+  \httpfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/obtener-recurso-page.http}
+  \caption{Petición indicando parámetros de paginación en JSON API}
+  \label{soa:tecnologias:json-api:obtener-recurso-page}
+\end{listing}
+
+\paragraph{Filtrado de resultados}
+
+Adicionalmente a las posibilidades antes mencionadas, JSON API permite que se filtren los resultados de una petición mediante la palabra clave \texttt{filter}, cuyos valores serán los criterios de búsqueda que el cliente envíe al servidor para reducir el número de recursos únicamente a los que apliquen a dichos criterios. La forma concreta de interpretación de este parámetro se deja abierta a la implementación del servidor. 

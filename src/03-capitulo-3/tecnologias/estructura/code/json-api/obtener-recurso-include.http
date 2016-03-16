@@ -1,0 +1,2 @@
+GET /people/000000000000000000000000027855859?include=document_type HTTP/1.1
+Accept: application/vnd.api+json

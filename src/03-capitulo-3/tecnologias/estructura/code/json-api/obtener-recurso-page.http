@@ -1,0 +1,2 @@
+GET /people?sort=surname,name HTTP/1.1
+Accept: application/vnd.api+json

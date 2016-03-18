@@ -1,5 +1,38 @@
 \subsubsection{HAL}
 \label{soa:tecnologias:hal}
 
+Este formato pensado para las respuestas de \glspl{acro:api} hypermedia, es en sí un \eng{Media type} basado en los formatos \gls{lang:json} o \gls{lang:xml} que define cómo estructurar las respuestas de una \gls{acro:api} para que respete los principios del modelo \gls{term:rest} que hemos tratado con anterioridad, principalmente el de hypermedia. HAL apunta a hacer las \glspl{acro:api} explorables y su documentación accesible desde éstas mismas.
 
-Ver \url{http://stateless.co/hal_specification.html}
+\paragraph{\eng{Media type} dedicado}
+
+Para denotar los documentos \gls{lang:json} o \gls{lang:xml} que utilizan el formato HAL, se deben utilizar los \eng{media types} dedicados a tal fin: \texttt{application/hal+json} y \texttt{application/hal+xml}, respectivamente. Debido a la orientación de nuestro trabajo, de aquí en más nos referiremos únicamente a la variante \gls{lang:json} de HAL.
+
+\paragraph{Diseño sencillo y enfocado}
+
+El principal beneficio de este formato radica en su sencillez, ya que se limita únicamente a definir la estructura que las interrelaciones de las respuestas de nuestros servicios pudieran tener. El concepto que motiva su diseño es intentar que HAL funcione como HTML para máquinas en el sentido que sea el medio para establecer hipervínculos, como ocurre con las páginas web que se vinculan entre sí, que conecten de una manera genérica diferentes interacciones posibles en una o varias \glspl{acro:api}.
+
+\paragraph{El modelo}
+
+HAL posee dos conceptos principales: el \textit{recurso} y los \textit{links} (vínculos). Los recursos HAL poseen links a \glspl{acro:uri}, otros recursos \textit{embebidos} en ellos y un estado representado por sus atributos. Por otra parte, los links poseen un destino (una \gls{acro:uri}), un nombre para la relación que representa (o \texttt{rel}) y opcionalmente otras propiedades que funcionan de metadatos.
+
+Esta estructura permite que los clientes de las \glspl{acro:api} que utilicen HAL naveguen por éstas al seguir los links que los recursos poseen.
+
+En el bloque de código \autoref{soa:tecnologias:hal:ejemplo} podemos distinguir los elementos antes mencionados, de la siguiente forma:
+
+\begin{itemize}
+  \item El documento HAL en su totalidad es el recurso.
+  \item El atributo de primer nivel \verb|_links| es el contenedor de todos los links del recurso.
+  \item Los atributos de primer nivel \texttt{name}, \texttt{surname}, \verb|document_number| y \verb|document_type_id| son los atributos del recurso principal.
+  \item El atributo de primer nivel \verb|_embedded| contiene los recursos embebidos al principal. En este caso, sólo uno: \verb|document_type|.
+
+\end{itemize}
+
+\begin{listing}
+  \jsonfile{src/03-capitulo-3/tecnologias/estructura/code/hal/ejemplo.json}
+  \caption{Recurso HAL de ejemplo}
+  \label{soa:tecnologias:hal:ejemplo}
+\end{listing}
+
+\paragraph{Madurez y actualidad}
+
+HAL surgió a mediados de 2011 y fue actualizado en la segunda mitad de 2013, fecha desde la cual no ha tenido revisiones ni agregados para completarlo.

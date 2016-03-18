@@ -1,0 +1,26 @@
+{
+  "_links": {
+    "self": {
+      "href": "/people/000000000000000000000000027855859"
+    },
+    "document_type": {
+      "href": "/document_types/0"
+    }
+  },
+  "name": "Miguel",
+  "surname": "Carbone",
+  "document_number": "27855859",
+  "document_type_id": "0",
+  "_embedded": {
+    "document_type": {
+      "_links": {
+        "self": {
+          "href": "/document_types/0"
+        }
+      },
+      "abbreviation": "DNI",
+      "code": 0,
+      "name": "Documento Nacional de Identidad"
+    }
+  }
+}

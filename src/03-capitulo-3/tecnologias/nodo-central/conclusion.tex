@@ -1,17 +1,7 @@
 \subsubsection{Conclusión}
 
-Kong o Tyk, porque...
+En esta sección hemos analizado variantes para abordar un mismo problema, la centralización de la distribución de conexiones entre los clientes y los servicios sin generar nuevos cuellos de botella. En el análisis hemos considerado desde un \gls{acro:esb} completo, con toda su estructura, hasta tecnologías que simplemente funcionaban de proxy reverso altamente performante con la posibilidad de administrarlo y algún agregado más.
 
-\textit{TODO: Acomodar las conclusiones que estaban en los productos para unificarlas comparativamente:}
+Este amplio espectro de opciones nos ayudó a comprender mejor nuestras necesidades y, por ende, a tomar una decisión basada en nuestras necesidades y no simplemente en las tendencias de la industria. En un extremo del espectro de opciones nos encontramos con un \gls{acro:esb} completo, lo cual nos resulta demasiado para el planteo que estamos haciendo, ya que incluirlo agregaría capas innecesarias de complejidad a nuestro nodo central. En el opuesto nos encontramos con productos en extremo simples (o tal vez incompletos) que nos generan la necesidad de implementar nosotros algunos elementos para nuestra arquitectura, como ser analíticas o monitoreo de \eng{endpoints}.
 
-\paragraph{Conclusión (tomada de API Axle)}
-
-La falta de mantenimiento, documentación y datos que respalden la posibilidad de usar API Axle seriamente en producción, sumados a la complejidad para instalar la herramienta para hacer una prueba de concepto nos detuvo al momento de continuar analizando este producto.
-
-\paragraph{Conclusión (tomada de API Umbrella)}
-
-API Umbrella se ve muy prometedor, es un producto más grande que otros que hemos analizado como \nameref{soa:tecnologias:kong}, lo cual da soporte para algunas características que no están presentes en el resto como el uso de \nameref{soa:tecnologias:varnish} como cache compartida dentro del mismo proxy, pero presenta un gran inconveniente para considerarlo como una opción en nuestra arquitectura: su nivel de madurez. En el diseño final para la nube de servicios necesitamos utilizar herramientas estables, listas para ser utilizadas en servicios en producción y API Umbrella aún no puede ser considerada lo suficientemente madura y probada como para ser una candidata fuerte para ser incluida en nuestra arquitectura.
-
-\paragraph{Conclusión (tomada de Kong)}
-
-Kong es una excelente alternativa al uso de un \gls{acro:esb}, ya que es más liviano, sencillo de configurar y administrar, altamente extensible y personalizable, y cubre las necesidades que tenemos en cuanto a escalabilidad, transparencia, centralización de la gestión y portabilidad.
+En un punto relativamente intermedio del rango encontramos opciones como \nameref{soa:tecnologias:api-umbrella} y \nameref{soa:tecnologias:tyk}, que nos brindan un buen equilibrio entre prestaciones y complejidad, sin sacrificar nuestras necesidades para este nodo central. Entre estos productos, el aspecto determinante para nuestra elección se basa en su madurez: al momento de realizar este trabajo, \nameref{soa:tecnologias:api-umbrella} no tiene un nivel de estabilidad adecuado para nuestras necesidad, mientras que \nameref{soa:tecnologias:tyk} sí, por lo cual elegimos este último para implementar el nodo central.

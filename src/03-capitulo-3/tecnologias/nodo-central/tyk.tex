@@ -17,17 +17,25 @@ A continuación presentamos un breve listado de las características principales
 
 \begin{itemize}
   \item RESTful API - posee una \gls{acro:api} RESTful, que permite configurar Tyk.
-  \item Multiple access protocols - Tyk soporta múltiples métodos de acceso a la \gls{acro:api}: \eng{Token-based}, \eng{HMAC}, \eng{Basic Auth}, \eng{OAuth2}, \eng{JSON Web Token} y \eng{Keyless}.
-  \item Rate Limiting - permite configurar fácilmente el \eng{rate limit} para cada \eng{API Key}, definiendo la cantidad de peticiones por segundo y el tiempo de expiración (1 hora, 6 horas, 12 horas, 24 horas, 1 semana, 1 mes o nunca expira).
-  \item Policies - permite crear políticas para aplicar \eng{quotas}, \eng{rate limit} y \eng{access rights} a un conjunto de \eng{Keys}.
+  \item Multiple access protocols - Tyk soporta múltiples métodos de acceso a la \gls{acro:api}: \eng{Token-based}, \eng{HMAC}, \eng{Basic Auth}, \eng{OAuth2}, \eng{JSON Web Token} y \eng{Keyless}. \\
+  \url{https://tyk.io/v1.9/access-control/keyless} \\
+  \url{https://tyk.io/v1.9/access-control/json-web-tokens} \\
+  \url{https://tyk.io/v1.9/access-control/basic-auth} \\
+  \url{https://tyk.io/v1.9/access-control/hmac} \\
+  \item Rate Limiting - permite configurar fácilmente el \eng{rate limit} para cada \eng{API Key}, definiendo la cantidad de peticiones por segundo y el tiempo de expiración (1 hora, 6 horas, 12 horas, 24 horas, 1 semana, 1 mes o nunca expira). \\
+  \url{https://tyk.io/v1.9/quotas-limits-security/access-control}
+  \item Policies - permite crear políticas para aplicar \eng{quotas}, \eng{rate limit} y \eng{access rights} a un conjunto de \eng{Keys}. \\
+  \url{https://tyk.io/v1.9/quotas-limits-security/limiting-access}
   \item Path by path permissions - permite configurar permisos de acceso para cada \eng{endpoint}, indicando el método.
-  \item Key Expiry - permite controlar el tiempo de expiración de una \eng{Key}.
+  \item Key Expiry - permite controlar el tiempo de expiración de una \eng{Key}. \\
+  \url{https://tyk.io/v1.9/rest-api/api-key-management}
   \item API Versioning - permite versionar la API de tres maneras diferentes:
   \begin{itemize}
     \item mediante una clave en el encabezado http, por ej. x-api-version
     \item por URL o parámetro en el Form
     \item por el primer elemento de una URL, ej. /v1/resource/id
   \end{itemize}
+  \url{https://tyk.io/v1.9/api-management/api-versioning}
   \item Analyitcs logging - registro detallado de los accesos a las \glspl{acro:api}.
   \item Zero downtime restarts - las configuraciones de Tyk pueden realizarse dinámicamente, reiniciar los servicios sin que esto afecte los requerimientos activos.
   \item Web hooks - fácilmente se pueden integrar notificaciones y eventos que permitirán mejorar el monitoreo.
@@ -38,11 +46,16 @@ A continuación presentamos un breve listado de las características principales
   \item API Blueprint support - permite importar rápidamente una \gls{acro:api} en formato JSON.
   \item Swagger support - permite importar archivos que respeten la especificación \gls{term:swagger}.
   \item Request and Response transformations - permite utilizar templates para transformar datos y agregar o quitar header \eng{on-the-fly}
-  \item Caching - permite implementar una cache para las respuestas por \eng{endpoint} o globalmente, incrementando la velocidad de respuesta, al mismo tiempo que se disminuye la carga de las \gls{acro:api}.
+  \item Caching - permite implementar una cache para las respuestas por \eng{endpoint} o globalmente, incrementando la velocidad de respuesta, al mismo tiempo que se disminuye la carga de las \gls{acro:api}. \\
+  \url{https://tyk.io/v1.9/api-management/caching}
   \item API Documentation, el portal de Tyk soporta API Blueprint y Swagger.
-  \item Virtual Endpoints, como AWS Lambda functions, permite correr fragmentos de JavaScript en los \eng{endpoints} para manejar interacciones complejas de servicios, tales como solicitud de procesamiento por lotes.
-  \item Focus on microservices, permite implementar el patrón \eng{circuit breaker}, hard timeouts y \eng{round-robin}, para balancear la carga en el acceso a los servicios.
-  \item Uptime Awareness, Tyk activamente monitorea los \eng{endpoints} de las \glspl{acro:api} y notifica cuando alguno de estos se encuentra fuera de servicio.
+  \item Virtual Endpoints, como AWS Lambda functions, permite correr fragmentos de JavaScript en los \eng{endpoints} para manejar interacciones complejas de servicios, tales como solicitud de procesamiento por lotes. \\
+  \url{https://tyk.io/v1.9/api-management/virtual-endpoints}
+  \item Focus on microservices, permite implementar el patrón \eng{circuit breaker}, hard timeouts y \eng{round-robin}, para balancear la carga en el acceso a los servicios. \\
+  \url{https://tyk.io/v1.9/api-management/circuit-breakers} \\
+  \url{https://tyk.io/v1.9/api-management/load-balancing}
+  \item Uptime Awareness, Tyk activamente monitorea los \eng{endpoints} de las \glspl{acro:api} y notifica cuando alguno de estos se encuentra fuera de servicio. \\
+  \url{https://tyk.io/v1.9/uptime-tests/uptime-tests}
 \end{itemize}
 
 \paragraph{Instalación y prueba}

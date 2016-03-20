@@ -1,9 +1,9 @@
 \subsubsection{Kong}
 \label{soa:tecnologias:kong}
 
-Es una herramienta desarrollada por la empresa Mashape que permite la fácil administración de \glspl{acro:api}, centralizando el acceso a las mismas desde uno o más servidores que se encargan de llevar registro de qué servicios ofrecen, recibir los requerimientos para éstos y delegar la generación de las respuestas a los \textit{backends} destinados a tal fin.
+Es una herramienta desarrollada por la empresa Mashape que facilita administración de \glspl{acro:api}, centralizando el acceso a las mismas desde uno o más servidores que se encargan de llevar registro de qué servicios ofrecen, recibir los requerimientos para éstos y delegar la generación de las respuestas a los \textit{backends} destinados a tal fin.
 
-Kong funciona con una versión modificada de \nameref{soa:tecnologias:nginx}, haciendo las de \eng{proxy} reverso y proveyendo una estructura extensible mediante el uso de agregados (\eng{plugins}) para brindar funcionalidad adicional a la básica, como ser autenticación, registro en logs, limitación de datos (\eng{rate limiting}), \eng{caching}, por nombrar algunos. Toda su información se almacena en una base de datos no relacional Apache Cassandra, altamente escalable por naturaleza.
+Kong funciona con una versión modificada de \nameref{soa:tecnologias:nginx}, haciendo las veces de \eng{proxy} reverso y proveyendo una estructura extensible mediante el uso de agregados (\eng{plugins}) que permite brindar funcionalidad adicional a la instalación base, como ser autenticación, registro en logs, limitación de datos (\eng{rate limiting}), \eng{caching}, por nombrar algunos. Toda su información se almacena en una base de datos no relacional Apache Cassandra, altamente escalable por naturaleza.
 
 Básicamente, Kong se ubica entre los clientes y las instancias vivas de las \glspl{acro:api}, recibiendo los requerimientos para luego de aplicar las reglas que se le hayan especificado, enviarlos al servicio que corresponda.
 
@@ -13,7 +13,7 @@ Kong está publicado bajo licencia Apache 2.0\footnote{La misma puede ser consul
 
 \paragraph{Extensiones disponibles (\eng{plugins})}
 
-Este producto permite extender su funcionalidad y comportamiento básico mediante la adición de \eng{plugins} que brindan variadas funciones. Adicionalmente, en caso que necesitemos agregar comportamiento que no se encuentra disponible, podemos implementarlo nosotros mismos y contribuir nuestro propia extensión a la comunidad.
+Este producto permite extender su funcionalidad y comportamiento básico mediante la adición de \eng{plugins} que brindan variadas funciones. Adicionalmente, en caso que necesitemos agregar comportamiento que no se encuentra disponible, podemos implementarlo nosotros mismos y contribuir con nuestra propia extensión a la comunidad.
 
 A continuación presentamos un breve listado de las extensiones que Kong ofrece actualmente:
 

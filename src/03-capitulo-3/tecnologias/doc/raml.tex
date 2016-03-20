@@ -1,6 +1,22 @@
 \subsubsection{RAML}
 \label{soa:tecnologias:raml}
 
-RESTful API Modeling Language
+Entre las alternativas sobresalientes para la documentación de \glspl{acro:api} \gls{acro:rest}, encontramos en RAML un conjunto extenso de funcionalidades que no se limita únicamente a la generación de una \gls{term:documentacion-viviente} para nuestros servicios, si no que además permite generar código y tests para realizar pruebas a unidad sobre nuestros \glspl{term:endpoint} mediante el uso de herramientas complementarias diseñadas para esta tecnología.
 
-Ver \url{http://raml.org/}
+RAML, cuyo nombre es el acrónimo para \eng{RESTful API Modeling Language}, es una especificación y un lenguaje de descripción de \glspl{acro:api} \gls{acro:rest} basado en \gls{lang:yaml}, diseñado por un grupo de trabajo integrado por importantes empresas de la industria como Cisco, VMWare, Mulesoft e Intuit. Su premisa es ser una especificación abierta, sin ser dirigida a un proveedor específica, y que su estructura permita describir \glspl{acro:api} \gls{acro:rest} de manera clara, correcta, precisa, consistente, legible, natural e intuitiva.
+
+\paragraph{Licencia}
+
+RAML se encuentra liberado bajo la licencia Apache versión 2.0\footnote{\url{http://raml.org/about/legal}}.
+
+\paragraph{Estructura}
+
+Al escribir la descripción de una \gls{acro:api} \gls{acro:rest} con RAML, debemos crear un archivo principal con extensión \texttt{.raml} que contendrá el nodo raiz de la especificación de los servicios. En ese nodo se define la versión de RAML a utilizar\footnote{Al momento de escritura del presente informe, la versión más reciente de RAML es la \texttt{1.0}}, el título que le damos a la \gls{acro:api}, su dirección base y algunos atributos opcionales como por ejemplo la versión.
+
+Adicionalmente, se definen los recursos que los servicios pueden proveer, identificándolos por sus \glspl{acro:uri}, y anidándolos en caso que se trate de recursos que tengan esa organización. Bajo estas claves que indican los servicios (o sus \glspl{acro:uri}, más precisamente) se especifican qué métodos \gls{proto:http} admite cada \gls{acro:uri}, junto con un detalle de los parámetros que admita (en caso que aplique). Además de describir los servicios y la forma de realizar las peticiones, RAML permite describir las respuestas mediante el uso de ejemplos o esquemas genéricos, agrupándolos por código de estado \gls{proto:http}.
+
+Al ver la forma en que se estructuran las especificaciones RAML, rápidamente notamos que es un formato orientado a la reutilización de recursos y definiciones, buscando en todo momento evitar la repetición innecesaria de información, lo cual es una consideración positiva a la hora de planificar una especificación donde es altamente probable que tanto datos como esquemas se repitan en distintos puntos. En el mismo sentido, permite incluir en cualquier punto de un archivo \texttt{.raml} el contenido de otro archivo para utilizar su contenido, sin que necesariamente se trate de otro archivo con el mismo formato. Esto también asiste a la simplificación del trabajo de documentación y la reutilización de los recursos definidos a lo largo de la especificación que se realiza.
+
+\paragraph{Herramientas}
+
+El ecosistema de herramientas alrededor de RAML es variado, con implementaciones de su \eng{Parser} en los lenguajes más populares, y con algunas librerías (principalmente implementadas en JavaScript mediante Node.js) para servir la \gls{term:documentacion-viviente} generada a partir de los documentos RAML, y con otras para generar tests automatizados de las \glspl{acro:api} \gls{acro:rest} descriptas mediante este lenguaje. Este último punto es una gran ventaja, considerando la importancia que tienen las pruebas automatizadas sobre los servicios críticos que provee la nube de servicios de la UNLP.

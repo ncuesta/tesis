@@ -86,12 +86,12 @@ Asegurarse que el puerto 3000 esté abierto: este puerto es utlizado por el dash
 
 \paragraph{Integración con nuestro diseño}
 
+Para el nuevo diseño de la arquitectura, se implementaría el API Gateway de Tyk como un nodo central, por donde se enrutarían todas las peticiones realizadas desde los diferentes clientes.  Detrás de Tyk tendremos replicadas N instancias de las \glspl{acro:api}, las cuales nos permiten escalar horizontalmente de forma sencilla, Tyk se encargará de realizar el balanceo de la carga a cualquiera de estas instancias replicadas.
+
+La migración de la vieja nube a la nueva arquitectura, se iría realizando de manera progresiva, cambiando el viejo cliente por el nuevo, en cada aplicación.  De esta manera tendremos conviviendo al mismo tiempo, la vieja nube y la nueva arquitectura.
+
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/tyk/tyk-arq.jpg}
   \caption{Esquema de integración de Tyk en nuestra propuesta}
   \label{fig:integracion-tyk-arquitectura}
 \end{figure}
-
-Para el nuevo diseño de la arquitectura, se implementaría la API Gateway de Tyk como un nodo central, por donde se enrutarían todas las peticiones realizadas desde los diferentes clientes.  Detrás de Tyk tendremos replicadas N instancias de las \glspl{acro:api}, las cuales nos permiten escalar horizontalmente de forma sencilla, Tyk se encargará de realizar el balanceo de la carga a cualquiera de estas instancias replicadas.
-
-La migración de la vieja nube a la nueva arquitectura, se iría realizando de manera progresiva, cambiando el viejo cliente por el nuevo, en cada aplicación.  De esta manera tendremos conviviendo al mismo tiempo, la vieja nube y la nueva arquitectura.

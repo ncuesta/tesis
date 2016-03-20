@@ -1,0 +1,24 @@
+\subsubsection{\eng{The OpenAPI Specification}}
+\label{soa:tecnologias:openapi-spec}
+
+Esta especificación, que hasta Enero de 2016 se conocía como \eng{Swagger}, fue donada por la empresa \textit{SmartBear} a la \gls{acro:oai} para fomentar su crecimiento en manos de esta última. La iniciativa \gls{acro:oai} es un consorcio de empresas líderes en la industria\footnote{Entre otros miembros destacados, podemos mencionar a Google, IBM, Microsoft, PayPal, apigee y Mashape - \url{https://openapis.org}} que forma parte de los proyectos colaborativos de la \eng{Linux Foundation} y como tal mantiene un modelo de gobierno abierto entre sus miembros.
+
+La {\oaispec} apunta a ser un estándar, agnóstico tanto tecnológica como corporativamente, para describir las \glspl{acro:api} \gls{acro:rest} que interconectan las aplicaciones relacionadas a la web moderna. Al momento de realización del presente trabajo de análisis, esta especificación se encuentra en su versión \texttt{2.0}, con cierto trabajo de preparación de la tercera versión en proceso por parte de la \gls{acro:oai}.
+
+\paragraph{Licencia}
+
+\oaispec está liberado bajo la licencia Apache versión 2.0\footnote{\url{https://github.com/OAI/OpenAPI-Specification/blob/master/LICENSE}}.
+
+\paragraph{Organización}
+
+La especificación define una organización en archivos que describan la \gls{acro:api} que documentan utilizando el formato \gls{lang:json} o \gls{lang:yaml}, según sea preferencia de quien esté utilizando esta herramienta. Entre esos archivos se cuenta con uno principal y requerido que es \texttt{swagger.json} (o \texttt{swagger.yml}), a partir del cual se comienza la lectura de la información que describe la \gls{acro:api}.
+
+La descripción de una \gls{acro:api} comienza con un \texttt{schema}, que es un objeto \gls{lang:json} que contiene información general como datos sobre el proveedor de los servicios, posibles \texttt{schemes} que utiliza para servir los recursos o tipos MIME utilizados, y luego información más técnica como descripciones detalladas de los \glspl{term:endpoint} que se exponen, parámetros y tipos de datos admitidos, protocolos de seguridad y metadatos como categorías para que al generar la documentación puedan agruparse lógicamente los servicios a partir de éstas.
+
+A partir de estos elementos, se pueden generar descripciones altamente detalladas de una \gls{acro:api} y los servicios que ésta provea, lo cual podría alimentar tanto a clientes automatizados que respeten el estándar de documentación, como a generadores automáticos de documentación que la dejen disponible para ser utilizada por desarrolladores o interesados en utilizar estos servicios.
+
+\paragraph{Herramientas}
+
+Las herramientas disponibles acorde a este estándar están orientadas a tecnologías como Node.js o Java, lo cual deja nuestra elección de lenguaje para el desarrollo de las \glspl{acro:api} (Ruby) parcialmente marginada. Afortunadamente existen gemas que nos permiten integrar la documentación en nuestro mismo código Ruby mediante directivas de un \gls{acro:dsl} dedicado y a partir de esta información generan el archivo \texttt{swagger.json}. Es interesante destacar en este punto que si bien la especificación fue donada a la \gls{acro:oai} y renombrada a \oaispec, el conjunto de herramientas que provee siguen siendo las relacionadas a Swagger.
+
+A partir de ese paso inicial, se puede utilizar la herramienta \eng{Swagger UI} para generar sitios web con la \gls{term:documentacion-viviente}.

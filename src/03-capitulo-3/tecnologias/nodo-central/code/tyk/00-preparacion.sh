@@ -27,7 +27,7 @@ $ echo "deb-src https://packagecloud.io/tyk/tyk-dashboard/ubuntu/ trusty main" |
 $ sudo apt-get update
 
 # 2. Instalación Tyk stack:
-  # Estamos listos para instalar Tyk Gateway y tyk Dashboard, junto con sus principales dependencias: Redis y MongoDB. Para instalar todo ejecutamos el siguiten comando:
+# Estamos listos para instalar Tyk Gateway y tyk Dashboard, junto con sus principales dependencias: Redis y MongoDB. Para instalar todo ejecutamos el siguiten comando:
 
 $ sudo apt-get install -y mongodb-org redis-server tyk-gateway tyk-dashboard
 

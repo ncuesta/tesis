@@ -70,14 +70,12 @@ Tyk puede instalarse de varias maneras:
   \item Instalación de Tyk desde una imagen Docker
 \end{itemize}
 
-En nuestro caso particular se optó por instalar Tyk en Ubuntu 14.04 desde paquetes, por lo tanto a continuación desarrollaremos esta forma de instalación.
+En nuestro caso particular se optó por instalar Tyk en Ubuntu 14.04 desde paquetes, continuación desarrollaremos esta forma de instalación.
 
-Pre-requisites:
+Pre-requisitos:
 
 Asegurarse que el puerto 8080 esté abierto: este puerto es utlizado por el API Gateway
 Asegurarse que el puerto 3000 esté abierto: este puerto es utlizado por el dashboard, quien provee la GUI y el portal para desarrolladores
-
-Para iniciar los dos servicios requeridos por Kong para su funcionamiento (Apache Cassandra y Kong mismo), ejecutamos la siguiente secuencia de comandos:
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/tyk/00-preparacion.sh}

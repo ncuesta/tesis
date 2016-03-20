@@ -122,12 +122,12 @@ Con esta breve prueba de concepto, hemos comprobado que tanto la instalación co
 
 \paragraph{Integración con nuestro diseño}
 
+En nuestra arquitectura, tendríamos inicialmente un balanceador de carga delante de un cluster de instancias de Kong (junto con su correspondiente cluster de bases Cassandra con al menos dos instancias en réplica) como fachada para todas las peticiones a los servicios de la nube, y detrás de este tendríamos las distintas aplicaciones que proveen los \glspl{term:endpoint} específicos. En caso de necesitar escalar, bastará con agregar más instancias al cluster de Kong y, de ser necesario, también al cluster de bases de datos Cassandra.
+
+En su función de proxy reverso, este producto nos será de gran utilidad al transicionar de la nube actual a la que estamos diseñando en este trabajo: podríamos enrutar todas las peticiones del \eng{hostname} \texttt{api2.dataintegration.unlp.edu.ar} a los servicios de la nube anterior y dirigir a las \glspl{acro:api} de la nueva arquitectura aquellas que lleguen a \texttt{cloud.unlp.edu.ar}. De esta forma, la migración de las aplicaciones cliente a la nueva arquitectura sería gradual.
+
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/kong/kong-arq.jpg}
   \caption{Esquema de integración de Kong en nuestra propuesta}
   \label{fig:integracion-kong-arquitectura}
 \end{figure}
-
-En nuestra arquitectura, tendríamos inicialmente un balanceador de carga delante de un cluster de instancias de Kong (junto con su correspondiente cluster de bases Cassandra con al menos dos instancias en réplica) como fachada para todas las peticiones a los servicios de la nube, y detrás de este tendríamos las distintas aplicaciones que proveen los \glspl{term:endpoint} específicos. En caso de necesitar escalar, bastará con agregar más instancias al cluster de Kong y, de ser necesario, también al cluster de bases de datos Cassandra.
-
-En su función de proxy reverso, este producto nos será de gran utilidad al transicionar de la nube actual a la que estamos diseñando en este trabajo: podríamos enrutar todas las peticiones del \eng{hostname} \texttt{api2.dataintegration.unlp.edu.ar} a los servicios de la nube anterior y dirigir a las \glspl{acro:api} de la nueva arquitectura aquellas que lleguen a \texttt{cloud.unlp.edu.ar}. De esta forma, la migración de las aplicaciones cliente a la nueva arquitectura sería gradual.

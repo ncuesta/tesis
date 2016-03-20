@@ -3,9 +3,9 @@
 
 Tyk es un API Gateway liviano y plataforma de administración, todo en un mismo producto, que permite controlar quien tiene acceso a la API, cuando y como.  Escrito en Go, sencillo de configurar, sus únicas dependencias son Redis y MongoDB (v2.6 o superior, requerido para el almacenamiento de los datos de acceso, opcional)
 
-El API Gateway de Tyk se implementa delante de nuestras \glspl{acro:api} para gestionar la autorización, control de acceso y limitación de acceso (\eng{rate limiting}) a nuetros servicios.  De esta manera permite concentranos en el desarrollo de servicios para nuestras \glspl{acro:api}, en lugar de implementar herramientas para la administración de la infraestrucutra, simplemente se desarrollo el servicio, el cual puede ser integrado fácilmente al API Gateway.
+El API Gateway de Tyk se implementa delante de nuestras \glspl{acro:api} para gestionar la autorización, control de acceso y limitación de acceso a nuetros servicios (\eng{rate limiting}).  De esta manera permite concentranos en el desarrollo de servicios para nuestras \glspl{acro:api}, en lugar de implementar herramientas para la administración de la infraestrucutra.  Simplemente se desarrolla el servicio el cual puede ser integrado fácilmente al API Gateway.
 
-Tyk posee un portal para desarrolladores que permite analizar quien y como utilizan nuestras \glspl{acro:api}, limitar el acceso a los servicios (\eng{rate limiting}), utlización de \eng{caching}, generar o rebocar una \eng{Key}, entro otras características.  Todo esto de manera muy sencilla y centralizada, evitando trasladar parte de esta funcionalidad a las \glspl{acro:api}.
+Tyk posee un portal para desarrolladores que permite analizar quien y como utiliza nuestras \glspl{acro:api}, limitar el acceso a los servicios (\eng{rate limiting}), utlización de \eng{caching}, generar o rebocar una \eng{Key}, entre otras características.  Todo esto de manera muy sencilla y centralizada, evitando trasladar parte de esta funcionalidad a las \glspl{acro:api}.
 
 \paragraph{Licencia}
 
@@ -17,11 +17,22 @@ A continuación presentamos un breve listado de las características principales
 
 \begin{itemize}
   \item RESTful API - posee una \gls{acro:api} RESTful, que permite configurar Tyk.
-  \item Multiple access protocols - Tyk soporta múltiples métodos de acceso a la \gls{acro:api}: \eng{Token-based}, \eng{HMAC}, \eng{Basic Auth}, \eng{OAuth2}, \eng{JSON Web Token} y \eng{Keyless}. \\
-  \url{https://tyk.io/v1.9/access-control/keyless} \\
-  \url{https://tyk.io/v1.9/access-control/json-web-tokens} \\
-  \url{https://tyk.io/v1.9/access-control/basic-auth} \\
-  \url{https://tyk.io/v1.9/access-control/hmac} \\
+  \item Multiple access protocols - Tyk soporta múltiples métodos de acceso a la \gls{acro:api}:
+  \begin{itemize}
+    \item \textbf{Token-based:} Autenticación mediante una clave de \gls{acro:api}. \\
+    \url{https://tyk.io/v1.9/access-control/access-keys}
+    \item \textbf{HMAC:} Permite autenticar la identidad del cliente (\eng{consumer}) mediante firmas \gls{acro:hmac} en los mensajes. \\
+    \url{https://tyk.io/v1.9/access-control/hmac}
+    \item \textbf{Basic Auth:} Autenticación mediante usuario y contraseña. \\
+    \url{https://tyk.io/v1.9/access-control/basic-auth}
+    \item \textbf{OAuth2:} Autenticación mediante el protocolo OAuth 2.0. \\
+    \url{https://tyk.io/v1.9/access-control/oauth2}
+    \item \textbf{JSON Web Token:} Provee autenticación mediante el uso del estándar JSON Web Tokens. \\
+    \url{https://tyk.io/v1.9/access-control/json-web-tokens}
+    \item \textbf{Keyless:} Provee acceso abierto \\
+    \url{https://tyk.io/v1.9/access-control/keyless}
+  \end{itemize}
+
   \item Rate Limiting - permite configurar fácilmente el \eng{rate limit} para cada \eng{API Key}, definiendo la cantidad de peticiones por segundo y el tiempo de expiración (1 hora, 6 horas, 12 horas, 24 horas, 1 semana, 1 mes o nunca expira). \\
   \url{https://tyk.io/v1.9/quotas-limits-security/access-control}
   \item Policies - permite crear políticas para aplicar \eng{quotas}, \eng{rate limit} y \eng{access rights} a un conjunto de \eng{Keys}. \\
@@ -51,7 +62,7 @@ A continuación presentamos un breve listado de las características principales
   \item API Documentation, el portal de Tyk soporta API Blueprint y Swagger.
   \item Virtual Endpoints, como AWS Lambda functions, permite correr fragmentos de JavaScript en los \eng{endpoints} para manejar interacciones complejas de servicios, tales como solicitud de procesamiento por lotes. \\
   \url{https://tyk.io/v1.9/api-management/virtual-endpoints}
-  \item Focus on microservices, permite implementar el patrón \eng{circuit breaker}, hard timeouts y \eng{round-robin}, para balancear la carga en el acceso a los servicios. \\
+  \item Foco en microservicios, permite implementar el patrón \eng{circuit breaker}, hard timeouts y \eng{round-robin}, para balancear la carga en el acceso a los servicios. \\
   \url{https://tyk.io/v1.9/api-management/circuit-breakers} \\
   \url{https://tyk.io/v1.9/api-management/load-balancing}
   \item Uptime Awareness, Tyk activamente monitorea los \eng{endpoints} de las \glspl{acro:api} y notifica cuando alguno de estos se encuentra fuera de servicio. \\
@@ -86,7 +97,7 @@ Asegurarse que el puerto 3000 esté abierto: este puerto es utlizado por el dash
 
 \paragraph{Integración con nuestro diseño}
 
-Para el nuevo diseño de la arquitectura, se implementaría el API Gateway de Tyk como un nodo central, por donde se enrutarían todas las peticiones realizadas desde los diferentes clientes.  Detrás de Tyk tendremos replicadas N instancias de las \glspl{acro:api}, las cuales nos permiten escalar horizontalmente de forma sencilla, Tyk se encargará de realizar el balanceo de la carga a cualquiera de estas instancias replicadas.
+Para el nuevo diseño de la arquitectura, se implementaría el API Gateway de Tyk como un nodo central, en el cual se enrutarán todas las peticiones realizadas desde los diferentes clientes.  Detrás de Tyk tendremos replicadas N instancias de las \glspl{acro:api}, las cuales nos permiten escalar horizontalmente de forma sencilla, Tyk se encargará de realizar el balanceo de la carga a cualquiera de estas instancias replicadas.
 
 La migración de la vieja nube a la nueva arquitectura, se iría realizando de manera progresiva, cambiando el viejo cliente por el nuevo, en cada aplicación.  De esta manera tendremos conviviendo al mismo tiempo, la vieja nube y la nueva arquitectura.
 

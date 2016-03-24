@@ -1,26 +1,9 @@
 \subsubsection{Squid}
 \label{soa:tecnologias:squid}
 
-Un \eng{proxy server}, también conocido como \eng{forward proxy server}, actúa como un proxy para los dispositivos que se conectan a él.  Una implementación típica puede ser un \eng{forward proxy} que provee acceso a internet a N clientes.
-En cambio, un \eng{reverse proxy server} es un servidor proxy que recupera recursos desde uno o mas servidores.  Estos recursos se devuelven al cliente como si se hubieran originado desde el propio servidor, es decir, actúa como intermediario entre los clientes y servidores.  Los \eng{reverse proxys} se implementan en las proximidades de los \eng{web servers}, a veces realizan tareas como balanceo de carga, autenticación, o \eng{caching}.
-
-\begin{figure}[H]
-  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/squid/forward-reverse-proxy.png}
-  \caption{Forward proxy y reverse proxy}
-  \label{fig:varnish}
-\end{figure}
-
 \gls{db:squid} es un \eng{proxy server} (\eng{forward proxy server}) para la Web, soporta \gls{proto:http}, \gls{proto:https}, \gls{acro:ftp}, entre otros. Reduce el ancho de banda y mejora los tiempos de respuesta por el almacenamiento en caché y la reutilización de las páginas web frecuentemente solicitadas.  Puede implementarse en la mayoría de los sistemas operativos disponibles, incluyendo Windows y está disponible bajo licencia GNU GPL.
 
-\gls{db:squid} es usado por cientos de proveedores de internet en todo el mundo, para proporcionar a sus usuarios el mejor acceso posible a la web.  Optimiza el flujo de datos entre el cliente y el servidor, utilizando el contenido en caches frecuentemente usado, ahorrando de esta manera ancho de banda y obteniendo mejoras en el rendimiento de los clientes.
-
-ver RFC 2186: Internet Cache Protocol (ICP), version 2
-ver http://www.ietf.org/rfc/rfc2186.txt
-
-
-\paragraph{Licencia}
-
-GNU General Public License
+\gls{db:squid} optimiza el flujo de datos entre el cliente y el servidor, utilizando el contenido en caches frecuentemente usado, ahorrando de esta manera ancho de banda y obteniendo mejoras en el rendimiento de los clientes.
 
 \paragraph{Instalación}
 

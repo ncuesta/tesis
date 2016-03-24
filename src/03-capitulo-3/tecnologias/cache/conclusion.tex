@@ -1,3 +1,25 @@
 \subsubsection{Conclusión}
 
 Varnish, porque...
+
+La diferencia fundamental entre Squid y Varnish, es que Squid es un \eng{forward proxy} que puede ser configurado como \eng{reverse proxy}, mientras que Varnish es un \eng{reverse proxy}.
+
+So, in principle Varnish is better suited than Squid to do reverse proxy HTTP. However, Squid is a very mature product and has had time to accumulate a lot of features that still are not available in Varnish. Both projects are used by huge websites and both of them can do almost anything.
+
+Las principales ventajas de Squid sobre Varnish son:
+
+\begin{itemize}
+  \item Built in SSL support. Varnish needs stud, nginx or stunnel to do SSL.
+  \item Better support for Range and streaming delivery of objects.
+  \item Support for antivirus-plugins
+\end{itemize}
+
+por otro lado, Varnish tiene:
+
+\begin{itemize}
+  \item An absolutely amazing configuration system. VCL gives unmatched flexiblity to run policies. Want to rewrite URLs coming from a certain user-agent requesting a specific URL coming from a specific network? Easy. With Squid, that configuration will be quite complex (if at all possible).
+  \item Better performance and scalability. Squid is a single process running on only one CPU core, whereas Varnish is threaded. Artur Bergman reported having a Varnish server serving 60K req/sec on real life traffic. That's more than most of us ever see and I doubt that you'll be able to see Squid push those kind of numbers.
+  \item Better and more flexible invalidation support. With Varnish you can invalidate content from cache based on more or less everything. I can elaborate on this.
+\end{itemize}
+
+Nobody mentions that Squid follows the HTTP specification to the letter (or at least they try to) whereas Varnish does not. In my opinion, this means Varnish is better suited for caching content for individual sites (by extensively tuning Varnish) and Squid is better for caching content for many sites (each of which will have to make their content cachable according to spec).

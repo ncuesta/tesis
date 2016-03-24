@@ -1,10 +1,9 @@
 \subsubsection{Varnish}
 \label{soa:tecnologias:varnish}
 
-\gls{db:varnish} es un proxy reverso HTTP, a veces referenciado como HTTP accelerator o a web accelerator.  Un proxy reverso es un servidor proxy que recupera recursos desde uno o mas servidores.  Estos recursos se devuelven al cliente como si se hubieran originado desde el propio servidor proxy, es decir, actúa como intermediario entre los clientes y servidores.
-Varnish almacena archivos y framentos de archivos en memoria, lo que reduce el tiempo de respuestea y el ancho de banda de red para las mismas solicitudes.\cite[p.~20]{varnish2016}
+\gls{db:varnish} es un proxy reverso HTTP, a veces referenciado como HTTP accelerator o a \eng{web accelerator}, que almacena archivos y framentos de archivos en memoria, lo que reduce el tiempo de respuestea y el ancho de banda de red para las mismas solicitudes.\cite[p.~20]{varnish2016}
 
-El proyecto fue iniciado en el 2005 por el Noruego Verdens Gang, el arquitecto y desarrollador principal es el consultor danés Poul Henning Kamp, desarrollador del núcleo de FreeBSD. El proyecto además contó con el gerencia, infraestructura y desarrollos adicionales aportados por la comunidad Noruega de Linux, Linpro. El soporte, gerencia y desarrollo luego paso a una empresa independiente, Varnish Software.
+El proyecto Varnish fue iniciado por Verdens Gang en el 2005, contó con la gerencia, infraestructura y desarrollos adicionales aportados por la comunidad Noruega de Linux, que mas tarde pasó a una empresa independiente, Varnish Software.
 
 Dependiendo de su instalación, varnish puede ser usado para:
 
@@ -15,13 +14,18 @@ Dependiendo de su instalación, varnish puede ser usado para:
   \item integration point,
   \item single sign-on gateway,
   \item authentication and authorization policy mechanism,
-  \item quick fix for unstable backends, and
+  \item quick fix for unstable backends,
   \item HTTP router
 \end{itemize}
 
-Como mencionamos anteriormente, \gls{db:varnish} es un acelerador de aplicaciones web, que se instala delante de cualquier servidor HTTP y se configura para almacenar en la caché del servidor una copia del recurso solicitado. Pensado para mejorar el rendimiento de aplicaciones web con contenidos pesados y APIs altamente consumidas.
+Como mencionamos anteriormente, \gls{db:varnish} es un acelerador de aplicaciones web, que se instala delante de cualquier servidor HTTP y se configura para almacenar en la caché del servidor una copia del recurso solicitado. Pensado para mejorar el rendimiento de aplicaciones web con contenidos pesados y APIs altamente consumidas, este será nuestro caso.
 
-Actualmente es utilizado por una gran cantidad de sitios web con alta demanda de tráfico como pueden ser: The New York Times, The Guardian, The Hindu, Corriere della Sera, y sitios de redes sociales y contenidos como Wikipedia, Facebook, Twitter, Vimeo, Tumblr, entre otros. De los top 10K sitios en la web, alrededor de una décima parte usan Varnish Cache.
+para la conclusión
+Para nuestra implementación, se instalará varnish delante del balanceador de carga y por lo tanto, delante de las instancias replicadas en las que se encuentran las diferentes APIs, de esta manera, los accesos recurrentes a los mismos \eng{end points}, serán obtenidos desde la cache de varnish, en lugar de llegar a cualquiera de las APIs, logrando obtener mejores tiempos de respuesta.
+
+
+conseguir fuente de este dato
+Actualmente es utilizado por una gran cantidad de sitios web con alta demanda de tráfico como pueden ser: The New York Times, The Guardian, The Hindu, y sitios de redes sociales y contenidos como Wikipedia, Facebook, Twitter, Vimeo, Tumblr, entre otros. De los top 10K sitios en la web, alrededor de una décima parte usan Varnish Cache.
 
 
 \begin{figure}[H]
@@ -34,7 +38,10 @@ Actualmente es utilizado por una gran cantidad de sitios web con alta demanda de
 
 Varnish Cache es software libre, licenciado bajo una licencia BSD
 
-\paragraph{Instalación y prueba}
+\paragraph{Instalación}
+
+Varnish se distribuye en los respositorios de paquetes de Ubuntu, pero puede suceder que el paquete se encuentre desactualizado por lo tanto se recomienda usar los respositorios de paquestes de varnish-cache.org.
+Para usar los respositorios de varnish-cache.org e instalar Varnish en Ubuntu 14.04, debemos ejecuatar la siguiente secuencias de comandos:
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/cache/code/varnish/00-preparacion.sh}

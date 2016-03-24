@@ -11,16 +11,18 @@ Esto mantendría siempre actualizada la documentación de los servicios, que deb
 
 \subsubsection{Automatización de la arquitectura}
 
-...
+En nuestras pruebas, hemos manejado de manera manual la instalación y configuración de la arquitectura base que utilizamos. Si bien esto puede funcionar bien para un caso testigo como el que aquí hemos presentado, al momento de llevar esto a producción es conveniente tener una forma documentada y replicable de poner en funcionamiento todos los nodos.
+
+En la actualidad, existe una cantidad considerable de herramientas que asisten en esta tarea, como por ejemplo Chef\footnote{\url{https://www.chef.io}}, Ansible\footnote{\url{https://www.ansible.com}} o Puppet\footnote{\url{https://puppetlabs.com}}, por nombrar algunos.
+
+Se deja planteada para el futuro la necesidad de implementar esto con alguna herramienta afin, sea alguna de las aquí mencionadas u otra.
 
 \subsubsection{Extensión de la gema cliente desarrollada}
 
-...
+El desarrollo que realizamos para dar soporte a las necesidades de la {\cloud} en nuestro caso testigo está limitado a aquellos puntos que se necesitó implementar. Aunque esto es un buen punto de partida y la gema resultante es completamente funcional, su alcance no sería suficiente para la implementación completa de la nueva nube de servicios.
 
-\subsubsection{Implementación de pruebas de unidad}
+Queda para etapas posteriores al presente trabajo la tarea de completar la lógica presente en la gema, agregando soporte para los nuevos \glspl{term:endpoint} que pudieran surgir, así como funcionalidad que asista al desarrollo de las aplicaciones cliente que no hayan sido necesarias para nuestro caso testigo.
 
-...
+\subsubsection{Implementación de pruebas}
 
-\subsubsection{Implementación de pruebas de integración}
-
-...
+Una buena práctica a la hora de desarrollar software es mantener una batería de pruebas a realizar sobre el producto para cerciorarnos que su ejecución genera los resultados esperados, y para garantizar que durante la evolución y el mentenimiento del mismo no se modifiquen su lógica de manera que impacte negativamente en dichos resultados. En el desarrollo de nuestro caso testigo obviamos la implementación de ese tipo de pruebas, dejando esto como una deuda técnica a saldar cuando este diseño comenzase a pasarse a desarrollo real. Recomendamos la realización de pruebas de unidad dentro de cada \gls{acro:api}, y de pruebas de integración entre las \glspl{acro:api} y las aplicaciones cliente, para garantizar que ningún cambio realizado en cualquiera de las partes intervinentes en la arquitectura produzca efectos secundarios no deseados en el resto.

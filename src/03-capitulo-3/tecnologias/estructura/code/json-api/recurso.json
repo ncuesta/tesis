@@ -14,8 +14,8 @@
           "related": "/document_types/0/people"
         },
         "data": [
-          { "type": "people", "id": "000000000000000000000000027855859" },
-          { "type": "people", "id": "000000000000000000000000031988189" }
+          { "type": "people", "id": "00027855859" },
+          { "type": "people", "id": "00031988189" }
         ]
       }
     }
@@ -26,7 +26,7 @@
   "included": [
     {
       "type": "people",
-      "id": "000000000000000000000000027855859",
+      "id": "00027855859",
       "attributes": {
         "name": "Miguel",
         "surname": "Carbone",
@@ -38,12 +38,12 @@
         }
       },
       "links": {
-        "self": "/people/000000000000000000000000027855859"
+        "self": "/people/00027855859"
       }
     },
     {
       "type": "people",
-      "id": "000000000000000000000000031988189",
+      "id": "00031988189",
       "attributes": {
         "name": "Jose Nahuel",
         "surname": "Cuesta Luengo",
@@ -55,7 +55,7 @@
         }
       },
       "links": {
-        "self": "/people/000000000000000000000000031988189"
+        "self": "/people/00031988189"
       }
     }
   ]

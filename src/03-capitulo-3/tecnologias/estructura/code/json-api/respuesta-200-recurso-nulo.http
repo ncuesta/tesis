@@ -3,7 +3,7 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "self": "/people/000000000000000000000000027855859/relationships/document_type"
+    "self": "/people/00027855859/relationships/document_type"
   },
   "data": null
 }

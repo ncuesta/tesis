@@ -115,8 +115,8 @@ Como se mencionó anteriormente, las relaciones pueden tener un vínculo a sí m
 El servidor responderá con un código de estado \gls{proto:http} \texttt{200 OK} en caso de tratarse de una consulta exitosa, y con un \texttt{404 Not Found} si se tratase de una petición a una relación sobre un recurso principal inexistente. A modo de ejemplo, se presentan estos dos posibles casos en situaciones concretas:
 
 \begin{itemize}
-  \item \verb|GET /people/000000000000000000000000027855859/relationships/document_type|\\
-    Esta petición, realizada sobre el recurso principal de tipo \texttt{people} con identificador \texttt{000000000000000000000000027855859}, pide el recurso de tipo \verb|document_type| relacionado. Considerando que el recurso principal existe, se retornará invariablemente un código de estado \gls{proto:http} \texttt{200 OK} y una respuesta cuyo atributo \texttt{data} contendrá o bien un recurso existente, o bien un valor nulo (\texttt{null}) en caso que dicho recurso no exista.
+  \item \verb|GET /people/00027855859/relationships/document_type|\\
+    Esta petición, realizada sobre el recurso principal de tipo \texttt{people} con identificador \texttt{00027855859}, pide el recurso de tipo \verb|document_type| relacionado. Considerando que el recurso principal existe, se retornará invariablemente un código de estado \gls{proto:http} \texttt{200 OK} y una respuesta cuyo atributo \texttt{data} contendrá o bien un recurso existente, o bien un valor nulo (\texttt{null}) en caso que dicho recurso no exista.
   \item \verb|GET /people/inexistente/relationships/document_type|\\
     Esta petición, similar a la anterior pero realizada sobre un ficticio recurso principal inexistente, tendrá una respuesta con estado \gls{proto:http} \texttt{404 Not Found} indicando que es el recurso principal el que no existe, y por ende descartando la posibilidad de que la relación solicitada pueda ser obtenida.
 \end{itemize}

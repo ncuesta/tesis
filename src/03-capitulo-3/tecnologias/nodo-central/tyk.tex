@@ -81,17 +81,26 @@ Tyk puede instalarse de varias maneras:
   \item Instalación de Tyk desde una imagen Docker
 \end{itemize}
 
-En nuestro caso particular se optó por instalar Tyk en Ubuntu 14.04 desde paquetes, continuación desarrollaremos esta forma de instalación.
+En nuestro caso particular se optó por instalar Tyk en Ubuntu 14.04 desde paquetes, a continuación desarrollaremos esta forma de instalación.
 
-Pre-requisitos:
+Pre-requisitos:\\
+Asegurarse que el puerto \texttt{8080} esté abierto: este puerto es utlizado por el API Gateway.\\
+Asegurarse que el puerto \texttt{3000} esté abierto: este puerto es utlizado por el dashboard, quien provee la GUI y el portal para desarrolladores.
 
-Asegurarse que el puerto 8080 esté abierto: este puerto es utlizado por el API Gateway
-Asegurarse que el puerto 3000 esté abierto: este puerto es utlizado por el dashboard, quien provee la GUI y el portal para desarrolladores
+Primero preparamos el ambiente del equipo para obtener los paquetes a instalar:
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/tyk/00-preparacion.sh}
-  \caption{Preparación y arranque de Tyk}
+  \caption{Preparación del servidor para instalar Tyk}
   \label{soa:tecnologias:tyk:bash-preparacion}
+\end{listing}
+
+Luego, procedemos a instalar Tyk y sus dependencias:
+
+\begin{listing}[H]
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/tyk/01-instalacion.sh}
+  \caption{Instalación y arranque de Tyk}
+  \label{soa:tecnologias:tyk:bash-instalacion}
 \end{listing}
 
 
@@ -102,7 +111,7 @@ Para el nuevo diseño de la arquitectura, se implementaría el API Gateway de Ty
 La migración de la vieja nube a la nueva arquitectura, se iría realizando de manera progresiva, cambiando el viejo cliente por el nuevo, en cada aplicación.  De esta manera tendremos conviviendo al mismo tiempo, la vieja nube y la nueva arquitectura.
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/tyk/tyk-arq.jpg}
+  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/tyk/tyk-integracion-arquitectura.png}
   \caption{Esquema de integración de Tyk en nuestra propuesta}
   \label{fig:integracion-tyk-arquitectura}
 \end{figure}

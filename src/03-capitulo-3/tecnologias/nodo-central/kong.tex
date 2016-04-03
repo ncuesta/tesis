@@ -146,7 +146,7 @@ En nuestra arquitectura, tendríamos inicialmente un balanceador de carga delant
 En su función de proxy reverso, este producto nos será de gran utilidad al transicionar de la nube actual a la que estamos diseñando en este trabajo: podríamos enrutar todas las peticiones del \eng{hostname} \texttt{api2.dataintegration.unlp.edu.ar} a los servicios de la nube anterior y dirigir a las \glspl{acro:api} de la nueva arquitectura aquellas que lleguen a \texttt{cloud.unlp.edu.ar}. De esta forma, la migración de las aplicaciones cliente a la nueva arquitectura sería gradual.
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/kong/kong-arq.jpg}
+  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/kong/kong-integracion-arquitectura.png}
   \caption{Esquema de integración de Kong en nuestra propuesta}
   \label{fig:integracion-kong-arquitectura}
 \end{figure}

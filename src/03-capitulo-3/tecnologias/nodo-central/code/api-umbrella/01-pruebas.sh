@@ -1,7 +1,6 @@
 # Primero probamos realizar una petición que no tenga una clave válida para
 # corroborar que efectivamente falle
-$ curl -i -k -G https://localhost/google/maps/api/geocode/json \
-       --data "address=La+Plata,+AR"
+$ curl -i -k -G https://localhost/google/maps/api/geocode/json --data "address=La+Plata,+AR"
 HTTP/1.1 403 Forbidden
 Server: openresty
 Content-Type: application/json
@@ -16,9 +15,7 @@ X-Cache: MISS
 }
 
 # Luego, intentamos con la clave que obtuvimos mediante la interfaz web
-$ curl -i -k -G https://localhost/google/maps/api/geocode/json \
-       --data "address=La+Plata,+AR" \
-       --data "api_key=6dn6iL7xTuR1bvSWdRccpP7DCFp5X2OnhdYZzkrI"
+$ curl -i -k -G https://localhost/google/maps/api/geocode/json --data "address=La+Plata,+AR" --data "api_key=6dn6iL7xTuR1bvSWdRccpP7DCFp5X2OnhdYZzkrI"
 HTTP/1.1 200 OK
 Server: openresty
 Content-Type: application/json; charset=UTF-8

@@ -4,6 +4,4 @@ $ docker pull nrel/api-umbrella
 $ mkdir config
 $ touch config/api-umbrella.yml
 # Finalmente podemos ejecutar api umbrella usando docker
-$ docker run -d -p 80:80 -p 443:443 \
-             --name api-umbrella \
-             -v $PWD/config:/etc/api-umbrella nrel/api-umbrella
+$ docker run -d -p 80:80 -p 443:443 --name api-umbrella -v $PWD/config:/etc/api-umbrella nrel/api-umbrella

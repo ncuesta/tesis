@@ -112,11 +112,30 @@ Teniendo esto en cuenta, procederemos a configurar una \gls{acro:api} de pruebas
 
 Una vez agregada una \gls{acro:api}, en nuestro caso lo más probable será que querramos limitar su acceso mediante políticas de seguridad. A tal fin, agregaremos autenticación mediante clave con el \eng{plugin} \textbf{Key} de Kong.
 
+Inicialmente, es necesario habilitar el \eng{plugin} antes mencionado sobre la \gls{acro:api} que hemos creado (\texttt{mockbin}) y probar que no se permitan peticiones sin datos de autenticación.
+
 \begin{listing}[H]
-  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/kong/02-habilitar-key-auth.sh}
-  \caption{Comandos para habilitar autenticación mediante clave y probar Kong}
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/kong/02-probar-sin-auth.sh}
+  \caption{Comandos para habilitar autenticación mediante clave sobre una API}
+  \label{soa:tecnologias:kong:bash-probar-sin-auth}
+\end{listing}
+
+Luego, procedemos a crear un \eng{consumer} (cliente) para asignar a esta \gls{acro:api} y le asignamos una clave para que pueda identificarse ante Kong.
+
+\begin{listing}[H]
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/kong/03-habilitar-key-auth.sh}
+  \caption{Comandos para habilitar un \eng{consumer} y su clave}
   \label{soa:tecnologias:kong:bash-habilitar-key-auth}
 \end{listing}
+
+Y finalmente, probar el requerimiento realizado anteriormente ahora utilizando la clave asignada al consumer creado:
+
+\begin{listing}[H]
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/kong/04-probar-key-auth.sh}
+  \caption{Comandos para probar la autenticación mediante clave antes habilitada}
+  \label{soa:tecnologias:kong:bash-probar-key-auth}
+\end{listing}
+
 
 Con esta breve prueba de concepto, hemos comprobado que tanto la instalación como el uso de Kong son sencillos, lo cual lo hace un gran candidato para su utilización como nodo central de la nueva arquitectura de la nube de servicios de la {\unlp}.
 

@@ -28,7 +28,7 @@ Idealmente, el cambio de tecnología en el \gls{acro:esb}, no debe tener ningún
 Con la aparición de estándares como \gls{ws:soap}, se estabecieron bases para las aplicaciones altamente interoperables mediante \eng{Web Services}. Este tipo de tecnologías abrieron muchas posibilidades pero tambien trajeron nuevos desafíos. Uno de ellos es la proliferación de comunicaciones punto a punto entre sistemas, que a menudo conduce a un modelo de integración llamado ``plato de espaguetis'', con relaciones muchos a muchos entre diferentes aplicaciones. Si bien el problema de la interoperabilidad entre las aplicaciones se resolvía, se dificultaba su mantenimiento.\cite[p.~4]{dossotandemic2010}.
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/esb/integracion-p2p.png}
+  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/integracion-p2p.png}
   \caption{Diagrama ejemplificando la integración punto a punto}
   \label{fig:point-to-point-integration}
 \end{figure}
@@ -44,7 +44,7 @@ En una arquitectura en la que se implemente un \gls{acro:esb}, las aplicaciones 
 Otra manera en que un \gls{acro:esb} basado en un protocolo de punto a punto puede proporcionar indirección a las llamadas de servicio, es con los llamados \eng{interceptors} o \eng{proxies}. Estos elementos, que forman parte del \gls{acro:esb}, se ubican por delante de los servicios existentes y delegan en ellos las peticiones, pero sólo luego de procesarlas y decidir la mejor forma de tratarlas. Un enfoque sencillo es reemplazar el \eng{endpoint} que ofrece un servicio, con un balanceador de carga. Los consumidores siguen utilizando el mismo \eng{endpoint}, donde se delega la verdadera tarea, solo que cuando los mensajes llegan, el interceptor los distribuye a las diferentes instancias que proveen ese servicio\cite[p.~52]{josuttis2007}.
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/esb/esb-interceptors-load-balancer.png}
+  \includegraphics[width=\linewidth]{src/images/02-capitulo-2/esb-interceptor.png}
   \caption{Un ESB como interceptor balancea la carga de los proveedores de servicios}
   \label{fig:esb-interceptors-load-balancer}
 \end{figure}

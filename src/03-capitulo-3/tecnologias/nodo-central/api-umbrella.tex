@@ -10,12 +10,12 @@ Este producto está publicado bajo licencia MIT\footnote{\url{https://github.com
 \paragraph{Arquitectura interna}
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/api-umbrella/api-umbrella-arq.png}
+  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/api-umbrella/api-umbrella-arquitectura.png}
   \caption{Arquitectura interna de API Umbrella}
   \label{fig:arquitectura-interna-api-umbrella}
 \end{figure}
 
-Como se puede ver en el diagrama \nameref{fig:arquitectura-interna-api-umbrella} tomado de la documentación oficial de la herramienta, API Umbrella está compuesto de una serie de elementos que se enlazan secuencialmente, de más externos (cercanos al cliente) a más internos (cercanos a los \eng{backends}):
+Como se puede ver en el diagrama \nameref{fig:arquitectura-interna-api-umbrella} (\autoref{fig:arquitectura-interna-api-umbrella}), según la documentación oficial de la herramienta API Umbrella está compuesto de una serie de elementos que se enlazan secuencialmente, de más externos (cercanos al cliente) a más internos (cercanos a los \eng{backends}):
 
 \begin{itemize}
   \item \textbf{Ruteo inicial con balanceo de carga:} Un servidor \nameref{soa:tecnologias:nginx} recibe las peticiones de los clientes y las deriva al \eng{Gatekeeper} o al sitio para desarrolladores, según sea o no una petición a una \gls{acro:api}.

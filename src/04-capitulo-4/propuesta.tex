@@ -72,7 +72,7 @@ El hecho de dividir la aplicación en componentes pequeños y \eng{deployables} 
 Los sistemas distribuidos tienen potencialmente más fallos que los sistemas monolíticos, ya que en cada solicitud intervienen decenas (o cientos) de microservicios diferentes\cite[p.~48]{stin2015}. Es por esto que no resulta suficiente descomponer un sistema en unidades independientes; también hay que evitar que un fallo en uno de estas cause un fallo en cascada\cite[p.~4]{stin2015}, situación en que un error en una capa interna provoca un fallo en la capa más externa\cite[p.~65]{nygard2007}. Mike Nygard describe en su libro ``Release It!''\cite{nygard2007} varios patrones tolerantes a fallos, de los cuales el mas popular es el \eng{Circuit Breaker}.
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{src/images/04-capitulo-4/circuit_breaker.png}
+  \includegraphics[width=\linewidth]{src/images/04-capitulo-4/circuit-breaker.png}
   \caption{Patrón de tolerancia a fallos \eng{Circuit Breaker}}
   \label{fig:circuit_breaker}
 \end{figure}

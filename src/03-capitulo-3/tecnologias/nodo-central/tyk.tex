@@ -1,7 +1,7 @@
 \subsubsection{Tyk}
 \label{soa:tecnologias:tyk}
 
-Tyk es un API Gateway liviano y plataforma de administración, todo en un mismo producto, que permite controlar quién tiene acceso a la API, cuéndo y cómo.  Está escrito en Go, es sencillo de configurar, y sus únicas dependencias son Redis y MongoDB (\texttt{v2.6} o superior, utilizado para el almacenamiento de los datos de acceso, de caracter opcional).
+Tyk es un API Gateway liviano y plataforma de administración, todo en un mismo producto, que permite controlar quién tiene acceso a la API, cuándo y cómo.  Está escrito en Go, es sencillo de configurar, y sus únicas dependencias son Redis y MongoDB (\texttt{v2.6} o superior, utilizado para el almacenamiento de los datos de acceso, de caracter opcional).
 
 El API Gateway de Tyk se implementa delante de nuestras \glspl{acro:api} para gestionar la autorización, el control de acceso y la limitación de acceso a nuetros servicios (\eng{rate limiting}).  De esta manera permite concentranos en el desarrollo de servicios para nuestras \glspl{acro:api}, en lugar de implementar herramientas para la administración de la infraestructura.  Esto nos permite enfocarnos en el desarrollo de los servicios, para luego integrarlos fácilmente al API Gateway.
 

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker run --rm -v "`pwd`:/latex" -e max_print_line=1000 -e error_line=254 -e half_error_line=238 -i ncuesta/latex

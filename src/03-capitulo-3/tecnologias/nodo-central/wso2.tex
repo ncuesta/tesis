@@ -1,0 +1,128 @@
+\subsubsection{WSO2 ESB}
+\label{soa:tecnologias:wso2-esb}
+
+WSO2 es una compañía de tecnología \eng{open source}, que proporciona \eng{middleware} de \gls{acro:soa}.  Es conocida por sus productos: \eng{Enterprise Service Bus}, \eng{API Management} y \eng{Governance} por nombrar algunos, utilizados por eBay, Boeing y Experian entre otros.
+
+WSO2 fue fundada por Dr. Sanjiva Weerawarana y Paul Fremantle en agostos de 2005, ha sido respaldada por Intel Capital, Toba Capital, Pacific Controls.  WSO2 ESB es rápido, ligero y versátil, 100\% \eng{open source}, basado en los proyectos Apache Synapse\footnote{\url{http://synapse.apache.org/}} y Apache Axis2\footnote{\url{http://axis.apache.org/axis2/java/core/}}, ha desmotrado interoperabilidad con la mayoría de los stack de web services, incluyendo Microsoft .NET WCF.
+
+Utilizando WSO2 ESB se pueden implementar una gran variedad de patrones de integración empresarial \eng{enterprise integration patterns (EIPs)}, incluyendo filtrado, transformaciones y ruteo SOAP, binario, XML y de mensajes de texto, atravesando los sistemas de la organización sobre HTTP, HTTPS, JMS, mail, etc.
+
+El WSO2 ESB se implementaría delante de nuestras \glspl{acro:api} proporcionando balanceo de carga entre las réplicas y para la administración de las \glspl{acro:api}, se implementaría WSO2 API Manager que permite crear, publicar y administrar todos los aspectos relativos a una \glspl{acro:api} y su ciclo de vida, gestionar la autorización y control de acceso de los \eng{endpoints}.
+
+\paragraph{Licencia}
+
+WSO2 ESB se encuentra publicado bajo licencia Apache 2.0\footnote{La misma puede ser consultada accediendo a \url{http://www.apache.org/licenses/LICENSE-2.0}}.
+
+\paragraph{Características principales}
+
+\begin{itemize}
+  \item Adaptadores a servicios en la nube: posee un store con mas de 100 conectores\footnote{https://store.wso2.com/store/assets/esbconnector} como por ejemplo: CRM, ERP, redes sociales entre otros.
+  \item Soporte para diferentes tipos de transporte: HTTP, HTTPS, POP, IMAP, SMTP, JMS, AMQP, RabbitMQ, FIX, TCP, UDP, FTPS, SFTP, MLLP, SMS, MQTT y Apache Kafka.
+  \item Formatos y protocolos: JSON, XML, SOAP 1.1, SOAP 1.2, WS-*, HTML, EDI, HL7, OAGIS, Hessian, Text, JPEG, MP4.
+  \item Adaptadores para productos comerciales: SAP BAPI \& IDoc, IBM WebSphere MQ, Oracle AQ y MSMQ.
+  \item Ruteo: basado en headers, basado en contenido, basado en reglas y basado en prioridades.
+  \item Transformaciones: XSLT 1.0\/2.0, XPath, XQuery y Smooks.
+  \item Alto rendimiento, alta disponibilidad, escalabilidad y estabilidad, soporta 1000 conexiones HTTP(S) concurrentes no bloqueantes por servidor.
+  \item Baja latencia en escenarios de alto rendimiento.
+  \item Permite escalar horizontalmente.
+  \item Estabilidad de ejecución a largo plazo con baja utilización de recursos.
+  \item Permite balanceo de carga y failover para \eng{endpoints} de alta disponibilidad.
+\end{itemize}
+
+
+\paragraph{Instalación}
+
+A continuación se detallan los pasos necesarios para la instalación y ejecución de WSO2 ESB, basándonos en su documentación oficial \footnote{\url{https://docs.wso2.com/display/ESB403/Installing+ESB+on+Linux+and+Solaris+from+Source+Distribution}}.  Previo a la instalación se debe verificar los siguientes prerrequisitos necesarios: \footnote{https://docs.wso2.com/display/ESB403/ESB+Installation+Prerequisites}
+
+\begin{itemize}
+  \item Java SE Development Kit (JDK)
+  \item Apache ActiveMQ JMS Provider
+  \item Apache Ant
+  \item Apache Maven
+\end{itemize}
+
+Paso 1. Obtener el Pack de Instalación.\\
+Descargar la última versión de WSO2 ESB (para la descarga seguir las siguientes instrucciones \footnote{La misma puede ser consultada accediendo a \url{https://docs.wso2.com/display/ESB403/Obtaining+ESB}})
+
+\begin{listing}[H]
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/wso2/00-instalacion.sh}
+  \caption{Comando para descargar los fuentes de WSO2 ESB}
+  \label{soa:tecnologias:wso2:bash-descargar-fuentes}
+\end{listing}
+
+Paso 2. Extraer el archivo.\\
+Una vez descaragos los fuentes, extraer los archivos de instalación en el directorio home:
+
+\begin{listing}[H]
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/wso2/01-instalacion.sh}
+  \caption{Comando para descomprimir zip}
+  \label{soa:tecnologias:wso2:bash-descomprimir-zip}
+\end{listing}
+
+Paso 3. Construir el WSO2 Enterprise Service Bus.\\
+Ejecutar el siguiente comando para construir WSO2 ESB en el directorio de instalación
+
+\begin{listing}[H]
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/wso2/02-instalacion.sh}
+  \caption{Comando para construir WSO2 ESB}
+  \label{soa:tecnologias:wso2:bash-maven-clean}
+\end{listing}
+
+Paso 4. Configuración de la variable JAVA\_HOME.\\
+Es necesaria la variable de entorno JAVA\_HOME para poder ejecutar WSO2 ESB.  La variable apunta al directorio donde se encuentra instalado \eng{Java Development Kit (JDK)}.
+
+Editar el archivo BASHRC del directorio home y agregar la variable de entorno JAVA\_HOME.  Para configurar la variable JAVA\_HOME, seguir los siguientes pasos:
+
+\begin{enumerate}
+  \item Abrir el archivo BASHRC
+  \item Agregar las siguientes líneas al final del archivo:
+\end{enumerate}
+
+\begin{listing}[H]
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/wso2/03-instalacion.sh}
+  \caption{Comandos para configurar variables de entorno}
+  \label{soa:tecnologias:wso2:bash-configurar-variables-de-entorno}
+\end{listing}
+
+3. Guardar los cambios en el archivo.
+
+\begin{listing}[H]
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/wso2/04-instalacion.sh}
+  \caption{Vericamos el contenido}
+  \label{soa:tecnologias:wso2:bash-cat}
+\end{listing}
+
+4. Para verficar la correcta configuración de la variable JAVA\_HOME, ejecutar el siguiente comando:
+
+\begin{listing}[H]
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/wso2/05-instalacion.sh}
+  \caption{Verificamos la variable de entorno JAVA\_HOME}
+  \label{soa:tecnologias:wso2:bash-verificar-variable-de-entorno}
+\end{listing}
+
+Paso 5. Acceder a la consola de administración de ESB.\\
+El ESB ya se encuentra instalado, ahora procedemos a iniciar el servicio, para esto realizar los siguientes pasos:\\
+
+\begin{enumerate}
+  \item Realizar una conección SSH al servidor.\\
+  \item Ir al directorio <ESB\_HOME>/bin, donde ``<ESB\_HOME>'' es el directorio donde se encuentran los archivos de WSO2 ESB.\\
+  \item Ejecutar el siguiente comando para iniciar el ESB:\\
+\end{enumerate}
+
+\begin{listing}[H]
+  \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/wso2/06-instalacion.sh}
+  \caption{Comando para iniciar el servicio}
+  \label{soa:tecnologias:wso2:bash-inicio-de-servicio}
+\end{listing}
+
+\paragraph{Integración con nuestro diseño}
+
+Para el nuevo diseño de la arquitectura, se implementaría WSO2 ESB como nodo central, en el cual se enrutarán todas las peticiones realizadas desde los diferentes clientes.  Detrás de WSO2 ESB tendremos replicadas N instancias de las \glspl{acro:api}, las cuales nos permiten escalar horizontalmente de forma sencilla, WSO2 ESB se encargará de realizar el balanceo de la carga a cualquiera de estas instancias replicadas.  Delante del WSO2 ESB se instalará WSO2 API Manager para administrar las \glspl{acro:api}, geststionar la autorización y control de acceso.
+
+Si bien se presenta como un producto robusto y con amplias posibilidad de escalar, se trata de una solución demasiado compleja para el alcance de este trabajo, que intenta rediseñar la nube de servicios de la UNLP, por lo que el API Gateway de Tyk resulta suficiente para este propósito.
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/wso2/wso2_esb.png}
+  \caption{Esquema de integración de WSO2 ESB en nuestra propuesta}
+  \label{fig:integracion-wso2-esb-arquitectura}
+\end{figure}

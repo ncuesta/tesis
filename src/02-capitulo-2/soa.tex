@@ -7,7 +7,7 @@ Inicialmente, el acceso en tiempo real se lograba vía comunicaciones de socket 
 
 En la década de 1980 las computadoras personales habían entrado en escena y los desarrolladores estaban buscando formas más eficaces para aprovechar la potencia de cálculo de estos equipos. Asimismo, el número de servidores dentro de las organizaciones se incrementó exponencialmente debido a la disminución en el precio del hardware. Estas tendencias, junto con la creciente madurez de \gls{acro:rpc}, impulsaron dos importantes avances en la computación distribuida: \gls{acro:corba} y \gls{acro:dcom}, tecnologías que ofrecían herramientas para desarrollar aplicaciones distribuidas en entornos heterogéneos. Estas comunicaciones entre las organizaciones eran caras y dependían de líneas alquiladas con propósitos específicos que formaban circuitos privados, lo cual resultaba práctico solamente para las grandes empresas.
 
-A finales de la década de 1990, con la extendida adopción de internet las compañías comenzaron a reconocer los beneficios de expandir sus plataformas digitales a socios y clientes, principalmente por la reducción de costos que este medio ofrecía. Desafortunadamente, la utilización de \gls{acro:corba} o \gls{acro:dcom} para las comunicaciones en internet resultó ser todo un reto, en parte debido a las restricciones impuestas por los \eng{firewalls}, que sólo permitían el tráfico \gls{proto:http} (necesario para los navegadores y comunicaciones con servidores web), y en parte porque ni \gls{acro:corba}, ni \gls{acro:dcom} lograron dominar el mercado.
+A finales de la década de 1990, con la extendida adopción de Internet las compañías comenzaron a reconocer los beneficios de expandir sus plataformas digitales a socios y clientes, principalmente por la reducción de costos que este medio ofrecía. Desafortunadamente, la utilización de \gls{acro:corba} o \gls{acro:dcom} para las comunicaciones en Internet resultó ser todo un reto, en parte debido a las restricciones impuestas por los \eng{firewalls}, que sólo permitían el tráfico \gls{proto:http} (necesario para los navegadores y comunicaciones con servidores web), y en parte porque ni \gls{acro:corba}, ni \gls{acro:dcom} lograron dominar el mercado.
 
 Cuando el protocolo \gls{ws:soap} apareció por primera vez en enero de 2000, fue promocionado como la panacea debido a su dependencia interoperable en \gls{lang:xml}. \gls{ws:soap} fue concebido principalmente como una alternativa a \gls{acro:corba} y \gls{acro:dcom} para realizar llamadas remotas a procedimientos. En este sentido, vale la pena señalar que RPC SOAP era una mejora sobre las implementaciones \gls{acro:rpc} anteriores, ya que se basó en \gls{lang:xml}, lo que facilitó un mayor grado de interoperabilidad entre los lenguajes de programación.
 
@@ -15,20 +15,18 @@ Si bien el procesamiento distribuido basado en \gls{acro:rpc}, fue sin duda algu
 
 \begin{itemize}
   \item La alta dependencia entre los sistemas locales y remotos requiere demandas de ancho de banda significativo, existiendo la posibilidad de que una excesiva cantidad de llamadas \gls{acro:rpc} de un cliente al servidor puedan generar una carga sustancial en la red.
-  \item La naturaleza de grano fino de \gls{acro:rpc} requiere una red altamente predecible. En este sentido, la latencia impredecible, como es el caso de las comunicaciones sobre internet, es inaceptable para las soluciones basadas en \gls{acro:rpc}.
+  \item La naturaleza de grano fino de \gls{acro:rpc} requiere una red altamente predecible. En este sentido, la latencia impredecible, como es el caso de las comunicaciones sobre Internet, es inaceptable para las soluciones basadas en \gls{acro:rpc}.
   \item La compatibilidad de tipos de datos de \gls{acro:rpc}, que tiene como objetivo proporcionar un soporte completo para todos los tipos de datos nativos (\texttt{array}, \texttt{string}, \texttt{integer}, etc.), dificultó la compatibilización de lenguajes tales como C++ y Java.
 \end{itemize}
 
 Los mensajes RPC SOAP también sufrieron las mismas limitaciones inherentes como las mencionadas anteriormente. Afortunadamente, \gls{ws:soap} ofrece estilos de mensajes alternativos que superan estas deficiencias.
-
-% se puede agregar mas del libro Open Source SOA - Advent of SOA - pp 7-8, hay un gráfico que esta bueno
 
 \subsection{Arquitecturas Orientadas a Servicios}
 \label{soa:definicion}
 
 La Arquitectura Orientada a Servicios (\gls{acro:soa}) establece un marco de diseño para la integración de aplicaciones distribuidas e independientes, permitiendo acceder desde la red a sus funcionalidades que se ofrecen como servicio. Habitualmente \gls{acro:soa} es implementado mediante servicios web (\eng{Web Services}), tecnología basada en estándares e independiente de la plataforma que provee los datos, de esta manera \gls{acro:soa} puede descomponer las aplicaciones monolíticas en un conjunto de servicios\cite{microsoft2006}.
 
-Existen varias definiciones de \gls{acro:soa}, muchas incluyen el término \eng{Web Service}, pero éstos conceptos no son lo mismo. \gls{acro:soa} es un paradigma y \eng{Web Service} es una forma posible de implementarlo.
+Existen varias definiciones de \gls{acro:soa}, muchas incluyen el término \eng{Web Service}, pero estos conceptos no son lo mismo. \gls{acro:soa} es un paradigma y \eng{Web Service} es una forma posible de implementarlo.
 
 Según Thomas Erl\cite{principlesofdesign:erl}, \gls{acro:soa} establece ``un modelo arquitectónico que tiene como objetivo mejorar la eficiencia, agilidad y productividad de una organización mediante la colocación de los servicios como el principal medio a través del cual se realizan los objetivos estratégicos asociados a la comunicación orientada a servicios''.
 
@@ -45,7 +43,7 @@ A continuación enumeramos los 9 principios fundamentales de \gls{acro:soa}:
 
   \item Servicios con bajo acoplamiento (\eng{Loose Coupling}): hace referencia al nivel de dependencia entre servicios. Cuanto menos acoplamiento, mayor independencia para el diseño del servicio y su posterior evolución.
 
-  \item Abstracción de servicio: este principio pone el enfásis en ocultar los detalles internos del servicio. Indica que debe comportarse como una caja negra y estar únicamente definido por su contrato, que a su vez es el mínimo acoplamiento posible con el consumidor del mismo.
+  \item Abstracción de servicio: este principio pone el énfasis en ocultar los detalles internos del servicio. Indica que debe comportarse como una caja negra y estar únicamente definido por su contrato, que a su vez es el mínimo acoplamiento posible con el consumidor del mismo.
 
   \item Reusabilidad de servicio: la arquitectura \gls{acro:soa} no busca la sustitución de las lógicas de negocio actuales sino que proporciona una forma de reaprovechar todos estos activos encapsulándolos en servicios para que a su vez puedan ser reutilizados por otros servicios.
 

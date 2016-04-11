@@ -3,13 +3,13 @@
 
 Tyk es un API Gateway liviano y plataforma de administración, todo en un mismo producto, que permite controlar quién tiene acceso a la API, cuándo y cómo.  Está escrito en Go, es sencillo de configurar, y sus únicas dependencias son Redis y MongoDB (\texttt{v2.6} o superior, utilizado para el almacenamiento de los datos de acceso, de caracter opcional).
 
-El API Gateway de Tyk se implementa delante de nuestras \glspl{acro:api} para gestionar la autorización, el control de acceso y la limitación de acceso a nuetros servicios (\eng{rate limiting}).  De esta manera permite concentranos en el desarrollo de servicios para nuestras \glspl{acro:api}, en lugar de implementar herramientas para la administración de la infraestructura.  Esto nos permite enfocarnos en el desarrollo de los servicios, para luego integrarlos fácilmente al API Gateway.
+El API Gateway de Tyk se implementa delante de nuestras \glspl{acro:api} para gestionar la autorización, el control de acceso y la limitación de acceso a nuestros servicios (\eng{rate limiting}).  De esta manera permite concentrarnos en el desarrollo de servicios para nuestras \glspl{acro:api}, en lugar de implementar herramientas para la administración de la infraestructura.  Esto nos permite enfocarnos en el desarrollo de los servicios, para luego integrarlos fácilmente al API Gateway.
 
-Tyk posee un portal para desarrolladores que permite analizar quién y cómo utiliza nuestras \glspl{acro:api}, limitar el acceso a los servicios (\eng{rate limiting}), modificar parámetros de \eng{caching}, y generar o revocar una \eng{API Key}, entre otras características.  Todo esto de manera muy sencilla y centralizada, evitando trasladar parte de esta funcionalidad a los servicios.
+Tyk posee un portal para desarrolladores que permite analizar quién y cómo utiliza nuestras \glspl{acro:api}, limitar el acceso a los servicios (\eng{rate limiting}), modificar parámetros de \eng{caching}, y generar o revocar una \eng{API key}, entre otras características.  Todo esto de manera muy sencilla y centralizada, evitando trasladar parte de esta funcionalidad a los servicios.
 
 \paragraph{Licencia}
 
-Tyk se encuentra publicado bajo licencia Mozilla Public License Version 2.0\footnote{La misma puede ser consultada en \url{https://www.mozilla.org/en-US/MPL/2.0}}.
+Tyk se encuentra publicado bajo licencia Mozilla Public License versión 2.0\footnote{La misma puede ser consultada en \url{https://www.mozilla.org/en-US/MPL/2.0}}.
 
 \paragraph{Características principales}
 
@@ -42,9 +42,9 @@ A continuación presentamos un breve listado de las características principales
   \url{https://tyk.io/v1.9/rest-api/api-key-management}
   \item Versionado de las \glspl{acro:api}: permite versionar las \glspl{acro:api} de tres maneras diferentes:
   \begin{itemize}
-    \item Mediante una clave en el encabezado \gls{proto:http}, por ejemplo \texttt{X-Api-Version}.
-    \item Por \gls{acro:url} o parámetro en el cuerpo de la petición.
-    \item Por el primer elemento de una \gls{acro:url}, ejemplo \texttt{/v1/resource/id} (donde \texttt{v1} es la versión).
+    \item mediante una clave en el encabezado \gls{proto:http}, por ejemplo \texttt{X-Api-Version},
+    \item por \gls{acro:url} o parámetro en el cuerpo de la petición,
+    \item por el primer elemento de una \gls{acro:url}, ejemplo \texttt{/v1/resource/id} (donde \texttt{v1} es la versión).
   \end{itemize}
   \url{https://tyk.io/v1.9/api-management/api-versioning}
   \item Analíticas: registro detallado de los accesos a las \glspl{acro:api}.
@@ -65,7 +65,7 @@ A continuación presentamos un breve listado de las características principales
   \item Foco en microservicios: permite implementar el patrón \eng{circuit breaker}, \eng{hard timeouts} y \eng{round robin}, para balancear la carga en el acceso a los servicios. \\
   \url{https://tyk.io/v1.9/api-management/circuit-breakers} \\
   \url{https://tyk.io/v1.9/api-management/load-balancing}
-  \item Uptime Awareness: Tyk activamente monitorea los \eng{endpoints} de las \glspl{acro:api} y notifica cuando alguno de estos se encuentra fuera de servicio. \\
+  \item Uptime Awareness: Tyk activamente monitorea los \eng{endpoints} de las \glspl{acro:api} y notifica cuando alguno de éstos se encuentra fuera de servicio. \\
   \url{https://tyk.io/v1.9/uptime-tests/uptime-tests}
 \end{itemize}
 
@@ -83,11 +83,14 @@ Tyk puede instalarse de varias maneras:
 
 En nuestro caso particular se optó por instalar Tyk en Ubuntu 14.04 desde paquetes, a continuación desarrollaremos esta forma de instalación.
 
-Pre-requisitos:\\
-Asegurarse que el puerto \texttt{8080} esté abierto: este puerto es utlizado por el API Gateway.\\
-Asegurarse que el puerto \texttt{3000} esté abierto: este puerto es utlizado por el dashboard, quien provee la GUI y el portal para desarrolladores.
+Inicialmente el equipo donde se instalará Tyk debe debe cumplir con los siguientes requisitos:
 
-Primero preparamos el ambiente del equipo para obtener los paquetes a instalar:
+\begin{itemize}
+  \item Asegurarse que el puerto \texttt{8080} esté abierto: este puerto es utlizado por el API Gateway.
+  \item Asegurarse que el puerto \texttt{3000} esté abierto: este puerto es utlizado por el dashboard, quien provee la GUI y el portal para desarrolladores.
+\end{itemize}
+
+Primero preparamos el ambiente del equipo para obtener los paquetes a instalar con los comandos descriptos en el bloque de código \autoref{soa:tecnologias:tyk:bash-preparacion}:
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/tyk/00-preparacion.sh}
@@ -95,7 +98,7 @@ Primero preparamos el ambiente del equipo para obtener los paquetes a instalar:
   \label{soa:tecnologias:tyk:bash-preparacion}
 \end{listing}
 
-Luego, procedemos a instalar Tyk y sus dependencias:
+Luego, procedemos a instalar Tyk y sus dependencias con los comandos del bloque de código \autoref{soa:tecnologias:tyk:bash-instalacion}:
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/tyk/01-instalacion.sh}
@@ -103,10 +106,11 @@ Luego, procedemos a instalar Tyk y sus dependencias:
   \label{soa:tecnologias:tyk:bash-instalacion}
 \end{listing}
 
+Con los pasos anteriores, tuvimos una instancia de Tyk en ejecución para realizar pruebas.
 
 \paragraph{Integración con nuestro diseño}
 
-Para el nuevo diseño de la arquitectura, se implementaría el API Gateway de Tyk como un nodo central, en el cual se enrutarían todas las peticiones realizadas desde los diferentes clientes.  Detrás de Tyk tendríamos replicadas distintas instancias de las \glspl{acro:api}, las cuales nos permitirían escalar horizontalmente de forma sencilla, ya que Tyk se encargaría de realizar el balanceo de la carga a cualquiera de estas instancias replicadas.
+Para el nuevo diseño de la arquitectura, se implementaría el API Gateway de Tyk como un nodo central, en el cual se enrutarían todas las peticiones realizadas desde los diferentes clientes.  Detrás de Tyk tendríamos replicadas distintas instancias de las \glspl{acro:api}, las cuales nos permitirían escalar horizontalmente de forma sencilla, ya que Tyk se encargaría de realizar el balanceo de la carga a cualquiera de estas instancias replicadas. En la \autoref{fig:integracion-tyk-arquitectura} se puede apreciar la posible arquitectura incluyendo a Tyk como nodo central.
 
 La migración de la vieja nube a la nueva arquitectura se iría realizando de manera progresiva, cambiando la lógica de acceso antigua por la nueva en cada aplicación.  De esta manera tendríamos conviviendo al mismo tiempo la vieja nube y la nueva arquitectura que en el presente trabajo estamos definiendo.
 

@@ -1,9 +1,6 @@
 $ curl https://packagecloud.io/gpg.key | sudo apt-key add -
 $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-
-# Actulizamos la lista de paquetes:
 $ sudo apt-get update
-
 # Nos aseguramos de tener soporte para acceder a respositorios por https:
 $ sudo apt-get install -y apt-transport-https
 

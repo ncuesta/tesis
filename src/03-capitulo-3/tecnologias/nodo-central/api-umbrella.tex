@@ -1,7 +1,7 @@
 \subsubsection{API Umbrella}
 \label{soa:tecnologias:api-umbrella}
 
-Es un producto open source desarrollado por la NREL (\eng{National Renewable Energy Laboratory}) que actualmente está en uso por el Gobierno de Estados Unidos en la \gls{acro:api} su sitio de \eng{open data}. Su función es la de un proxy que se ubica delante de las aplicaciones que proveen las \glspl{acro:api} (los \eng{\gls{acro:api} backends}) y procesa los requerimientos entrantes para esos servicios con un conjunto de reglas configurables, envía esos requerimientos a los proveedores correspondientes para finalmente enviar al cliente la respuesta. En la superficie es similar a Kong, pero su arquitectura interna es mucho más compleja, como veremos en breve.
+Es un producto open source desarrollado por la NREL (\eng{National Renewable Energy Laboratory}) que actualmente está en uso por el Gobierno de Estados Unidos en la \gls{acro:api} su sitio de \eng{open data}. Su función es la de un proxy que se ubica delante de las aplicaciones que proveen las \glspl{acro:api} (los \eng{\gls{acro:api} backends}) y procesa los requerimientos entrantes para esos servicios con un conjunto de reglas configurables, envía esos requerimientos a los proveedores correspondientes para finalmente enviar al cliente la respuesta. En la superficie es similar a Kong, pero su arquitectura interna es mucho más compleja, como veremos a continuación.
 
 \paragraph{Licencia}
 
@@ -15,16 +15,16 @@ Este producto está publicado bajo licencia MIT\footnote{\url{https://github.com
   \label{fig:arquitectura-interna-api-umbrella}
 \end{figure}
 
-Como se puede ver en el diagrama \nameref{fig:arquitectura-interna-api-umbrella} (\autoref{fig:arquitectura-interna-api-umbrella}), según la documentación oficial de la herramienta API Umbrella está compuesto de una serie de elementos que se enlazan secuencialmente, de más externos (cercanos al cliente) a más internos (cercanos a los \eng{backends}):
+Como se puede ver en la \autoref{fig:arquitectura-interna-api-umbrella}: \nameref{fig:arquitectura-interna-api-umbrella}, según la documentación oficial de la herramienta API Umbrella está compuesto de una serie de elementos que se enlazan secuencialmente, de más externos (cercanos al cliente) a más internos (cercanos a los \eng{backends}):
 
 \begin{itemize}
   \item \textbf{Ruteo inicial con balanceo de carga:} Un servidor \nameref{soa:tecnologias:nginx} recibe las peticiones de los clientes y las deriva al \eng{Gatekeeper} o al sitio para desarrolladores, según sea o no una petición a una \gls{acro:api}.
-  \item \textbf{\eng{Gatekeeper}:} Una aplicación hecha en Node JS recibe peticiones para las \glspl{acro:api}, aplica restricciones (autenticación, autorización y rate limiting) y transformaciones (reescritura de las peticiones originales), y registra datos de consumo de los servicios para poder utilizarlos con una herramienta de analíticas.
-  \item \textbf{Cache HTTP:} Un servidor \nameref{soa:tecnologias:varnish} se ubica justo antes del enrutador de las \glspl{acro:api} para evitar que éstas reciban accesos si la respuesta para el servicio solicitado ya se encuentra en esta cache compartida.
+  \item \textbf{\eng{Gatekeeper}:} Una aplicación hecha en Node.js\footnote{Node.js es un \eng{runtime} para JavaScript basado en V8, el motor de ejecución de ese lenguaje del navegador Google Chrome, que permite ejecutar código escrito en JavaScript del lado del servidor. En la actualidad se encuentra en gran auge por las posibilidades de integración que provee, su velocidad y creciente comunidad de usuarios.\\\url{https://nodejs.org/en/about}} recibe peticiones para las \glspl{acro:api}, aplica restricciones (autenticación, autorización y rate limiting) y transformaciones (reescritura de las peticiones originales), y registra datos de consumo de los servicios para poder utilizarlos con una herramienta de analíticas.
+  \item \textbf{Cache HTTP:} Un servidor \nameref{soa:tecnologias:varnish} (Cf. \autoref{soa:tecnologias:varnish}) se ubica justo antes del enrutador de las \glspl{acro:api} para evitar que éstas reciban accesos si la respuesta para el servicio solicitado ya se encuentra en esta cache compartida.
   \item \textbf{Ruteo de servicios con balanceo de carga:} Por último, otro \nameref{soa:tecnologias:nginx} funciona como enrutador de los \glspl{term:endpoint} reales que cada \eng{backend} provee, pudiendo también balancear la carga entre distintas instancias de cada uno.
 \end{itemize}
 
-En particular, el \eng{Gatekeeper} merece un gráfico propio describiendo su flujo de trabajo para aplicar restricciones, modificar las peticiones y registrar datos de analíticas. Dicha lógica se puede apreciar en detalle en el diagrama \nameref{fig:api-umbrella-gatekeeper}. Del detalle del flujo de trabajo de este componente se desprenden el resto de los servicios que completan la arquitectura de API Umbrella:
+En particular, el \eng{Gatekeeper} merece un gráfico propio describiendo su flujo de trabajo para aplicar restricciones, modificar las peticiones y registrar datos de analíticas. Dicha lógica se puede apreciar en detalle en la \autoref{fig:api-umbrella-gatekeeper}: \nameref{fig:api-umbrella-gatekeeper}. Del detalle del flujo de trabajo de este componente se desprenden el resto de los servicios que completan la arquitectura de API Umbrella:
 
 \begin{itemize}
   \item Bases de datos \gls{db:nosql} MongoDB para almacenar configuración y claves de acceso (\eng{\gls{acro:api} keys}).
@@ -40,7 +40,7 @@ En particular, el \eng{Gatekeeper} merece un gráfico propio describiendo su flu
 
 \paragraph{Instalación y prueba}
 
-Al igual que en el caso de \nameref{soa:tecnologias:kong}, y ya que NREL provee una imagen oficial para ejecutar API Umbrella, utilizamos Docker para realizar una prueba de concepto del producto. A continuación detallamos los pasos realizados.
+Al igual que en el caso de \nameref{soa:tecnologias:kong}, y ya que NREL provee una imagen oficial para ejecutar API Umbrella, utilizamos Docker para realizar una prueba de instalación del producto, evaluando sus características, facilidad de instalación y potencial. A continuación detallamos los pasos realizados.
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/api-umbrella/00-preparacion.sh}
@@ -58,13 +58,7 @@ En el archivo de configuración debemos mínimamente definir las direcciones de 
   \label{fig:api-umbrella-api-backend}
 \end{figure}
 
-\begin{figure}
-  \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/api-umbrella/api-key-request.png}
-  \caption{Interfaz web de solicitud de clave de acceso a los servicios de API Umbrella}
-  \label{fig:api-umbrella-api-key-request}
-\end{figure}
-
-Para poder utilizar este nuevo \gls{term:endpoint} debemos obtener una clave de acceso (\eng{\gls{acro:api} key}), y para esto API Umbrella provee una interfaz web dedicada que puede observarse en la \autoref{fig:api-umbrella-api-key-request}. Completando los datos solicitados obtendremos nuestra clave de acceso para que nuestras peticiones sean autorizadas, en nuestro caso obtuvimos la clave \texttt{6dn6iL7xTuR1bvSWdRccpP7DCFp5X2OnhdYZzkrI}. Utilizando esta clave y la \gls{acro:url} definida anteriormente, podemos realizar las siguientes peticiones para probar el correcto funcionamiento del producto:
+Para poder utilizar este nuevo \gls{term:endpoint} es necesaria una clave de acceso (\eng{\gls{acro:api} key}), para lo cual API Umbrella provee una interfaz web dedicada. Completando los datos solicitados obtendremos nuestra clave de acceso para que nuestras peticiones sean autorizadas (en nuestro caso obtuvimos la clave \texttt{6dn6iL7xTuR1bvSWdRccpP7DCFp5X2OnhdYZzkrI}). Utilizando esta clave y la \gls{acro:url} definida anteriormente, podemos realizar las peticiones detalladas en el bloque de código \autoref{soa:tecnologias:api-umbrella:bash-pruebas} para probar el correcto funcionamiento del producto, haciendo una petición sin credenciales primero y luego la misma petición incluyendo la información de autenticación. Al hacer esto, intentamos corroborar que la primer petición sea denegada mientras que la segunda obtenga la respuesta exitosa esperada.
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/api-umbrella/01-pruebas.sh}
@@ -72,16 +66,16 @@ Para poder utilizar este nuevo \gls{term:endpoint} debemos obtener una clave de 
   \label{soa:tecnologias:api-umbrella:bash-pruebas}
 \end{listing}
 
-Con estos comandos pudimos comprobar varias situaciones:
+Con estas pruebas pudimos comprobar varias situaciones:
 
 \begin{itemize}
-  \item En primer lugar, que API Umbrella requiere por defecto el uso de claves de acceso para responder a los servicios para los que funciona de proxy. Este enfoque ``seguro por defecto'' es altamente deseable, ya que implica que para consumir la información que nuestros servicios proveen, se debe obtener una clave de acceso y por ende se debe identificar al \eng{consumer} de la información - en nuestro caso, serían las aplicaciones cliente las que identifiquemos, pero si llegásemos a proveer nuestra información a terceros, éstos deberían primero identificarse para obtener una clave de acceso y así permitirnos tener una noción de quién y cuánto utiliza nuestra información.
+  \item En primer lugar, que API Umbrella requiere por defecto el uso de claves de acceso para responder a los servicios para los que funciona de proxy. Este enfoque ``seguro por defecto'' es altamente deseable, ya que implica que para consumir la información que nuestros servicios proveen, se debe obtener una clave de acceso y por ende se debe identificar al cliente (\eng{consumer}) de la información - en nuestro caso, serían las aplicaciones cliente las que identifiquemos, pero si llegásemos a proveer nuestra información a terceros, éstos deberían primero identificarse para obtener una clave de acceso y así permitirnos tener una noción de quién y cuánto utiliza nuestra información.
   \item En segundo lugar, que efectivamente hay un \nameref{soa:tecnologias:varnish} funcionando internamente a API Umbrella. Esto se hace evidente en las cabeceras que esta cache compartida agrega a las respuestas \gls{proto:http}: \texttt{X-Cache} y \texttt{Age}. Adicionalmente, API Umbrella agrega las cabeceras correspondientes para indicar cuándo y por cuánto tiempo se pueden almacenar en caches intermedias las respuestas, mediante \texttt{Cache-Control} y \texttt{Expires}.
   \item También comprobamos que las respuestas tienen límites en la tasa de consultas que podemos hacer. Esto se hace evidente en las cabeceras \texttt{X-RateLimit-Limit} y \texttt{X-RateLimit-Remaining} que indican respectivamente el límite aplicable y la cantidad de peticiones que nos quedan disponibles hasta que se cumpla el período de tiempo del límite y esos contadores se reinicien.
   \item Y por último, aunque no por eso menos importante, que el producto funciona correctamente haciendo de proxy del servicio de geocodificación de Google, al devolvernos una respuesta correcta para nuestra consulta.
 \end{itemize}
 
-Luego de realizar algunas peticiones, podemos utilizar la potente herramienta de análisis de tráfico y respuestas que provee API Umbrella para tener una idea del uso que nuestra instancia está teniendo, junto con datos como quién, cuándo, cuánto, cómo y desde dónde está usando nuestras \glspl{acro:api}. En la \autoref{fig:api-umbrella-analytics} se puede apreciar, a modo de ejemplo, parte de información que se puede obtener mediante esta herramienta.
+Luego de realizar algunas peticiones, podemos utilizar la potente herramienta de análisis de tráfico y respuestas que provee API Umbrella para tener una idea del uso que nuestra instancia está teniendo, junto con datos como quién, cuándo, cuánto, cómo y desde dónde está usando nuestras \glspl{acro:api}. En la \autoref{fig:api-umbrella-analytics} se puede apreciar, a modo de ejemplo, parte de la información que se puede obtener mediante esta herramienta.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/api-umbrella/analytics.png}

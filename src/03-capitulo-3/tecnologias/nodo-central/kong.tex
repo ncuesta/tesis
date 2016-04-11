@@ -3,7 +3,7 @@
 
 Es una herramienta desarrollada por la empresa Mashape que facilita administración de \glspl{acro:api}, centralizando el acceso a las mismas desde uno o más servidores que se encargan de llevar registro de qué servicios ofrecen, recibir los requerimientos para éstos y delegar la generación de las respuestas a los \textit{backends} destinados a tal fin.
 
-Kong funciona con una versión modificada de \nameref{soa:tecnologias:nginx}, haciendo las veces de \eng{proxy} reverso y proveyendo una estructura extensible mediante el uso de agregados (\eng{plugins}) que permite brindar funcionalidad adicional a la instalación base, como ser autenticación, registro en logs, limitación de datos (\eng{rate limiting}), \eng{caching}, por nombrar algunos. Toda su información se almacena en una base de datos no relacional Apache Cassandra, altamente escalable por naturaleza.
+Kong funciona con una versión modificada del servidor web \nameref{soa:tecnologias:nginx} (Cf. \autoref{soa:tecnologias:nginx}), haciendo las veces de \eng{proxy} reverso y proveyendo una estructura extensible mediante el uso de agregados (\eng{plugins}) que permite brindar funcionalidad adicional a la instalación base, como ser autenticación, registro en logs, limitación de datos (\eng{rate limiting}), \eng{caching}, por nombrar algunos. Toda su información se almacena en una base de datos no relacional Apache Cassandra, altamente escalable por naturaleza.
 
 Básicamente, Kong se ubica entre los clientes y las instancias vivas de las \glspl{acro:api}, recibiendo los requerimientos para luego de aplicar las reglas que se le hayan especificado, enviarlos al servicio que corresponda.
 
@@ -34,7 +34,7 @@ A continuación presentamos un breve listado de las extensiones que Kong ofrece 
 
   \item \textbf{Seguridad:} Las siguientes extensiones de Kong proveen capas adicinales de seguridad a los servicios:
   \begin{itemize}
-    \item \textbf{\gls{acro:acl}:} Agrega listas de control de acceso para limiter qué consumers pueden acceder a qué \glspl{acro:api}. \\
+    \item \textbf{\gls{acro:acl}:} Agrega listas de control de acceso para limiter qué clientes (\eng{consumers}) pueden acceder a qué \glspl{acro:api}. \\
     \url{https://getkong.org/plugins/acl}
     \item \textbf{\gls{acro:cors}:} Permite que se realicen requerimientos desde distintos dominios con las limitaciones que impongamos, algo ideal para la implementación de clientes puramente desarrollados en JavaScript que corran por completo en el navegador de los usuarios. \\
     \url{https://getkong.org/plugins/cors}
@@ -46,9 +46,9 @@ A continuación presentamos un breve listado de las extensiones que Kong ofrece 
 
   \item \textbf{Control de tráfico:} Estas extensiones habilitan reglas de control sobre el tráfico entrante y saliente de nuestras \glspl{acro:api}:
   \begin{itemize}
-    \item \textbf{Límite de tasa de consulta (\eng{Rate limiting}):} Permite limitar la cantidad de requerimientos que un cliente puede hacer a los servicios en un periodo de tiempo dado. \\
+    \item \textbf{Límite de tasa de consulta (\eng{Rate limiting}):} Permite limitar la cantidad de requerimientos que un cliente puede hacer a los servicios en un período de tiempo dado. \\
     \url{https://getkong.org/plugins/rate-limiting}
-    \item \textbf{Límite de tasa de respuesta (\eng{Response rate limiting}):} Hace posible limitar la cantidad de respuestas que los servicios envían en un periodo de tiempo dado (aplica límites sobre el tráfico saliente). \\
+    \item \textbf{Límite de tasa de respuesta (\eng{Response rate limiting}):} Hace posible limitar la cantidad de respuestas que los servicios envían en un período de tiempo dado (aplica límites sobre el tráfico saliente). \\
     \url{https://getkong.org/plugins/response-rate-limiting}
     \item \textbf{Límite de tamaño de solicitud (\eng{Request size limiting}):} Bloquea aquellos requerimientos cuyo cuerpo exceda un límite que especifiquemos en su tamaño. \\
     \url{https://getkong.org/plugins/request-size-limiting}
@@ -120,7 +120,7 @@ Inicialmente, es necesario habilitar el \eng{plugin} antes mencionado sobre la \
   \label{soa:tecnologias:kong:bash-probar-sin-auth}
 \end{listing}
 
-Luego, procedemos a crear un \eng{consumer} (cliente) para asignar a esta \gls{acro:api} y le asignamos una clave para que pueda identificarse ante Kong.
+Una vez comprobado que es necesario incluir información de autenticación para poder acceder al servicio, procedemos a crear un \eng{consumer} (cliente) para asignar a esta \gls{acro:api} y le asignamos una clave para que pueda identificarse ante Kong.
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/kong/03-habilitar-key-auth.sh}
@@ -128,7 +128,7 @@ Luego, procedemos a crear un \eng{consumer} (cliente) para asignar a esta \gls{a
   \label{soa:tecnologias:kong:bash-habilitar-key-auth}
 \end{listing}
 
-Y finalmente, probar el requerimiento realizado anteriormente ahora utilizando la clave asignada al consumer creado:
+Finalmente, probamos el requerimiento realizado anteriormente ahora utilizando la clave asignada al consumer creado, para corroborar que al incluir los datos de acceso correctos Kong nos provee la respuesta esperada por parte del servicio:
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/nodo-central/code/kong/04-probar-key-auth.sh}
@@ -141,9 +141,9 @@ Con esta breve prueba de concepto, hemos comprobado que tanto la instalación co
 
 \paragraph{Integración con nuestro diseño}
 
-En nuestra arquitectura, tendríamos inicialmente un balanceador de carga delante de un cluster de instancias de Kong (junto con su correspondiente cluster de bases Cassandra con al menos dos instancias en réplica) como fachada para todas las peticiones a los servicios de la nube, y detrás de este tendríamos las distintas aplicaciones que proveen los \glspl{term:endpoint} específicos. En caso de necesitar escalar, bastará con agregar más instancias al cluster de Kong y, de ser necesario, también al cluster de bases de datos Cassandra.
+En nuestra arquitectura tendríamos inicialmente un balanceador de carga delante de un cluster de instancias de Kong (junto con su correspondiente cluster de bases Cassandra con al menos dos instancias en réplica) como fachada para todas las peticiones a los servicios de la nube, y detrás de éste tendríamos las distintas aplicaciones que proveen los \glspl{term:endpoint} específicos. En caso de necesitar escalar, bastará con agregar más instancias al cluster de Kong y, de ser necesario, también al cluster de bases de datos Cassandra. La \autoref{fig:integracion-kong-arquitectura} presenta en un diagrama la posible arquitectura propuesta incluyendo Kong como nodo central.
 
-En su función de proxy reverso, este producto nos será de gran utilidad al transicionar de la nube actual a la que estamos diseñando en este trabajo: podríamos enrutar todas las peticiones del \eng{hostname} \texttt{api2.dataintegration.unlp.edu.ar} a los servicios de la nube anterior y dirigir a las \glspl{acro:api} de la nueva arquitectura aquellas que lleguen a \texttt{cloud.unlp.edu.ar}. De esta forma, la migración de las aplicaciones cliente a la nueva arquitectura sería gradual.
+Al poder funcionar como \eng{proxy} reverso, este producto nos será de gran utilidad al transicionar de la nube actual a la que estamos diseñando en este trabajo: nos permitiría enrutar todas las peticiones que lleguen al \eng{hostname} \texttt{api2.dataintegration.unlp.edu.ar} a los servicios de la nube anterior y dirigir a las \glspl{acro:api} de la nueva arquitectura aquellas que lleguen a \texttt{cloud.unlp.edu.ar}. De esta forma, la migración de las aplicaciones cliente a la nueva arquitectura sería gradual.
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{src/images/03-capitulo-3/tecnologias/kong/kong-integracion-arquitectura.png}

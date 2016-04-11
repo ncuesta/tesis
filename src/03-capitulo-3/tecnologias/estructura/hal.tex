@@ -1,7 +1,7 @@
 \subsubsection{HAL}
 \label{soa:tecnologias:hal}
 
-Este formato pensado para las respuestas de \glspl{acro:api} hypermedia, es en sí un \eng{Media type} basado en los formatos \gls{lang:json} o \gls{lang:xml} que define cómo estructurar las respuestas de una \gls{acro:api} para que respete los principios del modelo \gls{term:rest} que hemos tratado con anterioridad, principalmente el de hypermedia. HAL apunta a hacer las \glspl{acro:api} explorables y su documentación accesible desde éstas mismas.
+Este formato pensado para las respuestas de \glspl{acro:api} hypermedia, es en sí un \eng{media type} basado en los formatos \gls{lang:json} o \gls{lang:xml} que define cómo estructurar las respuestas de una \gls{acro:api} para que respete los principios del modelo \gls{term:rest} que hemos tratado con anterioridad, principalmente el de hypermedia. HAL apunta a hacer las \glspl{acro:api} explorables y su documentación accesible desde éstas mismas.
 
 \paragraph{\eng{Media type} dedicado}
 
@@ -22,7 +22,7 @@ En el bloque de código \autoref{soa:tecnologias:hal:ejemplo} podemos distinguir
 \begin{itemize}
   \item El documento HAL en su totalidad es el recurso.
   \item El atributo de primer nivel \verb|_links| es el contenedor de todos los links del recurso.
-  \item Los atributos de primer nivel \texttt{name}, \texttt{surname}, \verb|document_number| y \verb|document_type_id| son los atributos del recurso principal.
+  \item Los atributos de primer nivel \texttt{name}, \texttt{surname}, \verb|document_number| y \\ \verb|document_type_id| son los atributos del recurso principal.
   \item El atributo de primer nivel \verb|_embedded| contiene los recursos embebidos al principal. En este caso, sólo uno: \verb|document_type|.
 
 \end{itemize}

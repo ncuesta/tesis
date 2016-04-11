@@ -3,17 +3,17 @@
 A continuación se detallan algunas de las ventajas de \gls{db:varnish} por sobre \gls{db:squid}:
 
 \begin{itemize}
-  \item Poul-Henning Kamp explica en \cite{website:www.varnish-cache.org} que \gls{db:varnish} delega en el kernel la administración de la memoria virtual, mientras que \gls{db:squid} intenta mantener separados el almacenamiento en disco y la memoria cache, lo que genera conflictos acerca de lo que debe paginarse a disco.
+  \item Poul-Henning Kamp explica en \cite{website:varnish-cache.org} que \gls{db:varnish} delega en el kernel la administración de la memoria virtual, mientras que \gls{db:squid} intenta mantener separados el almacenamiento en disco y la memoria cache, lo que genera conflictos acerca de lo que debe paginarse a disco.
 
-  \item Mejor performance y escalabilidad, \gls{db:squid} corre como un único proceso en un core de CPU, mientras \gls{db:varnish} utiliza un hilo (\eng{thread}) para cada cliente.
+  \item Mejor performance y escalabilidad, \gls{db:squid} corre como un único proceso en un núcleo de CPU, mientras \gls{db:varnish} utiliza un hilo (\eng{thread}) para cada conexión de cliente.
 
-  \item \gls{db:varnish} utiliza VCL (\eng{Varnish Configuration Language}), que es un potente lenguaje de configuración que permite definir políticas de \eng{caching}, las mismas luego serán traducidas a código C, para más tarde ser compiladas.  Sin embargo, con \gls{db:squid}, algunas configuraciones resultan demasiado complejas, otras incluso no pueden realizarse.
+  \item \gls{db:varnish} utiliza VCL (\eng{Varnish Configuration Language}), que es un potente lenguaje de configuración que permite definir políticas de \eng{caching}, las mismas luego serán traducidas a código C, para más tarde ser compiladas.  En el caso de \gls{db:squid}, algunas configuraciones resultan demasiado complejas, y otras incluso no pueden realizarse.
 
-  \item Actualmente \gls{db:varnish} es utilizado por una gran cantidad de sitios web con alta demanda de tráfico como pueden ser: The New York Times, The Guardian, The Hindu, sitios de redes sociales y contenidos como: Wikipedia, Facebook, Twitter, Vimeo, Tumblr, entre otros.
+  \item Actualmente \gls{db:varnish} es utilizado por una gran cantidad de sitios web con alta demanda de tráfico como pueden ser: The New York Times, The Guardian, The Hindu, y sitios de redes sociales y contenidos como Wikipedia, Facebook, Twitter, Vimeo, Tumblr, entre otros.
 
-  \item Squid no soporta ESI o invalidaciones explícitas.
+  \item Squid no soporta ESI (\eng{Edge-Side Includes}, un mecanismo de caching con invalidaciones parciales dentro de un mismo recurso) o invalidaciones explícitas.
 
-  \item Squid es un \eng{forward proxy} que puede ser configurado como \eng{reverse proxy}, mientras que Varnish es un \eng{reverse proxy}.
+  \item Squid es un \eng{forward proxy} que puede ser configurado como \eng{reverse proxy}, mientras que Varnish es un \eng{reverse proxy} que adicionalmente puede funcionar como \eng{forward proxy}.
 \end{itemize}
 
-Además de las ventajas mencionadas anteriormente, el equipo de desarrollo del {\cespi} cuenta con la experiencia necesaria en la utlización de \gls{db:varnish}, ya que actualmente se encuentra implementado en producción para desarrollos realizados para la Universidad.  Por lo tanto, para nuestra implementación se instalará \gls{db:varnish} delante del balanceador de carga y de las instancias replicadas en las que se encuentran las diferentes \glspl{acro:api}, de esta manera, los accesos recurrentes a los mismos \eng{endpoints}, serán obtenidos desde la cache de \gls{db:varnish}, en lugar de acceder a cualquiera de las APIs, logrando obtener mejores tiempos de respuesta.
+Además de estas ventajas, el equipo de desarrollo del {\cespi} cuenta con la experiencia necesaria en la utlización de \gls{db:varnish}, ya que actualmente se encuentra implementado en producción para desarrollos realizados para la Universidad.  Por lo tanto, para nuestra implementación se instalará \gls{db:varnish} delante del balanceador de carga y de las instancias replicadas en las que se encuentran las diferentes \glspl{acro:api}, de esta manera, los accesos recurrentes a los mismos \eng{endpoints}, serán obtenidos desde la cache de \gls{db:varnish}, en lugar de acceder a cualquiera de las APIs, logrando obtener mejores tiempos de respuesta.

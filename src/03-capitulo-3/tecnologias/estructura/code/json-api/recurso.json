@@ -20,9 +20,7 @@
       }
     }
   },
-  "links": {
-    "self": "/document_types/0"
-  },
+  "links": { "self": "/document_types/0" },
   "included": [
     {
       "type": "people",
@@ -37,9 +35,7 @@
           "data": { "type": "document_types", "id": "0" }
         }
       },
-      "links": {
-        "self": "/people/00027855859"
-      }
+      "links": { "self": "/people/00027855859" }
     },
     {
       "type": "people",
@@ -54,9 +50,7 @@
           "data": { "type": "document_types", "id": "0" }
         }
       },
-      "links": {
-        "self": "/people/00031988189"
-      }
+      "links": { "self": "/people/00031988189" }
     }
   ]
 }

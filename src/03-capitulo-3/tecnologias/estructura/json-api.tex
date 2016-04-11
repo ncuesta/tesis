@@ -7,9 +7,9 @@ En este análisis resumiremos de manera concisa los puntos sobresalientes de la 
 
 \paragraph{\eng{Media type} dedicado}
 
-Tanto los datos que el cliente envía en su petición como la respuesta del servidor deben indicar el \eng{media type} dedicado de JSON API: \texttt{application/vnd.api+json}\footnote{Este tipo de contenido fue asignado por la IANA - \url{http://www.iana.org/assignments/media-types/application/vnd.api+json}}.
+Tanto los datos que el cliente envía en su petición como la respuesta del servidor deben indicar el \eng{media type} dedicado de JSON API para cumplir con la especificación. El \eng{media type} apropiado es: \texttt{application/vnd.api+json}\footnote{Este tipo de contenido fue asignado por la IANA - \url{http://www.iana.org/assignments/media-types/application/vnd.api+json}}.
 
-Este tipo de contenidos es una definición de estructura basada en el lenguaje \gls{lang:json}. Denominaremos ``documentos JSON API'' a aquellos documentos \gls{lang:json} que adhieran a este \eng{media type}.
+Este tipo de contenidos es una definición de estructura basada en el formato \gls{lang:json}. Denominaremos ``documentos JSON API'' a aquellos documentos \gls{lang:json} que adhieran a este \eng{media type}.
 
 \paragraph{Estructura general de los documentos JSON API}
 
@@ -40,6 +40,8 @@ Las relaciones de un recurso son objetos \glspl{lang:json} que pueden tener las 
 
 La especificación, con miras a hacer un uso más eficiente de los recursos, define también los ``documentos compuestos'' que son aquellos que incluyen en la misma estructura la información relacionada a los recursos asociados a la información principal del documento, es decir, aquellos recursos referenciados en alguna de las relaciones. La información de estos recursos adicionales debe realizarse dentro de una clave \texttt{included} de primer nivel en la raiz del documento JSON API. Al incorporar esta información adicional al documento, se reducen la cantidad de peticiones necesarias para obtener un recurso y sus elementos relacionados, reduciendo la utilización de recursos necesaria para completar la tarea.
 
+En el bloque de código \autoref{soa:tecnologias:json-api:recurso} incluimos un ejemplo completo de un documento JSON API.
+
 \begingroup
   \jsonfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/recurso.json}
   \captionof{listing}{Documento JSON API representando un recurso\label{soa:tecnologias:json-api:recurso}}
@@ -49,7 +51,7 @@ La especificación, con miras a hacer un uso más eficiente de los recursos, def
 
 Las peticiones de acceso de lectura a la información deben ser realizadas utilizando el método \gls{proto:http} \texttt{GET} y utilizando alguna de las \glspl{acro:url} provistas en los documentos JSON API como vínculos \texttt{self} o \texttt{related}. Por ejemplo, las peticiones presentadas a continuación son válidas para obtener información a partir del documento JSON API presentado anteriormente.
 
-Esta petición se puede utilizar para obtener la colección de tipos de documentos:
+La petición del bloque de código \autoref{soa:tecnologias:json-api:obtener-colecccion} se puede utilizar para obtener la colección de tipos de documentos:
 
 \begin{listing}[H]
   \httpfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/obtener-coleccion.http}
@@ -57,7 +59,7 @@ Esta petición se puede utilizar para obtener la colección de tipos de document
   \label{soa:tecnologias:json-api:obtener-colecccion}
 \end{listing}
 
-Esta otra para obtener todas las personas relacionadas con el tipo de documento con \texttt{id} \texttt{"0"}:
+De manera similar, la petición del bloque de código \autoref{soa:tecnologias:json-api:obtener-recurso-relacionado} puede usarse para obtener todas las personas relacionadas con el tipo de documento con \texttt{id} \texttt{"0"}:
 
 \begin{listing}[H]
   \httpfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/obtener-recurso-relacionado.http}
@@ -65,7 +67,7 @@ Esta otra para obtener todas las personas relacionadas con el tipo de documento 
   \label{soa:tecnologias:json-api:obtener-recurso-relacionado}
 \end{listing}
 
-Y la siguiente para obtener una persona en particular:
+Y la del bloque de código \autoref{soa:tecnologias:json-api:obtener-recurso} para obtener una persona en particular:
 
 \begin{listing}[H]
   \httpfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/obtener-recurso.http}
@@ -73,9 +75,11 @@ Y la siguiente para obtener una persona en particular:
   \label{soa:tecnologias:json-api:obtener-recurso}
 \end{listing}
 
-Las respuestas exitosas a estas peticiones deben devolver un código de estado \gls{proto:http} \texttt{200 OK} junto con el recurso (o un elemento nulo, en caso de no existir el recurso identificado y estar siendo solicitado a través de una relación) o la colección de recursos (o una colección vacía, en caso de no poseer elementos). En el caso de las peticiones para obtener un único recurso inexistente que no sean realizadas a través de la \gls{acro:url} de una relación, el servidor deberá responder con un código de estado \gls{proto:http} \texttt{404 Not Found}.
+Las respuestas exitosas a estas peticiones deben devolver un código de estado \gls{proto:http} \texttt{200 OK} junto con el recurso (o un elemento nulo, en caso de no existir el recurso identificado y estar siendo solicitado a través de una relación) o la colección de recursos (o una colección vacía, en caso de no poseer elementos).
 
-El documento JSON API expuesto en el bloque de código \autoref{soa:tecnologias:json-api:recurso} es un ejemplo del cuerpo de una respuesta exitosa que debiera responder con el siguiente encabezado \gls{proto:http}:
+En el caso de las peticiones para obtener un único recurso inexistente que no sean realizadas a través de la \gls{acro:url} de una relación, el servidor deberá responder con un código de estado \gls{proto:http} \texttt{404 Not Found}.
+
+El documento JSON API expuesto en el bloque de código \autoref{soa:tecnologias:json-api:recurso} es un ejemplo del cuerpo de una respuesta exitosa que debiera responder con el encabezado \gls{proto:http} del bloque de código \autoref{soa:tecnologias:json-api:respuesta-200-ok}:
 
 \begin{listing}[H]
   \httpfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/respuesta-200-ok.http}
@@ -85,7 +89,7 @@ El documento JSON API expuesto en el bloque de código \autoref{soa:tecnologias:
 
 Similarmente, el extracto presentado en el bloque de código \autoref{soa:tecnologias:json-api:respuesta-200-obtener-coleccion} representa una respuesta exitosa a una petición sobre la colección de tipos de documento.
 
-\begin{listing}
+\begin{listing}[H]
   \httpfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/respuesta-200-obtener-coleccion.http}
   \caption{Respuesta exitosa a petición de una colección de recursos en JSON API}
   \label{soa:tecnologias:json-api:respuesta-200-obtener-coleccion}
@@ -107,10 +111,9 @@ Si en cambio la petición fuese exitosa pero su respuesta no contuviese elemento
 
 En los ejemplos anteriores se demuestra el uso del valor nulo (\texttt{null}) y la colección vacía (\texttt{[]}) para denotar la respuesta a una petición exitosa pero que no arroja coincidencias.
 
-\clearpage
 \paragraph{Obtención de relaciones}
 
-Como se mencionó anteriormente, las relaciones pueden tener un vínculo a sí mismas (\texttt{self}) que permita manipular la relación en sí y no a los recursos que ésta vincula. Esa \gls{acro:url} consultada con el método \gls{proto:http} \texttt{GET} nos permite consultar la información asociada a esa relación, obteniendo como dato principal el recurso o los recursos involucrados en ella en forma de identificadores de recursos (objetos \gls{lang:json} con las propiedades \texttt{id} y \texttt{type} únicamente).
+Como se mencionó anteriormente, las relaciones pueden tener un vínculo a sí mismas (\texttt{self}) que permita manipular la relación en sí y no a los recursos que ésta vincula. Esa \gls{acro:url} consultada con el método \gls{proto:http} \texttt{GET} nos permite consultar la información asociada a esa relación, obteniendo como dato principal el recurso o los recursos involucrados en ella en forma de identificadores de recursos (objetos \gls{lang:json} con las propiedades \texttt{id} y \texttt{type} únicamente). En el bloque de código \autoref{soa:tecnologias:json-api:respuesta-200-obtener-relacion} se puede apreciar el documento JSON API que representa una relación.
 
 El servidor responderá con un código de estado \gls{proto:http} \texttt{200 OK} en caso de tratarse de una consulta exitosa, y con un \texttt{404 Not Found} si se tratase de una petición a una relación sobre un recurso principal inexistente. A modo de ejemplo, se presentan estos dos posibles casos en situaciones concretas:
 
@@ -139,7 +142,7 @@ El estándar define una forma para reducir la cantidad de peticiones realizadas 
 
 \paragraph{Selección de campos}
 
-Otra forma incluida en la especificación orientada a la reducción del uso de recursos son los \eng{sparse fieldsets}, recursos que son consultados indicando específicamente qué campos se deben incluir en la respuesta. Así como el apartado anterior explica una forma de reducir requerimientos, este explica una forma de reducir el tamaño de cada respuesta, e inclusive ambos pueden combinarse para reducir la cantidad de campos de diferentes recursos en una misma respuesta JSON API. Es justamente por este tipo de situaciones en que una misma respuesta podría incluir diferentes recursos de diferentes tipos que la forma de especificar qué campos se desean obtener en la respuesta es mediante el parámetro \texttt{fields} el cual es un arreglo de claves y valores, donde las claves son tipos de recursos y los valores los campos a incluir en la respuesta. A continuación, en el bloque de código \autoref{soa:tecnologias:json-api:obtener-recurso-fields}, se presenta un ejemplo de petición utilizando esta posibilidad definida por JSON API.
+Otra forma incluida en la especificación orientada a la reducción del uso de recursos son los \eng{sparse fieldsets}, recursos que son consultados indicando específicamente qué campos se deben incluir en la respuesta. Así como el apartado anterior explica una forma de reducir requerimientos, éste explica una forma de reducir el tamaño de cada respuesta, e inclusive ambos pueden combinarse para reducir la cantidad de campos de diferentes recursos en una misma respuesta JSON API. Es justamente por este tipo de situaciones en que una misma respuesta podría incluir diferentes recursos de diferentes tipos que la forma de especificar qué campos se desean obtener en la respuesta es mediante el parámetro \texttt{fields} el cual es un arreglo de claves y valores, donde las claves son tipos de recursos y los valores los campos a incluir en la respuesta. A continuación, en el bloque de código \autoref{soa:tecnologias:json-api:obtener-recurso-fields}, se presenta un ejemplo de petición utilizando esta posibilidad definida por JSON API.
 
 \begin{listing}
   \httpfile{src/03-capitulo-3/tecnologias/estructura/code/json-api/obtener-recurso-fields.http}

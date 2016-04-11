@@ -9,7 +9,7 @@
 
 \paragraph{Instalación}
 
-A continuación se detallan los pasos para instalar Squid en un servidor con Ubuntu 14.04.  Antes de comnenzar con la instación y configuración de Squid, debemos actualizar el software del servidor a su última versión:
+A continuación se detallan los pasos para instalar Squid en un servidor con Ubuntu 14.04.  Antes de comenzar con la instalación y configuración de Squid, debemos actualizar el software del servidor a su última versión, como se muestra en el bloque de código \autoref{soa:tecnologias:squid-cache:bash-preparacion}:
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/cache/code/squid/00-preparacion.sh}
@@ -17,7 +17,7 @@ A continuación se detallan los pasos para instalar Squid en un servidor con Ubu
   \label{soa:tecnologias:squid-cache:bash-preparacion}
 \end{listing}
 
-Una vez que hemos terminado la actulización del equipo, estamos en condiciones de iniciar la instalación de Squid.  Squid se encuentra disponible en los repositorios de Ubuntu, para instalarlo en el servidor debemos ejecutar el siguiente comando:
+Una vez que hemos terminado la actulización del equipo, estamos en condiciones de iniciar la instalación de Squid.  Squid se encuentra disponible en los repositorios de Ubuntu, para instalarlo en el servidor debemos ejecutar el comando del bloque de código \autoref{soa:tecnologias:squid-cache01:bash-preparacion}:
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/cache/code/squid/01-preparacion.sh}
@@ -25,7 +25,7 @@ Una vez que hemos terminado la actulización del equipo, estamos en condiciones 
   \label{soa:tecnologias:squid-cache01:bash-preparacion}
 \end{listing}
 
-La configuración principal de Squid se encuentra en /etc/squid3/squid.conf.  Antes de realizar cualquier cambio en la configuración origincal, realizamos una copia del archivo.
+La configuración principal de Squid se encuentra en /etc/squid3/squid.conf.  Antes de realizar cualquier cambio en la configuración original, realizamos una copia del archivo con el comando del bloque de código \autoref{soa:tecnologias:squid-cache02:bash-preparacion}.
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/cache/code/squid/02-preparacion.sh}
@@ -33,7 +33,7 @@ La configuración principal de Squid se encuentra en /etc/squid3/squid.conf.  An
   \label{soa:tecnologias:squid-cache02:bash-preparacion}
 \end{listing}
 
-Editamos la configuración
+A continuación procedemos a modificar el archivo principal de configuración de Squid con el editor \texttt{nano} (bloque de código \autoref{soa:tecnologias:squid-cache03:bash-preparacion}):
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/cache/code/squid/03-preparacion.sh}
@@ -41,23 +41,12 @@ Editamos la configuración
   \label{soa:tecnologias:squid-cache03:bash-preparacion}
 \end{listing}
 
-Lo primero que debemos configurar es el puerto en el que Squid estará escuchando las peticinas, por defecto, Squid escucha las peticioens en el puerto 3128.  Para cambiar el puerto por defecto, debemos editar la directiva \texttt{http\_port}.  En nuestro caso particular, configuramos el puerto 8888.
+Lo primero que debemos configurar es el puerto en el que Squid estará escuchando las peticiones, por defecto, Squid escucha las peticiones en el puerto \texttt{3128}.  Para cambiar el puerto por defecto, debemos editar la directiva \verb|http_port|.  En nuestro caso particular, configuramos el puerto \texttt{8888}, modificando la línea de esta directiva para que quede de la siguiente manera:\\ \verb|http_port 8888|
 
-\begin{listing}[H]
-  \bashfile{src/03-capitulo-3/tecnologias/cache/code/squid/04-preparacion.sh}
-  \caption{Configuracón de puerto}
-  \label{soa:tecnologias:squid-cache04:bash-preparacion}
-\end{listing}
+Por defecto, el servidor proxy HTTP no permite el acceso a nadie.  Para permitir el acceso al servidor desde cualquier IP, debemos editar la directiva \verb|http_access| para que quede de la siguiente manera:\\
+\verb|http_access allow all|
 
-Por defecto, el servidor proxy HTTP no permite el acceso a nadie.  Para permitir el acceso al servidor desde cualquier IP, debemos editar la directiva \texttt{http\_access} de la siguiente manera:
-
-\begin{listing}[H]
-  \bashfile{src/03-capitulo-3/tecnologias/cache/code/squid/05-preparacion.sh}
-  \caption{Configuración de acceso al servidor}
-  \label{soa:tecnologias:squid-cache05:bash-preparacion}
-\end{listing}
-
-Una vez que hemos realizado las configuraciones necesarias, debemos guardar los cambios y reiniciar el servicio de Squid, para que tome los cambios.  Para reiniciar el servio ejecutamos el siguiente comando:
+Una vez que hemos realizado las configuraciones necesarias, debemos guardar los cambios y reiniciar el servicio de Squid, para que tome los cambios.  Para reiniciar el servio ejecutamos el comando del bloque de código \autoref{soa:tecnologias:squid-cache06:bash-preparacion}:
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/cache/code/squid/06-preparacion.sh}
@@ -66,7 +55,7 @@ Una vez que hemos realizado las configuraciones necesarias, debemos guardar los 
 \end{listing}
 
 Para verificar el funcionamiento del servidor proxy, configuramos manualmente los datos de nuestro proxy en el navegador, ingresando la IP del servidor proxy y el puerto anteriomente configurado.
-En caso de que tengamos problemas, podemos ver log \texttt{access.log} para obtener más información:
+En caso de que tengamos problemas, podemos ver log \texttt{access.log} para obtener más información como se indica en el bloque de código \autoref{soa:tecnologias:squid-cache07:bash-preparacion}:
 
 \begin{listing}[H]
   \bashfile{src/03-capitulo-3/tecnologias/cache/code/squid/07-preparacion.sh}

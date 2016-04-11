@@ -98,7 +98,7 @@ El inconveniente con este enfoque era que pese a eliminar la repetición que exi
 \subsubsection{Segunda iteración: haciendo dinámicas las fuentes de datos}
 \label{nube:etapa2}
 
-Luego de la primera iteración en que logramos unificar los datos de referencia, y una vez pasado el periodo inicial de estabilización de la nueva solución, comenzamos a planificar la siguiente mejora a la forma en que disponíamos de la información: hacer dinámicas las fuentes de datos de referencia.
+Luego de la primera iteración en que logramos unificar los datos de referencia, y una vez pasado el período inicial de estabilización de la nueva solución, comenzamos a planificar la siguiente mejora a la forma en que disponíamos de la información: hacer dinámicas las fuentes de datos de referencia.
 
 Si bien el nuevo enfoque hasta este momento subsanaba los inconvenientes que conllevan la repetición y falta de normalización en los datos, éste traía acarreada  la poco deseable nueva situación de que los datos de referencia de nuestras aplicaciones eran estáticos y se encontraban escritos directamente en el código. Como se detalló en la sección anterior, esto dificultaba la actualización de cualquier dato en nuestras aplicaciones y  acoplaba el código con los datos, lo cual es considerado un \gls{term:antipatron}. Entonces el paso lógico era llevar esos datos a una fuente dinámica, como una base de datos, administrable desde alguna interfaz amigable, a la que las aplicaciones tuvieran acceso y pudieran consultar.
 

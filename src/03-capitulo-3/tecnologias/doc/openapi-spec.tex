@@ -1,13 +1,13 @@
 \subsubsection{\eng{The OpenAPI Specification}}
 \label{soa:tecnologias:openapi-spec}
 
-Esta especificación, que hasta Enero de 2016 se conocía como \eng{Swagger}, fue donada por la empresa \textit{SmartBear} a la \gls{acro:oai} para fomentar su crecimiento en manos de esta última. La iniciativa \gls{acro:oai} es un consorcio de empresas líderes en la industria\footnote{Entre otros miembros destacados, podemos mencionar a Google, IBM, Microsoft, PayPal, apigee y Mashape - \url{https://openapis.org}} que forma parte de los proyectos colaborativos de la \eng{Linux Foundation} y como tal mantiene un modelo de gobierno abierto entre sus miembros.
+Esta especificación, que hasta enero de 2016 se conocía como \eng{Swagger}, fue donada por la empresa \textit{SmartBear} a la \gls{acro:oai} para fomentar su crecimiento en manos de esta última. La iniciativa \gls{acro:oai} es un consorcio de empresas líderes en la industria\footnote{Entre otros miembros destacados, podemos mencionar a Google, IBM, Microsoft, PayPal, apigee y Mashape - \url{https://openapis.org}} que forma parte de los proyectos colaborativos de la \eng{Linux Foundation} y como tal mantiene un modelo de gobierno abierto entre sus miembros.
 
 La {\oaispec} apunta a ser un estándar, agnóstico tanto tecnológica como corporativamente, para describir las \glspl{acro:api} \gls{acro:rest} que interconectan las aplicaciones relacionadas a la web moderna. Al momento de realización del presente trabajo de análisis, esta especificación se encuentra en su versión \texttt{2.0}, con cierto trabajo de preparación de la tercera versión en proceso por parte de la \gls{acro:oai}.
 
 \paragraph{Licencia}
 
-\oaispec está liberado bajo la licencia Apache versión 2.0\footnote{\url{https://github.com/OAI/OpenAPI-Specification/blob/master/LICENSE}}.
+{\oaispec} está liberado bajo la licencia Apache versión 2.0\footnote{\url{https://github.com/OAI/OpenAPI-Specification/blob/master/LICENSE}}.
 
 \paragraph{Organización}
 
@@ -19,6 +19,6 @@ A partir de estos elementos, se pueden generar descripciones altamente detallada
 
 \paragraph{Herramientas}
 
-Las herramientas disponibles acorde a este estándar están orientadas a tecnologías como Node.js o Java, lo cual deja nuestra elección de lenguaje para el desarrollo de las \glspl{acro:api} (Ruby) parcialmente marginada. Afortunadamente existen gemas que nos permiten integrar la documentación en nuestro mismo código Ruby mediante directivas de un \gls{acro:dsl} dedicado y a partir de esta información generan el archivo \texttt{swagger.json}. Es interesante destacar en este punto que si bien la especificación fue donada a la \gls{acro:oai} y renombrada a \oaispec, el conjunto de herramientas que provee siguen siendo las relacionadas a Swagger.
+Las herramientas disponibles acorde a este estándar están orientadas a tecnologías como Node.js o Java, lo cual deja nuestra elección de lenguaje para el desarrollo de las \glspl{acro:api} (Ruby) parcialmente marginada. Afortunadamente existen librerías que nos permiten integrar la documentación en nuestro mismo código Ruby mediante directivas de un \gls{acro:dsl} dedicado y a partir de esta información generan el archivo \texttt{swagger.json}. Es interesante destacar en este punto que si bien la especificación fue donada a la \gls{acro:oai} y renombrada a \oaispec, el conjunto de herramientas que provee siguen siendo las relacionadas a Swagger.
 
 A partir de ese paso inicial, se puede utilizar la herramienta \eng{Swagger UI} para generar sitios web con la \gls{term:documentacion-viviente}.

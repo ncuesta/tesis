@@ -120,7 +120,7 @@ En el desarrollo de la arquitectura de nuestro caso testigo hemos seguido los pr
 
   \item Para aislar la arquitectura y evitar problemas de seguridad, utilizamos un esquema de red privada local al servidor de Proxmox, al cual accedimos mediante modificaciones a las tablas de \eng{routing} en nuestros equipos y la inclusión del servidor de DNS dedicado a la zona de nuestras instancias virtuales para la resolución de los nombres de cada equipo.
 
-  \item Para los \eng{deployments} utilizamos Capistrano 3\footnote{\url{http://capistranorb.com}}, una herramienta altamente personalizable que automatiza los pasos necesarios para realizar la configuración, preparación, distribución y ejecución de cada una de nuestras aplicaciones (cliente y \glspl{acro:api}).
+  \item Para los despliegues utilizamos Capistrano 3\footnote{\url{http://capistranorb.com}}, una herramienta altamente personalizable que automatiza los pasos necesarios para realizar la configuración, preparación, distribución y ejecución de cada una de nuestras aplicaciones (cliente y \glspl{acro:api}).
 
   \item Para la configuración de \nameref{soa:tecnologias:tyk} utilizamos \eng{Tyk Dashboard}, herramienta gratuita pero de código cerrado que distribuyen los creadores del API Gateway. En caso de no desear utilizar esa herramienta por no ser software libre podríamos utilizar la \gls{acro:api} REST que \nameref{soa:tecnologias:tyk} brinda para realizar esas configuraciones.  En este caso utilizamos la interfaz web para poder familiarizarnos con la configuración y gestión del producto de manera más sencilla.
 
@@ -138,7 +138,7 @@ Si bien se podría haber simplificado aún más la arquitectura, la inclusión d
 \subsubsection{Experiencia}
 \label{caso-testigo:experiencia}
 
-A lo largo del desarrollo de las distintas partes involucradas en la implementación del caso testigo, pudimos apreciar cómo los conceptos clave enunciados hasta este punto en el informe se hacían presentes: desde la facilidad para realizar los \eng{deployments} virtualmente sin tiempo de caída del servicio, hasta la simplicidad introducida en el diseño y el desarrollo como producto de la clara separación de incumbencias por cada \eng{service component}.
+A lo largo del desarrollo de las distintas partes involucradas en la implementación del caso testigo, pudimos apreciar cómo los conceptos clave enunciados hasta este punto en el informe se hacían presentes: desde la facilidad para realizar los despliegues virtualmente sin tiempo de caída del servicio, hasta la simplicidad introducida en el diseño y el desarrollo como producto de la clara separación de incumbencias por cada \eng{service component}.
 
 A su vez, la libertad de gestionar los nodos de la arquitectura nos permitió experimentar con la cantidad y distribución de los mismos. Esto es extremadamente enriquecedor a la hora de comenzar a hacer pruebas sobre las posibles variantes de una arquitectura, ya que permite toparnos con eventuales problemáticas de su implementación efectiva.
 

@@ -1,7 +1,7 @@
 \subsection{Propuesta}
 \label{propuesta}
 
-Por lo analizado en capítulos anteriores, se propone una arquitectura más desacoplada a la planteada con el Integrador, permitiendo de esta manera minimizar el costo del mantenimiento, desarrollo y simplificando su \eng{deployment} en entornos de producción. Una solución basada en estándares que permita integrar sistemas heterogéneos, aceptando el hecho de que la mayoría de los sistemas legados que se encuentran en producción, se mantendrán y logrando de esta manera, que la infraestructura subyacente facilite la incorporación de cambios que puedan surgir como necesidades del {\cespi} y la {\unlp}.
+Por lo analizado en capítulos anteriores, se propone una arquitectura más desacoplada a la planteada con el Integrador, permitiendo de esta manera minimizar el costo del mantenimiento, desarrollo y simplificando su despliegue en entornos de producción. Una solución basada en estándares que permita integrar sistemas heterogéneos, aceptando el hecho de que la mayoría de los sistemas legados que se encuentran en producción, se mantendrán y logrando de esta manera, que la infraestructura subyacente facilite la incorporación de cambios que puedan surgir como necesidades del {\cespi} y la {\unlp}.
 
 El modelo de servicios facilita el acceso y consumo de la información a través de la red. Dado que los servicios son independientes y autónomos, pueden combinarse tantas veces como sea necesario de manera sencilla, generando nuevas aplicaciones que respondan a las necesidades en constante evolución de nuestra casa de estudios. Esta posibilidad de agregar y combinar servicios para resolver situaciones presentes y futuras, convierten en una opción altamente beneficiosa el uso de esta estrategia, con el fin de crear servicios y aplicaciones complejas con independencia de las tecnologías subyacentes\cite{microsoft2006}.
 
@@ -63,9 +63,9 @@ Para ejemplificar la situación anterior, podemos pensar en la aplicación de re
 
 \subsubsection{Simplicidad}
 
-Como se desarrolló en la \autoref{microservicios}, las aplicaciones monolíticas consisten en componentes fuertemente acoplados, que son parte de una única unidad \eng{deployable}, resultando dificultosa la incorporación de cambios, \eng{testing} y \eng{deployment} sin caídas del servicio.  El patrón de microservicios trata estas cuestiones, separando la aplicación en múltiples unidades \eng{deployables}, que pueden ser desarrolladas, testeadas y desplegadas de forma independiente.
+Como se desarrolló en la \autoref{microservicios}, las aplicaciones monolíticas consisten en componentes fuertemente acoplados, que son parte de una única unidad desplegable, resultando dificultosa la incorporación de cambios, \eng{testing} y despliegue sin caídas del servicio.  El patrón de microservicios trata estas cuestiones, separando la aplicación en múltiples unidades desplegables, que pueden ser desarrolladas, testeadas y desplegadas de forma independiente.
 
-El hecho de dividir la aplicación en componentes pequeños y \eng{deployables} de manera independiente, facilita el desarrollo, \eng{testing} y puesta en producción, esto se debe a que el cambio se encuentra aislado a un \eng{service component}, permitiendo un mayor control.  Es por esto que hemos optado por seguir el patrón de arquitectura de microservicios para el diseño de la nube de servicios de la {\unlp}.
+El hecho de dividir la aplicación en componentes pequeños y desplegables de manera independiente, facilita el desarrollo, \eng{testing} y puesta en producción, esto se debe a que el cambio se encuentra aislado a un \eng{service component}, permitiendo un mayor control.  Es por esto que hemos optado por seguir el patrón de arquitectura de microservicios para el diseño de la nube de servicios de la {\unlp}.
 
 \subsubsection{Tolerancia a fallos}
 
@@ -77,7 +77,7 @@ Los sistemas distribuidos tienen potencialmente más fallos que los sistemas mon
   \label{fig:circuit_breaker}
 \end{figure}
 
-Para implementar una infraestructura tolerante a fallos, los servicios deberán estar replicados en varias instancias virtuales y, como detallamos anteriomente, delante de éstas se implementará un balanceador de carga que permitirá distribuir las peticiones recibidas entre las instancias virtuales.  Al mismo tiempo, se deberá trabajar en limitar el alcance del fallo a nivel de servicio.  Cabe aclarar que el partón de microservicios, realiza un aporte importante en este orden, ya que al dividir la aplicación en \eng{service components} aislamos el problema, facilitando luego su eventual solución y \eng{deployment} en producción.
+Para implementar una infraestructura tolerante a fallos, los servicios deberán estar replicados en varias instancias virtuales y, como detallamos anteriomente, delante de éstas se implementará un balanceador de carga que permitirá distribuir las peticiones recibidas entre las instancias virtuales.  Al mismo tiempo, se deberá trabajar en limitar el alcance del fallo a nivel de servicio.  Cabe aclarar que el partón de microservicios, realiza un aporte importante en este orden, ya que al dividir la aplicación en \eng{service components} aislamos el problema, facilitando luego su eventual solución y despliegues en producción.
 
 \subsubsection{Estandarización}
 

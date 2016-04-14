@@ -12,16 +12,12 @@
 %   - Resaltado de sintaxis
 \setminted{
   fontsize=\small,
-  style=colorful % o style=bw para blanco y negro
+  style=bw % o style=colorful para blanco y negro
 }
 %     + Define el ambiente {phpcode} para código PHP
-\newminted{php}{linenos}
+\newminted{php}{linenos,style=colorful}
 %     + Define el comando \phpfile{path} para código PHP desde archivos externos
-\newmintedfile{php}{linenos}
-%     + Define el ambiente {rubycode} para código Ruby
-\newminted{ruby}{linenos}
-%     + Define el comando \rubyfile{path} para código ruby desde archivos externos
-\newmintedfile{ruby}{linenos}
+\newmintedfile{php}{linenos,style=colorful}
 %     + Define el ambiente {bashcode} para comandos de CLI
 \newminted{bash}{breaklines=true}
 %     + Define el comando \bashfile{path} para comandos de CLI desde archivos externos

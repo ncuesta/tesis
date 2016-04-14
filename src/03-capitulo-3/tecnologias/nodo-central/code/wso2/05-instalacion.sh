@@ -1,2 +1,1 @@
-
 $ echo $JAVA_HOME

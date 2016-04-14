@@ -20,7 +20,7 @@ Cuando hablamos de escalabilidad, podemos basarnos en el modelo llamado \eng{sca
   \item \textbf{Escalar sobre el eje \textit{Z}:} (\eng{Z-axis scaling}, en inglés) En este enfoque se toma como base la replicación de instancias presente en \eng{X-axis scaling} y a esto se agrega una capa superior de abstracción que separa el conjunto de datos que cada instancia o instancias atenderá, acorde a algún criterio lógico como puede ser el cliente que realice la petición (privilegiando unos clientes sobre otros).
 \end{itemize}
 
-\begin{figure}[H]
+\begin{figure}
   \includegraphics[width=\linewidth]{src/images/04-capitulo-4/scale-cube.png}
   \caption{El modelo de escalabilidad \eng{scale cube}}
   \label{fig:scale-cube}
@@ -72,7 +72,7 @@ El hecho de dividir la aplicación en componentes pequeños y desplegables de ma
 Los sistemas distribuidos tienen potencialmente más fallos que los sistemas monolíticos, ya que en cada solicitud intervienen decenas (o cientos) de microservicios diferentes\cite[p.~48]{stin2015}. Es por esto que no resulta suficiente descomponer un sistema en unidades independientes; también hay que evitar que un fallo en uno de éstas cause un fallo en cascada\cite[p.~4]{stin2015}, situación en que un error en una capa interna provoca un fallo en la capa más externa\cite[p.~65]{nygard2007}. Mike Nygard describe en su libro ``Release It!''\cite{nygard2007} varios patrones tolerantes a fallos, de los cuales el más popular es el \eng{Circuit Breaker}, presentado en la \autoref{fig:circuit_breaker}.
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{src/images/04-capitulo-4/circuit-breaker.png}
+  \includegraphics[width=\linewidth,height=0.5\textheight,keepaspectratio]{src/images/04-capitulo-4/circuit-breaker.png}
   \caption{Patrón de tolerancia a fallos \eng{Circuit Breaker}}
   \label{fig:circuit_breaker}
 \end{figure}
@@ -89,7 +89,7 @@ Esta estandarización facilitará el desarrollo de clientes que consuman informa
 
 En la \autoref{fig:arquitectura-propuesta} se puede observar la arquitectura final propuesta.
 
-\begin{figure}[H]
+\begin{figure}
   \includegraphics[width=\linewidth]{src/images/04-capitulo-4/propuesta-arquitectura-final.png}
   \caption{Arquitectura propuesta para la {\cloud} de la UNLP}
   \label{fig:arquitectura-propuesta}

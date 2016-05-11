@@ -1,0 +1,155 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+
+$slide-border: #ccc;
+$highlight-color: rgb(99, 210, 151);
+
+body {
+  font-family: "Open Sans", sans-serif;
+  transition: opacity 500ms ease-in-out;
+  background: #dedede;
+
+  &.impress-not-supported {
+    opacity: 0;
+  }
+}
+
+.impress-enabled {
+  .slide {
+    box-sizing: border-box;
+    min-width: 80vw;
+    max-width: 95vw;
+    border-radius: .5em;
+    background-color: transparent;
+    padding: 1.5em;
+
+    &.bordered {
+      border: 1px solid $slide-border;
+      border-bottom: 8px solid $highlight-color;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(darken($slide-border, 25%), .85);
+    }
+
+    &.full-size {
+      height: 95vh;
+      width: 95vw;
+      max-width: 1024px;
+    }
+
+    &.cover {
+      @extend .full-size,
+              .bordered;
+
+      h1, h2, h3 {
+        text-align: center;
+      }
+
+      h1 {
+        font-weight: 700;
+        font-size: 450%;
+      }
+
+      h2 {
+        font-weight: 400;
+      }
+    }
+
+    &.topic {
+      @extend .full-size,
+              .bordered;
+
+      display: flex;
+      background: rgb(32, 39, 41);
+      color: #fff;
+      border-bottom-width: 0;
+
+      h1 {
+        font-size: 450%;
+        font-weight: 300;
+        border-bottom: 3px solid $highlight-color;
+        align-self: center;
+        flex-grow: 1;
+        padding-bottom: .25em;
+      }
+    }
+
+    &.regular {
+      @extend .full-size,
+              .bordered;
+
+      font-size: 180%;
+      color: #555;
+
+      h1 {
+        color: #000;
+        font-size: 200%;
+        font-weight: 300;
+        margin-top: 0;
+      }
+
+      ul ul {
+        font-size: 90%;
+      }
+    }
+
+    &.with-bounded-image {
+      img {
+        max-height: 95%;
+        margin: 0 auto;
+        display: block;
+        z-index: 0;
+      }
+
+      .caption {
+        position: absolute;
+        bottom: .5em;
+        z-index: 1;
+        color: #000;
+        font-weight: 300;
+      }
+    }
+
+    // Inner elements
+    img {
+      max-width: 95vw;
+
+      &.logo {
+        display: block;
+        margin: 0 auto 1em;
+      }
+    }
+
+    p {
+      margin: 0 0 .5em;
+    }
+
+    hr {
+      border-top-width: 0;
+      border-bottom: 3px solid $highlight-color;
+      margin: 2em 0;
+    }
+
+    table {
+      width: 100%;
+
+      td {
+        text-align: center;
+      }
+    }
+
+    .centered {
+      text-align: center;
+    }
+
+    .important {
+      font-size: 150%;
+      font-weight: 300;
+      margin-top: .5em;
+    }
+
+    .muted {
+      color: #999;
+    }
+  }
+}
+
+@import "adjustments";

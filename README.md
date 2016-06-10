@@ -1,4 +1,4 @@
-# Tesis !(https://i.creativecommons.org/l/by-sa/4.0/88x31.png)
+# Tesis ![Licencia](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)
 
 Este proyecto contiene los fuentes de la tesina de grado de Miguel Carbone y
 José Nahuel Cuesta Luengo, alumnos de la Facultad de Informática de la

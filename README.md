@@ -31,7 +31,7 @@ $ docker pull ncuesta/latex
 Luego, cada vez que querramos ejecutar Latex para generar la salida en PDF:
 
 ```console
-$ run --rm -v "`pwd`:/latex" -i ncuesta/latex
+$ docker run --rm -v "`pwd`:/latex" -i ncuesta/latex
 ```
 
 ### Con PdfLaTeX instalado localmente
